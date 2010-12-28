@@ -1,0 +1,232 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>5</version>
+  </parent>
+
+  <groupId>com.github.cwilper.fcrepo-misc</groupId>
+  <artifactId>parent</artifactId>
+  <version>0.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>FCRepo Misc</name>
+  <description>
+    Miscellaneous Libaries and Utilities for Fedora Commons Repositories
+  </description>
+  <url>https://github.com/cwilper/fcrepo-misc</url>
+
+  <modules>
+    <module>fcrepo-flexport</module>
+    <module>fcrepo-dto</module>
+    <module>fcrepo-httpclient</module>
+    <module>fcrepo-riclient</module>
+  </modules>
+  
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/cwilper/fcrepo-misc</url>
+    <connection>
+      scm:git:git://github.com/cwilper/fcrepo-misc.git
+    </connection>
+    <developerConnection>
+      scm:git:git@github.com:cwilper/fcrepo-misc.git
+    </developerConnection>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>cwilper</id>
+      <name>Chris Wilper</name>
+      <email>cwilper@gmail.com</email>
+      <timezone>-5</timezone>
+    </developer>
+  </developers>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <skipITs>true</skipITs>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>local-fedora</id>
+      <properties>
+        <skipITs>false</skipITs>
+        <fedora.url>http://localhost:8080/fedora</fedora.url>
+        <fedora.user>fedoraAdmin</fedora.user>
+        <fedora.pass>fedoraAdmin</fedora.pass>
+      </properties>
+    </profile>
+  </profiles>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>0.9.26</version>
+        <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.cwilper.fcrepo-misc</groupId>
+        <artifactId>fcrepo-flexport</artifactId>
+        <version>${pom.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.cwilper.fcrepo-misc</groupId>
+        <artifactId>fcrepo-dto</artifactId>
+        <version>${pom.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.cwilper.fcrepo-misc</groupId>
+        <artifactId>fcrepo-httpclient</artifactId>
+        <version>${pom.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.cwilper.fcrepo-misc</groupId>
+        <artifactId>fcrepo-riclient</artifactId>
+        <version>${pom.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava-collections</artifactId>
+        <version>r03</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.8.2</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.0.3</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openrdf</groupId>
+        <artifactId>rio</artifactId>
+        <version>1.0.10</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.6.1</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>1.0-beta-1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <bannedDependencies>
+                  <searchTransitive>true</searchTransitive>
+                  <excludes>
+                    <exclude>commons-logging</exclude>
+                    <exclude>log4j:log4j</exclude>
+                    <exclude>org.slf4j:slf4j-jcl</exclude>
+                    <exclude>org.slf4j:slf4j-jdk14</exclude>
+                    <exclude>org.slf4j:slf4j-log4j12</exclude>
+                    <exclude>org.slf4j:slf4j-log4j13</exclude>
+                    <exclude>org.slf4j:slf4j-nop</exclude>
+                    <exclude>org.slf4j:slf4j-simple</exclude>
+                  </excludes>
+                  <message>
+                    This project uses SLF4J (with Logback runtime binding)
+                    for logging only.  All other logging frameworks and
+                    bindings are disallowed.  They may be excluded manually
+                    in the parent project's dependencyManagement section.
+                  </message>
+                </bannedDependencies>
+                <requireMavenVersion>
+                  <version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
+                  <message>
+                    Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures
+                    and checksums respectively, and therefore must be avoided.
+                  </message>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <debug>true</debug>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <systemPropertyVariables>
+            <fedora.url>${fedora.url}</fedora.url>
+            <fedora.user>${fedora.user}</fedora.user>
+            <fedora.pass>${fedora.pass}</fedora.pass>
+          </systemPropertyVariables>
+        </configuration>
+        <executions>
+          <execution>
+            <id>integration-test</id>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>verify</id>
+            <goals>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>
