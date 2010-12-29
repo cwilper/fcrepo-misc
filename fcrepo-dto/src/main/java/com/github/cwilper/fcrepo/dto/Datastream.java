@@ -1,5 +1,6 @@
 package com.github.cwilper.fcrepo.dto;
 
+import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -54,6 +55,21 @@ public class Datastream {
 
     public SortedSet<DatastreamVersion> versions() {
         return versions;
+    }
+
+    @Override
+    public final int hashCode() {
+        return Util.computeHash(getEqArray());
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        return o instanceof Datastream && Arrays.equals(
+                ((Datastream) o).getEqArray(), getEqArray());
+    }
+
+    Object[] getEqArray() {
+        return new Object[] { id, state, controlGroup, versionable, versions };
     }
 
 }

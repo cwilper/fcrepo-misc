@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -129,4 +130,22 @@ public class DatastreamVersion {
         this.contentLocation = contentLocation;
         return this;
     }
+
+    @Override
+    public final int hashCode() {
+        return Util.computeHash(getEqArray());
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        return o instanceof DatastreamVersion && Arrays.equals(
+                ((DatastreamVersion) o).getEqArray(), getEqArray());
+    }
+    
+    Object[] getEqArray() {
+        return new Object[] { id, label, createdDate, mimeType, formatURI,
+                contentDigest, size, inlineXMLContent, contentLocation,
+                altIds };
+    }
+
 }
