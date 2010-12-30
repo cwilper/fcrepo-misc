@@ -8,8 +8,4 @@ public class FOXMLWriterTest {
     public void simple() {
     }
 
-    private static String write() {
-
-    }
-
 }
