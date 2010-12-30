@@ -38,7 +38,7 @@ import java.security.cert.X509Certificate;
 /**
  * A multi-threaded <code>HttpClient</code> that's easy to construct.
  */
-class MultiThreadedHttpClient extends DefaultHttpClient {
+public class MultiThreadedHttpClient extends DefaultHttpClient {
 
     private final HttpClientConfig config;
 
