@@ -1,11 +1,11 @@
-package com.github.cwilper.fcrepo.dto;
+package com.github.cwilper.fcrepo.dto.core;
 
 public enum ControlGroup {
     
     EXTERNAL_REFERENCE("E"),
-    INLINE_XML("X"),
     MANAGED_CONTENT("M"),
-    REDIRECT("R");
+    REDIRECT("R"),
+    INLINE_XML("X");
 
     private final String shortName;
 
@@ -17,9 +17,9 @@ public enum ControlGroup {
         return shortName;
     }
 
-    public static State forShortName(String shortName) {
-        for (State s: State.values()) {
-            if (s.shortName().equals(shortName)) return s;
+    public static ControlGroup forShortName(String shortName) {
+        for (ControlGroup c: ControlGroup.values()) {
+            if (c.shortName().equals(shortName)) return c;
         }
         throw new IllegalArgumentException();
     }

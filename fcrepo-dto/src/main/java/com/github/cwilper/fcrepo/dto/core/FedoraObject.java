@@ -1,13 +1,7 @@
-package com.github.cwilper.fcrepo.dto;
+package com.github.cwilper.fcrepo.dto.core;
 
-import org.apache.http.client.HttpClient;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -82,35 +76,6 @@ public class FedoraObject {
 
     public SortedMap<String, Datastream> datastreams() {
         return datastreams;
-    }
-
-    /**
-     * Serializes the object to the given stream as FOXML, leaving the stream
-     * open when finished.
-     *
-     * @param sink the stream to serialize to.
-     * @param managedDatastreamsToEmbed the ids of any managed datastreams
-     *        whose content should be base64-encoded within the FOXML rather
-     *        than referenced.
-     * @throws IOException if an error occurs while writing.
-     */
-    public void write(OutputStream sink, Set<String> managedDatastreamsToEmbed,
-            HttpClient httpClient) throws IOException {
-        new FOXMLWriter(this, sink, managedDatastreamsToEmbed, httpClient)
-                .writeObject();
-    }
-
-    /**
-     * Deserializes the FOXML from the given stream, closing the stream when
-     * finished.
-     *
-     * @param source the stream to deserialize from.
-     * @return a new FedoraObject instance populated from the given stream.
-     * @throws IOException if an error occurs while reading.
-     */
-    public static FedoraObject read(InputStream source)
-            throws IOException {
-        return new FOXMLReader(source).readObject();
     }
 
     @Override

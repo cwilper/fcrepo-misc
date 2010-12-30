@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.dto;
+package com.github.cwilper.fcrepo.dto.core;
 
 import java.util.Arrays;
 import java.util.SortedSet;

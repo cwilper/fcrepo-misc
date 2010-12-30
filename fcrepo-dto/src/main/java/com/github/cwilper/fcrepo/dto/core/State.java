@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.dto;
+package com.github.cwilper.fcrepo.dto.core;
 
 public enum State {
 
@@ -10,7 +10,7 @@ public enum State {
     private final String longName;
 
     State(String longName) {
-        this.shortName = longName.substring(0, 0);
+        this.shortName = longName.substring(0, 1);
         this.longName = longName;
     }
 

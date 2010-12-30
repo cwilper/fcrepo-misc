@@ -1,6 +1,10 @@
-package com.github.cwilper.fcrepo.dto;
+package com.github.cwilper.fcrepo.dto.foxml;
 
-abstract class FOXML {
+abstract class Constants {
+
+    public static final int BASE64_LINE_LENGTH = 74;
+    public static final String CHAR_ENCODING = "UTF-8";
+    public static final String LINE_FEED = "\n";
 
     public static final String SUPPORTED_VERSION = "1.1";
 
