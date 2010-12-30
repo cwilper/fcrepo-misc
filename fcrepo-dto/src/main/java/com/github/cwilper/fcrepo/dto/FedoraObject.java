@@ -1,10 +1,15 @@
 package com.github.cwilper.fcrepo.dto;
 
+import org.apache.http.client.HttpClient;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.Reader;
-import java.io.Writer;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class FedoraObject {
 
@@ -80,53 +85,32 @@ public class FedoraObject {
     }
 
     /**
-     * Serializes the object to the given writer as FOXML.
+     * Serializes the object to the given stream as FOXML, leaving the stream
+     * open when finished.
      *
-     * @param sink the writer to serialize to. It will not be automatically
-     *        closed.
+     * @param sink the stream to serialize to.
      * @param managedDatastreamsToEmbed the ids of any managed datastreams
      *        whose content should be base64-encoded within the FOXML rather
      *        than referenced.
+     * @throws IOException if an error occurs while writing.
      */
-    public void write(Writer sink,
-                      Set<String> managedDatastreamsToEmbed) {
-        new FOXMLWriter(sink, managedDatastreamsToEmbed).write();
+    public void write(OutputStream sink, Set<String> managedDatastreamsToEmbed,
+            HttpClient httpClient) throws IOException {
+        new FOXMLWriter(this, sink, managedDatastreamsToEmbed, httpClient)
+                .writeObject();
     }
 
     /**
-     * Serializes the object to the given stream as FOXML.
+     * Deserializes the FOXML from the given stream, closing the stream when
+     * finished.
      *
-     * @param sink the stream to serialize to. It will not be automatically
-     *        closed.
-     * @param managedDatastreamsToEmbed the ids of any managed datastreams
-     *        whose content should be base64-encoded within the FOXML rather
-     *        than referenced.
-     */
-    public void write(OutputStream sink,
-                      Set<String> managedDatastreamsToEmbed) {
-        new FOXMLWriter(sink, managedDatastreamsToEmbed).write();
-    }
-
-    /**
-     * Deserializes the FOXML from the given reader.
-     *
-     * @param source the reader to deserialize from. It will not be
-     *        automatically closed.
+     * @param source the stream to deserialize from.
      * @return a new FedoraObject instance populated from the given stream.
+     * @throws IOException if an error occurs while reading.
      */
-    public static FedoraObject read(Reader source) {
-        return new FOXMLReader(source).read();
-    }
-
-    /**
-     * Deserializes the FOXML from the given stream.
-     *
-     * @param source the stream to deserialize from. It will not be
-     *        automatically closed.
-     * @return a new FedoraObject instance populated from the given stream.
-     */
-    public static FedoraObject read(InputStream source) {
-        return new FOXMLReader(source).read();
+    public static FedoraObject read(InputStream source)
+            throws IOException {
+        return new FOXMLReader(source).readObject();
     }
 
     @Override

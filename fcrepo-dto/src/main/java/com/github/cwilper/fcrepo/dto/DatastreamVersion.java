@@ -1,5 +1,7 @@
 package com.github.cwilper.fcrepo.dto;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,16 +14,16 @@ import java.util.TreeSet;
 
 public class DatastreamVersion {
 
-    private final SortedSet<String> altIds = new TreeSet<String>();
+    private final SortedSet<URI> altIds = new TreeSet<URI>();
 
     private String id;
     private String label;
     private Date createdDate;
     private String mimeType;
     private URI formatURI;
-    private ContentDigest contentDigest;
     private Long size;
-    private byte[] inlineXMLContent;
+    private ContentDigest contentDigest;
+    private byte[] xmlContent;
     private URI contentLocation;
 
     public DatastreamVersion() {
@@ -63,7 +65,7 @@ public class DatastreamVersion {
         return this;
     }
 
-    public SortedSet<String> altIds() {
+    public SortedSet<URI> altIds() {
         return altIds;
     }
 
@@ -94,32 +96,23 @@ public class DatastreamVersion {
         return this;
     }
 
-    public InputStream getInlineXMLContent() {
-        if (inlineXMLContent == null) {
+    public InputStream xmlContent() throws IOException {
+        if (xmlContent == null) {
             return null;
         }
-        return new ByteArrayInputStream(inlineXMLContent);
+        return new ByteArrayInputStream(xmlContent);
     }
 
-    public void setInlineXMLContent(InputStream source) {
+    // source will be read entirely, then auto-closed
+    public void xmlContent(InputStream source) throws IOException {
         ByteArrayOutputStream sink = new ByteArrayOutputStream();
         try {
-            byte[] buf = new byte[4096];
-            int len;
-            while ((len = source.read(buf)) > 0) {
-                sink.write(buf, 0, len);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(
-                    "Error setting XML content from stream", e);
+            IOUtils.copy(source, sink);
         } finally {
-            try {
-                source.close();
-                sink.close();
-            } catch (IOException e) {
-            }
+            IOUtils.closeQuietly(source);
+            IOUtils.closeQuietly(sink);
         }
-        inlineXMLContent = sink.toByteArray();
+        xmlContent = sink.toByteArray();
     }
 
     public URI contentLocation() {
@@ -144,8 +137,7 @@ public class DatastreamVersion {
     
     Object[] getEqArray() {
         return new Object[] { id, label, createdDate, mimeType, formatURI,
-                contentDigest, size, inlineXMLContent, contentLocation,
-                altIds };
+                contentDigest, size, xmlContent, contentLocation, altIds };
     }
 
 }
