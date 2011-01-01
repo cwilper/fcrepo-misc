@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashSet;
@@ -77,11 +78,12 @@ public class FOXMLWriter {
 
     private void writeDigitalObject()
             throws IOException, XMLStreamException {
-        w.writeStartDocument();
-        w.setDefaultNamespace(Constants.xmlns);
+        w.writeStartDocument(Constants.CHAR_ENCODING, Constants.XML_VERSION);
 
         w.writeStartElement(Constants.digitalObject);
-        w.writeAttribute(Constants.VERSION, Constants.SUPPORTED_VERSION);
+        w.writeDefaultNamespace(Constants.xmlns);
+        
+        w.writeAttribute(Constants.VERSION, Constants.FOXML_VERSION);
         writeAttribute(Constants.PID, obj.pid());
 
         writeObjectProperties(obj);
@@ -127,7 +129,7 @@ public class FOXMLWriter {
         writeAttribute(Constants.SIZE, dsv.size());
         writeContentDigest(dsv.contentDigest());
         if (ds.controlGroup() == ControlGroup.INLINE_XML) {
-            writeXMLContent(dsv.xmlContent());
+            writeXMLContent(dsv);
         } else if (ds.controlGroup() == ControlGroup.MANAGED_CONTENT
                 && managedDatastreamsToEmbed.contains(ds.id())) {
             writeBinaryContent(dsv.contentLocation());
@@ -171,21 +173,19 @@ public class FOXMLWriter {
                         + "scheme");
             }
             out.flush();
-            w.writeCharacters(Constants.LINE_FEED);
             w.writeEndElement();
         }
     }
 
-    private void writeXMLContent(InputStream xmlContent)
+    private void writeXMLContent(DatastreamVersion dsv)
             throws IOException, XMLStreamException {
-        if (xmlContent != null) {
+        if (dsv.inlineXML()) {
             w.writeStartElement(Constants.xmlContent);
+            w.writeCharacters(Constants.LINE_FEED);
             w.flush();
-            try {
-                IOUtils.copy(xmlContent, sink);
-            } finally {
-                IOUtils.closeQuietly(xmlContent);
-            }
+            OutputStreamWriter sinkWriter = new OutputStreamWriter(sink);
+            dsv.inlineXML(sinkWriter);
+            sinkWriter.flush();
             w.writeEndElement();
         }
     }

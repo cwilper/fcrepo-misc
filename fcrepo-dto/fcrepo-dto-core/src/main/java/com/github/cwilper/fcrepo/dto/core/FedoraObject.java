@@ -7,8 +7,7 @@ import java.util.TreeMap;
 
 public class FedoraObject {
 
-    private final SortedMap<String, Datastream> datastreams =
-            new TreeMap<String, Datastream>();
+    private final SortedMap<String, Datastream> datastreams = new DSMap();
 
     private String pid;
     private State state;
@@ -74,6 +73,11 @@ public class FedoraObject {
         return this;
     }
 
+    public FedoraObject putDatastream(Datastream ds) {
+        datastreams.put(ds.id(), ds);
+        return this;
+    }
+
     public SortedMap<String, Datastream> datastreams() {
         return datastreams;
     }
@@ -93,5 +97,17 @@ public class FedoraObject {
         return new Object[] { pid, state, label, ownerId, createdDate,
                 lastModifiedDate, datastreams };
     }
-    
+
+    private class DSMap extends TreeMap<String, Datastream> {
+
+        @Override
+        public Datastream put(String id, Datastream datastream) {
+            if (!datastream.id().equals(id)) {
+                throw new IllegalArgumentException();
+            }
+            return super.put(id, datastream);
+        }
+        
+    }
+
 }

@@ -14,4 +14,5 @@ abstract class Util {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat.format(date);
     }
+
 }

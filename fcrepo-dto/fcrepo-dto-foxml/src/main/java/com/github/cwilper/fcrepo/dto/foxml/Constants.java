@@ -2,11 +2,13 @@ package com.github.cwilper.fcrepo.dto.foxml;
 
 abstract class Constants {
 
-    public static final int BASE64_LINE_LENGTH = 74;
+    public static final String XML_VERSION = "1.0";
     public static final String CHAR_ENCODING = "UTF-8";
+
+    public static final int BASE64_LINE_LENGTH = 74;
     public static final String LINE_FEED = "\n";
 
-    public static final String SUPPORTED_VERSION = "1.1";
+    public static final String FOXML_VERSION = "1.1";
 
     public static final String xmlns = "info:fedora/fedora-system:def/foxml#";
 

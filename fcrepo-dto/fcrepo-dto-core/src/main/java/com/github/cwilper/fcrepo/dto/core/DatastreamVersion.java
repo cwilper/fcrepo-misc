@@ -2,10 +2,11 @@ package com.github.cwilper.fcrepo.dto.core;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.CharArrayReader;
+import java.io.CharArrayWriter;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Date;
@@ -16,26 +17,31 @@ public class DatastreamVersion {
 
     private final SortedSet<URI> altIds = new TreeSet<URI>();
 
-    private String id;
+    private final String id;
+    private final Date createdDate;
+
     private String label;
-    private Date createdDate;
     private String mimeType;
     private URI formatURI;
     private Long size;
     private ContentDigest contentDigest;
-    private byte[] xmlContent;
+    private char[] inlineXML;
     private URI contentLocation;
 
-    public DatastreamVersion() {
+    public DatastreamVersion(String id, Date createdDate) {
+        if (id == null) {
+            throw new NullPointerException();
+        }
+        this.id = id;
+        if (createdDate != null) {
+            this.createdDate = createdDate;
+        } else {
+            this.createdDate = new Date();
+        }
     }
 
     public String id() {
         return id;
-    }
-
-    public DatastreamVersion id(String id) {
-        this.id = id;
-        return this;
     }
 
     public String label() {
@@ -49,11 +55,6 @@ public class DatastreamVersion {
 
     public Date createdDate() {
         return createdDate;
-    }
-
-    public DatastreamVersion createdDate(Date createdDate) {
-        this.createdDate = createdDate;
-        return this;
     }
 
     public String mimeType() {
@@ -96,23 +97,27 @@ public class DatastreamVersion {
         return this;
     }
 
-    public InputStream xmlContent() throws IOException {
-        if (xmlContent == null) {
-            return null;
+    public boolean inlineXML() {
+        return inlineXML != null;
+    }
+
+    public DatastreamVersion inlineXML(Writer writer) throws IOException {
+        if (inlineXML != null) {
+            IOUtils.copy(new CharArrayReader(inlineXML), writer);
         }
-        return new ByteArrayInputStream(xmlContent);
+        return this;
     }
 
     // source will be read entirely, then auto-closed
-    public void xmlContent(InputStream source) throws IOException {
-        ByteArrayOutputStream sink = new ByteArrayOutputStream();
+    public DatastreamVersion inlineXML(Reader reader) throws IOException {
+        CharArrayWriter writer = new CharArrayWriter();
         try {
-            IOUtils.copy(source, sink);
+            IOUtils.copy(reader, writer);
         } finally {
-            IOUtils.closeQuietly(source);
-            IOUtils.closeQuietly(sink);
+            IOUtils.closeQuietly(reader);
         }
-        xmlContent = sink.toByteArray();
+        inlineXML = writer.toCharArray();
+        return this;
     }
 
     public URI contentLocation() {
@@ -137,7 +142,7 @@ public class DatastreamVersion {
     
     Object[] getEqArray() {
         return new Object[] { id, label, createdDate, mimeType, formatURI,
-                contentDigest, size, xmlContent, contentLocation, altIds };
+                contentDigest, size, inlineXML, contentLocation, altIds };
     }
 
 }
