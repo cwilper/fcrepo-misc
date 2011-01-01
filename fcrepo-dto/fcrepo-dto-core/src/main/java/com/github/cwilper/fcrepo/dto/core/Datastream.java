@@ -18,6 +18,9 @@ public class Datastream {
     private Boolean versionable;
 
     public Datastream(String id) {
+        if (id == null) {
+            throw new NullPointerException();
+        }
         this.id = id;
     }
 
