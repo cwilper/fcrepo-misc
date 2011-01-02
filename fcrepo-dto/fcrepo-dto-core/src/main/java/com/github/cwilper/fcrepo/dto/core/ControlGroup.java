@@ -1,5 +1,8 @@
 package com.github.cwilper.fcrepo.dto.core;
 
+/**
+ * The Control Group of a <code>Datastream</code>.
+ */
 public enum ControlGroup {
     
     EXTERNAL_REFERENCE("E"),
@@ -9,6 +12,11 @@ public enum ControlGroup {
 
     private final String shortName;
 
+    /**
+     * Creates an instance.
+     *
+     * @param shortName the abbreviated name often used in serializations.
+     */
     ControlGroup(String shortName) {
         this.shortName = shortName;
     }

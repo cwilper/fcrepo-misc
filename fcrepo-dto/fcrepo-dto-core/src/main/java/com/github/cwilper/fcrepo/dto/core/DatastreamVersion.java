@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * A particular revision of a <code>Datastream</code>.
+ */
 public class DatastreamVersion {
 
     private final SortedSet<URI> altIds = new TreeSet<URI>();
@@ -28,15 +31,23 @@ public class DatastreamVersion {
     private char[] inlineXML;
     private URI contentLocation;
 
+    /**
+     * Creates an instance.
+     *
+     * @param id the id of the version (not null, immutable).
+     * @param createdDate the date the version was created
+     *        (possibly null, immutable).
+     * @throws NullPointerException if id is given as <code>null</code>.
+     */
     public DatastreamVersion(String id, Date createdDate) {
         if (id == null) {
             throw new NullPointerException();
         }
         this.id = id;
-        if (createdDate != null) {
-            this.createdDate = createdDate;
+        if (createdDate == null) {
+            this.createdDate = null;
         } else {
-            this.createdDate = new Date();
+            this.createdDate = new Date(createdDate.getTime());
         }
     }
 
@@ -54,7 +65,11 @@ public class DatastreamVersion {
     }
 
     public Date createdDate() {
-        return createdDate;
+        if (createdDate == null) {
+            return null;
+        } else {
+            return new Date(createdDate.getTime());
+        }
     }
 
     public String mimeType() {

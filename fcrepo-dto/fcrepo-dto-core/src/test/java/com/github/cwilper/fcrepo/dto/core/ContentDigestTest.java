@@ -3,6 +3,9 @@ package com.github.cwilper.fcrepo.dto.core;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Unit tests for <code>ContentDigest</code>.
+ */
 public class ContentDigestTest extends AbstractTest {
 
     @Test

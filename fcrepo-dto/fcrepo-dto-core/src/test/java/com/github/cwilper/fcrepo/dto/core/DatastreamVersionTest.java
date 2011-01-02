@@ -2,6 +2,9 @@ package com.github.cwilper.fcrepo.dto.core;
 
 import org.junit.Test;
 
+/**
+ * Unit tests for <code>DatastreamVersion</code>.
+ */
 public class DatastreamVersionTest extends AbstractTest {
 
     @Test (expected=NullPointerException.class)

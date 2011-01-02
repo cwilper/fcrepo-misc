@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+/**
+ * A Fedora Digital Object.
+ */
 public class FedoraObject {
 
     private final SortedMap<String, Datastream> datastreams = new DSMap();
@@ -16,6 +19,9 @@ public class FedoraObject {
     private Date createdDate;
     private Date lastModifiedDate;
 
+    /**
+     * Creates an instance.
+     */
     public FedoraObject() {
     }
 
@@ -56,20 +62,36 @@ public class FedoraObject {
     }
 
     public Date createdDate() {
-        return createdDate;
+        if (createdDate == null) {
+            return null;
+        } else {
+            return new Date(createdDate.getTime());
+        }
     }
 
     public FedoraObject createdDate(Date createdDate) {
-        this.createdDate = createdDate;
+        if (createdDate == null) {
+            this.createdDate = null;
+        } else {
+            this.createdDate = new Date(createdDate.getTime());
+        }
         return this;
     }
 
     public Date lastModifiedDate() {
-        return lastModifiedDate;
+        if (lastModifiedDate == null) {
+            return null;
+        } else {
+            return new Date(lastModifiedDate.getTime());
+        }
     }
 
     public FedoraObject lastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
+        if (lastModifiedDate == null) {
+            this.lastModifiedDate = null;
+        } else {
+            this.lastModifiedDate = new Date(lastModifiedDate.getTime());
+        }
         return this;
     }
 
@@ -98,7 +120,7 @@ public class FedoraObject {
                 lastModifiedDate, datastreams };
     }
 
-    private class DSMap extends TreeMap<String, Datastream> {
+    private static class DSMap extends TreeMap<String, Datastream> {
 
         @Override
         public Datastream put(String id, Datastream datastream) {

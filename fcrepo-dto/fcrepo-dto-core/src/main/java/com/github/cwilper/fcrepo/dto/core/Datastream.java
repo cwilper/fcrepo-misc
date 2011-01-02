@@ -1,11 +1,15 @@
 package com.github.cwilper.fcrepo.dto.core;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * A Datastream within a <code>FedoraObject</code>.
+ */
 public class Datastream {
 
     private final SortedSet<DatastreamVersion> versions =
@@ -17,6 +21,12 @@ public class Datastream {
     private ControlGroup controlGroup;
     private Boolean versionable;
 
+    /**
+     * Creates an instance.
+     *
+     * @param id the id of the datastream (not null, immutable).
+     * @throws NullPointerException if id is given as <code>null</code>.
+     */
     public Datastream(String id) {
         if (id == null) {
             throw new NullPointerException();
@@ -59,10 +69,6 @@ public class Datastream {
         return versions;
     }
 
-    public DatastreamVersion addVersion() {
-        return addVersion(null);
-    }
-
     public DatastreamVersion addVersion(Date createdDate) {
         int n = versions.size();
         while (hasVersion(id + "." + n)) {
@@ -97,7 +103,8 @@ public class Datastream {
                 versions };
     }
 
-    private class DSVComparator implements Comparator<DatastreamVersion> {
+    private static class DSVComparator
+            implements Comparator<DatastreamVersion>, Serializable {
 
         @Override
         public int compare(DatastreamVersion a, DatastreamVersion b) {

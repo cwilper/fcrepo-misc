@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit tests for <code>ControlGroup</code>.
+ */
 public class ControlGroupTest extends AbstractTest {
 
     @Test

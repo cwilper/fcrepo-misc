@@ -2,11 +2,17 @@ package com.github.cwilper.fcrepo.dto.core;
 
 import java.util.Arrays;
 
+/**
+ * The computed checksum of a <code>DatastreamVersion</code>'s content.
+ */
 public class ContentDigest {
 
     private String type;
     private String hexValue;
 
+    /**
+     * Creates an instance.
+     */
     public ContentDigest() {
     }
 
