@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ControlGroupTest {
+public class ControlGroupTest extends AbstractTest {
 
     @Test
     public void fourPossibleValues() {
@@ -29,7 +29,7 @@ public class ControlGroupTest {
 
     @Test (expected=IllegalArgumentException.class)
     public void bogusShortName() {
-        State.forShortName("Bogus");
+        ControlGroup.forShortName("Bogus");
     }
 
 }

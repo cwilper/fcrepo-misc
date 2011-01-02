@@ -40,7 +40,11 @@ public class ContentDigest {
     }
 
     Object[] getEqArray() {
-        return new Object[] { type, hexValue.toUpperCase() };
+        if (hexValue == null) {
+            return new Object[] { type, null };
+        } else {
+            return new Object[] { type, hexValue.toUpperCase() };
+        }
     }
 
 }
