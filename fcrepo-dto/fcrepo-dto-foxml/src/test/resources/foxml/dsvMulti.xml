@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<digitalObject xmlns="info:fedora/fedora-system:def/foxml#" VERSION="1.1">
+  <datastream ID="ds">
+    <datastreamVersion ID="ds.2"/>
+    <datastreamVersion ID="ds.1"/>
+    <datastreamVersion ID="ds.3" CREATED="1970-01-01T00:00:00.002Z"/>
+    <datastreamVersion ID="ds.4" CREATED="1970-01-01T00:00:00.001Z"/>
+  </datastream>
+</digitalObject>

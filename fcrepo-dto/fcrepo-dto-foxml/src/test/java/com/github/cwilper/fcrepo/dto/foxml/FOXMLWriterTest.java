@@ -1,7 +1,9 @@
 package com.github.cwilper.fcrepo.dto.foxml;
 
+import com.github.cwilper.fcrepo.dto.core.ContentDigest;
 import com.github.cwilper.fcrepo.dto.core.ControlGroup;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
+import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import com.github.cwilper.fcrepo.dto.core.State;
 import org.apache.commons.io.IOUtils;
@@ -22,6 +24,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.net.URI;
 import java.util.Date;
 import java.util.Set;
 
@@ -172,6 +175,124 @@ public class FOXMLWriterTest {
         obj.putDatastream(new Datastream("ds2"));
         obj.putDatastream(new Datastream("ds1"));
         writeCheck("dsMulti");
+    }
+
+    @Test
+    public void dsvId() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(null);
+        obj.putDatastream(ds);
+        writeCheck("dsvId");
+    }
+
+    @Test
+    public void dsvCreatedDate() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(new Date(0));
+        obj.putDatastream(ds);
+        writeCheck("dsvCreatedDate");
+    }
+
+    @Test
+    public void dsvLabel() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(null).label("dsvLabel");
+        obj.putDatastream(ds);
+        writeCheck("dsvLabel");
+    }
+
+    @Test
+    public void dsvMimeType() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(null).mimeType("dsvMimeType");
+        obj.putDatastream(ds);
+        writeCheck("dsvMimeType");
+    }
+
+    @Test
+    public void dsvFormatURI() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(null).formatURI(URI.create("urn:dsvFormatURI"));
+        obj.putDatastream(ds);
+        writeCheck("dsvFormatURI");
+    }
+
+    @Test
+    public void dsvSize() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(null).size(0L);
+        obj.putDatastream(ds);
+        writeCheck("dsvSize");
+    }
+
+    @Test
+    public void dsvContentDigest() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(null).contentDigest(new ContentDigest().type("someType").
+                hexValue("someHexValue"));
+        obj.putDatastream(ds);
+        writeCheck("dsvContentDigest");
+    }
+
+    @Test
+    public void dsvInlineXML() throws IOException {
+        Datastream ds = new Datastream("ds").controlGroup(
+                ControlGroup.INLINE_XML);
+        ds.addVersion(null).setInlineXML(new StringReader("<doc/>"));
+        obj.putDatastream(ds);
+        writeCheck("dsvInlineXML");
+    }
+
+    @Test
+    public void dsvContentLocation() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(null).contentLocation(URI.create("http://example.org/"));
+        obj.putDatastream(ds);
+        writeCheck("dsvContentLocation");
+    }
+
+    @Test
+    public void dsvContentLocationInternal() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(null).contentLocation(
+                URI.create("internal:test:obj+ds+ds.0"));
+        obj.putDatastream(ds);
+        writeCheck("dsvContentLocationInternal");
+    }
+
+    @Test
+    public void dsvAltIds() {
+        Datastream ds = new Datastream("ds");
+        ds.addVersion(null).altIds().add(URI.create("urn:a"));
+        obj.putDatastream(ds);
+        writeCheck("dsvAltIds");
+    }
+
+    @Test
+    public void dsvAltIdsMulti() {
+        Datastream ds = new Datastream("ds");
+        DatastreamVersion dsv = ds.addVersion(null);
+        dsv.altIds().add(URI.create("urn:c"));
+        dsv.altIds().add(URI.create("urn:a"));
+        dsv.altIds().add(URI.create("urn:b"));
+        obj.putDatastream(ds);
+        writeCheck("dsvAltIdsMulti");
+    }
+
+    @Test
+    public void dsvMulti() {
+        Datastream ds = new Datastream("ds");
+        DatastreamVersion dsv1 = new DatastreamVersion("ds.1", null);
+        DatastreamVersion dsv2 = new DatastreamVersion("ds.2", null);
+        DatastreamVersion dsv3 = new DatastreamVersion("ds.3", new Date(2));
+        DatastreamVersion dsv4 = new DatastreamVersion("ds.4", new Date(1));
+        ds.versions().add(dsv4);
+        ds.versions().add(dsv2);
+        ds.versions().add(dsv1);
+        ds.versions().add(dsv3);
+        // should be in this order: 2, 1, 3, 4
+        obj.putDatastream(ds);
+        writeCheck("dsvMulti");
     }
 
     private void writeCheck(String testName) {
