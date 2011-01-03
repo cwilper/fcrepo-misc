@@ -170,7 +170,7 @@
         <groupId>org.slf4j</groupId>
         <artifactId>jcl-over-slf4j</artifactId>
         <version>1.6.1</version>
-      </dependency> 
+      </dependency>
 
     </dependencies>
   </dependencyManagement>
@@ -284,6 +284,7 @@
         <configuration>
           <instrumentation>
             <excludes>
+              <exclude>**/Constants.class</exclude>
               <exclude>**/Util.class</exclude>
             </excludes>
           </instrumentation>

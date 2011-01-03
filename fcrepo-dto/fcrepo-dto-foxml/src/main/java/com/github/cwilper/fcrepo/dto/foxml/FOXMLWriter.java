@@ -95,13 +95,17 @@ public class FOXMLWriter {
 
     private void writeObjectProperties(FedoraObject obj)
             throws XMLStreamException {
-        w.writeStartElement(Constants.objectProperties);
-        writeProperty(Constants.STATE_URI, obj.state());
-        writeProperty(Constants.LABEL_URI, obj.label());
-        writeProperty(Constants.OWNERID_URI, obj.ownerId());
-        writeProperty(Constants.CREATEDDATE_URI, obj.createdDate());
-        writeProperty(Constants.LASTMODIFIEDDATE_URI, obj.lastModifiedDate());
-        w.writeEndElement();
+        if (obj.state() != null || obj.label() != null
+                || obj.ownerId() != null || obj.createdDate() != null
+                || obj.lastModifiedDate() != null) {
+            w.writeStartElement(Constants.objectProperties);
+            writeProperty(Constants.STATE_URI, obj.state());
+            writeProperty(Constants.LABEL_URI, obj.label());
+            writeProperty(Constants.OWNERID_URI, obj.ownerId());
+            writeProperty(Constants.CREATEDDATE_URI, obj.createdDate());
+            writeProperty(Constants.LASTMODIFIEDDATE_URI, obj.lastModifiedDate());
+            w.writeEndElement();
+        }
     }
 
     private void writeDatastream(Datastream ds)
@@ -142,8 +146,13 @@ public class FOXMLWriter {
     private void writeContentLocation(URI ref) throws XMLStreamException {
         if (ref != null) {
             w.writeStartElement(Constants.contentLocation);
-            w.writeAttribute(Constants.TYPE, Constants.URL_TYPE);
-            w.writeAttribute(Constants.REF, ref.toString());
+            if (ref.getScheme().equalsIgnoreCase(Constants.INTERNAL_TYPE)) {
+                w.writeAttribute(Constants.TYPE, Constants.INTERNAL_TYPE);
+                w.writeAttribute(Constants.REF, ref.getRawSchemeSpecificPart());
+            } else {
+                w.writeAttribute(Constants.TYPE, Constants.URL_TYPE);
+                w.writeAttribute(Constants.REF, ref.toString());
+            }
             w.writeEndElement();
         }
     }

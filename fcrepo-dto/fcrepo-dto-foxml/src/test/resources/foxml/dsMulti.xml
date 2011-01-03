@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<digitalObject xmlns="info:fedora/fedora-system:def/foxml#" VERSION="1.1">
+  <datastream ID="ds1"/>
+  <datastream ID="ds2"/>
+</digitalObject>

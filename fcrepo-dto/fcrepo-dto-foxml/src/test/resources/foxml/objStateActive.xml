@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<digitalObject xmlns="info:fedora/fedora-system:def/foxml#" VERSION="1.1">
+  <objectProperties>
+    <property NAME="info:fedora/fedora:def/model#state" VALUE="Active"/>
+  </objectProperties>
+</digitalObject>
