@@ -1,7 +1,6 @@
 package com.github.cwilper.fcrepo.dto.core;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.SortedSet;
@@ -10,7 +9,7 @@ import java.util.TreeSet;
 /**
  * A Datastream within a <code>FedoraObject</code>.
  */
-public class Datastream {
+public class Datastream extends FedoraDTO {
 
     private final SortedSet<DatastreamVersion> versions =
             new TreeSet<DatastreamVersion>(new DSVComparator());
@@ -28,10 +27,10 @@ public class Datastream {
      * @throws NullPointerException if id is given as <code>null</code>.
      */
     public Datastream(String id) {
-        if (id == null) {
+        this.id = Util.normalize(id);
+        if (this.id == null) {
             throw new NullPointerException();
         }
-        this.id = id;
     }
 
     public String id() {
@@ -88,16 +87,6 @@ public class Datastream {
     }
 
     @Override
-    public final int hashCode() {
-        return Util.computeHash(getEqArray());
-    }
-
-    @Override
-    public final boolean equals(Object o) {
-        return o instanceof Datastream && Arrays.equals(
-                ((Datastream) o).getEqArray(), getEqArray());
-    }
-
     Object[] getEqArray() {
         return new Object[] { id, state, controlGroup, versionable,
                 versions };
@@ -112,15 +101,15 @@ public class Datastream {
             Date bDate = b.createdDate();
             if (aDate == null) {
                 if (bDate == null) {
-                    return a.id().compareTo(b.id());
+                    return b.id().compareTo(a.id());
                 } else {
-                    return 1;
+                    return -1;
                 }
             } else {
                 if (bDate == null) {
-                    return -1;
+                    return 1;
                 } else {
-                    return aDate.compareTo(bDate);
+                    return bDate.compareTo(aDate);
                 }
             }
         }

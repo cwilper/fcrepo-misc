@@ -179,12 +179,12 @@ public class FOXMLWriter {
 
     private void writeXMLContent(DatastreamVersion dsv)
             throws IOException, XMLStreamException {
-        if (dsv.inlineXML()) {
+        if (dsv.hasInlineXML()) {
             w.writeStartElement(Constants.xmlContent);
             w.writeCharacters(Constants.LINE_FEED);
             w.flush();
             OutputStreamWriter sinkWriter = new OutputStreamWriter(sink);
-            dsv.inlineXML(sinkWriter);
+            dsv.getInlineXML(sinkWriter);
             sinkWriter.flush();
             w.writeEndElement();
         }

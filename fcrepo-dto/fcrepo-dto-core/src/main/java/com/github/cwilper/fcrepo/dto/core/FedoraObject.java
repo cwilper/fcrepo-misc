@@ -1,6 +1,5 @@
 package com.github.cwilper.fcrepo.dto.core;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -8,7 +7,7 @@ import java.util.TreeMap;
 /**
  * A Fedora Digital Object.
  */
-public class FedoraObject {
+public class FedoraObject extends FedoraDTO {
 
     private final SortedMap<String, Datastream> datastreams = new DSMap();
 
@@ -30,7 +29,7 @@ public class FedoraObject {
     }
 
     public FedoraObject pid(String pid) {
-        this.pid = pid;
+        this.pid = Util.normalize(pid);
         return this;
     }
 
@@ -48,7 +47,7 @@ public class FedoraObject {
     }
 
     public FedoraObject label(String label) {
-        this.label = label;
+        this.label = Util.normalize(label);
         return this;
     }
 
@@ -57,41 +56,25 @@ public class FedoraObject {
     }
 
     public FedoraObject ownerId(String ownerId) {
-        this.ownerId = ownerId;
+        this.ownerId = Util.normalize(ownerId);
         return this;
     }
 
     public Date createdDate() {
-        if (createdDate == null) {
-            return null;
-        } else {
-            return new Date(createdDate.getTime());
-        }
+        return Util.copy(createdDate);
     }
 
     public FedoraObject createdDate(Date createdDate) {
-        if (createdDate == null) {
-            this.createdDate = null;
-        } else {
-            this.createdDate = new Date(createdDate.getTime());
-        }
+        this.createdDate = Util.copy(createdDate);
         return this;
     }
 
     public Date lastModifiedDate() {
-        if (lastModifiedDate == null) {
-            return null;
-        } else {
-            return new Date(lastModifiedDate.getTime());
-        }
+        return Util.copy(lastModifiedDate);
     }
 
     public FedoraObject lastModifiedDate(Date lastModifiedDate) {
-        if (lastModifiedDate == null) {
-            this.lastModifiedDate = null;
-        } else {
-            this.lastModifiedDate = new Date(lastModifiedDate.getTime());
-        }
+        this.lastModifiedDate = Util.copy(lastModifiedDate);
         return this;
     }
 
@@ -105,16 +88,6 @@ public class FedoraObject {
     }
 
     @Override
-    public final int hashCode() {
-        return Util.computeHash(getEqArray());
-    }
-
-    @Override
-    public final boolean equals(Object o) {
-        return o instanceof FedoraObject && Arrays.equals(
-                ((FedoraObject) o).getEqArray(), getEqArray());
-    }
-
     Object[] getEqArray() {
         return new Object[] { pid, state, label, ownerId, createdDate,
                 lastModifiedDate, datastreams };

@@ -1,45 +1,40 @@
 package com.github.cwilper.fcrepo.dto.core;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * Unit tests for <code>ContentDigest</code>.
  */
-public class ContentDigestTest extends AbstractTest {
+public class ContentDigestTest extends FedoraDTOTest {
 
-    @Test
-    public void type() {
-        ContentDigest contentDigest = new ContentDigest().type("a");
-        Assert.assertEquals("a", contentDigest.type());
+    @Override
+    Object[] getEqualInstances() {
+        return new Object[] {
+                new ContentDigest(),
+                new ContentDigest(),
+                new ContentDigest().type("a"),
+                new ContentDigest().type("a"),
+                new ContentDigest().hexValue("a"),
+                new ContentDigest().hexValue("A")
+        };
+    }
+
+    @Override
+    Object[] getNonEqualInstances() {
+        return new Object[] {
+                new ContentDigest(),
+                new ContentDigest().type("a")
+        };
     }
 
     @Test
-    public void hexValue() {
-        ContentDigest contentDigest = new ContentDigest().hexValue("a");
-        Assert.assertEquals("a", contentDigest.hexValue());
+    public void typeField() {
+        checkStringField(new ContentDigest(), "type");
     }
 
     @Test
-    public void equality() {
-        checkEquality(new ContentDigest(), new ContentDigest());
-        checkEquality(new ContentDigest().type("a"),
-                new ContentDigest().type("a"));
-        checkEquality(new ContentDigest().hexValue("a"),
-                new ContentDigest().hexValue("a"));
-        checkEquality(new ContentDigest().type("a").hexValue("a"),
-                new ContentDigest().type("a").hexValue("a"));
-    }
-
-    @Test
-    public void inequality() {
-        Assert.assertFalse(new ContentDigest().equals(""));
-        Assert.assertFalse(new ContentDigest().equals(
-                new ContentDigest().type("a")));
-        Assert.assertFalse(new ContentDigest().equals(
-                new ContentDigest().hexValue("a")));
-        Assert.assertFalse(new ContentDigest().type("a").equals(
-                new ContentDigest().hexValue("a")));
+    public void hexValueField() {
+        checkStringField(new ContentDigest(), "hexValue");
     }
 
 }

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -16,7 +15,7 @@ import java.util.TreeSet;
 /**
  * A particular revision of a <code>Datastream</code>.
  */
-public class DatastreamVersion {
+public class DatastreamVersion extends FedoraDTO {
 
     private final SortedSet<URI> altIds = new TreeSet<URI>();
 
@@ -40,15 +39,11 @@ public class DatastreamVersion {
      * @throws NullPointerException if id is given as <code>null</code>.
      */
     public DatastreamVersion(String id, Date createdDate) {
-        if (id == null) {
+        this.id = Util.normalize(id);
+        if (this.id == null) {
             throw new NullPointerException();
         }
-        this.id = id;
-        if (createdDate == null) {
-            this.createdDate = null;
-        } else {
-            this.createdDate = new Date(createdDate.getTime());
-        }
+        this.createdDate = Util.copy(createdDate);
     }
 
     public String id() {
@@ -60,16 +55,12 @@ public class DatastreamVersion {
     }
 
     public DatastreamVersion label(String label) {
-        this.label = label;
+        this.label = Util.normalize(label);
         return this;
     }
 
     public Date createdDate() {
-        if (createdDate == null) {
-            return null;
-        } else {
-            return new Date(createdDate.getTime());
-        }
+        return Util.copy(createdDate);
     }
 
     public String mimeType() {
@@ -77,7 +68,7 @@ public class DatastreamVersion {
     }
 
     public DatastreamVersion mimeType(String mimeType) {
-        this.mimeType = mimeType;
+        this.mimeType = Util.normalize(mimeType);
         return this;
     }
 
@@ -108,30 +99,35 @@ public class DatastreamVersion {
     }
 
     public DatastreamVersion size(Long size) {
+        if (size != null && size < 0) throw new IllegalArgumentException();
         this.size = size;
         return this;
     }
 
-    public boolean inlineXML() {
+    public boolean hasInlineXML() {
         return inlineXML != null;
     }
 
-    public DatastreamVersion inlineXML(Writer writer) throws IOException {
+    public DatastreamVersion getInlineXML(Writer sink) throws IOException {
         if (inlineXML != null) {
-            IOUtils.copy(new CharArrayReader(inlineXML), writer);
+            IOUtils.copy(new CharArrayReader(inlineXML), sink);
         }
         return this;
     }
 
     // source will be read entirely, then auto-closed
-    public DatastreamVersion inlineXML(Reader reader) throws IOException {
-        CharArrayWriter writer = new CharArrayWriter();
-        try {
-            IOUtils.copy(reader, writer);
-        } finally {
-            IOUtils.closeQuietly(reader);
+    public DatastreamVersion setInlineXML(Reader source) throws IOException {
+        if (source == null) {
+            inlineXML = null;
+        } else {
+            CharArrayWriter sink = new CharArrayWriter();
+            try {
+                IOUtils.copy(source, sink);
+            } finally {
+                IOUtils.closeQuietly(source);
+            }
+            inlineXML = sink.toCharArray();
         }
-        inlineXML = writer.toCharArray();
         return this;
     }
 
@@ -145,16 +141,6 @@ public class DatastreamVersion {
     }
 
     @Override
-    public final int hashCode() {
-        return Util.computeHash(getEqArray());
-    }
-
-    @Override
-    public final boolean equals(Object o) {
-        return o instanceof DatastreamVersion && Arrays.equals(
-                ((DatastreamVersion) o).getEqArray(), getEqArray());
-    }
-    
     Object[] getEqArray() {
         return new Object[] { id, label, createdDate, mimeType, formatURI,
                 contentDigest, size, inlineXML, contentLocation, altIds };

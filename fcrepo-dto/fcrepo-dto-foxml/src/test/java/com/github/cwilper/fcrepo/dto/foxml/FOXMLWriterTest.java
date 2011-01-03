@@ -40,14 +40,14 @@ public class FOXMLWriterTest {
 
         Datastream ds1 = new Datastream("DS1")
                 .controlGroup(ControlGroup.MANAGED_CONTENT);
-        ds1.addVersion()
+        ds1.addVersion(null)
                 .contentLocation(URI.create("file:///Users/cwilper/.vimrc"));
         obj.putDatastream(ds1);
         
         Datastream ds2 = new Datastream("DS2")
                 .controlGroup(ControlGroup.INLINE_XML);
-        ds2.addVersion()
-                .inlineXML(new StringReader("<doc>hi</doc>"));
+        ds2.addVersion(null)
+                .setInlineXML(new StringReader("<doc>hi</doc>"));
         obj.putDatastream(ds2);
 
         System.out.println(getFOXML(obj, obj.datastreams().keySet()));

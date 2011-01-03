@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Unit tests for <code>State</code>.
  */
-public class StateTest extends AbstractTest {
+public class StateTest {
 
     @Test
     public void threePossibleValues() {
