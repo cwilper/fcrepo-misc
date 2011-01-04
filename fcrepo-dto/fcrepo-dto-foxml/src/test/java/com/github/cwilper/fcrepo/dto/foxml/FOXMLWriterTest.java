@@ -332,7 +332,7 @@ public class FOXMLWriterTest {
         try {
             FOXMLWriter writer = new FOXMLWriter();
             writer.setManagedDatastreamsToEmbed(embedIds);
-            writer.write(obj, out);
+            writer.writeObject(obj, out);
             return prettyPrint(new ByteArrayInputStream(out.toByteArray()));
         } catch (IOException e) {
             throw new RuntimeException(e);

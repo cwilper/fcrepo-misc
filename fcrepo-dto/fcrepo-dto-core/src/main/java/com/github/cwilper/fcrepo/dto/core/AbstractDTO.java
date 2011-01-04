@@ -9,7 +9,7 @@ import java.util.Arrays;
  * <code>Object.hashCode()</code> and <code>Object.equals(Object)</code>,
  * requiring only that subclasses implement <code>getEqArray()</code>.
  */
-abstract class FedoraDTO {
+abstract class AbstractDTO {
 
     @Override
     public final int hashCode() {
@@ -22,8 +22,8 @@ abstract class FedoraDTO {
 
     @Override
     public final boolean equals(Object o) {
-        return o instanceof FedoraDTO && Arrays.equals(
-                ((FedoraDTO) o).getEqArray(), getEqArray());
+        return o instanceof AbstractDTO && Arrays.equals(
+                ((AbstractDTO) o).getEqArray(), getEqArray());
     }
 
     /**

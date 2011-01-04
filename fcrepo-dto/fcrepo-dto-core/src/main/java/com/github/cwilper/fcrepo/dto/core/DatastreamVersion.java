@@ -15,7 +15,7 @@ import java.util.TreeSet;
 /**
  * A particular revision of a <code>Datastream</code>.
  */
-public class DatastreamVersion extends FedoraDTO {
+public class DatastreamVersion extends AbstractDTO {
 
     private final SortedSet<URI> altIds = new TreeSet<URI>();
 

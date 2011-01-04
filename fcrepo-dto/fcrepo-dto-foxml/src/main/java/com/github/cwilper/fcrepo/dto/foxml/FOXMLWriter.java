@@ -6,36 +6,28 @@ import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import com.github.cwilper.fcrepo.dto.core.State;
-import com.github.cwilper.fcrepo.httpclient.HttpUtil;
+import com.github.cwilper.fcrepo.dto.core.io.AbstractDTOWriter;
 import org.apache.commons.codec.binary.Base64OutputStream;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 // not threadsafe!
-public class FOXMLWriter {
+public class FOXMLWriter extends AbstractDTOWriter {
 
     private static final Logger logger =
             LoggerFactory.getLogger(FOXMLWriter.class);
 
     private Set<String> managedDatastreamsToEmbed;
-    private HttpClient httpClient;
 
     private FedoraObject obj;
     private OutputStream sink;
@@ -43,8 +35,6 @@ public class FOXMLWriter {
     private XMLStreamWriter w;
     
     public FOXMLWriter() {
-        managedDatastreamsToEmbed = new HashSet<String>();
-        httpClient = new DefaultHttpClient();
     }
 
     public void setManagedDatastreamsToEmbed(
@@ -52,17 +42,14 @@ public class FOXMLWriter {
         this.managedDatastreamsToEmbed = managedDatastreamsToEmbed;
     }
 
-    public void setHttpClient(HttpClient httpClient) {
-        this.httpClient = httpClient;
-    }
-
-    public void write(FedoraObject obj, OutputStream sink) throws IOException {
+    public void writeObject(FedoraObject obj, OutputStream sink)
+            throws IOException {
         this.obj = obj;
         this.sink = sink;
         XMLOutputFactory factory = XMLOutputFactory.newInstance();
         try {
             w = factory.createXMLStreamWriter(sink, Constants.CHAR_ENCODING);
-            writeDigitalObject();
+            writeObject();
         } catch (XMLStreamException e) {
             throw new IOException(e);
         } finally {
@@ -76,7 +63,7 @@ public class FOXMLWriter {
         }
     }
 
-    private void writeDigitalObject()
+    private void writeObject()
             throws IOException, XMLStreamException {
         w.writeStartDocument(Constants.CHAR_ENCODING, Constants.XML_VERSION);
 
@@ -166,21 +153,7 @@ public class FOXMLWriter {
             Base64OutputStream out = new Base64OutputStream(sink,
                     true, Constants.BASE64_LINE_LENGTH,
                     Constants.LINE_FEED.getBytes(Constants.CHAR_ENCODING));
-            if (ref.getScheme().equals("http")
-                    || ref.getScheme().equals("https")) {
-                HttpUtil.get(httpClient, ref, out);
-            } else if (ref.getScheme().equals("file")) {
-                InputStream in = new FileInputStream(
-                        new File(ref.getRawSchemeSpecificPart()));
-                try {
-                    IOUtils.copy(in, out);
-                } finally {
-                    IOUtils.closeQuietly(in);
-                }
-            } else {
-                throw new IOException("Cannot read " + ref + " -- unsupported "
-                        + "scheme");
-            }
+            contentResolver.resolveContent(ref, out);
             out.flush();
             w.writeEndElement();
         }
