@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <digitalObject xmlns="info:fedora/fedora-system:def/foxml#" VERSION="1.1">
   <objectProperties>
-    <property NAME="info:fedora/fedora:def/model#ownerId" VALUE="objOwnerId"/>
+    <property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE="objOwnerId"/>
   </objectProperties>
 </digitalObject>

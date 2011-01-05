@@ -20,8 +20,8 @@ abstract class Constants {
     
     public static final String property = "property";
     public static final String NAME = "NAME";
-    public static final String MODEL = "info:fedora/fedora:def/model#";
-    public static final String VIEW = "info:fedora/fedora:def/view#";
+    public static final String MODEL = "info:fedora/fedora-system:def/model#";
+    public static final String VIEW = "info:fedora/fedora-system:def/view#";
     public static final String STATE_URI = MODEL + "state";
     public static final String LABEL_URI = MODEL + "label";
     public static final String OWNERID_URI = MODEL + "ownerId";
