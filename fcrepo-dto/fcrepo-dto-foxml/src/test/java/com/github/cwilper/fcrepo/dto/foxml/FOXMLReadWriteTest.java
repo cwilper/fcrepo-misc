@@ -6,15 +6,12 @@ import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import com.github.cwilper.fcrepo.dto.core.State;
+import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -35,17 +32,6 @@ public class FOXMLReadWriteTest {
     private static File testResources =
             new File("/Users/cwilper/work/cwilper/fcrepo-misc/"
                     + "fcrepo-dto/fcrepo-dto-foxml/src/test/resources");
-
-    final static String prettyXSL = "<xsl:stylesheet version=\"1.0\"\n" +
-            " xmlns:xalan=\"http://xml.apache.org/xalan\"\n" +
-            " xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n" +
-            "<xsl:output method=\"xml\" indent=\"yes\"\n" +
-            " xalan:indent-amount=\"2\"/>\n" +
-            "<xsl:strip-space elements=\"*\"/>\n" +
-            "<xsl:template match=\"/\">\n" +
-            "  <xsl:copy-of select=\".\"/>\n" +
-            "</xsl:template>\n" +
-            "</xsl:stylesheet>";
 
     private FedoraObject obj;
 
@@ -362,7 +348,7 @@ public class FOXMLReadWriteTest {
         try {
             InputStream actualStream = new ByteArrayInputStream(
                     getFOXML(embedIds).getBytes("UTF-8"));
-            String actualXML = prettyPrint(actualStream);
+            String actualXML = XMLUtil.prettyPrint(actualStream);
             if (getClass().getClassLoader().getResource(filename) == null) {
                 if (testResources != null && testResources.isDirectory()) {
                     File testFile = new File(testResources, filename);
@@ -377,7 +363,7 @@ public class FOXMLReadWriteTest {
             } else {
                 InputStream expectedStream = getClass().getClassLoader()
                         .getResourceAsStream(filename);
-                String expectedXML = prettyPrint(expectedStream);
+                String expectedXML = XMLUtil.prettyPrint(expectedStream);
                 Assert.assertEquals(expectedXML, actualXML);
             }
         } catch (IOException e) {
@@ -406,27 +392,13 @@ public class FOXMLReadWriteTest {
         try {
             FOXMLWriter writer = new FOXMLWriter();
             writer.setManagedDatastreamsToEmbed(embedIds);
-            writer.writeObject(obj, out);
-            return prettyPrint(new ByteArrayInputStream(out.toByteArray()));
+            StringWriter sink = new StringWriter();
+            XMLUtil.prettyPrint(writer, obj, sink);
+            return sink.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
             IOUtils.closeQuietly(out);
-        }
-    }
-
-    private static String prettyPrint(InputStream xml) {
-        try {
-            TransformerFactory tFactory = TransformerFactory.newInstance();
-            Transformer t = tFactory.newTransformer(
-                    new StreamSource(new StringReader(prettyXSL)));
-            StringWriter result = new StringWriter();
-            t.transform(new StreamSource(xml), new StreamResult(result));
-            return result.toString();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            IOUtils.closeQuietly(xml);
         }
     }
 

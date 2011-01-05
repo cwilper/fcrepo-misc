@@ -116,6 +116,9 @@ public class DatastreamVersion extends AbstractDTO {
     }
 
     // source will be read entirely, then auto-closed
+    // TODO: normalize if needed (omit xml decl, omit doctype, strip leading/trailing spaces)
+    // and use axiom to canonicalize the xml
+    // then...auto-set size (probably not, or have an OPTION)??
     public DatastreamVersion setInlineXML(Reader source) throws IOException {
         if (source == null) {
             inlineXML = null;

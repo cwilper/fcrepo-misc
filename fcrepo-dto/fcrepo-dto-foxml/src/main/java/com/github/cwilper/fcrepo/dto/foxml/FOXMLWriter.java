@@ -7,6 +7,7 @@ import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.AbstractDTOWriter;
+import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,7 @@ public class FOXMLWriter extends AbstractDTOWriter {
         } catch (XMLStreamException e) {
             throw new IOException(e);
         } finally {
-            Util.closeQuietly(w);
+            XMLUtil.closeQuietly(w);
         }
     }
 

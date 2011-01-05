@@ -7,6 +7,7 @@ import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.AbstractDTOReader;
+import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -16,9 +17,12 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.CharArrayReader;
+import java.io.CharArrayWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
@@ -47,7 +51,7 @@ public class FOXMLReader extends AbstractDTOReader {
         } catch (XMLStreamException e) {
             throw new IOException(e);
         } finally {
-            Util.closeQuietly(r);
+            XMLUtil.closeQuietly(r);
             IOUtils.closeQuietly(source);
         }
     }
@@ -177,8 +181,15 @@ public class FOXMLReader extends AbstractDTOReader {
     }
 
     private void readXMLContent(DatastreamVersion dsv)
-            throws XMLStreamException {
-        // TODO: Implement this
+            throws IOException, XMLStreamException {
+        while (r.nextTag() != XMLStreamConstants.START_ELEMENT) {
+        }
+        CharArrayWriter sink = new CharArrayWriter();
+        XMLUtil.copy(r, sink, true);
+        StringWriter s = new StringWriter();
+        IOUtils.copy(new CharArrayReader(sink.toCharArray()), s);
+        System.out.println(s.toString());
+        dsv.setInlineXML(new CharArrayReader(sink.toCharArray()));
     }
 
     private void readContentDigest(DatastreamVersion dsv)

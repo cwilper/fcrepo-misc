@@ -155,6 +155,18 @@
       </dependency>
 
       <dependency>
+        <groupId>org.apache.ws.commons.axiom</groupId>
+        <artifactId>axiom-c14n</artifactId>
+        <version>1.2.10</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
         <groupId>org.openrdf</groupId>
         <artifactId>rio</artifactId>
         <version>1.0.10</version>
