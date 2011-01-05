@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<digitalObject xmlns="info:fedora/fedora-system:def/foxml#" VERSION="1.1">
+  <datastream ID="ds" CONTROL_GROUP="M">
+    <datastreamVersion ID="ds.0">
+      <binaryContent>
+QSB3b3JkIHN0YXJ0aW5nIHdpdGggYywgZm9sbG93ZWQgYnkgbywgZm9sbG93ZWQgYnkgbiwg
+Zm9sbG93ZWQgYnkgdCwgZm9sbG93ZWQgYnkgZSwgZm9sbG93ZWQgYnkgbiwgYW5kIGVuZGlu
+ZyB3aXRoIHQu</binaryContent>
+    </datastreamVersion>
+  </datastream>
+</digitalObject>

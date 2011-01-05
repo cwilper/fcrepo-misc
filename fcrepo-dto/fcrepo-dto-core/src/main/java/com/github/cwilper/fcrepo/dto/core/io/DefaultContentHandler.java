@@ -3,7 +3,6 @@ package com.github.cwilper.fcrepo.dto.core.io;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,8 +10,7 @@ import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
+import java.io.OutputStream;
 
 public class DefaultContentHandler implements ContentHandler {
 
@@ -38,28 +36,38 @@ public class DefaultContentHandler implements ContentHandler {
     }
 
     @Override
-    public void handleContent(FedoraObject obj,
-                              Datastream ds,
-                              DatastreamVersion dsv,
-                              InputStream source) throws IOException {
-        dsv.contentLocation(store(obj.pid() + "/" + ds.id() + "+" + dsv.id(),
-                source));
+    public OutputStream handleContent(FedoraObject obj,
+                                      Datastream ds,
+                                      DatastreamVersion dsv)
+            throws IOException {
+        File file = new File(baseDir(), getPath(obj, ds, dsv));
+        if (!file.getParentFile().mkdirs()) {
+            throw new IOException("Can't create parent dir of " + file);
+        }
+        OutputStream sink = new FileOutputStream(file);
+        dsv.contentLocation(file.toURI());
+        return sink;
     }
 
-    private URI store(String path, InputStream source) throws IOException {
-        FileOutputStream sink = null;
-        try {
-            File file = new File(baseDir(), path);
-            if (!file.getParentFile().mkdirs()) {
-                throw new IOException("Can't create parent dir of " + file);
-            }
-            sink = new FileOutputStream(file);
-            IOUtils.copy(source, sink);
-            return file.toURI();
-        } finally {
-            IOUtils.closeQuietly(source);
-            IOUtils.closeQuietly(sink);
+    private static String getPath(FedoraObject obj,
+                                  Datastream ds,
+                                  DatastreamVersion dsv) {
+        if (obj == null || ds == null || dsv == null) {
+            throw new NullPointerException();
         }
+        StringBuffer sb = new StringBuffer();
+        if (obj.pid() != null) {
+            sb.append(obj.pid());
+        } else {
+            // if pid isn't assigned yet, come up with a unique enough path
+            // to avoid collisions for now
+            sb.append("nopid:" + Math.abs(obj.hashCode()));
+        }
+        sb.append("/");
+        sb.append(ds.id());
+        sb.append("+");
+        sb.append(dsv.id());
+        return sb.toString();
     }
 
     private File baseDir() throws IOException {

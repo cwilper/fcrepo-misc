@@ -31,7 +31,6 @@ public class FOXMLWriter extends AbstractDTOWriter {
 
     private FedoraObject obj;
     private OutputStream sink;
-
     private XMLStreamWriter w;
     
     public FOXMLWriter() {
@@ -53,13 +52,7 @@ public class FOXMLWriter extends AbstractDTOWriter {
         } catch (XMLStreamException e) {
             throw new IOException(e);
         } finally {
-            try {
-                if (w != null) {
-                    w.close();
-                }
-            } catch (XMLStreamException e) {
-                logger.warn("Error closing XMLStreamWriter", e);
-            }
+            Util.closeQuietly(w);
         }
     }
 
@@ -133,8 +126,8 @@ public class FOXMLWriter extends AbstractDTOWriter {
     private void writeContentLocation(URI ref) throws XMLStreamException {
         if (ref != null) {
             w.writeStartElement(Constants.contentLocation);
-            if (ref.getScheme().equalsIgnoreCase(Constants.INTERNAL_TYPE)) {
-                w.writeAttribute(Constants.TYPE, Constants.INTERNAL_TYPE);
+            if (ref.getScheme().equals(Constants.INTERNALREF_SCHEME)) {
+                w.writeAttribute(Constants.TYPE, Constants.INTERNALREF_TYPE);
                 w.writeAttribute(Constants.REF, ref.getRawSchemeSpecificPart());
             } else {
                 w.writeAttribute(Constants.TYPE, Constants.URL_TYPE);

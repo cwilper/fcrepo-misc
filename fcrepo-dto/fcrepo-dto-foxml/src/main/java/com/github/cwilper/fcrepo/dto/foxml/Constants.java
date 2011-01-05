@@ -48,7 +48,8 @@ abstract class Constants {
     public static final String DIGEST = "DIGEST";
     
     public static final String contentLocation = "contentLocation";
-    public static final String INTERNAL_TYPE = "INTERNAL";
+    public static final String INTERNALREF_SCHEME = "internal";
+    public static final String INTERNALREF_TYPE = "INTERNAL_REF";
     public static final String URL_TYPE = "URL";
     public static final String REF = "REF";
 

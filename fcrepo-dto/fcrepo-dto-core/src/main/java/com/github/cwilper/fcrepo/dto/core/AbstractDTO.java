@@ -1,7 +1,5 @@
 package com.github.cwilper.fcrepo.dto.core;
 
-import java.util.Arrays;
-
 /**
  * Superclass of all (non-Enum) Fedora Data Transfer Object classes.
  *
@@ -22,8 +20,25 @@ abstract class AbstractDTO {
 
     @Override
     public final boolean equals(Object o) {
-        return o instanceof AbstractDTO && Arrays.equals(
-                ((AbstractDTO) o).getEqArray(), getEqArray());
+        return o instanceof AbstractDTO && o.toString().equals(toString());
+    }
+
+    @Override
+    public final String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName() + "(");
+        int i = 0;
+        for (Object o: getEqArray()) {
+            if (i > 0) sb.append(",");
+            if (o instanceof String) {
+                sb.append("\"" + o + "\"");
+            } else {
+                sb.append(o);
+            }
+            i++;
+        }
+        sb.append(")");
+        return sb.toString();
     }
 
     /**
