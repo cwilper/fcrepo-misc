@@ -155,13 +155,12 @@ public class FOXMLWriter extends AbstractDTOWriter {
 
     private void writeXMLContent(DatastreamVersion dsv)
             throws IOException, XMLStreamException {
-        if (dsv.hasInlineXML()) {
+        byte[] inlineXML = dsv.inlineXML();
+        if (inlineXML != null) {
             w.writeStartElement(Constants.xmlContent);
             w.writeCharacters(Constants.LINE_FEED);
             w.flush();
-            OutputStreamWriter sinkWriter = new OutputStreamWriter(sink);
-            dsv.getInlineXML(sinkWriter);
-            sinkWriter.flush();
+            sink.write(inlineXML);
             w.writeEndElement();
         }
     }

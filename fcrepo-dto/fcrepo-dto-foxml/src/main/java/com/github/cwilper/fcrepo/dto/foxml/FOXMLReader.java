@@ -17,12 +17,10 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.io.CharArrayReader;
-import java.io.CharArrayWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
@@ -184,12 +182,10 @@ public class FOXMLReader extends AbstractDTOReader {
             throws IOException, XMLStreamException {
         while (r.nextTag() != XMLStreamConstants.START_ELEMENT) {
         }
-        CharArrayWriter sink = new CharArrayWriter();
-        XMLUtil.copy(r, sink, true);
-        StringWriter s = new StringWriter();
-        IOUtils.copy(new CharArrayReader(sink.toCharArray()), s);
-        System.out.println(s.toString());
-        dsv.setInlineXML(new CharArrayReader(sink.toCharArray()));
+        ByteArrayOutputStream sink = new ByteArrayOutputStream();
+        XMLUtil.copy(r, sink, false);
+
+        dsv.inlineXML(sink.toByteArray());
     }
 
     private void readContentDigest(DatastreamVersion dsv)

@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.net.URI;
 import java.util.Date;
 
@@ -145,25 +143,24 @@ public class DatastreamVersionTest extends FedoraDTOTest {
     }
 
     @Test
-    public void inlineXMLValue() throws IOException {
-        StringWriter sink = new StringWriter();
+    public void inlineXMLField() throws IOException {
         DatastreamVersion dsv = new DatastreamVersion("a", null);
-        // value starts undefined
-        Assert.assertFalse(dsv.hasInlineXML());
-        // getting undefined value has no effect
-        dsv.getInlineXML(sink);
-        Assert.assertEquals(0, sink.toString().length());
-        // set value, value is defined, then get same value
-        dsv.setInlineXML(new StringReader("a"));
-        Assert.assertTrue(dsv.hasInlineXML());
-        dsv.getInlineXML(sink);
-        Assert.assertEquals("a", sink.toString());
-        // can get value multiple times
-        dsv.getInlineXML(sink);
-        Assert.assertEquals("aa", sink.toString());
-        // set null, value is undefined
-        dsv.setInlineXML(null);
-        Assert.assertFalse(dsv.hasInlineXML());
+        // value starts null
+        Assert.assertNull(dsv.inlineXML());
+        // set value, get canonicalized value
+        String setValue = "<doc/>";
+        dsv.inlineXML(setValue.getBytes("UTF-8"));
+        String gotValue = new String(dsv.inlineXML(), "UTF-8");
+        Assert.assertEquals("<doc></doc>", gotValue);
+        // set null, get null
+        dsv.inlineXML(null);
+        Assert.assertNull(dsv.inlineXML());
+    }
+
+    @Test (expected=IOException.class)
+    public void malformedInlineXML() throws IOException {
+        DatastreamVersion dsv = new DatastreamVersion("a", null);
+        dsv.inlineXML("this isn't XML".getBytes("UTF-8"));
     }
 
     @Test

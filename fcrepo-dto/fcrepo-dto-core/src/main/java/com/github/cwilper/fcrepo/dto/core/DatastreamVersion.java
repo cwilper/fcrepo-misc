@@ -1,12 +1,8 @@
 package com.github.cwilper.fcrepo.dto.core;
 
-import org.apache.commons.io.IOUtils;
+import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 
-import java.io.CharArrayReader;
-import java.io.CharArrayWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
 import java.net.URI;
 import java.util.Date;
 import java.util.SortedSet;
@@ -27,7 +23,7 @@ public class DatastreamVersion extends AbstractDTO {
     private URI formatURI;
     private Long size;
     private ContentDigest contentDigest;
-    private char[] inlineXML;
+    private byte[] inlineXML;
     private URI contentLocation;
 
     /**
@@ -104,32 +100,15 @@ public class DatastreamVersion extends AbstractDTO {
         return this;
     }
 
-    public boolean hasInlineXML() {
-        return inlineXML != null;
+    public byte[] inlineXML() {
+        return inlineXML;
     }
 
-    public DatastreamVersion getInlineXML(Writer sink) throws IOException {
+    public DatastreamVersion inlineXML(byte[] inlineXML) throws IOException {
         if (inlineXML != null) {
-            IOUtils.copy(new CharArrayReader(inlineXML), sink);
-        }
-        return this;
-    }
-
-    // source will be read entirely, then auto-closed
-    // TODO: normalize if needed (omit xml decl, omit doctype, strip leading/trailing spaces)
-    // and use axiom to canonicalize the xml
-    // then...auto-set size (probably not, or have an OPTION)??
-    public DatastreamVersion setInlineXML(Reader source) throws IOException {
-        if (source == null) {
-            inlineXML = null;
+            this.inlineXML = XMLUtil.canonicalize(inlineXML);
         } else {
-            CharArrayWriter sink = new CharArrayWriter();
-            try {
-                IOUtils.copy(source, sink);
-            } finally {
-                IOUtils.closeQuietly(source);
-            }
-            inlineXML = sink.toCharArray();
+            this.inlineXML = null;
         }
         return this;
     }

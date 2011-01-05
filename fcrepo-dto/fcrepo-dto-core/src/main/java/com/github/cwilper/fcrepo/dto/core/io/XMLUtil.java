@@ -1,9 +1,8 @@
 package com.github.cwilper.fcrepo.dto.core.io;
 
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
-import org.apache.axiom.c14n.Canonicalizer;
-import org.apache.axiom.c14n.exceptions.CanonicalizationException;
-import org.apache.axiom.c14n.exceptions.InvalidCanonicalizerException;
+import org.apache.axiom.c14n.CanonicalizerSpi;
+import org.apache.axiom.c14n.impl.Canonicalizer20010315ExclOmitComments;
 import org.apache.commons.io.IOUtils;
 
 import javax.xml.namespace.NamespaceContext;
@@ -21,6 +20,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -48,6 +49,14 @@ public abstract class XMLUtil implements XMLStreamConstants {
         prettyPrint(source, sink);
     }
 
+    public static byte[] prettyPrint(byte[] inBytes) throws IOException {
+        InputStream source = new ByteArrayInputStream(inBytes);
+        ByteArrayOutputStream sink = new ByteArrayOutputStream();
+        prettyPrint(new ByteArrayInputStream(inBytes),
+                new OutputStreamWriter(sink, "UTF-8"));
+        return sink.toByteArray();
+    }
+
     public static void prettyPrint(InputStream source,
                                    Writer sink) throws IOException {
         try {
@@ -72,12 +81,9 @@ public abstract class XMLUtil implements XMLStreamConstants {
     // without comments, as defined by http://www.w3.org/TR/xml-exc-c14n/
     public static byte[] canonicalize(byte[] inBytes) throws IOException {
         try {
-            Canonicalizer c = Canonicalizer.getInstance(
-                    Canonicalizer.ALGO_ID_C14N_EXCL_OMIT_COMMENTS);
-            return c.canonicalize(inBytes);
-        } catch (CanonicalizationException e) {
-            throw new IOException(e);
-        } catch (InvalidCanonicalizerException e) {
+            CanonicalizerSpi c = new Canonicalizer20010315ExclOmitComments();
+            return c.engineCanonicalize(inBytes);
+        } catch (Exception e) {
             throw new IOException(e);
         }
     }
@@ -101,14 +107,20 @@ public abstract class XMLUtil implements XMLStreamConstants {
     }
 
     public static void copy(XMLStreamReader source, Writer sink,
-                            boolean repair)
-            throws XMLStreamException {
+                            boolean repair) throws XMLStreamException {
         XMLOutputFactory factory = XMLOutputFactory.newInstance();
         XMLStreamWriter writer = factory.createXMLStreamWriter(sink);
         copy(source, writer, repair);
         writer.flush();
     }
 
+    public static void copy(XMLStreamReader source, OutputStream sink,
+            boolean repair) throws XMLStreamException {
+        XMLOutputFactory factory = XMLOutputFactory.newInstance();
+        XMLStreamWriter writer = factory.createXMLStreamWriter(sink, "UTF-8");
+        copy(source, writer, repair);
+        writer.flush();
+    }
 
     /**
      * Copies the current element and all children.
@@ -180,7 +192,7 @@ public abstract class XMLUtil implements XMLStreamConstants {
         for (int i = 0; i < count; i++) {
             String prefix = in.getNamespacePrefix(i);
             String uri = in.getNamespaceURI(i);
-
+            
             if ( prefixOfCurrentElement == null && prefix.length()==0 ) {
               continue;
             }
@@ -208,6 +220,7 @@ public abstract class XMLUtil implements XMLStreamConstants {
                 continue;
             }
             String uri = in.getNamespaceURI(i);
+
             if (isPrefixNotMappedToUri(out, aPrefix, uri)) {
                 if (aPrefix != null && aPrefix.length() > 0) {
                     out.setPrefix(aPrefix, uri);
@@ -235,12 +248,29 @@ public abstract class XMLUtil implements XMLStreamConstants {
                 out.writeNamespace(prefix, uri);
             }
         } else {
+            boolean skipDefaultNamespace = false;
             boolean hasURI = uri != null && uri.length() > 0;
             if (map && hasURI) {
-                out.setDefaultNamespace(uri);
+
+                if (uri.equals("info:fedora/fedora-system:def/foxml#")) {
+                    skipDefaultNamespace = true;
+                    // TODO: Fix this hack; it prevents wrapping foxml in foxml.
+                    // It's probably avoidable if foxml docs are consistently
+                    // written to be bound to a namespace prefix rather than
+                    // the default namespace.  Otherwise, non-namespaced XML
+                    // written within an xmlContent section is assumed to be
+                    // bound to the default namespace, which causes this
+                    // extraneous declaration when a copy is performed.
+                } else {
+                    out.setDefaultNamespace(uri);
+                }
             }
-            out.writeStartElement(uri, localName);
-            if (map && !repair && hasURI) {
+            if (skipDefaultNamespace) {
+                out.writeStartElement(localName);
+            } else {
+                out.writeStartElement(uri, localName);
+            }
+            if (map && !repair && hasURI && !skipDefaultNamespace) {
                 out.writeDefaultNamespace(uri);
             }
         }
