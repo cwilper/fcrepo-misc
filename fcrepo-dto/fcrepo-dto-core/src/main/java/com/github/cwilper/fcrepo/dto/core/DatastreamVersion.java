@@ -28,7 +28,7 @@ public class DatastreamVersion extends FedoraDTO {
     private URI formatURI;
     private Long size;
     private ContentDigest contentDigest;
-    private byte[] inlineXML;
+    private String inlineXML;
     private URI contentLocation;
 
     private boolean inlineXMLCanonicalized;
@@ -107,23 +107,34 @@ public class DatastreamVersion extends FedoraDTO {
         return this;
     }
 
-    public byte[] inlineXML() {
+    public byte[] inlineXMLBytes() {
+        return Util.getBytes(inlineXML);
+    }
+
+    public String inlineXML() {
         return inlineXML;
     }
 
-    public DatastreamVersion inlineXML(byte[] inlineXML) throws IOException {
-        if (inlineXML != null) {
+    public DatastreamVersion inlineXML(String inlineXML) throws IOException {
+        return inlineXMLBytes(Util.getBytes(inlineXML));
+    }
+
+    public DatastreamVersion inlineXMLBytes(byte[] inlineXMLBytes)
+            throws IOException {
+        if (inlineXMLBytes != null) {
             try {
-                this.inlineXML = XMLUtil.canonicalize(inlineXML);
+                inlineXML = Util.getString(
+                        XMLUtil.canonicalize(inlineXMLBytes));
                 inlineXMLCanonicalized = true;
             } catch (Exception e) {
                 logger.debug("Can't canonicalize inlineXML; pretty-printing "
                         + "instead", e);
-                this.inlineXML = XMLUtil.prettyPrint(inlineXML, true);
+                inlineXML = Util.getString(
+                        XMLUtil.prettyPrint(inlineXMLBytes, true));
                 inlineXMLCanonicalized = false;
             }
         } else {
-            this.inlineXML = null;
+            inlineXML = null;
             inlineXMLCanonicalized = false;
         }
         return this;

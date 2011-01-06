@@ -32,8 +32,6 @@ abstract class FedoraDTO {
             if (i > 0) sb.append(",");
             if (o instanceof String) {
                 sb.append("\"" + o + "\"");
-            } else if (o instanceof byte[]) {
-                sb.append("\"" + Util.getString((byte[]) o) + "\"");
             } else {
                 sb.append(o);
             }

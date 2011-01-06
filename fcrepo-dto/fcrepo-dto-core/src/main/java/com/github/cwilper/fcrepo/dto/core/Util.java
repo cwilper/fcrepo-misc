@@ -31,15 +31,17 @@ abstract class Util {
         return new Date(date.getTime());
     }
 
-    static byte[] getBytes(String in) {
+    static byte[] getBytes(String string) {
+        if (string == null) return null;
         try {
-            return in.getBytes("UTF-8");
+            return string.getBytes("UTF-8");
         } catch (UnsupportedEncodingException wontHappen) {
             throw new RuntimeException(wontHappen);
         }
     }
 
     static String getString(byte[] bytes) {
+        if (bytes == null) return null;
         try {
             return new String(bytes, "UTF-8");
         } catch (UnsupportedEncodingException wontHappen) {

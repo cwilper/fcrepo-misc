@@ -146,7 +146,7 @@ public class FOXMLWriter extends ContentResolvingDTOWriter {
             Base64OutputStream out = new Base64OutputStream(sink,
                     true, Constants.BASE64_LINE_LENGTH,
                     Constants.LINE_FEED.getBytes(Constants.CHAR_ENCODING));
-            contentResolver.resolveContent(ref, out);
+            contentResolver.resolveContent(baseURI, ref, out);
             out.flush();
             w.writeEndElement();
         }
@@ -154,7 +154,7 @@ public class FOXMLWriter extends ContentResolvingDTOWriter {
 
     private void writeXMLContent(DatastreamVersion dsv)
             throws IOException, XMLStreamException {
-        byte[] inlineXML = dsv.inlineXML();
+        byte[] inlineXML = dsv.inlineXMLBytes();
         if (inlineXML != null) {
             w.writeStartElement(Constants.xmlContent);
             w.writeCharacters(Constants.LINE_FEED);

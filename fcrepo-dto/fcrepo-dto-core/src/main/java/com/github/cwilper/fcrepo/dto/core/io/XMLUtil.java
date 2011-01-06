@@ -70,7 +70,6 @@ public abstract class XMLUtil implements XMLStreamConstants {
     public static byte[] prettyPrint(byte[] inBytes,
                                      boolean omitXMLDeclaration)
             throws IOException {
-        InputStream source = new ByteArrayInputStream(inBytes);
         ByteArrayOutputStream sink = new ByteArrayOutputStream();
         prettyPrint(new ByteArrayInputStream(inBytes),
                 new OutputStreamWriter(sink, "UTF-8"), omitXMLDeclaration);
@@ -124,6 +123,7 @@ public abstract class XMLUtil implements XMLStreamConstants {
             try {
                 w.close();
             } catch (XMLStreamException e) {
+                logger.warn("Error while closing", e);
             }
         }
     }
@@ -133,6 +133,7 @@ public abstract class XMLUtil implements XMLStreamConstants {
             try {
                 r.close();
             } catch (XMLStreamException e) {
+                logger.warn("Error while closing", e);
             }
         }
     }

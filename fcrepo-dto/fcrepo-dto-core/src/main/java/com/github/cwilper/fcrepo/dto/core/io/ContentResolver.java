@@ -7,9 +7,9 @@ import java.net.URI;
 
 public interface ContentResolver {
 
-    InputStream resolveContent(URI ref) throws IOException;
+    InputStream resolveContent(URI base, URI ref) throws IOException;
 
-    void resolveContent(URI ref, OutputStream sink) throws IOException;
+    void resolveContent(URI base, URI ref, OutputStream sink) throws IOException;
 
     void close();
 

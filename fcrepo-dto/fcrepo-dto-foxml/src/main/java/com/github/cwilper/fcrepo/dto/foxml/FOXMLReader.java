@@ -188,11 +188,10 @@ public class FOXMLReader extends ContentHandlingDTOReader {
         ByteArrayOutputStream sink = new ByteArrayOutputStream();
         try {
             XMLUtil.copy(r, sink);
+            dsv.inlineXMLBytes(sink.toByteArray());
         } catch (Exception e) {
             throw new IOException("Error parsing foxml:xmlContent", e);
         }
-
-        dsv.inlineXML(sink.toByteArray());
     }
 
     private void readContentDigest(DatastreamVersion dsv)

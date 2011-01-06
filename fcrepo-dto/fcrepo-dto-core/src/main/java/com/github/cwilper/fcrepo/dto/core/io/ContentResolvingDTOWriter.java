@@ -1,6 +1,7 @@
 package com.github.cwilper.fcrepo.dto.core.io;
 
 import javax.annotation.PreDestroy;
+import java.net.URI;
 
 public abstract class ContentResolvingDTOWriter implements DTOWriter {
 
@@ -8,6 +9,7 @@ public abstract class ContentResolvingDTOWriter implements DTOWriter {
             new DefaultContentResolver();
 
     protected ContentResolver contentResolver;
+    protected URI baseURI;
 
     protected ContentResolvingDTOWriter() {
         contentResolver = defaultContentResolver;
@@ -19,6 +21,10 @@ public abstract class ContentResolvingDTOWriter implements DTOWriter {
             defaultContentResolver.close();
         }
         
+    }
+
+    public void setBaseURI(URI baseURI) {
+        this.baseURI = baseURI;
     }
 
     @Override

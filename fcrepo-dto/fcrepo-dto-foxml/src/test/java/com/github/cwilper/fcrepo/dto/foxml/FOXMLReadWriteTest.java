@@ -225,7 +225,7 @@ public class FOXMLReadWriteTest {
     public void dsvInlineXML() throws IOException {
         Datastream ds = new Datastream("ds").controlGroup(
                 ControlGroup.INLINE_XML);
-        ds.addVersion(null).inlineXML("<doc></doc>".getBytes("UTF-8"));
+        ds.addVersion(null).inlineXML("<doc></doc>");
         obj.putDatastream(ds);
         writeThenReadCheck("dsvInlineXML");
     }
@@ -236,7 +236,7 @@ public class FOXMLReadWriteTest {
                 ControlGroup.INLINE_XML);
         String xml = IOUtils.toString(getClass().getClassLoader()
                 .getResourceAsStream("inlineRDFInput.xml"));
-        ds.addVersion(null).inlineXML(xml.getBytes("UTF-8"));
+        ds.addVersion(null).inlineXML(xml);
         obj.putDatastream(ds);
         writeThenReadCheck("dsvInlineRDF");
     }

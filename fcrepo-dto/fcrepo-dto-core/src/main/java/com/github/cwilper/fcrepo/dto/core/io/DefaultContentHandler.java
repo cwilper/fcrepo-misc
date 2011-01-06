@@ -61,7 +61,7 @@ public class DefaultContentHandler implements ContentHandler {
         } else {
             // if pid isn't assigned yet, come up with a unique enough path
             // to avoid collisions for now
-            sb.append("nopid:" + Math.abs(obj.hashCode()));
+            sb.append("nopid:" + Math.abs((long) obj.hashCode()));
         }
         sb.append("/");
         sb.append(ds.id());
