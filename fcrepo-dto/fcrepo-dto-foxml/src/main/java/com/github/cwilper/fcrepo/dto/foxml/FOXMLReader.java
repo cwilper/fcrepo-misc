@@ -180,10 +180,17 @@ public class FOXMLReader extends AbstractDTOReader {
 
     private void readXMLContent(DatastreamVersion dsv)
             throws IOException, XMLStreamException {
-        while (r.nextTag() != XMLStreamConstants.START_ELEMENT) {
+        while (r.next() != XMLStreamConstants.START_ELEMENT) {
+            if (r.getEventType() == XMLStreamConstants.END_ELEMENT) {
+                return; // xmlContent element is empty
+            }
         }
         ByteArrayOutputStream sink = new ByteArrayOutputStream();
-        XMLUtil.copy(r, sink, false);
+        try {
+            XMLUtil.copy(r, sink);
+        } catch (Exception e) {
+            throw new IOException("Error parsing foxml:xmlContent", e);
+        }
 
         dsv.inlineXML(sink.toByteArray());
     }
