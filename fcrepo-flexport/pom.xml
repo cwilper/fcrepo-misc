@@ -25,8 +25,23 @@
     </dependency>
 
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava-collections</artifactId>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-dto-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-dto-foxml</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-httpclient</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-riclient</artifactId>
     </dependency>
 
     <dependency>
@@ -35,15 +50,39 @@
     </dependency>
 
     <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
 
   </dependencies>
+
+  <properties>
+    <mainClass>com.github.cwilper.fcrepo.flexport.Flexport</mainClass>
+  </properties>
+
+  <build>                                                                           
+    <plugins>                                                                       
+
+      <plugin>                                                                      
+        <artifactId>maven-assembly-plugin</artifactId>                              
+        <version>2.2</version>                                                      
+        <configuration>                                                             
+          <descriptors>
+            <descriptor>src/main/assembly/install.xml</descriptor>                    
+          </descriptors>
+        </configuration>                                                            
+        <executions>                                                                
+          <execution>                                                               
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>                                                                 
+              <goal>single</goal>
+            </goals>                                                                
+          </execution>                                                              
+        </executions>                                                               
+      </plugin>                                                                     
+
+    </plugins>                                                                      
+  </build>  
 
 </project>

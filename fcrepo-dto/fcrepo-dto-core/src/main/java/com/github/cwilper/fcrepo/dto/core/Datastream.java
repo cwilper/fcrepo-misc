@@ -9,7 +9,7 @@ import java.util.TreeSet;
 /**
  * A Datastream within a <code>FedoraObject</code>.
  */
-public class Datastream extends AbstractDTO {
+public class Datastream extends FedoraDTO {
 
     private final SortedSet<DatastreamVersion> versions =
             new TreeSet<DatastreamVersion>(new DSVComparator());

@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
  * <code>Object.hashCode()</code> and <code>Object.equals(Object)</code>,
  * requiring only that subclasses implement <code>getEqArray()</code>.
  */
-abstract class AbstractDTO {
+abstract class FedoraDTO {
 
     @Override
     public final int hashCode() {
@@ -22,7 +22,7 @@ abstract class AbstractDTO {
 
     @Override
     public final boolean equals(Object o) {
-        return o instanceof AbstractDTO && o.toString().equals(toString());
+        return o instanceof FedoraDTO && o.toString().equals(toString());
     }
 
     @Override

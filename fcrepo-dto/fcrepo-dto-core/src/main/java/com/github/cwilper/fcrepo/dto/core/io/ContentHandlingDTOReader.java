@@ -2,14 +2,14 @@ package com.github.cwilper.fcrepo.dto.core.io;
 
 import javax.annotation.PreDestroy;
 
-public abstract class AbstractDTOReader implements DTOReader {
+public abstract class ContentHandlingDTOReader implements DTOReader {
 
     private final ContentHandler defaultContentHandler =
             new DefaultContentHandler();
     
     protected ContentHandler contentHandler;
 
-    public AbstractDTOReader() {
+    public ContentHandlingDTOReader() {
         contentHandler = defaultContentHandler;
     }
 

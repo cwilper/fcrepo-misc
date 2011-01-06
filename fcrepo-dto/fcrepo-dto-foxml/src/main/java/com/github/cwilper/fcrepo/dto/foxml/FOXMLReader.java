@@ -6,7 +6,7 @@ import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import com.github.cwilper.fcrepo.dto.core.State;
-import com.github.cwilper.fcrepo.dto.core.io.AbstractDTOReader;
+import com.github.cwilper.fcrepo.dto.core.io.ContentHandlingDTOReader;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.apache.commons.io.IOUtils;
@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FOXMLReader extends AbstractDTOReader {
+public class FOXMLReader extends ContentHandlingDTOReader {
 
     private static final Logger logger = LoggerFactory.getLogger(
             FOXMLReader.class);

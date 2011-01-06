@@ -6,7 +6,7 @@ import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import com.github.cwilper.fcrepo.dto.core.State;
-import com.github.cwilper.fcrepo.dto.core.io.AbstractDTOWriter;
+import com.github.cwilper.fcrepo.dto.core.io.ContentResolvingDTOWriter;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.slf4j.Logger;
@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.Set;
 
 // not threadsafe!
-public class FOXMLWriter extends AbstractDTOWriter {
+public class FOXMLWriter extends ContentResolvingDTOWriter {
 
     private static final Logger logger =
             LoggerFactory.getLogger(FOXMLWriter.class);

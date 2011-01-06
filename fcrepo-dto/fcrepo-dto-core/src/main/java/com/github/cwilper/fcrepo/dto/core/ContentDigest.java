@@ -3,7 +3,7 @@ package com.github.cwilper.fcrepo.dto.core;
 /**
  * The computed checksum of a <code>DatastreamVersion</code>'s content.
  */
-public class ContentDigest extends AbstractDTO {
+public class ContentDigest extends FedoraDTO {
 
     private String type;
     private String hexValue;

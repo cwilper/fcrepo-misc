@@ -358,7 +358,7 @@ public class FOXMLReadWriteTest {
         try {
             InputStream actualStream = new ByteArrayInputStream(
                     getFOXML(embedIds).getBytes("UTF-8"));
-            String actualXML = XMLUtil.prettyPrint(actualStream);
+            String actualXML = XMLUtil.prettyPrint(actualStream, false);
             if (getClass().getClassLoader().getResource(filename) == null) {
                 if (testResources != null && testResources.isDirectory()) {
                     File testFile = new File(testResources, filename);
@@ -373,7 +373,7 @@ public class FOXMLReadWriteTest {
             } else {
                 InputStream expectedStream = getClass().getClassLoader()
                         .getResourceAsStream(filename);
-                String expectedXML = XMLUtil.prettyPrint(expectedStream);
+                String expectedXML = XMLUtil.prettyPrint(expectedStream, false);
                 Assert.assertEquals(expectedXML, actualXML);
             }
         } catch (IOException e) {

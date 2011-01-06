@@ -2,14 +2,14 @@ package com.github.cwilper.fcrepo.dto.core.io;
 
 import javax.annotation.PreDestroy;
 
-public abstract class AbstractDTOWriter implements DTOWriter {
+public abstract class ContentResolvingDTOWriter implements DTOWriter {
 
     private final ContentResolver defaultContentResolver =
             new DefaultContentResolver();
 
     protected ContentResolver contentResolver;
 
-    protected AbstractDTOWriter() {
+    protected ContentResolvingDTOWriter() {
         contentResolver = defaultContentResolver;
     }
 

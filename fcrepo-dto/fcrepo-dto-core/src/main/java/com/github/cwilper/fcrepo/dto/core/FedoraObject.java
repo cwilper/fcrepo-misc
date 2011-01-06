@@ -7,7 +7,7 @@ import java.util.TreeMap;
 /**
  * A Fedora Digital Object.
  */
-public class FedoraObject extends AbstractDTO {
+public class FedoraObject extends FedoraDTO {
 
     private final SortedMap<String, Datastream> datastreams = new DSMap();
 

@@ -1,6 +1,8 @@
 package com.github.cwilper.fcrepo.dto.core;
 
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URI;
@@ -11,7 +13,10 @@ import java.util.TreeSet;
 /**
  * A particular revision of a <code>Datastream</code>.
  */
-public class DatastreamVersion extends AbstractDTO {
+public class DatastreamVersion extends FedoraDTO {
+
+    private final static Logger logger =
+            LoggerFactory.getLogger(DatastreamVersion.class);
 
     private final SortedSet<URI> altIds = new TreeSet<URI>();
 
@@ -25,6 +30,8 @@ public class DatastreamVersion extends AbstractDTO {
     private ContentDigest contentDigest;
     private byte[] inlineXML;
     private URI contentLocation;
+
+    private boolean inlineXMLCanonicalized;
 
     /**
      * Creates an instance.
@@ -106,11 +113,24 @@ public class DatastreamVersion extends AbstractDTO {
 
     public DatastreamVersion inlineXML(byte[] inlineXML) throws IOException {
         if (inlineXML != null) {
-            this.inlineXML = XMLUtil.canonicalize(inlineXML);
+            try {
+                this.inlineXML = XMLUtil.canonicalize(inlineXML);
+                inlineXMLCanonicalized = true;
+            } catch (Exception e) {
+                logger.debug("Can't canonicalize inlineXML; pretty-printing "
+                        + "instead", e);
+                this.inlineXML = XMLUtil.prettyPrint(inlineXML, true);
+                inlineXMLCanonicalized = false;
+            }
         } else {
             this.inlineXML = null;
+            inlineXMLCanonicalized = false;
         }
         return this;
+    }
+
+    public boolean inlineXMLCanonicalized() {
+        return inlineXMLCanonicalized;
     }
 
     public URI contentLocation() {

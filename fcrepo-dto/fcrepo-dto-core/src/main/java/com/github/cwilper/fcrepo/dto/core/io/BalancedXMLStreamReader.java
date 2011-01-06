@@ -14,13 +14,13 @@ import java.util.NoSuchElementException;
  * it emulates an END_DOCUMENT state, leaving the underlying reader on the
  * END_ELEMENT.
  */
-public class BalancedStreamReader extends StreamReaderDelegate {
+class BalancedXMLStreamReader extends StreamReaderDelegate {
 
     private final XMLStreamReader reader;
 
     private int level;
 
-    public BalancedStreamReader(XMLStreamReader reader)
+    public BalancedXMLStreamReader(XMLStreamReader reader)
             throws XMLStreamException {
         super(reader);
         this.reader = reader;
