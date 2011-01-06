@@ -15,12 +15,20 @@ public class DatastreamVersionTest extends FedoraDTOTest {
     @Override
     Object[] getEqualInstances() {
         Date now = new Date();
-        return new Object[] {
-                new DatastreamVersion("a", null),
-                new DatastreamVersion("a", null),
-                new DatastreamVersion("a", now),
-                new DatastreamVersion("a", now)
-        };
+        try {
+            return new Object[] {
+                    new DatastreamVersion("a", null),
+                    new DatastreamVersion("a", null),
+                    new DatastreamVersion("a", now),
+                    new DatastreamVersion("a", now),
+                    new DatastreamVersion("a", null).
+                            inlineXML("<doc/>".getBytes("UTF-8")),
+                    new DatastreamVersion("a", null).
+                            inlineXML("<doc></doc>".getBytes("UTF-8")),
+            };
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -143,18 +151,33 @@ public class DatastreamVersionTest extends FedoraDTOTest {
     }
 
     @Test
-    public void inlineXMLField() throws IOException {
+    public void canonicalizableInlineXML() throws IOException {
         DatastreamVersion dsv = new DatastreamVersion("a", null);
         // value starts null
         Assert.assertNull(dsv.inlineXML());
+        // canonicalized starts false
+        Assert.assertFalse(dsv.inlineXMLCanonicalized());
         // set value, get canonicalized value
         String setValue = "<doc/>";
-        dsv.inlineXML(setValue.getBytes("UTF-8"));
-        String gotValue = new String(dsv.inlineXML(), "UTF-8");
+        dsv.inlineXML(Util.getBytes(setValue));
+        String gotValue = Util.getString(dsv.inlineXML());
         Assert.assertEquals("<doc></doc>", gotValue);
+        // canonicalized should now be true
+        Assert.assertTrue(dsv.inlineXMLCanonicalized());
         // set null, get null
         dsv.inlineXML(null);
         Assert.assertNull(dsv.inlineXML());
+        // canonicalized should now be false
+        Assert.assertFalse(dsv.inlineXMLCanonicalized());
+    }
+
+    @Test
+    public void nonCanonicalizableInlineXML() throws IOException {
+        String inputXML = "<a xmlns=\"relative-uri\"/>";
+        DatastreamVersion dsv = new DatastreamVersion("a", null);
+        dsv.inlineXML(Util.getBytes(inputXML));
+        Assert.assertEquals(inputXML, Util.getString(dsv.inlineXML()));
+        Assert.assertFalse(dsv.inlineXMLCanonicalized());
     }
 
     @Test (expected=IOException.class)

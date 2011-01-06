@@ -1,7 +1,5 @@
 package com.github.cwilper.fcrepo.dto.core;
 
-import java.io.UnsupportedEncodingException;
-
 /**
  * Superclass of all (non-Enum) Fedora Data Transfer Object classes.
  *
@@ -35,11 +33,7 @@ abstract class FedoraDTO {
             if (o instanceof String) {
                 sb.append("\"" + o + "\"");
             } else if (o instanceof byte[]) {
-                byte[] bytes = (byte[]) o;
-                try {
-                    sb.append("\"" + new String(bytes, "UTF-8") + "\"");
-                } catch (UnsupportedEncodingException e) {
-                }
+                sb.append("\"" + Util.getString((byte[]) o) + "\"");
             } else {
                 sb.append(o);
             }

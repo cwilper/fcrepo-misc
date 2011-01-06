@@ -1,5 +1,6 @@
 package com.github.cwilper.fcrepo.dto.core;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 /**
@@ -28,6 +29,22 @@ abstract class Util {
     static Date copy(Date date) {
         if (date == null) return null;
         return new Date(date.getTime());
+    }
+
+    static byte[] getBytes(String in) {
+        try {
+            return in.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException wontHappen) {
+            throw new RuntimeException(wontHappen);
+        }
+    }
+
+    static String getString(byte[] bytes) {
+        try {
+            return new String(bytes, "UTF-8");
+        } catch (UnsupportedEncodingException wontHappen) {
+            throw new RuntimeException(wontHappen);
+        }
     }
 
 }

@@ -88,7 +88,11 @@ public abstract class XMLUtil implements XMLStreamConstants {
             Transformer t = tFactory.newTransformer(
                     new StreamSource(new StringReader(xsl)));
             t.setErrorListener(new DebugLoggingErrorListener());
-            t.transform(new StreamSource(source), new StreamResult(sink));
+            StringWriter preTrimmed = new StringWriter();
+            t.transform(new StreamSource(source), new StreamResult(preTrimmed));
+            preTrimmed.flush();
+            sink.write(preTrimmed.toString().trim());
+            sink.flush();
         } catch (Exception e) {
             throw new IOException(e);
         } finally {
