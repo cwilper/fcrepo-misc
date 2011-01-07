@@ -1,0 +1,6 @@
+com.github.cwilper.fcrepo.dto.core
+com.github.cwilper.fcrepo.dto.core.io
+com.github.cwilper.fcrepo.dto.foxml
+com.github.cwilper.fcrepo.flexport
+com.github.cwilper.fcrepo.httpclient
+com.github.cwilper.fcrepo.riclient
