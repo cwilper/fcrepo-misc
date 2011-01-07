@@ -165,8 +165,10 @@ public class FOXMLReader extends ContentHandlingDTOReader {
     private void readBinaryContent(Datastream ds, DatastreamVersion dsv)
             throws IOException, XMLStreamException {
         OutputStream sink = contentHandler.handleContent(obj, ds, dsv);
+        if (sink == null) return; // handler opted out
+        OutputStream out = null;
         try {
-            Base64OutputStream out = new Base64OutputStream(sink, false);
+            out = new Base64OutputStream(sink, false);
             while (r.next() != XMLStreamConstants.END_ELEMENT) {
                 if (r.isCharacters()) {
                     out.write(r.getText().getBytes(Constants.CHAR_ENCODING));
@@ -174,6 +176,7 @@ public class FOXMLReader extends ContentHandlingDTOReader {
             }
             out.flush();
         } finally {
+            IOUtils.closeQuietly(out);
             IOUtils.closeQuietly(sink);
         }
     }
