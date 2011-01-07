@@ -2,9 +2,8 @@ package com.github.cwilper.fcrepo.dto.core.io;
 
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import javanet.staxutils.XMLStreamUtils;
-import org.apache.axiom.c14n.CanonicalizerSpi;
-import org.apache.axiom.c14n.impl.Canonicalizer20010315ExclOmitComments;
 import org.apache.commons.io.IOUtils;
+import org.apache.xml.security.c14n.Canonicalizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +55,12 @@ public abstract class XMLUtil implements XMLStreamConstants {
             "  <xsl:copy-of select=\".\"/>" +
             "</xsl:template>" +
             "</xsl:stylesheet>";
-    
+
+    static {
+        // initialize xmlsec
+        org.apache.xml.security.Init.init();
+    }
+
     public static void prettyPrint(DTOWriter writer,
                                    FedoraObject obj,
                                    Writer sink) throws IOException {
@@ -107,12 +111,14 @@ public abstract class XMLUtil implements XMLStreamConstants {
         return sink.toString();
     }
 
-    // produces exclusive xml canonicalized form of the input document,
-    // without comments, as defined by http://www.w3.org/TR/xml-exc-c14n/
+    // produces canonicalized form of the input document, without comments,
+    // as defined by XML Canonicalization 1.1:
+    // http://www.w3.org/TR/xml-c14n11/ 
     public static byte[] canonicalize(byte[] inBytes) throws IOException {
         try {
-            CanonicalizerSpi c = new Canonicalizer20010315ExclOmitComments();
-            return c.engineCanonicalize(inBytes);
+            Canonicalizer c = Canonicalizer.getInstance(
+                    Canonicalizer.ALGO_ID_C14N11_OMIT_COMMENTS);
+            return c.canonicalize(inBytes);
         } catch (Exception e) {
             throw new IOException(e);
         }

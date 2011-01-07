@@ -152,9 +152,9 @@
       </dependency>
 
       <dependency>
-        <groupId>org.apache.ws.commons.axiom</groupId>
-        <artifactId>axiom-c14n</artifactId>
-        <version>1.2.10</version>
+        <groupId>org.apache.santuario</groupId>
+        <artifactId>xmlsec</artifactId>
+        <version>1.4.3</version>
         <exclusions>
           <exclusion>
             <groupId>commons-logging</groupId>
