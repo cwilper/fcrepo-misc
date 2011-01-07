@@ -9,7 +9,7 @@
 
   <artifactId>fcrepo-flexport</artifactId>
   <packaging>jar</packaging>
-  <name>FCRepo Flexport Utility</name>
+  <name>Fedora Flexport Utility</name>
   <description>
     Flexible Export Utility for Fedora Commons Repositories
   </description>

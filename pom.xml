@@ -11,11 +11,11 @@
   <artifactId>parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>FCRepo Misc Libraries and Utilities</name>
+  <name>Fedora Misc Libs and Utils</name>
   <description>
     Miscellaneous Libaries and Utilities for Fedora Commons Repositories
   </description>
-  <url>https://github.com/cwilper/fcrepo-misc</url>
+  <url>http://cwilper.github.com/fcrepo-misc</url>
 
   <modules>
     <module>fcrepo-flexport</module>
@@ -377,6 +377,13 @@
 
     </plugins>
   </reporting>
+
+  <distributionManagement>
+    <site>
+      <id>site</id>
+      <url>file:///tmp/site</url>
+    </site>
+  </distributionManagement> 
 
   <profiles>
 

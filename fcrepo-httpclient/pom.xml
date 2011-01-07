@@ -9,7 +9,7 @@
 
   <artifactId>fcrepo-httpclient</artifactId>
   <packaging>jar</packaging>
-  <name>FCRepo HTTP Client Library</name>
+  <name>Fedora HTTP Client Library</name>
   <description>
     HTTP Client Library for Fedora Commons Repositories
   </description>

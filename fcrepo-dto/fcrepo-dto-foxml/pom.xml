@@ -9,7 +9,7 @@
 
   <artifactId>fcrepo-dto-foxml</artifactId>
   <packaging>jar</packaging>
-  <name>FCRepo DTO FOXML Library</name>
+  <name>Fedora DTO FOXML Library</name>
   <description>
     FOXML Reader/Writer Library for Fedora Data Transfer Objects
   </description>

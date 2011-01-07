@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <version position="left" />
+  <body>
+
+    <menu name="${project.name}">
+      <item name="About" href="index.html"/>
+      <item name="Javadocs (Combined)" href="apidocs/index.html"/>
+      <item name="Dependency Convergence" href="dependency-convergence.html"/>
+      <item name="License" href="license.html"/>
+    </menu>
+
+    <menu name="Submodules" ref="modules"/>
+
+  </body>
+</project>

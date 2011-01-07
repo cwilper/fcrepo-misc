@@ -9,7 +9,7 @@
 
   <artifactId>fcrepo-riclient</artifactId>
   <packaging>jar</packaging>
-  <name>FCRepo Resource Index Client Library</name>
+  <name>Fedora RI Client Library</name>
   <description>
     Resource Index Client Library for Fedora Commons Repositories
   </description>

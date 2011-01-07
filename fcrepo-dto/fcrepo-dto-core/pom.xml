@@ -9,7 +9,7 @@
 
   <artifactId>fcrepo-dto-core</artifactId>
   <packaging>jar</packaging>
-  <name>FCRepo DTO Core Library</name>
+  <name>Fedora DTO Core Library</name>
   <description>
     Core Data Transfer Object Library for Fedora Commons Repositories
   </description>

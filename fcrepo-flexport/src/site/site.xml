@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <version position="left" />
+  <body>
+
+    <menu name="Parent Project">
+      <item name="${project.parent.name}" href="../index.html"/>
+    </menu>
+
+    <menu name="${project.name}">
+      <item name="About" href="index.html"/>
+      <item name="Javadocs" href="apidocs/index.html"/>
+      <item name="Dependencies" href="dependencies.html"/>
+    </menu>
+
+    <menu name="Project Reports">
+      <item name="Test Results" href="surefire-report.html"/>
+      <item name="Test Coverage" href="cobertura/index.html"/>
+      <item name="FindBugs" href="findbugs.html"/>
+      <item name="PMD" href="pmd.html"/>
+      <item name="CPD" href="cpd.html"/>
+    </menu>
+
+  </body>
+</project>

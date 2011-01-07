@@ -9,7 +9,7 @@
 
   <artifactId>fcrepo-dto</artifactId>
   <packaging>pom</packaging>
-  <name>FCRepo Data Transfer Object Libraries</name>
+  <name>Fedora DTO Libraries</name>
   <description>
     Data Transfer Object Libraries for Fedora Commons Repositories
   </description>
