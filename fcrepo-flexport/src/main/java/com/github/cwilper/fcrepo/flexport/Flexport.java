@@ -19,7 +19,12 @@ public class Flexport {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             writer.writeObject(obj, out);
             byte[] pretty = XMLUtil.prettyPrint(out.toByteArray(), false);
-            System.out.println(new String(pretty, "UTF-8"));
+            if (args.length == 1) {
+                System.out.println(new String(pretty, "UTF-8"));
+            } else {
+                byte[] c14n = XMLUtil.canonicalize(pretty);
+                System.out.println(new String(c14n, "UTF-8"));
+            }
         } finally {
             reader.close();
             writer.close();
