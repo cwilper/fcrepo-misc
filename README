@@ -1,0 +1,14 @@
+Fedora Misc Libs and Utils - Source Code
+========================================
+
+Website
+-------
+
+    http://cwilper.github.com/fcrepo-misc/
+
+Build Instructions
+------------------
+
+To build all project artifacts and install them in your local Maven repository:
+
+    mvn clean install
