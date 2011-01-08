@@ -54,6 +54,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <skipITs>true</skipITs>
+    <site.id>local-site</site.id>
+    <site.url>file:///tmp/fcrepo-misc-site</site.url>
   </properties>
 
   <dependencyManagement>
@@ -401,12 +403,10 @@
   </reporting>
 
   <distributionManagement>
-
     <site>
-      <id>gh-pages</id>
-      <url>gitsite:git@github.com/cwilper/fcrepo-misc.git</url>
+      <id>${site.id}</id>
+      <url>${site.url}</url>
     </site>
-
   </distributionManagement> 
 
   <profiles>
@@ -418,6 +418,14 @@
         <fedora.url>http://localhost:8080/fedora</fedora.url>
         <fedora.user>fedoraAdmin</fedora.user>
         <fedora.pass>fedoraAdmin</fedora.pass>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>release-site</id>
+      <properties>
+        <site.id>gh-pages</site.id>
+        <site.url>gitsite:git@github.com/cwilper/fcrepo-misc.git</site.url>
       </properties>
     </profile>
 
