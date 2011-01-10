@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <version position="left" />
   <body>
-
-    <menu name="Parent Project">
-      <item name="${project.parent.name}" href="../index.html"/>
-    </menu>
-
-    <menu name="${project.name}">
+    <breadcrumbs>
+      <item name="${artifactId}" href="index.html"/>
+    </breadcrumbs>
+    <menu name="Project Info">
       <item name="About" href="index.html"/>
-      <item name="Javadocs (Combined)" href="apidocs/index.html"/>
     </menu>
-
     <menu name="Submodules" ref="modules"/>
-
   </body>
 </project>

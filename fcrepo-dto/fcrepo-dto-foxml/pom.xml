@@ -13,6 +13,7 @@
   <description>
     FOXML Reader/Writer Library for Fedora Data Transfer Objects
   </description>
+  <url>http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/</url>
 
   <dependencies>
 

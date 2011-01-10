@@ -13,6 +13,7 @@
   <description>
     Data Transfer Object Libraries for Fedora Commons Repositories
   </description>
+  <url>http://cwilper.github.com/fcrepo-misc/fcrepo-dto/</url>
 
   <modules>
     <module>fcrepo-dto-core</module>
