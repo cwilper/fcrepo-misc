@@ -4,8 +4,11 @@
 
 About ${artifactId}
 
-  This library provides <<<DTOReader>>> and <<<DTOWriter>>> implementations that
-consume and produce Fedora Object XML:
+  This library provides
+<<<{{{../fcrepo-dto-core/apidocs/com/github/cwilper/fcrepo/dto/core/io/DTOReader.html}DTOReader}}>>>
+and
+<<<{{{../fcrepo-dto-core/apidocs/com/github/cwilper/fcrepo/dto/core/io/DTOWriter.html}DTOWriter}}>>>
+implementations that consume and produce Fedora Object XML:
 
     * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/foxml/FOXMLReader.html}FOXMLReader}}>>>
       - Reads a FedoraObject from a FOXML stream.
@@ -13,5 +16,5 @@ consume and produce Fedora Object XML:
     * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/foxml/FOXMLWriter.html}FOXMLWriter}}>>>
       - Writes a FedoraObject to a FOXML stream.
 
-  For more information, please see {{{./usage.html}Usage}} and
+  For more information, see {{{./usage.html}Usage}} and
 {{{./apidocs/index.html}Javadocs}}

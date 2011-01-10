@@ -29,7 +29,7 @@
       <item name="Dependency Convergence" href="dependency-convergence.html"/>
       <item name="License" href="license.html"/>
     </menu>
-    <menu name="Submodules" ref="modules"/>
+    <menu name="Modules" ref="modules"/>
     <menu name="Links" inherit="bottom">
       <item name="GitHub Repository" href="https://github.com/cwilper/fcrepo-misc"/>
       <item name="Fedora Commons" href="http://fedora-commons.org/"/>

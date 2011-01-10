@@ -4,8 +4,11 @@
 
 About ${artifactId}
 
-  This library provides a Resource Index client for performing RDF queries 
-against Fedora repositories.
+  This library provides a client for performing RDF queries against a Fedora
+repository:
 
-  For more information, please see {{{./usage.html}Usage}} and
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/riclient/RIClient.html}RIClient}}>>>
+      - Fedora Resource Index Client
+
+  For more information, see {{{./usage.html}Usage}} and
 {{{./apidocs/index.html}Javadocs}}

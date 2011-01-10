@@ -2,9 +2,9 @@
   About
   ---
 
-About ${artifactId}
+About fcrepo-misc
 
   This project is a collection of Java libraries and utilities for working with
-Fedora Commons repositories.
+{{{http://fedora-commons.org}Fedora Commons}} repositories.
 
-  See the Submodules at the left for more information.
+  See the Modules at the left for more information.

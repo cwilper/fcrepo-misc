@@ -2,7 +2,9 @@
   Usage
   ---
 
-Usage
+Using ${artifactId}
+
+* Installation
 
   To use this library in your own Maven-based project, just add the following
 to your <<<pom.xml>>>:
@@ -15,9 +17,13 @@ to your <<<pom.xml>>>:
     </dependency>
 +--
 
-  Or you can download
-{{{http://repo2.maven.org/maven2/com/github/cwilper/fcrepo-misc/${artifactId}/${currentVersion}/${artifactId}-${currentVersion}.jar}
-${artifactId}-${currentVersion}.jar}} and all
-{{{./dependencies.html}dependencies}} directly from Maven Central.
+  You can also download the jar and its dependencies directly from 
+Maven Central:
 
-  For API usage, please see the {{{./apidocs/index.html}Javadocs}}.
+    * {{{http://repo2.maven.org/maven2/com/github/cwilper/fcrepo-misc/${artifactId}/${currentVersion}/${artifactId}-${currentVersion}.jar}${artifactId}-${currentVersion}.jar}}
+
+    * {{{./dependencies.html}All dependencies}}
+
+* API Usage
+
+  See the {{{./apidocs/index.html}Javadocs}}.

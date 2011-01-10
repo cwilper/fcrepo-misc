@@ -72,7 +72,7 @@
     <!-- for use in site/apt/*.apt.vm docs -->
     <groupId>${project.groupId}</groupId>
     <artifactId>${project.artifactId}</artifactId>
-    <currentVersion>0.0.0</currentVersion>
+    <currentVersion>${project.version}</currentVersion>
 
   </properties>
 

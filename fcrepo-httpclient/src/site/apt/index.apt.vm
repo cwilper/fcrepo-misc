@@ -4,8 +4,16 @@
 
 About ${artifactId}
 
-  This library provides easy-to-construct <<<HTTPClient>>> implementations useful
-for working with Fedora repositories.
+  This library provides easy-to-construct
+<<<{{{http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/HttpClient.html}HTTPClient}}>>>
+implementations useful for working with Fedora repositories:
 
-  For more information, please see {{{./usage.html}Usage}} and
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/httpclient/MultiThreadedHttpClient.html}MultiThreadedHttpClient}}>>>
+      - A multi-threaded HttpClient that's easy to construct.
+
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/httpclient/FedoraHttpClient.html}FedoraHttpClient}}>>>
+      - A MultiThreadedHttpClient pre-loaded with a Fedora base URL and
+        optional credentials for authentication.
+
+  For more information, see {{{./usage.html}Usage}} and
 {{{./apidocs/index.html}Javadocs}}

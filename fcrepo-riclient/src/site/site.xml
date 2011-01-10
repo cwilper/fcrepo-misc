@@ -10,7 +10,7 @@
       <item name="Javadocs" href="apidocs/index.html"/>
       <item name="Dependencies" href="dependencies.html"/>
     </menu>
-    <menu name="Project">
+    <menu name="Reports">
       <item name="Test Results" href="surefire-report.html"/>
       <item name="Test Coverage" href="cobertura/index.html"/>
       <item name="FindBugs" href="findbugs.html"/>
