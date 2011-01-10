@@ -17,26 +17,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Fedora Resource Index Client.
+ * A Fedora Resource Index Client.
  */
 public class RIClient {
 
     private final String riEndpoint;
     private final FedoraHttpClient httpClient;
 
+    /**
+     * Creates an instance.
+     *
+     * @param httpClient The FedoraHTTPClient to use when making requests.
+     */
     public RIClient(FedoraHttpClient httpClient) {
         this.httpClient = httpClient;
         this.riEndpoint = httpClient.getBaseURI() + "/risearch";
     }
 
+    /**
+     * Performs an iTQL query.
+     *
+     * @param query the query text.
+     * @param flush whether the Fedora server should flush its triple buffer
+     *        first. If false, the result could be out of date with what was
+     *        actually stored in the repository at the time of the request.
+     *        If true, it may take considerably longer to get a response.
+     * @return the resulting tuples.
+     */
     public RIQueryResult itql(String query, boolean flush) {
         return new RIQueryResult(executeQuery(query, "itql", flush));
     }
 
+    /**
+     * Performs a SPARQL query.
+     *
+     * @param query the query text.
+     * @param flush whether the Fedora server should flush its triple buffer
+     *        first. If false, the result could be out of date with what was
+     *        actually stored in the repository at the time of the request.
+     *        If true, it may take considerably longer to get a response.
+     * @return the resulting tuples.
+     */
     public RIQueryResult sparql(String query, boolean flush) {
         return new RIQueryResult(executeQuery(query, "sparql", flush));
     }
 
+    /**
+     * Performs an SPO query.
+     *
+     * @param query the query text.
+     * @param flush whether the Fedora server should flush its triple buffer
+     *        first. If false, the result could be out of date with what was
+     *        actually stored in the repository at the time of the request.
+     *        If true, it may take considerably longer to get a response.
+     * @return the resulting tuples.
+     */
     public RIQueryResult spo(String query, boolean flush) {
         // TODO: Implement this, using NTriplesParser with a custom RDFHandler
         throw new UnsupportedOperationException();

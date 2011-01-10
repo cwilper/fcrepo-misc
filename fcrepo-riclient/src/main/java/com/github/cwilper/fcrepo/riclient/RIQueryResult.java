@@ -8,10 +8,24 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.rio.ntriples.NTriplesUtil;
 
 import javax.annotation.PreDestroy;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The result of a Resource Index query.
+ * <p>
+ * <b>NOTE:</b> If an underlying error occurs while the result is being
+ *              iterated, it will be wrapped and thrown as a
+ *              <code>RuntimeException</code>.
+ * <p>
+ * <b>IMPORTANT:</b> Results must always be <code>close()</code>d when
+ *                   finished, regardless of success or failure.
+ */
 public class RIQueryResult extends AbstractIterator<List<Value>> {
 
     private final BufferedReader reader;
@@ -66,11 +80,15 @@ public class RIQueryResult extends AbstractIterator<List<Value>> {
         }
     }
 
+    /**
+     * Releases any resources associated with the result.
+     */
     @PreDestroy
     public void close() {
         try {
             reader.close();
         } catch (IOException e) {
+            // FIXME: This really should not die...log a warning instead
             throw new RuntimeException(e);
         }
     }

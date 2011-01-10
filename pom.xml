@@ -290,6 +290,7 @@
           <maxmemory>1g</maxmemory>
           <links>
             <link>http://java.sun.com/javase/6/docs/api/</link>
+            <link>http://www.openrdf.org/doc/rio/api/</link>
           </links>
         </configuration>
         <executions>
