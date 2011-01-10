@@ -1,0 +1,11 @@
+  ---
+  About
+  ---
+
+About
+
+  The <<fcrepo-riclient>> library provides Spring-friendly Resource Index client
+for performing RDF queries against Fedora repositories.
+
+  For more information, please see {{{./usage.html}Usage}} and
+{{{./apidocs/index.html}Javadocs}}

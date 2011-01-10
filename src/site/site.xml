@@ -10,7 +10,10 @@
   <body>
     <head>
       <style>
-        .section { padding: 0px 4px; }
+        p { line-height: 1.3em }
+        #leftColumn { width: 170px }
+        #bodyColumn { margin-left: 190px }
+        .section { padding: 0px; }
         h2 { padding: 0px; }
         h3 { padding: 0px; }
         h4 { padding: 0px; }
@@ -28,7 +31,7 @@
     </menu>
     <menu name="Submodules" ref="modules"/>
     <menu name="Links" inherit="bottom">
-      <item name="Git Repository" href="https://github.com/cwilper/fcrepo-misc"/>
+      <item name="GitHub Repository" href="https://github.com/cwilper/fcrepo-misc"/>
       <item name="Fedora Commons" href="http://fedora-commons.org/"/>
       <item name="DuraSpace" href="http://duraspace.org/"/>
     </menu>

@@ -23,6 +23,11 @@
     <module>fcrepo-httpclient</module>
     <module>fcrepo-riclient</module>
   </modules>
+
+  <organization>                                                                    
+    <name>DuraSpace</name>                                                          
+    <url>http://duraspace.org/</url>                                                                               
+  </organization>
   
   <licenses>
     <license>

@@ -1,0 +1,29 @@
+  ---
+  About
+  ---
+
+About ${artifactId}
+
+  This command-line utility exports selected objects and datastream content
+from Fedora repositories.
+ 
+  Users can control the list of objects to export:
+
+    * By listing PIDs verbatim
+
+    * By specifying a simple PID wildcard (e.g. demo:*)
+
+    * By specify a Resource Index query that returns object URIs.
+
+  Users can also control how each datastream is exported:
+
+    * For E (External) datastreams, the content reference can be left as-is in the
+      exported object, or the the content can be copied to a local file with
+      the option of changing the reference to point to the copy.
+
+    * For M (Managed) datastreams, the exported object can refer to the original
+      repository content location, include the content within the export package,
+      or the content can be copied to a local file with the option of changing
+      the reference to point to the copy.
+
+  For more information, please see {{{./usage.html}Usage}}.

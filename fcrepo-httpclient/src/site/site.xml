@@ -6,6 +6,7 @@
     </breadcrumbs>
     <menu name="Project Info">
       <item name="About" href="index.html"/>
+      <item name="Usage" href="usage.html"/>
       <item name="Javadocs" href="apidocs/index.html"/>
       <item name="Dependencies" href="dependencies.html"/>
     </menu>

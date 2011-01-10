@@ -18,10 +18,10 @@ About
 
   It also defines interfaces for reading and writing DTOs:
 
-    * <{{{./apidocs/com/github/cwilper/fcrepo/dto/core/io/DTOReader.html}DTOReader}}>
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/core/io/DTOReader.html}DTOReader}}>>>
       - Reads a FedoraObject from a stream.
 
-    * <{{{./apidocs/com/github/cwilper/fcrepo/dto/core/io/DTOWriter.html}DTOWriter}}>
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/core/io/DTOWriter.html}DTOWriter}}>>>
       - Writes a FedoraObject to a stream.
 
   For more information, please see {{{./usage.html}Usage}} and

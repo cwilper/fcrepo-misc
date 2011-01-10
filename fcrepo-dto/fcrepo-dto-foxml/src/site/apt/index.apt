@@ -1,0 +1,17 @@
+  ---
+  About
+  ---
+
+About
+
+  The <<fcrepo-dto-foxml>> library provides DTOReader and DTOWriter 
+implementations that consume and produce Fedora Object XML:
+
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/foxml/FOXMLReader.html}FOXMLReader}}>>>
+      - Reads a FedoraObject from a FOXML stream.
+
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/foxml/FOXMLWriter.html}FOXMLWriter}}>>>
+      - Writes a FedoraObject to a FOXML stream.
+
+  For more information, please see {{{./usage.html}Usage}} and
+{{{./apidocs/index.html}Javadocs}}
