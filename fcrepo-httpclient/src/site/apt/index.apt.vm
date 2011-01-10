@@ -1,0 +1,11 @@
+  ---
+  About
+  ---
+
+About ${artifactId}
+
+  This library provides easy-to-construct <<<HTTPClient>>> implementations useful
+for working with Fedora repositories.
+
+  For more information, please see {{{./usage.html}Usage}} and
+{{{./apidocs/index.html}Javadocs}}

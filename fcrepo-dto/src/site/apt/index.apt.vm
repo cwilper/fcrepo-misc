@@ -1,0 +1,10 @@
+  ---
+  About
+  ---
+
+About ${artifactId}
+
+  These libraries provide classes for programmatically creating, reading, and 
+writing Fedora objects.
+
+  See the Submodules at the left for more information about each library.

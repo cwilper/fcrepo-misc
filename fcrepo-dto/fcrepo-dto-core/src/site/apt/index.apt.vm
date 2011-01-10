@@ -2,10 +2,10 @@
   About
   ---
 
-About
+About ${artifactId}
 
-  The <<fcrepo-dto-core>> library provides easy-to-use <<D>>ata <<T>>ransfer
-<<O>>bject classes for the core Fedora persistence entities:
+  This library provides easy-to-use <<D>>ata <<T>>ransfer <<O>>bject classes for
+the core Fedora persistence entities:
 
     * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/core/FedoraObject.html}FedoraObject}}>>>
       - A container of Datastreams.

@@ -1,0 +1,10 @@
+  ---
+  About
+  ---
+
+About ${artifactId}
+
+  This project is a collection of Java libraries and utilities for working with
+Fedora Commons repositories.
+
+  See the Submodules at the left for more information.

@@ -1,0 +1,11 @@
+  ---
+  About
+  ---
+
+About ${artifactId}
+
+  This library provides a Resource Index client for performing RDF queries 
+against Fedora repositories.
+
+  For more information, please see {{{./usage.html}Usage}} and
+{{{./apidocs/index.html}Javadocs}}
