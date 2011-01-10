@@ -64,6 +64,11 @@
     <fedora.user>fedoraAdmin</fedora.user>
     <fedora.pass>fedoraAdmin</fedora.pass>
 
+    <!-- for use in site/apt/*.apt.vm docs -->
+    <groupId>${project.groupId}</groupId>
+    <artifactId>${project.artifactId}</artifactId>
+    <currentVersion>0.0.0</currentVersion>
+
   </properties>
 
   <dependencyManagement>
@@ -73,43 +78,43 @@
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
         <version>0.9.26</version>
-        <scope>runtime</scope>
+        <scope>test</scope>
       </dependency>
 
       <dependency>
         <groupId>com.github.cwilper.fcrepo-misc</groupId>
         <artifactId>fcrepo-flexport</artifactId>
-        <version>${pom.version}</version>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>com.github.cwilper.fcrepo-misc</groupId>
         <artifactId>fcrepo-dto</artifactId>
-        <version>${pom.version}</version>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>com.github.cwilper.fcrepo-misc</groupId>
         <artifactId>fcrepo-dto-core</artifactId>
-        <version>${pom.version}</version>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>com.github.cwilper.fcrepo-misc</groupId>
         <artifactId>fcrepo-dto-foxml</artifactId>
-        <version>${pom.version}</version>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>com.github.cwilper.fcrepo-misc</groupId>
         <artifactId>fcrepo-httpclient</artifactId>
-        <version>${pom.version}</version>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>com.github.cwilper.fcrepo-misc</groupId>
         <artifactId>fcrepo-riclient</artifactId>
-        <version>${pom.version}</version>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>

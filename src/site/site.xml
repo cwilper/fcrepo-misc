@@ -8,6 +8,15 @@
     <version>1.3</version>
   </skin>
   <body>
+    <head>
+      <style>
+        .section { padding: 0px 4px; }
+        h2 { padding: 0px; }
+        h3 { padding: 0px; }
+        h4 { padding: 0px; }
+        h5 { padding: 0px; }
+      </style>
+    </head>
     <breadcrumbs>
       <item name="fcrepo-misc" href="index.html"/>
     </breadcrumbs>
@@ -19,8 +28,7 @@
     </menu>
     <menu name="Submodules" ref="modules"/>
     <menu name="Links" inherit="bottom">
-      <item name="Released Downloads" href="http://repo2.maven.org/maven2/com/github/cwilper/fcrepo-misc/"/>
-      <item name="Source Repository" href="https://github.com/cwilper/fcrepo-misc"/>
+      <item name="Git Repository" href="https://github.com/cwilper/fcrepo-misc"/>
       <item name="Fedora Commons" href="http://fedora-commons.org/"/>
       <item name="DuraSpace" href="http://duraspace.org/"/>
     </menu>
