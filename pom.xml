@@ -15,7 +15,7 @@
   <description>
     Miscellaneous Libaries and Utilities for Fedora Commons Repositories
   </description>
-  <url>http://cwilper.github.com/fcrepo-misc</url>
+  <url>http://cwilper.github.com/fcrepo-misc/</url>
 
   <modules>
     <module>fcrepo-flexport</module>
@@ -53,9 +53,17 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <skipITs>true</skipITs>
+
+    <!-- deploy site locally by default; override with -P release-site -->
     <site.id>local-site</site.id>
     <site.url>file:///tmp/fcrepo-misc-site</site.url>
+
+    <!-- skip integration tests by default; override with -DskipITs=false -->
+    <skipITs>true</skipITs>
+    <fedora.url>http://localhost:8080/fedora</fedora.url>
+    <fedora.user>fedoraAdmin</fedora.user>
+    <fedora.pass>fedoraAdmin</fedora.pass>
+
   </properties>
 
   <dependencyManagement>
@@ -246,13 +254,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <systemPropertyVariables>
-            <fedora.url>${fedora.url}</fedora.url>
-            <fedora.user>${fedora.user}</fedora.user>
-            <fedora.pass>${fedora.pass}</fedora.pass>
-          </systemPropertyVariables>
-        </configuration>
         <executions>
           <execution>
             <id>integration-test</id>
@@ -275,7 +276,6 @@
         <version>2.5</version>
         <configuration>
           <source>1.6</source>
-          <target>1.6</target>
           <encoding>UTF-8</encoding>
           <maxmemory>1g</maxmemory>
           <links>
@@ -301,6 +301,12 @@
           <!-- need this for gpg plugin to work correctly -->
           <mavenExecutorId>forked-path</mavenExecutorId>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>2.2</version>
       </plugin>
 
       <plugin>
@@ -412,16 +418,6 @@
   <profiles>
 
     <profile>
-      <id>local-fedora</id>
-      <properties>
-        <skipITs>false</skipITs>
-        <fedora.url>http://localhost:8080/fedora</fedora.url>
-        <fedora.user>fedoraAdmin</fedora.user>
-        <fedora.pass>fedoraAdmin</fedora.pass>
-      </properties>
-    </profile>
-
-    <profile>
       <id>release-site</id>
       <properties>
         <site.id>gh-pages</site.id>
@@ -442,7 +438,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
