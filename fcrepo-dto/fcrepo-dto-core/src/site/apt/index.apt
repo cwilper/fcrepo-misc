@@ -1,0 +1,52 @@
+    ---
+    About
+    ---
+
+Introduction
+
+  The <<fcrepo-dto-core>> library provides easy-to-use <<D>>ata <<T>>ransfer
+<<O>>bject classes for the core Fedora persistence entities:
+
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/core/FedoraObject.html}FedoraObject}}>>>
+      - A container of Datastreams.
+
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/core/Datastream.html}Datastream}}>>>
+      - A container of DatastreamVersions.
+
+    * <<<{{{./apidocs/com/github/cwilper/fcrepo/dto/core/DatastreamVersion.html}DatastreamVersion}}>>>
+      - A container of content.
+
+  It also defines interfaces for reading and writing DTOs:
+
+    * <{{{./apidocs/com/github/cwilper/fcrepo/dto/core/io/DTOReader.html}DTOReader}}>
+      - Reads a FedoraObject from a stream.
+
+    * <{{{./apidocs/com/github/cwilper/fcrepo/dto/core/io/DTOWriter.html}DTOWriter}}>
+      - Writes a FedoraObject to a stream.
+
+  More detailed information on these and other supporting classes can be found
+in the {{{./apidocs/index.html}fcrepo-dto-core Javadocs}}.
+
+Example Code
+
+* Creating an object from code
+
++--
+FedoraObject obj = new FedoraObject().pid("example:1");
+Datastream ds = new Datastream("DSID", new Date()
+        .controlGroup(ControlGroup.INLINE_XML);
+DatastreamVersion dsv = ds.addVersion(ds).inlineXML("<doc/>");
+obj.putDatastream(ds);
++--
+
+* Comparing two objects
+
++--
+if (obj1.equals(obj2)) {
+    System.out.println("Objects are equal");
+} else {
+    System.out.println("Objects are not equal:");
+    System.out.println("obj1: " + obj1);
+    System.out.println("obj2: " + obj2);
+}
++--
