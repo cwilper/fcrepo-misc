@@ -1,39 +1,58 @@
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
-
-
-
-
-
-
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Fedora HTTP Client Library - Reactor Dependency Convergence</title>
-    <style type="text/css" media="all">
-      @import url("./css/maven-base.css");
-      @import url("./css/maven-theme.css");
-      @import url("./css/site.css");
-    </style>
+    <link rel="stylesheet" href="./css/maven-theme.css" type="text/css" />
+    <link rel="stylesheet" href="./css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/prettify.css" type="text/css"/>
     <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-      </head>
-  <body class="composite">
-    <div id="banner">
-                    <span id="bannerLeft">
+    <script type="text/javascript" src="./js/prettify.js"></script>
+    <script type="text/javascript" src="./js/niftycube.js"></script>
+    <script type="text/javascript">
+        window.onload=function() {
+            Nifty("div\#wrapper", "big");
+            Nifty("div#breadcrumbs", "small");
+            Nifty("div\#navcolumn", "small");
+            Nifty("div.source", "medium");
+            prettyPrint();
+        }
+    </script>
+        <meta name="Date-Revision-yyyymmdd" content="20110110" />
+                                                    
+<style>p { line-height: 1.3em }
+        #leftColumn { width: 170px }
+        #bodyColumn { margin-left: 190px }
+        .section { padding: 0px; }
+        h2 { padding: 0px; }
+        h3 { padding: 0px; }
+        h4 { padding: 0px; }
+        h5 { padding: 0px; }</style>
+                    </head>
+  <body>
+    <div id="wrapper">
+        <div id="banner">
+                        <div id="bannerLeft">
     
             Fedora HTTP Client Library
     
-            </span>
-                    <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="breadcrumbs">
-          
+            </div>
+                            <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="breadcrumbs">
+              
   
 
   
@@ -42,10 +61,13 @@
   
     
             <div class="xleft">
-        Last Published: 2011-01-08
-                  &nbsp;| Version: 0.0.1-SNAPSHOT
-                      </div>
-            <div class="xright">      
+          
+                <a href="../index.html">fcrepo-misc</a>
+                &gt;
+      
+                <a href="index.html">fcrepo-httpclient</a>
+                  </div>
+                <div class="xright">      
   
 
   
@@ -53,14 +75,16 @@
             
   
     
-  </div>
-      <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="leftColumn">
-      <div id="navcolumn">
-           
+             <span id="publishDate">Last Published: 2011-01-10</span>
+              &nbsp;| <span id="projectVersion">Version: 0.0.1-SNAPSHOT</span>
+            </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="leftColumn">
+          <div id="navcolumn">
+               
   
 
   
@@ -68,18 +92,15 @@
             
   
     
-                   <h5>Parent Project</h5>
-            <ul>
-              
-    <li class="none">
-                    <a href="../index.html">Fedora Misc Libs and Utils</a>
-          </li>
-          </ul>
-              <h5>Fedora HTTP Client Library</h5>
+                       <h5>Project Info</h5>
             <ul>
               
     <li class="none">
                     <a href="index.html">About</a>
+          </li>
+              
+    <li class="none">
+                    <a href="usage.html">Usage</a>
           </li>
               
     <li class="none">
@@ -90,7 +111,7 @@
                     <a href="dependencies.html">Dependencies</a>
           </li>
           </ul>
-              <h5>Project Reports</h5>
+              <h5>Reports</h5>
             <ul>
               
     <li class="none">
@@ -113,10 +134,30 @@
                     <a href="cpd.html">CPD</a>
           </li>
           </ul>
-                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
-            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+              <h5>Links</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="https://github.com/cwilper/fcrepo-misc" class="externalLink">GitHub Repository</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://fedora-commons.org/" class="externalLink">Fedora Commons</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://duraspace.org/" class="externalLink">DuraSpace</a>
+          </li>
+          </ul>
+                                               <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img class="poweredBy"
+                 alt="Built by Maven"
+                 src="./images/logos/maven-feather.png"
+                 width="90"
+                 height="30"
+                 border="1" />
           </a>
-                       
+                           
   
 
   
@@ -124,253 +165,27 @@
             
   
     
+            </div>
         </div>
-    </div>
-    <div id="bodyColumn">
-      <div id="contentBox">
-        <div class="section"><h2>Reactor Dependency Convergence</h2>
-<table class="bodyTable"><caption><b>Legend:</b></caption>
-<tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td>All projects share one version of the dependency.</td>
-</tr>
-<tr class="b"><td><img alt="error" src="images/icon_error_sml.gif" /></td>
-<td>At least one project has a differing version of the dependency.</td>
-</tr>
-</table>
-<br />
-<table class="bodyTable"><caption><b>Statistics:</b></caption>
-<tr class="a"><th>Number of sub-projects:</th>
-<td>7</td>
-</tr>
-<tr class="b"><th>Number of dependencies (NOD):</th>
-<td>15</td>
-</tr>
-<tr class="a"><th>Number of unique artifacts (NOA):</th>
-<td>15</td>
-</tr>
-<tr class="b"><th>Number of SNAPSHOT artifacts (NOS):</th>
-<td>0</td>
-</tr>
-<tr class="a"><th>Convergence (NOD/NOA):</th>
-<td><img alt="success" src="images/icon_success_sml.gif" />&#160;<b>100%</b></td>
-</tr>
-<tr class="b"><th>Ready for Release (100% Convergence and no SNAPSHOTS):</th>
-<td><img alt="success" src="images/icon_success_sml.gif" />&#160;<b>Success</b></td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>Dependencies used in sub-projects</h3>
-<div class="section"><h4>ch.qos.logback:logback-classic</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">0.9.26</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>com.github.cwilper.fcrepo-misc:fcrepo-dto-core</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">0.0.1-SNAPSHOT</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">0.0.1-SNAPSHOT</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>com.github.cwilper.fcrepo-misc:fcrepo-httpclient</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">0.0.1-SNAPSHOT</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>com.github.cwilper.fcrepo-misc:fcrepo-riclient</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">0.0.1-SNAPSHOT</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>com.google.guava:guava-collections</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">r03</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>commons-codec:commons-codec</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">1.4</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>commons-io:commons-io</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">2.0.1</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>junit:junit</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">4.8.2</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>net.java.dev.stax-utils:stax-utils</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">20060502</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>org.apache.httpcomponents:httpclient</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">4.0.3</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>org.apache.santuario:xmlsec</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">1.4.3</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>org.openrdf:rio</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">1.0.10</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>org.slf4j:jcl-over-slf4j</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">1.6.1</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-<div class="section"><h4>org.slf4j:slf4j-api</h4>
-<table class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td>
-<td><table class="bodyTable"><tr class="b"><td width="25%">1.6.1</td>
-<td><ol type="a"><li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li>
-<li><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient" class="externalLink">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li>
-</ol>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</div>
-</div>
-
-      </div>
-    </div>
-    <div class="clear">
-      <hr/>
-    </div>
-    <div id="footer">
-      <div class="xright">&#169;  
+        <div id="bodyColumn">
+          <div id="contentBox">
+            <div class="section"><h2>Reactor Dependency Convergence<a name="Reactor_Dependency_Convergence"></a></h2><table border="0" class="bodyTable"><caption>
+  <b>Legend:</b>
+</caption><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td>All projects share one version of the dependency.</td></tr><tr class="b"><td><img alt="error" src="images/icon_error_sml.gif" /></td><td>At least one project has a differing version of the dependency.</td></tr></table><br /><table border="0" class="bodyTable"><caption>
+  <b>Statistics:</b>
+</caption><tr class="a"><th>Number of sub-projects:</th><td>7</td></tr><tr class="b"><th>Number of dependencies (NOD):</th><td>15</td></tr><tr class="a"><th>Number of unique artifacts (NOA):</th><td>15</td></tr><tr class="b"><th>Number of SNAPSHOT artifacts (NOS):</th><td>0</td></tr><tr class="a"><th>Convergence (NOD/NOA):</th><td><img alt="success" src="images/icon_success_sml.gif" />&#160;<b>100%</b></td></tr><tr class="b"><th>Ready for Release (100% Convergence and no SNAPSHOTS):</th><td><img alt="success" src="images/icon_success_sml.gif" />&#160;<b>Success</b></td></tr></table></div><div class="section"><h3>Dependencies used in sub-projects<a name="Dependencies_used_in_sub-projects"></a></h3><div class="section"><h4>ch.qos.logback:logback-classic<a name="ch.qos.logback:logback-classic"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">0.9.26</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>com.github.cwilper.fcrepo-misc:fcrepo-dto-core<a name="com.github.cwilper.fcrepo-misc:fcrepo-dto-core"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">0.0.1-SNAPSHOT</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml<a name="com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">0.0.1-SNAPSHOT</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>com.github.cwilper.fcrepo-misc:fcrepo-httpclient<a name="com.github.cwilper.fcrepo-misc:fcrepo-httpclient"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">0.0.1-SNAPSHOT</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>com.github.cwilper.fcrepo-misc:fcrepo-riclient<a name="com.github.cwilper.fcrepo-misc:fcrepo-riclient"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">0.0.1-SNAPSHOT</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>com.google.guava:guava-collections<a name="com.google.guava:guava-collections"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">r03</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>commons-codec:commons-codec<a name="commons-codec:commons-codec"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.4</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>commons-io:commons-io<a name="commons-io:commons-io"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">2.0.1</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>junit:junit<a name="junit:junit"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">4.8.2</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>net.java.dev.stax-utils:stax-utils<a name="net.java.dev.stax-utils:stax-utils"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">20060502</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.apache.httpcomponents:httpclient<a name="org.apache.httpcomponents:httpclient"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">4.0.3</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.apache.santuario:xmlsec<a name="org.apache.santuario:xmlsec"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.4.3</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.openrdf:rio<a name="org.openrdf:rio"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.0.10</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.slf4j:jcl-over-slf4j<a name="org.slf4j:jcl-over-slf4j"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.6.1</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.slf4j:slf4j-api<a name="org.slf4j:slf4j-api"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.6.1</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">com.github.cwilper.fcrepo-misc:fcrepo-dto-core</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/">com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport">com.github.cwilper.fcrepo-misc:fcrepo-flexport</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient">com.github.cwilper.fcrepo-misc:fcrepo-httpclient</a></li><li><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient">com.github.cwilper.fcrepo-misc:fcrepo-riclient</a></li></ol></td></tr></table></td></tr></table></div></div>
+          </div>
+        </div>
+        <div class="clear">
+          <hr/>
+        </div>
+        <div id="footer">
+          <div class="xright">Copyright &#169;          
+   
           2011
     
-          
+                    <a href="http://duraspace.org/">DuraSpace</a>.
+            All Rights Reserved.    
   
 
   
@@ -379,9 +194,10 @@
   
     
   </div>
-      <div class="clear">
-        <hr/>
-      </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
     </div>
   </body>
 </html>
