@@ -1,39 +1,58 @@
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
-
-
-
-
-
-
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Fedora DTO Core Library - Surefire Report</title>
-    <style type="text/css" media="all">
-      @import url("./css/maven-base.css");
-      @import url("./css/maven-theme.css");
-      @import url("./css/site.css");
-    </style>
+    <link rel="stylesheet" href="./css/maven-theme.css" type="text/css" />
+    <link rel="stylesheet" href="./css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/prettify.css" type="text/css"/>
     <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-      </head>
-  <body class="composite">
-    <div id="banner">
-                    <span id="bannerLeft">
+    <script type="text/javascript" src="./js/prettify.js"></script>
+    <script type="text/javascript" src="./js/niftycube.js"></script>
+    <script type="text/javascript">
+        window.onload=function() {
+            Nifty("div\#wrapper", "big");
+            Nifty("div#breadcrumbs", "small");
+            Nifty("div\#navcolumn", "small");
+            Nifty("div.source", "medium");
+            prettyPrint();
+        }
+    </script>
+        <meta name="Date-Revision-yyyymmdd" content="20110110" />
+                                                    
+<style>p { line-height: 1.3em }
+        #leftColumn { width: 170px }
+        #bodyColumn { margin-left: 190px }
+        .section { padding: 0px; }
+        h2 { padding: 0px; }
+        h3 { padding: 0px; }
+        h4 { padding: 0px; }
+        h5 { padding: 0px; }</style>
+                    </head>
+  <body>
+    <div id="wrapper">
+        <div id="banner">
+                        <div id="bannerLeft">
     
             Fedora DTO Core Library
     
-            </span>
-                    <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="breadcrumbs">
-          
+            </div>
+                            <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="breadcrumbs">
+              
   
 
   
@@ -42,10 +61,16 @@
   
     
             <div class="xleft">
-        Last Published: 2011-01-08
-                  &nbsp;| Version: 0.0.1-SNAPSHOT
-                      </div>
-            <div class="xright">      
+          
+                <a href="../../index.html">fcrepo-misc</a>
+                &gt;
+      
+                <a href="../index.html">fcrepo-dto</a>
+                &gt;
+      
+                <a href="index.html">fcrepo-dto-core</a>
+                  </div>
+                <div class="xright">      
   
 
   
@@ -53,14 +78,16 @@
             
   
     
-  </div>
-      <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="leftColumn">
-      <div id="navcolumn">
-           
+             <span id="publishDate">Last Published: 2011-01-10</span>
+              &nbsp;| <span id="projectVersion">Version: 0.0.1-SNAPSHOT</span>
+            </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="leftColumn">
+          <div id="navcolumn">
+               
   
 
   
@@ -68,18 +95,15 @@
             
   
     
-                   <h5>Parent Project</h5>
-            <ul>
-              
-    <li class="none">
-                    <a href="../index.html">Fedora DTO Libraries</a>
-          </li>
-          </ul>
-              <h5>Fedora DTO Core Library</h5>
+                       <h5>Project Info</h5>
             <ul>
               
     <li class="none">
                     <a href="index.html">About</a>
+          </li>
+              
+    <li class="none">
+                    <a href="usage.html">Usage</a>
           </li>
               
     <li class="none">
@@ -90,7 +114,7 @@
                     <a href="dependencies.html">Dependencies</a>
           </li>
           </ul>
-              <h5>Project Reports</h5>
+              <h5>Reports</h5>
             <ul>
               
     <li class="none">
@@ -113,10 +137,30 @@
                     <a href="cpd.html">CPD</a>
           </li>
           </ul>
-                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
-            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+              <h5>Links</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="https://github.com/cwilper/fcrepo-misc" class="externalLink">GitHub Repository</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://fedora-commons.org/" class="externalLink">Fedora Commons</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://duraspace.org/" class="externalLink">DuraSpace</a>
+          </li>
+          </ul>
+                                               <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img class="poweredBy"
+                 alt="Built by Maven"
+                 src="./images/logos/maven-feather.png"
+                 width="90"
+                 height="30"
+                 border="1" />
           </a>
-                       
+                           
   
 
   
@@ -124,447 +168,23 @@
             
   
     
+            </div>
         </div>
-    </div>
-    <div id="bodyColumn">
-      <div id="contentBox">
-        <script type="text/javascript">
-function toggleDisplay(elementId) {
- var elm = document.getElementById(elementId + 'error');
- if (elm && typeof elm.style != "undefined") {
- if (elm.style.display == "none") {
- elm.style.display = "";
- document.getElementById(elementId + 'off').style.display = "none";
- document.getElementById(elementId + 'on').style.display = "inline";
- } else if (elm.style.display == "") { elm.style.display = "none";
- document.getElementById(elementId + 'off').style.display = "inline";
- document.getElementById(elementId + 'on').style.display = "none";
- } 
- } 
- }
-</script><div class="section"><h2>Surefire Report</h2>
-</div>
-<div class="section"><h2>Summary</h2>
-<a name="Summary"></a><p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p>
-<br />
-<table class="bodyTable"><tr class="a"><th>Tests</th>
-<th>Errors </th>
-<th>Failures</th>
-<th>Skipped</th>
-<th>Success Rate</th>
-<th>Time</th>
-</tr>
-<tr class="b"><td>61</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.563</td>
-</tr>
-</table>
-<br />
-<p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p>
-<br />
-</div>
-<div class="section"><h2>Package List</h2>
-<a name="Package_List"></a><p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p>
-<br />
-<table class="bodyTable"><tr class="a"><th>Package</th>
-<th>Tests</th>
-<th>Errors </th>
-<th>Failures</th>
-<th>Skipped</th>
-<th>Success Rate</th>
-<th>Time</th>
-</tr>
-<tr class="b"><td><a href="#com.github.cwilper.fcrepo.dto.core.io">com.github.cwilper.fcrepo.dto.core.io</a></td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.123</td>
-</tr>
-<tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.core">com.github.cwilper.fcrepo.dto.core</a></td>
-<td>59</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.44</td>
-</tr>
-</table>
-<br />
-<p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p>
-<div class="section"><h3>com.github.cwilper.fcrepo.dto.core.io</h3>
-<a name="com.github.cwilper.fcrepo.dto.core.io"></a><table class="bodyTable"><tr class="b"><th></th>
-<th>Class</th>
-<th>Tests</th>
-<th>Errors </th>
-<th>Failures</th>
-<th>Skipped</th>
-<th>Success Rate</th>
-<th>Time</th>
-</tr>
-<tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.core.ioXMLUtilTest"><img src="images/icon_success_sml.gif" /></a></td>
-<td><a href="#com.github.cwilper.fcrepo.dto.core.ioXMLUtilTest">XMLUtilTest</a></td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.123</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com.github.cwilper.fcrepo.dto.core</h3>
-<a name="com.github.cwilper.fcrepo.dto.core"></a><table class="bodyTable"><tr class="b"><th></th>
-<th>Class</th>
-<th>Tests</th>
-<th>Errors </th>
-<th>Failures</th>
-<th>Skipped</th>
-<th>Success Rate</th>
-<th>Time</th>
-</tr>
-<tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.coreContentDigestTest"><img src="images/icon_success_sml.gif" /></a></td>
-<td><a href="#com.github.cwilper.fcrepo.dto.coreContentDigestTest">ContentDigestTest</a></td>
-<td>4</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.006</td>
-</tr>
-<tr class="b"><td><a href="#com.github.cwilper.fcrepo.dto.coreControlGroupTest"><img src="images/icon_success_sml.gif" /></a></td>
-<td><a href="#com.github.cwilper.fcrepo.dto.coreControlGroupTest">ControlGroupTest</a></td>
-<td>4</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.005</td>
-</tr>
-<tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.coreDatastreamTest"><img src="images/icon_success_sml.gif" /></a></td>
-<td><a href="#com.github.cwilper.fcrepo.dto.coreDatastreamTest">DatastreamTest</a></td>
-<td>13</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.234</td>
-</tr>
-<tr class="b"><td><a href="#com.github.cwilper.fcrepo.dto.coreDatastreamVersionTest"><img src="images/icon_success_sml.gif" /></a></td>
-<td><a href="#com.github.cwilper.fcrepo.dto.coreDatastreamVersionTest">DatastreamVersionTest</a></td>
-<td>19</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.164</td>
-</tr>
-<tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.coreFedoraObjectTest"><img src="images/icon_success_sml.gif" /></a></td>
-<td><a href="#com.github.cwilper.fcrepo.dto.coreFedoraObjectTest">FedoraObjectTest</a></td>
-<td>12</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.025</td>
-</tr>
-<tr class="b"><td><a href="#com.github.cwilper.fcrepo.dto.coreStateTest"><img src="images/icon_success_sml.gif" /></a></td>
-<td><a href="#com.github.cwilper.fcrepo.dto.coreStateTest">StateTest</a></td>
-<td>7</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>0.006</td>
-</tr>
-</table>
-</div>
-<br />
-</div>
-<div class="section"><h2>Test Cases</h2>
-<a name="Test_Cases"></a><p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p>
-<div class="section"><h3>ContentDigestTest</h3>
-<a name="com.github.cwilper.fcrepo.dto.coreContentDigestTest"></a><table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>typeField</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>hexValueField</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>equality</td>
-<td>0.001</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>inequality</td>
-<td>0</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>ControlGroupTest</h3>
-<a name="com.github.cwilper.fcrepo.dto.coreControlGroupTest"></a><table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>fourPossibleValues</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>expectedShortNames</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>getByShortNames</td>
-<td>0.001</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>bogusShortName</td>
-<td>0.001</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>DatastreamTest</h3>
-<a name="com.github.cwilper.fcrepo.dto.coreDatastreamTest"></a><table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldNormal</td>
-<td>0.015</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldNormalization</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldNull</td>
-<td>0.001</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldEmpty</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldSpace</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>stateField</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>controlGroupField</td>
-<td>0.001</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>versionableField</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>addVersion</td>
-<td>0.175</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>addVersionViaSet</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>datastreamVersionOrdering</td>
-<td>0.01</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>equality</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>inequality</td>
-<td>0</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>DatastreamVersionTest</h3>
-<a name="com.github.cwilper.fcrepo.dto.coreDatastreamVersionTest"></a><table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldNormal</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldNormalization</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldNull</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldEmpty</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>idFieldSpace</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>createdDateField</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>labelField</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>mimeTypeField</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>altIdsField</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>formatURIValue</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>contentDigestField</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>sizeField</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>negativeSize</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>canonicalizableInlineXML</td>
-<td>0.002</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>nonCanonicalizableInlineXML</td>
-<td>0.119</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>malformedInlineXML</td>
-<td>0.016</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>contentLocationValue</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>equality</td>
-<td>0.007</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>inequality</td>
-<td>0.001</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>FedoraObjectTest</h3>
-<a name="com.github.cwilper.fcrepo.dto.coreFedoraObjectTest"></a><table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>stateField</td>
-<td>0.002</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>createdDateField</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>labelField</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>pidField</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>ownerIdField</td>
-<td>0.001</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>lastModifiedDateField</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>putDatastream</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>putDatastreamViaMap</td>
-<td>0.001</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>putDatastreamViaMapWrongId</td>
-<td>0.001</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>datastreamOrdering</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>equality</td>
-<td>0.001</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>inequality</td>
-<td>0.002</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>XMLUtilTest</h3>
-<a name="com.github.cwilper.fcrepo.dto.core.ioXMLUtilTest"></a><table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>canonicalizeSimple</td>
-<td>0.119</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>canonicalizeComplex</td>
-<td>0.003</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>StateTest</h3>
-<a name="com.github.cwilper.fcrepo.dto.coreStateTest"></a><table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>expectedShortNames</td>
-<td>0.001</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>getByShortNames</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>bogusShortName</td>
-<td>0.001</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>threePossibleValues</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>expectedLongNames</td>
-<td>0</td>
-</tr>
-<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
-<td>getByLongNames</td>
-<td>0</td>
-</tr>
-<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
-<td>bogusLongName</td>
-<td>0</td>
-</tr>
-</table>
-</div>
-<br />
-</div>
-
-      </div>
-    </div>
-    <div class="clear">
-      <hr/>
-    </div>
-    <div id="footer">
-      <div class="xright">&#169;  
+        <div id="bodyColumn">
+          <div id="contentBox">
+            <div class="section"><h2>Surefire Report<a name="Surefire_Report"></a></h2></div><div class="section"><h2>Summary<a name="Summary"></a></h2><a name="Summary"></a><p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br /><table border="0" class="bodyTable"><tr class="a"><th>Tests</th><th>Errors </th><th>Failures</th><th>Skipped</th><th>Success Rate</th><th>Time</th></tr><tr class="b"><td>61</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.56</td></tr></table><br /><p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p><br /></div><div class="section"><h2>Package List<a name="Package_List"></a></h2><a name="Package_List"></a><p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br /><table border="0" class="bodyTable"><tr class="a"><th>Package</th><th>Tests</th><th>Errors </th><th>Failures</th><th>Skipped</th><th>Success Rate</th><th>Time</th></tr><tr class="b"><td><a href="#com.github.cwilper.fcrepo.dto.core.io">com.github.cwilper.fcrepo.dto.core.io</a></td><td>2</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.125</td></tr><tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.core">com.github.cwilper.fcrepo.dto.core</a></td><td>59</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.435</td></tr></table><br /><p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p><div class="section"><h3>com.github.cwilper.fcrepo.dto.core.io<a name="com.github.cwilper.fcrepo.dto.core.io"></a></h3><a name="com.github.cwilper.fcrepo.dto.core.io"></a><table border="0" class="bodyTable"><tr class="b"><th></th><th>Class</th><th>Tests</th><th>Errors </th><th>Failures</th><th>Skipped</th><th>Success Rate</th><th>Time</th></tr><tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.core.ioXMLUtilTest"><img src="images/icon_success_sml.gif" alt="" /></a></td><td><a href="#com.github.cwilper.fcrepo.dto.core.ioXMLUtilTest">XMLUtilTest</a></td><td>2</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.125</td></tr></table></div><div class="section"><h3>com.github.cwilper.fcrepo.dto.core<a name="com.github.cwilper.fcrepo.dto.core"></a></h3><a name="com.github.cwilper.fcrepo.dto.core"></a><table border="0" class="bodyTable"><tr class="b"><th></th><th>Class</th><th>Tests</th><th>Errors </th><th>Failures</th><th>Skipped</th><th>Success Rate</th><th>Time</th></tr><tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.coreContentDigestTest"><img src="images/icon_success_sml.gif" alt="" /></a></td><td><a href="#com.github.cwilper.fcrepo.dto.coreContentDigestTest">ContentDigestTest</a></td><td>4</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.006</td></tr><tr class="b"><td><a href="#com.github.cwilper.fcrepo.dto.coreControlGroupTest"><img src="images/icon_success_sml.gif" alt="" /></a></td><td><a href="#com.github.cwilper.fcrepo.dto.coreControlGroupTest">ControlGroupTest</a></td><td>4</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.004</td></tr><tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.coreDatastreamTest"><img src="images/icon_success_sml.gif" alt="" /></a></td><td><a href="#com.github.cwilper.fcrepo.dto.coreDatastreamTest">DatastreamTest</a></td><td>13</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.232</td></tr><tr class="b"><td><a href="#com.github.cwilper.fcrepo.dto.coreDatastreamVersionTest"><img src="images/icon_success_sml.gif" alt="" /></a></td><td><a href="#com.github.cwilper.fcrepo.dto.coreDatastreamVersionTest">DatastreamVersionTest</a></td><td>19</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.16</td></tr><tr class="a"><td><a href="#com.github.cwilper.fcrepo.dto.coreFedoraObjectTest"><img src="images/icon_success_sml.gif" alt="" /></a></td><td><a href="#com.github.cwilper.fcrepo.dto.coreFedoraObjectTest">FedoraObjectTest</a></td><td>12</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.026</td></tr><tr class="b"><td><a href="#com.github.cwilper.fcrepo.dto.coreStateTest"><img src="images/icon_success_sml.gif" alt="" /></a></td><td><a href="#com.github.cwilper.fcrepo.dto.coreStateTest">StateTest</a></td><td>7</td><td>0</td><td>0</td><td>0</td><td>100%</td><td>0.007</td></tr></table></div><br /></div><div class="section"><h2>Test Cases<a name="Test_Cases"></a></h2><a name="Test_Cases"></a><p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><div class="section"><h3>ContentDigestTest<a name="ContentDigestTest"></a></h3><a name="com.github.cwilper.fcrepo.dto.coreContentDigestTest"></a><table border="0" class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>typeField</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>hexValueField</td><td>0.001</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>equality</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>inequality</td><td>0</td></tr></table></div><div class="section"><h3>ControlGroupTest<a name="ControlGroupTest"></a></h3><a name="com.github.cwilper.fcrepo.dto.coreControlGroupTest"></a><table border="0" class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>fourPossibleValues</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>expectedShortNames</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>getByShortNames</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>bogusShortName</td><td>0</td></tr></table></div><div class="section"><h3>DatastreamTest<a name="DatastreamTest"></a></h3><a name="com.github.cwilper.fcrepo.dto.coreDatastreamTest"></a><table border="0" class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldNormal</td><td>0.014</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldNormalization</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldNull</td><td>0</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldEmpty</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldSpace</td><td>0</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>stateField</td><td>0.001</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>controlGroupField</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>versionableField</td><td>0.001</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>addVersion</td><td>0.174</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>addVersionViaSet</td><td>0.001</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>datastreamVersionOrdering</td><td>0.01</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>equality</td><td>0.001</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>inequality</td><td>0</td></tr></table></div><div class="section"><h3>DatastreamVersionTest<a name="DatastreamVersionTest"></a></h3><a name="com.github.cwilper.fcrepo.dto.coreDatastreamVersionTest"></a><table border="0" class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldNormal</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldNormalization</td><td>0</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldNull</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldEmpty</td><td>0</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>idFieldSpace</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>createdDateField</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>labelField</td><td>0.002</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>mimeTypeField</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>altIdsField</td><td>0.001</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>formatURIValue</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>contentDigestField</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>sizeField</td><td>0</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>negativeSize</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>canonicalizableInlineXML</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>nonCanonicalizableInlineXML</td><td>0.121</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>malformedInlineXML</td><td>0.012</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>contentLocationValue</td><td>0.001</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>equality</td><td>0.007</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>inequality</td><td>0</td></tr></table></div><div class="section"><h3>FedoraObjectTest<a name="FedoraObjectTest"></a></h3><a name="com.github.cwilper.fcrepo.dto.coreFedoraObjectTest"></a><table border="0" class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>stateField</td><td>0.003</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>createdDateField</td><td>0.001</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>labelField</td><td>0</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>pidField</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>ownerIdField</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>lastModifiedDateField</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>putDatastream</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>putDatastreamViaMap</td><td>0.001</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>putDatastreamViaMapWrongId</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>datastreamOrdering</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>equality</td><td>0.001</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>inequality</td><td>0.001</td></tr></table></div><div class="section"><h3>XMLUtilTest<a name="XMLUtilTest"></a></h3><a name="com.github.cwilper.fcrepo.dto.core.ioXMLUtilTest"></a><table border="0" class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>canonicalizeSimple</td><td>0.12</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>canonicalizeComplex</td><td>0.003</td></tr></table></div><div class="section"><h3>StateTest<a name="StateTest"></a></h3><a name="com.github.cwilper.fcrepo.dto.coreStateTest"></a><table border="0" class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>expectedShortNames</td><td>0</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>getByShortNames</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>bogusShortName</td><td>0</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>threePossibleValues</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>expectedLongNames</td><td>0</td></tr><tr class="b"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>getByLongNames</td><td>0</td></tr><tr class="a"><td><img src="images/icon_success_sml.gif" alt="" /></td><td>bogusLongName</td><td>0</td></tr></table></div><br /></div>
+          </div>
+        </div>
+        <div class="clear">
+          <hr/>
+        </div>
+        <div id="footer">
+          <div class="xright">Copyright &#169;          
+   
           2011
     
-          
+                    <a href="http://duraspace.org/">DuraSpace</a>.
+            All Rights Reserved.    
   
 
   
@@ -573,9 +193,10 @@ function toggleDisplay(elementId) {
   
     
   </div>
-      <div class="clear">
-        <hr/>
-      </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
     </div>
   </body>
 </html>

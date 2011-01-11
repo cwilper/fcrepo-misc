@@ -1,39 +1,58 @@
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
-
-
-
-
-
-
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Fedora DTO Core Library - CPD Results</title>
-    <style type="text/css" media="all">
-      @import url("./css/maven-base.css");
-      @import url("./css/maven-theme.css");
-      @import url("./css/site.css");
-    </style>
+    <link rel="stylesheet" href="./css/maven-theme.css" type="text/css" />
+    <link rel="stylesheet" href="./css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/prettify.css" type="text/css"/>
     <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-      </head>
-  <body class="composite">
-    <div id="banner">
-                    <span id="bannerLeft">
+    <script type="text/javascript" src="./js/prettify.js"></script>
+    <script type="text/javascript" src="./js/niftycube.js"></script>
+    <script type="text/javascript">
+        window.onload=function() {
+            Nifty("div\#wrapper", "big");
+            Nifty("div#breadcrumbs", "small");
+            Nifty("div\#navcolumn", "small");
+            Nifty("div.source", "medium");
+            prettyPrint();
+        }
+    </script>
+        <meta name="Date-Revision-yyyymmdd" content="20110110" />
+                                                    
+<style>p { line-height: 1.3em }
+        #leftColumn { width: 170px }
+        #bodyColumn { margin-left: 190px }
+        .section { padding: 0px; }
+        h2 { padding: 0px; }
+        h3 { padding: 0px; }
+        h4 { padding: 0px; }
+        h5 { padding: 0px; }</style>
+                    </head>
+  <body>
+    <div id="wrapper">
+        <div id="banner">
+                        <div id="bannerLeft">
     
             Fedora DTO Core Library
     
-            </span>
-                    <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="breadcrumbs">
-          
+            </div>
+                            <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="breadcrumbs">
+              
   
 
   
@@ -42,10 +61,16 @@
   
     
             <div class="xleft">
-        Last Published: 2011-01-08
-                  &nbsp;| Version: 0.0.1-SNAPSHOT
-                      </div>
-            <div class="xright">      
+          
+                <a href="../../index.html">fcrepo-misc</a>
+                &gt;
+      
+                <a href="../index.html">fcrepo-dto</a>
+                &gt;
+      
+                <a href="index.html">fcrepo-dto-core</a>
+                  </div>
+                <div class="xright">      
   
 
   
@@ -53,14 +78,16 @@
             
   
     
-  </div>
-      <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="leftColumn">
-      <div id="navcolumn">
-           
+             <span id="publishDate">Last Published: 2011-01-10</span>
+              &nbsp;| <span id="projectVersion">Version: 0.0.1-SNAPSHOT</span>
+            </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="leftColumn">
+          <div id="navcolumn">
+               
   
 
   
@@ -68,18 +95,15 @@
             
   
     
-                   <h5>Parent Project</h5>
-            <ul>
-              
-    <li class="none">
-                    <a href="../index.html">Fedora DTO Libraries</a>
-          </li>
-          </ul>
-              <h5>Fedora DTO Core Library</h5>
+                       <h5>Project Info</h5>
             <ul>
               
     <li class="none">
                     <a href="index.html">About</a>
+          </li>
+              
+    <li class="none">
+                    <a href="usage.html">Usage</a>
           </li>
               
     <li class="none">
@@ -90,7 +114,7 @@
                     <a href="dependencies.html">Dependencies</a>
           </li>
           </ul>
-              <h5>Project Reports</h5>
+              <h5>Reports</h5>
             <ul>
               
     <li class="none">
@@ -113,10 +137,30 @@
               <strong>CPD</strong>
         </li>
           </ul>
-                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
-            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+              <h5>Links</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="https://github.com/cwilper/fcrepo-misc" class="externalLink">GitHub Repository</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://fedora-commons.org/" class="externalLink">Fedora Commons</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://duraspace.org/" class="externalLink">DuraSpace</a>
+          </li>
+          </ul>
+                                               <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img class="poweredBy"
+                 alt="Built by Maven"
+                 src="./images/logos/maven-feather.png"
+                 width="90"
+                 height="30"
+                 border="1" />
           </a>
-                       
+                           
   
 
   
@@ -124,27 +168,23 @@
             
   
     
+            </div>
         </div>
-    </div>
-    <div id="bodyColumn">
-      <div id="contentBox">
-        <div class="section"><h2>CPD Results</h2>
-<p>The following document contains the results of PMD's  <a href="http://pmd.sourceforge.net/cpd.html" class="externalLink">CPD</a> 4.2.5.</p>
-</div>
-<div class="section"><h2>Duplications</h2>
-<p>CPD found no problems in your source code.</p>
-</div>
-
-      </div>
-    </div>
-    <div class="clear">
-      <hr/>
-    </div>
-    <div id="footer">
-      <div class="xright">&#169;  
+        <div id="bodyColumn">
+          <div id="contentBox">
+            <div class="section"><h2>CPD Results<a name="CPD_Results"></a></h2><p>The following document contains the results of PMD's  <a class="externalLink" href="http://pmd.sourceforge.net/cpd.html">CPD</a> 4.2.5.</p></div><div class="section"><h2>Duplications<a name="Duplications"></a></h2><p>CPD found no problems in your source code.</p></div>
+          </div>
+        </div>
+        <div class="clear">
+          <hr/>
+        </div>
+        <div id="footer">
+          <div class="xright">Copyright &#169;          
+   
           2011
     
-          
+                    <a href="http://duraspace.org/">DuraSpace</a>.
+            All Rights Reserved.    
   
 
   
@@ -153,9 +193,10 @@
   
     
   </div>
-      <div class="clear">
-        <hr/>
-      </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
     </div>
   </body>
 </html>
