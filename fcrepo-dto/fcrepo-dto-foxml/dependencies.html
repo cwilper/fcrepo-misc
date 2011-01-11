@@ -1,39 +1,58 @@
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
-
-
-
-
-
-
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Fedora DTO FOXML Library - Project Dependencies</title>
-    <style type="text/css" media="all">
-      @import url("./css/maven-base.css");
-      @import url("./css/maven-theme.css");
-      @import url("./css/site.css");
-    </style>
+    <link rel="stylesheet" href="./css/maven-theme.css" type="text/css" />
+    <link rel="stylesheet" href="./css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/prettify.css" type="text/css"/>
     <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-      </head>
-  <body class="composite">
-    <div id="banner">
-                    <span id="bannerLeft">
+    <script type="text/javascript" src="./js/prettify.js"></script>
+    <script type="text/javascript" src="./js/niftycube.js"></script>
+    <script type="text/javascript">
+        window.onload=function() {
+            Nifty("div\#wrapper", "big");
+            Nifty("div#breadcrumbs", "small");
+            Nifty("div\#navcolumn", "small");
+            Nifty("div.source", "medium");
+            prettyPrint();
+        }
+    </script>
+        <meta name="Date-Revision-yyyymmdd" content="20110110" />
+                                                    
+<style>p { line-height: 1.3em }
+        #leftColumn { width: 170px }
+        #bodyColumn { margin-left: 190px }
+        .section { padding: 0px; }
+        h2 { padding: 0px; }
+        h3 { padding: 0px; }
+        h4 { padding: 0px; }
+        h5 { padding: 0px; }</style>
+                    </head>
+  <body>
+    <div id="wrapper">
+        <div id="banner">
+                        <div id="bannerLeft">
     
             Fedora DTO FOXML Library
     
-            </span>
-                    <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="breadcrumbs">
-          
+            </div>
+                            <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="breadcrumbs">
+              
   
 
   
@@ -42,10 +61,16 @@
   
     
             <div class="xleft">
-        Last Published: 2011-01-08
-                  &nbsp;| Version: 0.0.1-SNAPSHOT
-                      </div>
-            <div class="xright">      
+          
+                <a href="../../index.html">fcrepo-misc</a>
+                &gt;
+      
+                <a href="../index.html">fcrepo-dto</a>
+                &gt;
+      
+                <a href="index.html">fcrepo-dto-foxml</a>
+                  </div>
+                <div class="xright">      
   
 
   
@@ -53,14 +78,16 @@
             
   
     
-  </div>
-      <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="leftColumn">
-      <div id="navcolumn">
-           
+             <span id="publishDate">Last Published: 2011-01-10</span>
+              &nbsp;| <span id="projectVersion">Version: 0.0.1-SNAPSHOT</span>
+            </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="leftColumn">
+          <div id="navcolumn">
+               
   
 
   
@@ -68,18 +95,15 @@
             
   
     
-                   <h5>Parent Project</h5>
-            <ul>
-              
-    <li class="none">
-                    <a href="../index.html">Fedora DTO Libraries</a>
-          </li>
-          </ul>
-              <h5>Fedora DTO FOXML Library</h5>
+                       <h5>Project Info</h5>
             <ul>
               
     <li class="none">
                     <a href="index.html">About</a>
+          </li>
+              
+    <li class="none">
+                    <a href="usage.html">Usage</a>
           </li>
               
     <li class="none">
@@ -90,7 +114,7 @@
               <strong>Dependencies</strong>
         </li>
           </ul>
-              <h5>Project Reports</h5>
+              <h5>Reports</h5>
             <ul>
               
     <li class="none">
@@ -113,10 +137,30 @@
                     <a href="cpd.html">CPD</a>
           </li>
           </ul>
-                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
-            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+              <h5>Links</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="https://github.com/cwilper/fcrepo-misc" class="externalLink">GitHub Repository</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://fedora-commons.org/" class="externalLink">Fedora Commons</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://duraspace.org/" class="externalLink">DuraSpace</a>
+          </li>
+          </ul>
+                                               <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img class="poweredBy"
+                 alt="Built by Maven"
+                 src="./images/logos/maven-feather.png"
+                 width="90"
+                 height="30"
+                 border="1" />
           </a>
-                       
+                           
   
 
   
@@ -124,147 +168,11 @@
             
   
     
+            </div>
         </div>
-    </div>
-    <div id="bodyColumn">
-      <div id="contentBox">
-        <div class="section"><h2>Project Dependencies</h2>
-<div class="section"><h3>compile</h3>
-<p>The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:</p>
-<table class="bodyTable"><tr class="a"><th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Type</th>
-</tr>
-<tr class="b"><td>com.github.cwilper.fcrepo-misc</td>
-<td><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">fcrepo-dto-core</a></td>
-<td>0.0.1-SNAPSHOT</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>commons-codec</td>
-<td><a href="http://commons.apache.org/codec/" class="externalLink">commons-codec</a></td>
-<td>1.4</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>commons-io</td>
-<td><a href="http://commons.apache.org/io/" class="externalLink">commons-io</a></td>
-<td>2.0.1</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>org.slf4j</td>
-<td><a href="http://www.slf4j.org" class="externalLink">slf4j-api</a></td>
-<td>1.6.1</td>
-<td>jar</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>runtime</h3>
-<p>The following is a list of runtime dependencies for this project. These dependencies are required to run the application:</p>
-<table class="bodyTable"><tr class="b"><th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Type</th>
-</tr>
-<tr class="a"><td>ch.qos.logback</td>
-<td><a href="http://logback.qos.ch" class="externalLink">logback-classic</a></td>
-<td>0.9.26</td>
-<td>jar</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>test</h3>
-<p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
-<table class="bodyTable"><tr class="b"><th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Type</th>
-</tr>
-<tr class="a"><td>junit</td>
-<td><a href="http://junit.org" class="externalLink">junit</a></td>
-<td>4.8.2</td>
-<td>jar</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="section"><h2>Project Transitive Dependencies</h2>
-<p>The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.</p>
-<div class="section"><h3>compile</h3>
-<p>The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:</p>
-<table class="bodyTable"><tr class="b"><th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Type</th>
-</tr>
-<tr class="a"><td>com.github.cwilper.fcrepo-misc</td>
-<td><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient" class="externalLink">fcrepo-httpclient</a></td>
-<td>0.0.1-SNAPSHOT</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>com.google.guava</td>
-<td><a href="http://code.google.com/p/guava-libraries/guava-annotations" class="externalLink">guava-annotations</a></td>
-<td>r03</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>com.google.guava</td>
-<td><a href="http://code.google.com/p/guava-libraries/guava-base" class="externalLink">guava-base</a></td>
-<td>r03</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>com.google.guava</td>
-<td><a href="http://code.google.com/p/guava-libraries/guava-collections" class="externalLink">guava-collections</a></td>
-<td>r03</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>com.google.guava</td>
-<td><a href="http://code.google.com/p/guava-libraries/guava-primitives" class="externalLink">guava-primitives</a></td>
-<td>r03</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>net.java.dev.stax-utils</td>
-<td><a href="http://stax-utils.dev.java.net/" class="externalLink">stax-utils</a></td>
-<td>20060502</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>org.apache.httpcomponents</td>
-<td><a href="http://hc.apache.org/httpcomponents-client" class="externalLink">httpclient</a></td>
-<td>4.0.3</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>org.apache.httpcomponents</td>
-<td><a href="http://hc.apache.org/httpcomponents-core/" class="externalLink">httpcore</a></td>
-<td>4.0.1</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>org.apache.santuario</td>
-<td><a href="http://santuario.apache.org/" class="externalLink">xmlsec</a></td>
-<td>1.4.3</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>org.slf4j</td>
-<td><a href="http://www.slf4j.org" class="externalLink">jcl-over-slf4j</a></td>
-<td>1.6.1</td>
-<td>jar</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>runtime</h3>
-<p>The following is a list of runtime dependencies for this project. These dependencies are required to run the application:</p>
-<table class="bodyTable"><tr class="a"><th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Type</th>
-</tr>
-<tr class="b"><td>ch.qos.logback</td>
-<td><a href="http://logback.qos.ch" class="externalLink">logback-core</a></td>
-<td>0.9.26</td>
-<td>jar</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="section"><h2>Project Dependency Graph</h2>
-<script language="javascript" type="text/javascript">
+        <div id="bodyColumn">
+          <div id="contentBox">
+            <div class="section"><h2>Project Dependencies<a name="Project_Dependencies"></a></h2><div class="section"><h3>compile<a name="compile"></a></h3><p>The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:</p><table border="0" class="bodyTable"><tr class="a"><th>GroupId</th><th>ArtifactId</th><th>Version</th><th>Type</th></tr><tr class="b"><td>com.github.cwilper.fcrepo-misc</td><td><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">fcrepo-dto-core</a></td><td>0.0.1-SNAPSHOT</td><td>jar</td></tr><tr class="a"><td>commons-codec</td><td><a class="externalLink" href="http://commons.apache.org/codec/">commons-codec</a></td><td>1.4</td><td>jar</td></tr><tr class="b"><td>commons-io</td><td><a class="externalLink" href="http://commons.apache.org/io/">commons-io</a></td><td>2.0.1</td><td>jar</td></tr><tr class="a"><td>org.slf4j</td><td><a class="externalLink" href="http://www.slf4j.org">slf4j-api</a></td><td>1.6.1</td><td>jar</td></tr></table></div><div class="section"><h3>test<a name="test"></a></h3><p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p><table border="0" class="bodyTable"><tr class="b"><th>GroupId</th><th>ArtifactId</th><th>Version</th><th>Type</th></tr><tr class="a"><td>ch.qos.logback</td><td><a class="externalLink" href="http://logback.qos.ch">logback-classic</a></td><td>0.9.26</td><td>jar</td></tr><tr class="b"><td>junit</td><td><a class="externalLink" href="http://junit.org">junit</a></td><td>4.8.2</td><td>jar</td></tr></table></div></div><div class="section"><h2>Project Transitive Dependencies<a name="Project_Transitive_Dependencies"></a></h2><p>The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.</p><div class="section"><h3>compile<a name="compile"></a></h3><p>The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:</p><table border="0" class="bodyTable"><tr class="a"><th>GroupId</th><th>ArtifactId</th><th>Version</th><th>Type</th></tr><tr class="b"><td>com.github.cwilper.fcrepo-misc</td><td><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient">fcrepo-httpclient</a></td><td>0.0.1-SNAPSHOT</td><td>jar</td></tr><tr class="a"><td>com.google.guava</td><td><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-annotations">guava-annotations</a></td><td>r03</td><td>jar</td></tr><tr class="b"><td>com.google.guava</td><td><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-base">guava-base</a></td><td>r03</td><td>jar</td></tr><tr class="a"><td>com.google.guava</td><td><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-collections">guava-collections</a></td><td>r03</td><td>jar</td></tr><tr class="b"><td>com.google.guava</td><td><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-primitives">guava-primitives</a></td><td>r03</td><td>jar</td></tr><tr class="a"><td>net.java.dev.stax-utils</td><td><a class="externalLink" href="http://stax-utils.dev.java.net/">stax-utils</a></td><td>20060502</td><td>jar</td></tr><tr class="b"><td>org.apache.httpcomponents</td><td><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">httpclient</a></td><td>4.0.3</td><td>jar</td></tr><tr class="a"><td>org.apache.httpcomponents</td><td><a class="externalLink" href="http://hc.apache.org/httpcomponents-core/">httpcore</a></td><td>4.0.1</td><td>jar</td></tr><tr class="b"><td>org.apache.santuario</td><td><a class="externalLink" href="http://santuario.apache.org/">xmlsec</a></td><td>1.4.3</td><td>jar</td></tr><tr class="a"><td>org.slf4j</td><td><a class="externalLink" href="http://www.slf4j.org">jcl-over-slf4j</a></td><td>1.6.1</td><td>jar</td></tr></table></div><div class="section"><h3>test<a name="test"></a></h3><p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p><table border="0" class="bodyTable"><tr class="b"><th>GroupId</th><th>ArtifactId</th><th>Version</th><th>Type</th></tr><tr class="a"><td>ch.qos.logback</td><td><a class="externalLink" href="http://logback.qos.ch">logback-core</a></td><td>0.9.26</td><td>jar</td></tr></table></div></div><div class="section"><h2>Project Dependency Graph<a name="Project_Dependency_Graph"></a></h2><script language="javascript" type="text/javascript">
       function toggleDependencyDetail( divId, imgId )
       {
         var div = document.getElementById( divId );
@@ -281,622 +189,34 @@
         }
       }
 </script>
-<div class="section"><h3>Dependency Tree</h3>
-<ul><li>com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml:jar:0.0.1-SNAPSHOT <img id="_370699179" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1675157054', '_370699179' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1675157054" style="display:none"><table class="bodyTable"><tr class="a"><th>Fedora DTO FOXML Library</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>FOXML Reader/Writer Library for Fedora Data Transfer Objects</p>
-<p><b>URL: </b><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml" class="externalLink">http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0" class="externalLink">Apache License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div><ul><li>ch.qos.logback:logback-classic:jar:0.9.26 (runtime) <img id="_1069655751" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_472154113', '_1069655751' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_472154113" style="display:none"><table class="bodyTable"><tr class="a"><th>Logback Classic Module</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Logback: the reliable, generic, fast and flexible logging library for Java.</p>
-<p><b>URL: </b><a href="http://logback.qos.ch" class="externalLink">http://logback.qos.ch</a></p>
-<p><b>Project License: </b><a href="http://www.eclipse.org/legal/epl-v10.html" class="externalLink">Eclipse Public License - v 1.0</a><a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html" class="externalLink">GNU Lesser General Public License</a></p>
-</td>
-</tr>
-</table>
-</div><ul><li>ch.qos.logback:logback-core:jar:0.9.26 (runtime) <img id="_785442811" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1466383004', '_785442811' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1466383004" style="display:none"><table class="bodyTable"><tr class="a"><th>Logback Core Module</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Logback: the generic, reliable, fast and flexible logging library for Java.</p>
-<p><b>URL: </b><a href="http://logback.qos.ch" class="externalLink">http://logback.qos.ch</a></p>
-<p><b>Project License: </b><a href="http://www.eclipse.org/legal/epl-v10.html" class="externalLink">Eclipse Public License - v 1.0</a><a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html" class="externalLink">GNU Lesser General Public License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_1752707996" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_604491703', '_1752707996' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_604491703" style="display:none"><table class="bodyTable"><tr class="a"><th>SLF4J API Module</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>The slf4j API</p>
-<p><b>URL: </b><a href="http://www.slf4j.org" class="externalLink">http://www.slf4j.org</a></p>
-<p><b>Project License: </b><a href="http://www.opensource.org/licenses/mit-license.php" class="externalLink">MIT License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-</ul>
-</li>
-<li>com.github.cwilper.fcrepo-misc:fcrepo-dto-core:jar:0.0.1-SNAPSHOT (compile) <img id="_1640536179" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_128309622', '_1640536179' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_128309622" style="display:none"><table class="bodyTable"><tr class="a"><th>Fedora DTO Core Library</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Core Data Transfer Object Library for Fedora Commons Repositories</p>
-<p><b>URL: </b><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0" class="externalLink">Apache License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div><ul><li>ch.qos.logback:logback-classic:jar:0.9.26 (runtime) <img id="_1573884130" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_462702183', '_1573884130' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_462702183" style="display:none"><table class="bodyTable"><tr class="a"><th>Logback Classic Module</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Logback: the reliable, generic, fast and flexible logging library for Java.</p>
-<p><b>URL: </b><a href="http://logback.qos.ch" class="externalLink">http://logback.qos.ch</a></p>
-<p><b>Project License: </b><a href="http://www.eclipse.org/legal/epl-v10.html" class="externalLink">Eclipse Public License - v 1.0</a><a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html" class="externalLink">GNU Lesser General Public License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>com.github.cwilper.fcrepo-misc:fcrepo-httpclient:jar:0.0.1-SNAPSHOT (compile) <img id="_1394518585" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_996694257', '_1394518585' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_996694257" style="display:none"><table class="bodyTable"><tr class="a"><th>Fedora HTTP Client Library</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>HTTP Client Library for Fedora Commons Repositories</p>
-<p><b>URL: </b><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient" class="externalLink">http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0" class="externalLink">Apache License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div><ul><li>ch.qos.logback:logback-classic:jar:0.9.26 (runtime) <img id="_1207816482" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1945047149', '_1207816482' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1945047149" style="display:none"><table class="bodyTable"><tr class="a"><th>Logback Classic Module</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Logback: the reliable, generic, fast and flexible logging library for Java.</p>
-<p><b>URL: </b><a href="http://logback.qos.ch" class="externalLink">http://logback.qos.ch</a></p>
-<p><b>Project License: </b><a href="http://www.eclipse.org/legal/epl-v10.html" class="externalLink">Eclipse Public License - v 1.0</a><a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html" class="externalLink">GNU Lesser General Public License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>com.google.guava:guava-collections:jar:r03 (compile) <img id="_1644805391" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_313292793', '_1644805391' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_313292793" style="display:none"><table class="bodyTable"><tr class="a"><th>Guava (Google Common Libraries) Collections</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Guava Collections is a collections extension library with 
+<div class="section"><h3>Dependency Tree<a name="Dependency_Tree"></a></h3><ul><li><p>com.github.cwilper.fcrepo-misc:fcrepo-dto-foxml:jar:0.0.1-SNAPSHOT <img id="_56782593" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_999215904', '_56782593' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_999215904" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Fedora DTO FOXML Library</th></tr><tr class="a"><td><p><b>Description: </b>FOXML Reader/Writer Library for Fedora Data Transfer Objects</p><p><b>URL: </b><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/">http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p></td></tr></table></div><ul><li><p>ch.qos.logback:logback-classic:jar:0.9.26 (test) <img id="_1834585416" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_925919660', '_1834585416' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_925919660" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Logback Classic Module</th></tr><tr class="a"><td><p><b>Description: </b>Logback: the reliable, generic, fast and flexible logging library for Java.</p><p><b>URL: </b><a class="externalLink" href="http://logback.qos.ch">http://logback.qos.ch</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a><a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></p></td></tr></table></div><ul><li><p>ch.qos.logback:logback-core:jar:0.9.26 (test) <img id="_1626312884" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1164773959', '_1626312884' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1164773959" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Logback Core Module</th></tr><tr class="a"><td><p><b>Description: </b>Logback: the generic, reliable, fast and flexible logging library for Java.</p><p><b>URL: </b><a class="externalLink" href="http://logback.qos.ch">http://logback.qos.ch</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a><a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></p></td></tr></table></div></li><li><p>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_852520624" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_2086660924', '_852520624' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_2086660924" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>SLF4J API Module</th></tr><tr class="a"><td><p><b>Description: </b>The slf4j API</p><p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li></ul></li><li><p>com.github.cwilper.fcrepo-misc:fcrepo-dto-core:jar:0.0.1-SNAPSHOT (compile) <img id="_685712915" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_127403331', '_685712915' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_127403331" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Fedora DTO Core Library</th></tr><tr class="a"><td><p><b>Description: </b>Core Data Transfer Object Library for Fedora Commons Repositories</p><p><b>URL: </b><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p></td></tr></table></div><ul><li><p>com.github.cwilper.fcrepo-misc:fcrepo-httpclient:jar:0.0.1-SNAPSHOT (compile) <img id="_1551342862" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_690764103', '_1551342862' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_690764103" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Fedora HTTP Client Library</th></tr><tr class="a"><td><p><b>Description: </b>HTTP Client Library for Fedora Commons Repositories</p><p><b>URL: </b><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient">http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p></td></tr></table></div><ul><li><p>com.google.guava:guava-collections:jar:r03 (compile) <img id="_1054878387" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1058167063', '_1054878387' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1058167063" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Guava (Google Common Libraries) Collections</th></tr><tr class="a"><td><p><b>Description: </b>Guava Collections is a collections extension library with 
     expanded collection types, implementations, and utility
-    methods for dealing with aggregate data.</p>
-<p><b>URL: </b><a href="http://code.google.com/p/guava-libraries/guava-collections" class="externalLink">http://code.google.com/p/guava-libraries/guava-collections</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div><ul><li>com.google.guava:guava-annotations:jar:r03 (compile) <img id="_1547723833" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_335672359', '_1547723833' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_335672359" style="display:none"><table class="bodyTable"><tr class="a"><th>Guava (Google Common Libraries) Annotations</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Guava annotations are used throughout the Guava libraries.</p>
-<p><b>URL: </b><a href="http://code.google.com/p/guava-libraries/guava-annotations" class="externalLink">http://code.google.com/p/guava-libraries/guava-annotations</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>com.google.guava:guava-primitives:jar:r03 (compile) <img id="_269137804" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1083077784', '_269137804' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1083077784" style="display:none"><table class="bodyTable"><tr class="a"><th>Guava (Google Common Libraries) Primitive Types</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Guava is a suite of core and expanded libraries that include 
+    methods for dealing with aggregate data.</p><p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-collections">http://code.google.com/p/guava-libraries/guava-collections</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div><ul><li><p>com.google.guava:guava-annotations:jar:r03 (compile) <img id="_51790543" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_206016844', '_51790543' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_206016844" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Guava (Google Common Libraries) Annotations</th></tr><tr class="a"><td><p><b>Description: </b>Guava annotations are used throughout the Guava libraries.</p><p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-annotations">http://code.google.com/p/guava-libraries/guava-annotations</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li><li><p>com.google.guava:guava-primitives:jar:r03 (compile) <img id="_844648755" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_898380112', '_844648755' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_898380112" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Guava (Google Common Libraries) Primitive Types</th></tr><tr class="a"><td><p><b>Description: </b>Guava is a suite of core and expanded libraries that include 
     utility classes, google's collections, io classes, and much 
-    much more.</p>
-<p><b>URL: </b><a href="http://code.google.com/p/guava-libraries/guava-primitives" class="externalLink">http://code.google.com/p/guava-libraries/guava-primitives</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div><ul><li>com.google.guava:guava-base:jar:r03 (compile) <img id="_1905631320" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_422310849', '_1905631320' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_422310849" style="display:none"><table class="bodyTable"><tr class="a"><th>Guava (Google Common Libraries) Base</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Guava Base contains core classes, utility methods, and services
-    used by other parts of the Guava libraries.</p>
-<p><b>URL: </b><a href="http://code.google.com/p/guava-libraries/guava-base" class="externalLink">http://code.google.com/p/guava-libraries/guava-base</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div><ul><li>com.google.guava:guava-annotations:jar:r03 (compile) <img id="_2045963500" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1381105535', '_2045963500' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1381105535" style="display:none"><table class="bodyTable"><tr class="a"><th>Guava (Google Common Libraries) Annotations</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Guava annotations are used throughout the Guava libraries.</p>
-<p><b>URL: </b><a href="http://code.google.com/p/guava-libraries/guava-annotations" class="externalLink">http://code.google.com/p/guava-libraries/guava-annotations</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>org.apache.httpcomponents:httpclient:jar:4.0.3 (compile) <img id="_1460416114" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1502359603', '_1460416114' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1502359603" style="display:none"><table class="bodyTable"><tr class="a"><th>HttpClient</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>HttpComponents Client (base module)</p>
-<p><b>URL: </b><a href="http://hc.apache.org/httpcomponents-client" class="externalLink">http://hc.apache.org/httpcomponents-client</a></p>
-<p><b>Project License: </b><a href="../LICENSE.txt">Apache License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_942292717" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1574835653', '_942292717' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1574835653" style="display:none"><table class="bodyTable"><tr class="a"><th>SLF4J API Module</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>The slf4j API</p>
-<p><b>URL: </b><a href="http://www.slf4j.org" class="externalLink">http://www.slf4j.org</a></p>
-<p><b>Project License: </b><a href="http://www.opensource.org/licenses/mit-license.php" class="externalLink">MIT License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>org.slf4j:jcl-over-slf4j:jar:1.6.1 (compile) <img id="_1220611528" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_508484137', '_1220611528' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_508484137" style="display:none"><table class="bodyTable"><tr class="a"><th>JCL 1.1.1 implemented over SLF4J</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>JCL 1.1.1 implementation over SLF4J</p>
-<p><b>URL: </b><a href="http://www.slf4j.org" class="externalLink">http://www.slf4j.org</a></p>
-<p><b>Project License: </b><a href="http://www.opensource.org/licenses/mit-license.php" class="externalLink">MIT License</a></p>
-</td>
-</tr>
-</table>
-</div><ul><li>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_706966521" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_918251617', '_706966521' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_918251617" style="display:none"><table class="bodyTable"><tr class="a"><th>SLF4J API Module</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>The slf4j API</p>
-<p><b>URL: </b><a href="http://www.slf4j.org" class="externalLink">http://www.slf4j.org</a></p>
-<p><b>Project License: </b><a href="http://www.opensource.org/licenses/mit-license.php" class="externalLink">MIT License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>commons-io:commons-io:jar:2.0.1 (compile) <img id="_1749710566" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1508344426', '_1749710566' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1508344426" style="display:none"><table class="bodyTable"><tr class="a"><th>Commons IO</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Commons-IO contains utility classes, stream implementations, file filters, file comparators and endian classes.</p>
-<p><b>URL: </b><a href="http://commons.apache.org/io/" class="externalLink">http://commons.apache.org/io/</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>net.java.dev.stax-utils:stax-utils:jar:20060502 (compile) <img id="_1664862708" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_817777917', '_1664862708' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_817777917" style="display:none"><table class="bodyTable"><tr class="a"><th>Unnamed - net.java.dev.stax-utils:stax-utils:jar:20060502</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>There is currently no description associated with this project.</p>
-<p><b>URL: </b><a href="http://stax-utils.dev.java.net/" class="externalLink">http://stax-utils.dev.java.net/</a></p>
-<p><b>Project License: </b><a href="https://stax-utils.dev.java.net/source/browse/*checkout*/stax-utils/LICENSE" class="externalLink">BSD</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>org.apache.httpcomponents:httpclient:jar:4.0.3 (compile) <img id="_1215477114" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1179132004', '_1215477114' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1179132004" style="display:none"><table class="bodyTable"><tr class="a"><th>HttpClient</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>HttpComponents Client (base module)</p>
-<p><b>URL: </b><a href="http://hc.apache.org/httpcomponents-client" class="externalLink">http://hc.apache.org/httpcomponents-client</a></p>
-<p><b>Project License: </b><a href="../LICENSE.txt">Apache License</a></p>
-</td>
-</tr>
-</table>
-</div><ul><li>org.apache.httpcomponents:httpcore:jar:4.0.1 (compile) <img id="_149176254" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_95729014', '_149176254' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_95729014" style="display:none"><table class="bodyTable"><tr class="a"><th>HttpCore</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>HttpComponents Core (Java 1.3 compatible)</p>
-<p><b>URL: </b><a href="http://hc.apache.org/httpcomponents-core/" class="externalLink">http://hc.apache.org/httpcomponents-core/</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.html" class="externalLink">Apache License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>commons-codec:commons-codec:jar:1.4 (compile) <img id="_1934903204" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1989948387', '_1934903204' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1989948387" style="display:none"><table class="bodyTable"><tr class="a"><th>Commons Codec</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>The codec package contains simple encoder and decoders for
+    much more.</p><p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-primitives">http://code.google.com/p/guava-libraries/guava-primitives</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div><ul><li><p>com.google.guava:guava-base:jar:r03 (compile) <img id="_1651297490" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1775119049', '_1651297490' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1775119049" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Guava (Google Common Libraries) Base</th></tr><tr class="a"><td><p><b>Description: </b>Guava Base contains core classes, utility methods, and services
+    used by other parts of the Guava libraries.</p><p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-base">http://code.google.com/p/guava-libraries/guava-base</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div><ul><li><p>com.google.guava:guava-annotations:jar:r03 (compile) <img id="_1736384099" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1795175997', '_1736384099' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1795175997" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Guava (Google Common Libraries) Annotations</th></tr><tr class="a"><td><p><b>Description: </b>Guava annotations are used throughout the Guava libraries.</p><p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-annotations">http://code.google.com/p/guava-libraries/guava-annotations</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></li></ul></li><li><p>org.apache.httpcomponents:httpclient:jar:4.0.3 (compile) <img id="_1692036503" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_695746419', '_1692036503' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_695746419" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>HttpClient</th></tr><tr class="a"><td><p><b>Description: </b>HttpComponents Client (base module)</p><p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">http://hc.apache.org/httpcomponents-client</a></p><p><b>Project License: </b><a href="../LICENSE.txt">Apache License</a></p></td></tr></table></div></li><li><p>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_423318781" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1129465065', '_423318781' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1129465065" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>SLF4J API Module</th></tr><tr class="a"><td><p><b>Description: </b>The slf4j API</p><p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li><li><p>org.slf4j:jcl-over-slf4j:jar:1.6.1 (compile) <img id="_1962827908" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_673733389', '_1962827908' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_673733389" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>JCL 1.1.1 implemented over SLF4J</th></tr><tr class="a"><td><p><b>Description: </b>JCL 1.1.1 implementation over SLF4J</p><p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div><ul><li><p>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_641089606" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1905402879', '_641089606' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1905402879" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>SLF4J API Module</th></tr><tr class="a"><td><p><b>Description: </b>The slf4j API</p><p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li></ul></li></ul></li><li><p>commons-io:commons-io:jar:2.0.1 (compile) <img id="_1697262259" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1366171319', '_1697262259' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1366171319" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Commons IO</th></tr><tr class="a"><td><p><b>Description: </b>Commons-IO contains utility classes, stream implementations, file filters, file comparators and endian classes.</p><p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li><li><p>net.java.dev.stax-utils:stax-utils:jar:20060502 (compile) <img id="_1502468" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_610880895', '_1502468' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_610880895" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Unnamed - net.java.dev.stax-utils:stax-utils:jar:20060502</th></tr><tr class="a"><td><p><b>Description: </b>There is currently no description associated with this project.</p><p><b>URL: </b><a class="externalLink" href="http://stax-utils.dev.java.net/">http://stax-utils.dev.java.net/</a></p><p><b>Project License: </b><a class="externalLink" href="https://stax-utils.dev.java.net/source/browse/*checkout*/stax-utils/LICENSE">BSD</a></p></td></tr></table></div></li><li><p>org.apache.httpcomponents:httpclient:jar:4.0.3 (compile) <img id="_130281703" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1146987995', '_130281703' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1146987995" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>HttpClient</th></tr><tr class="a"><td><p><b>Description: </b>HttpComponents Client (base module)</p><p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">http://hc.apache.org/httpcomponents-client</a></p><p><b>Project License: </b><a href="../LICENSE.txt">Apache License</a></p></td></tr></table></div><ul><li><p>org.apache.httpcomponents:httpcore:jar:4.0.1 (compile) <img id="_138804877" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_712988430', '_138804877' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_712988430" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>HttpCore</th></tr><tr class="a"><td><p><b>Description: </b>HttpComponents Core (Java 1.3 compatible)</p><p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-core/">http://hc.apache.org/httpcomponents-core/</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License</a></p></td></tr></table></div></li><li><p>commons-codec:commons-codec:jar:1.4 (compile) <img id="_1141080854" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1786667379', '_1141080854' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1786667379" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Commons Codec</th></tr><tr class="a"><td><p><b>Description: </b>The codec package contains simple encoder and decoders for
      various formats such as Base64 and Hexadecimal.  In addition to these
      widely used encoders and decoders, the codec package also maintains a
-     collection of phonetic encoding utilities.</p>
-<p><b>URL: </b><a href="http://commons.apache.org/codec/" class="externalLink">http://commons.apache.org/codec/</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-</ul>
-</li>
-<li>org.apache.santuario:xmlsec:jar:1.4.3 (compile) <img id="_446848198" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_483797011', '_446848198' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_483797011" style="display:none"><table class="bodyTable"><tr class="a"><th>XML Security</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Apache XML Security supports XML-Signature Syntax and Processing,
+     collection of phonetic encoding utilities.</p><p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/codec/">http://commons.apache.org/codec/</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li><li><p>org.apache.santuario:xmlsec:jar:1.4.3 (compile) <img id="_771989554" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_854570808', '_771989554' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_854570808" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>XML Security</th></tr><tr class="a"><td><p><b>Description: </b>Apache XML Security supports XML-Signature Syntax and Processing,
         W3C Recommendation 12 February 2002, and XML Encryption Syntax and
         Processing, W3C Recommendation 10 December 2002. As of version 1.4,
         the Java library supports the standard Java API JSR-105: XML Digital
-        Signature APIs.</p>
-<p><b>URL: </b><a href="http://santuario.apache.org/" class="externalLink">http://santuario.apache.org/</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_1741211233" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_804868530', '_1741211233' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_804868530" style="display:none"><table class="bodyTable"><tr class="a"><th>SLF4J API Module</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>The slf4j API</p>
-<p><b>URL: </b><a href="http://www.slf4j.org" class="externalLink">http://www.slf4j.org</a></p>
-<p><b>Project License: </b><a href="http://www.opensource.org/licenses/mit-license.php" class="externalLink">MIT License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-</ul>
-</li>
-<li>commons-codec:commons-codec:jar:1.4 (compile) <img id="_783298657" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1618750728', '_783298657' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1618750728" style="display:none"><table class="bodyTable"><tr class="a"><th>Commons Codec</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>The codec package contains simple encoder and decoders for
+        Signature APIs.</p><p><b>URL: </b><a class="externalLink" href="http://santuario.apache.org/">http://santuario.apache.org/</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li><li><p>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_225458572" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_906226572', '_225458572' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_906226572" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>SLF4J API Module</th></tr><tr class="a"><td><p><b>Description: </b>The slf4j API</p><p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li></ul></li><li><p>commons-codec:commons-codec:jar:1.4 (compile) <img id="_1174602678" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1118830702', '_1174602678' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1118830702" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Commons Codec</th></tr><tr class="a"><td><p><b>Description: </b>The codec package contains simple encoder and decoders for
      various formats such as Base64 and Hexadecimal.  In addition to these
      widely used encoders and decoders, the codec package also maintains a
-     collection of phonetic encoding utilities.</p>
-<p><b>URL: </b><a href="http://commons.apache.org/codec/" class="externalLink">http://commons.apache.org/codec/</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>commons-io:commons-io:jar:2.0.1 (compile) <img id="_106713534" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1491830812', '_106713534' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1491830812" style="display:none"><table class="bodyTable"><tr class="a"><th>Commons IO</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>Commons-IO contains utility classes, stream implementations, file filters, file comparators and endian classes.</p>
-<p><b>URL: </b><a href="http://commons.apache.org/io/" class="externalLink">http://commons.apache.org/io/</a></p>
-<p><b>Project License: </b><a href="http://www.apache.org/licenses/LICENSE-2.0.txt" class="externalLink">The Apache Software License, Version 2.0</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>junit:junit:jar:4.8.2 (test) <img id="_893396906" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1542516565', '_893396906' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_1542516565" style="display:none"><table class="bodyTable"><tr class="a"><th>JUnit</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>JUnit is a regression testing framework. It is used by the developer who implements unit tests in Java.</p>
-<p><b>URL: </b><a href="http://junit.org" class="externalLink">http://junit.org</a></p>
-<p><b>Project License: </b><a href="http://www.opensource.org/licenses/cpl1.0.txt" class="externalLink">Common Public License Version 1.0</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-<li>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_249075095" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_443749121', '_249075095' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_443749121" style="display:none"><table class="bodyTable"><tr class="a"><th>SLF4J API Module</th>
-</tr>
-<tr class="b"><td><p><b>Description: </b>The slf4j API</p>
-<p><b>URL: </b><a href="http://www.slf4j.org" class="externalLink">http://www.slf4j.org</a></p>
-<p><b>Project License: </b><a href="http://www.opensource.org/licenses/mit-license.php" class="externalLink">MIT License</a></p>
-</td>
-</tr>
-</table>
-</div></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div class="section"><h2>Licenses</h2>
-<p><b>BSD: </b>Unnamed - net.java.dev.stax-utils:stax-utils:jar:20060502</p>
-<p><b>Apache License: </b>HttpClient, HttpCore</p>
-<p><b>Eclipse Public License - v 1.0: </b>Logback Classic Module, Logback Core Module</p>
-<p><b>Apache License, Version 2.0: </b>Fedora DTO Core Library, Fedora DTO FOXML Library, Fedora HTTP Client Library</p>
-<p><b>Common Public License Version 1.0: </b>JUnit</p>
-<p><b>The Apache Software License, Version 2.0: </b>Commons Codec, Commons IO, Guava (Google Common Libraries) Annotations, Guava (Google Common Libraries) Base, Guava (Google Common Libraries) Collections, Guava (Google Common Libraries) Primitive Types, XML Security</p>
-<p><b>MIT License: </b>JCL 1.1.1 implemented over SLF4J, SLF4J API Module</p>
-<p><b>GNU Lesser General Public License: </b>Logback Classic Module, Logback Core Module</p>
-</div>
-<div class="section"><h2>Dependency File Details</h2>
-<table class="bodyTable"><tbody><tr class="a"><th align="left">Filename</th>
-<th align="right">Size</th>
-<th align="right">Entries</th>
-<th align="right">Classes</th>
-<th align="right">Packages</th>
-<th align="center">JDK Rev</th>
-<th align="center">Debug</th>
-</tr>
-<tr class="b"><td align="left">logback-classic-0.9.26.jar</td>
-<td align="right">237.78 kB</td>
-<td align="right">191</td>
-<td align="right">155</td>
-<td align="right">23</td>
-<td align="center">1.5</td>
-<td align="center">debug</td>
-</tr>
-<tr class="a"><td align="left">logback-core-0.9.26.jar</td>
-<td align="right">294.00 kB</td>
-<td align="right">280</td>
-<td align="right">243</td>
-<td align="right">27</td>
-<td align="center">1.5</td>
-<td align="center">debug</td>
-</tr>
-<tr class="b"><td align="left">fcrepo-dto-core-0.0.1-SNAPSHOT.jar</td>
-<td align="right">27.10 kB</td>
-<td align="right">38</td>
-<td align="right">24</td>
-<td align="right">2</td>
-<td align="center">1.6</td>
-<td align="center">debug</td>
-</tr>
-<tr class="a"><td align="left">fcrepo-httpclient-0.0.1-SNAPSHOT.jar</td>
-<td align="right">9.92 kB</td>
-<td align="right">18</td>
-<td align="right">6</td>
-<td align="right">1</td>
-<td align="center">1.6</td>
-<td align="center">debug</td>
-</tr>
-<tr class="b"><td align="left">guava-annotations-r03.jar</td>
-<td align="right">3.80 kB</td>
-<td align="right">15</td>
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="center">1.5</td>
-<td align="center">release</td>
-</tr>
-<tr class="a"><td align="left">guava-base-r03.jar</td>
-<td align="right">99.43 kB</td>
-<td align="right">110</td>
-<td align="right">98</td>
-<td align="right">2</td>
-<td align="center">1.5</td>
-<td align="center">debug</td>
-</tr>
-<tr class="b"><td align="left">guava-collections-r03.jar</td>
-<td align="right">580.82 kB</td>
-<td align="right">477</td>
-<td align="right">466</td>
-<td align="right">1</td>
-<td align="center">1.5</td>
-<td align="center">debug</td>
-</tr>
-<tr class="a"><td align="left">guava-primitives-r03.jar</td>
-<td align="right">54.68 kB</td>
-<td align="right">40</td>
-<td align="right">29</td>
-<td align="right">1</td>
-<td align="center">1.5</td>
-<td align="center">debug</td>
-</tr>
-<tr class="b"><td align="left">commons-codec-1.4.jar</td>
-<td align="right">56.80 kB</td>
-<td align="right">47</td>
-<td align="right">30</td>
-<td align="right">5</td>
-<td align="center">1.4</td>
-<td align="center">debug</td>
-</tr>
-<tr class="a"><td align="left">commons-io-2.0.1.jar</td>
-<td align="right">155.77 kB</td>
-<td align="right">122</td>
-<td align="right">104</td>
-<td align="right">6</td>
-<td align="center">1.5</td>
-<td align="center">debug</td>
-</tr>
-<tr class="b"><td align="left">junit-4.8.2.jar</td>
-<td align="right">231.78 kB</td>
-<td align="right">267</td>
-<td align="right">230</td>
-<td align="right">30</td>
-<td align="center">1.5</td>
-<td align="center">debug</td>
-</tr>
-<tr class="a"><td align="left">stax-utils-20060502.jar</td>
-<td align="right">125.46 kB</td>
-<td align="right">90</td>
-<td align="right">82</td>
-<td align="right">5</td>
-<td align="center">1.3</td>
-<td align="center">debug</td>
-</tr>
-<tr class="b"><td align="left">httpclient-4.0.3.jar</td>
-<td align="right">286.03 kB</td>
-<td align="right">267</td>
-<td align="right">231</td>
-<td align="right">22</td>
-<td align="center">1.5</td>
-<td align="center">debug</td>
-</tr>
-<tr class="a"><td align="left">httpcore-4.0.1.jar</td>
-<td align="right">168.84 kB</td>
-<td align="right">181</td>
-<td align="right">158</td>
-<td align="right">10</td>
-<td align="center">1.3</td>
-<td align="center">debug</td>
-</tr>
-<tr class="b"><td align="left">xmlsec-1.4.3.jar</td>
-<td align="right">437.14 kB</td>
-<td align="right">402</td>
-<td align="right">345</td>
-<td align="right">31</td>
-<td align="center">1.4</td>
-<td align="center">release</td>
-</tr>
-<tr class="a"><td align="left">jcl-over-slf4j-1.6.1.jar</td>
-<td align="right">16.90 kB</td>
-<td align="right">23</td>
-<td align="right">9</td>
-<td align="right">2</td>
-<td align="center">1.3</td>
-<td align="center">debug</td>
-</tr>
-<tr class="b"><td align="left">slf4j-api-1.6.1.jar</td>
-<td align="right">24.90 kB</td>
-<td align="right">34</td>
-<td align="right">23</td>
-<td align="right">3</td>
-<td align="center">1.3</td>
-<td align="center">debug</td>
-</tr>
-<tr class="a"><th align="left">Total</th>
-<th align="right">Size</th>
-<th align="right">Entries</th>
-<th align="right">Classes</th>
-<th align="right">Packages</th>
-<th align="center">JDK Rev</th>
-<th align="center">Debug</th>
-</tr>
-<tr class="b"><td align="right">17</td>
-<td align="right">2.75 MB</td>
-<td align="right">2,602</td>
-<td align="right">2,237</td>
-<td align="right">172</td>
-<td align="center">1.6</td>
-<td align="right">15</td>
-</tr>
-<tr class="a"><td align="right">compile: 14</td>
-<td align="right">compile: 2.00 MB</td>
-<td align="right">compile: 1,864</td>
-<td align="right">compile: 1,609</td>
-<td align="right">compile: 92</td>
-<td align="center">-</td>
-<td align="right">compile: 12</td>
-</tr>
-<tr class="b"><td align="right">test: 1</td>
-<td align="right">test: 231.78 kB</td>
-<td align="right">test: 267</td>
-<td align="right">test: 230</td>
-<td align="right">test: 30</td>
-<td align="center">-</td>
-<td align="right">test: 1</td>
-</tr>
-<tr class="a"><td align="right">runtime: 2</td>
-<td align="right">runtime: 531.77 kB</td>
-<td align="right">runtime: 471</td>
-<td align="right">runtime: 398</td>
-<td align="right">runtime: 50</td>
-<td align="center">-</td>
-<td align="right">runtime: 2</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section"><h2>Dependency Repository Locations</h2>
-<table class="bodyTable"><tbody><tr class="b"><th align="left">Repo ID</th>
-<th align="left">URL</th>
-<th align="center">Release</th>
-<th align="center">Snapshot</th>
-</tr>
-<tr class="a"><td align="left">apache.snapshots</td>
-<td align="left"><a href="http://repository.apache.org/snapshots" class="externalLink">http://repository.apache.org/snapshots</a></td>
-<td align="center">-</td>
-<td align="center">Yes</td>
-</tr>
-<tr class="b"><td align="left">sonatype-nexus-snapshots</td>
-<td align="left"><a href="https://oss.sonatype.org/content/repositories/snapshots" class="externalLink">https://oss.sonatype.org/content/repositories/snapshots</a></td>
-<td align="center">-</td>
-<td align="center">Yes</td>
-</tr>
-<tr class="a"><td align="left">central</td>
-<td align="left"><a href="http://repo1.maven.org/maven2" class="externalLink">http://repo1.maven.org/maven2</a></td>
-<td align="center">Yes</td>
-<td align="center">-</td>
-</tr>
-</tbody>
-</table>
-<p>Repository locations for each of the Dependencies.</p>
-<table class="bodyTable"><tbody><tr class="b"><th align="left">Artifact</th>
-<th align="center">apache.snapshots</th>
-<th align="center">sonatype-nexus-snapshots</th>
-<th align="center">central</th>
-</tr>
-<tr class="a"><td align="left">ch.qos.logback:logback-classic:jar:0.9.26</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/ch/qos/logback/logback-classic/0.9.26/logback-classic-0.9.26.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="b"><td align="left">ch.qos.logback:logback-core:jar:0.9.26</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/ch/qos/logback/logback-core/0.9.26/logback-core-0.9.26.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="a"><td align="left">com.github.cwilper.fcrepo-misc:fcrepo-dto-core:jar:0.0.1-SNAPSHOT</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center">-</td>
-</tr>
-<tr class="b"><td align="left">com.github.cwilper.fcrepo-misc:fcrepo-httpclient:jar:0.0.1-SNAPSHOT</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center">-</td>
-</tr>
-<tr class="a"><td align="left">com.google.guava:guava-annotations:jar:r03</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/com/google/guava/guava-annotations/r03/guava-annotations-r03.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="b"><td align="left">com.google.guava:guava-base:jar:r03</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/com/google/guava/guava-base/r03/guava-base-r03.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="a"><td align="left">com.google.guava:guava-collections:jar:r03</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/com/google/guava/guava-collections/r03/guava-collections-r03.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="b"><td align="left">com.google.guava:guava-primitives:jar:r03</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/com/google/guava/guava-primitives/r03/guava-primitives-r03.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="a"><td align="left">commons-codec:commons-codec:jar:1.4</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="b"><td align="left">commons-io:commons-io:jar:2.0.1</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/commons-io/commons-io/2.0.1/commons-io-2.0.1.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="a"><td align="left">junit:junit:jar:4.8.2</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/junit/junit/4.8.2/junit-4.8.2.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="b"><td align="left">net.java.dev.stax-utils:stax-utils:jar:20060502</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/net/java/dev/stax-utils/stax-utils/20060502/stax-utils-20060502.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="a"><td align="left">org.apache.httpcomponents:httpclient:jar:4.0.3</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="b"><td align="left">org.apache.httpcomponents:httpcore:jar:4.0.1</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="a"><td align="left">org.apache.santuario:xmlsec:jar:1.4.3</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/org/apache/santuario/xmlsec/1.4.3/xmlsec-1.4.3.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="b"><td align="left">org.slf4j:jcl-over-slf4j:jar:1.6.1</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/1.6.1/jcl-over-slf4j-1.6.1.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="a"><td align="left">org.slf4j:slf4j-api:jar:1.6.1</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center"><a href="http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar" class="externalLink"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td>
-</tr>
-<tr class="b"><th align="left">Total</th>
-<th align="center">apache.snapshots</th>
-<th align="center">sonatype-nexus-snapshots</th>
-<th align="center">central</th>
-</tr>
-<tr class="a"><td align="left">17 (compile: 14, test: 1, runtime: 2)</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">15</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      </div>
-    </div>
-    <div class="clear">
-      <hr/>
-    </div>
-    <div id="footer">
-      <div class="xright">&#169;  
+     collection of phonetic encoding utilities.</p><p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/codec/">http://commons.apache.org/codec/</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li><li><p>commons-io:commons-io:jar:2.0.1 (compile) <img id="_1478188479" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_547937971', '_1478188479' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_547937971" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>Commons IO</th></tr><tr class="a"><td><p><b>Description: </b>Commons-IO contains utility classes, stream implementations, file filters, file comparators and endian classes.</p><p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li><li><p>junit:junit:jar:4.8.2 (test) <img id="_1489110610" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_1956001302', '_1489110610' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_1956001302" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>JUnit</th></tr><tr class="a"><td><p><b>Description: </b>JUnit is a regression testing framework. It is used by the developer who implements unit tests in Java.</p><p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></p></td></tr></table></div></li><li><p>org.slf4j:slf4j-api:jar:1.6.1 (compile) <img id="_1800272193" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_497148596', '_1800272193' );" style="cursor: pointer;vertical-align:text-bottom;"></img></p><div id="_497148596" style="display:none"><table border="0" class="bodyTable"><tr class="b"><th>SLF4J API Module</th></tr><tr class="a"><td><p><b>Description: </b>The slf4j API</p><p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p><p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li></ul></li></ul></div></div><div class="section"><h2>Licenses<a name="Licenses"></a></h2><p><b>BSD: </b>Unnamed - net.java.dev.stax-utils:stax-utils:jar:20060502</p><p><b>Apache License: </b>HttpClient, HttpCore</p><p><b>Eclipse Public License - v 1.0: </b>Logback Classic Module, Logback Core Module</p><p><b>Apache License, Version 2.0: </b>Fedora DTO Core Library, Fedora DTO FOXML Library, Fedora HTTP Client Library</p><p><b>Common Public License Version 1.0: </b>JUnit</p><p><b>The Apache Software License, Version 2.0: </b>Commons Codec, Commons IO, Guava (Google Common Libraries) Annotations, Guava (Google Common Libraries) Base, Guava (Google Common Libraries) Collections, Guava (Google Common Libraries) Primitive Types, XML Security</p><p><b>MIT License: </b>JCL 1.1.1 implemented over SLF4J, SLF4J API Module</p><p><b>GNU Lesser General Public License: </b>Logback Classic Module, Logback Core Module</p></div><div class="section"><h2>Dependency File Details<a name="Dependency_File_Details"></a></h2><table border="1" class="bodyTable"><tr class="b"><th>Filename</th><th>Size</th><th>Entries</th><th>Classes</th><th>Packages</th><th>JDK Rev</th><th>Debug</th></tr><tr class="a"><td>logback-classic-0.9.26.jar</td><td>237.78 kB</td><td>191</td><td>155</td><td>23</td><td>1.5</td><td>debug</td></tr><tr class="b"><td>logback-core-0.9.26.jar</td><td>294.00 kB</td><td>280</td><td>243</td><td>27</td><td>1.5</td><td>debug</td></tr><tr class="a"><td>fcrepo-dto-core-0.0.1-SNAPSHOT.jar</td><td>27.10 kB</td><td>38</td><td>24</td><td>2</td><td>1.6</td><td>debug</td></tr><tr class="b"><td>fcrepo-httpclient-0.0.1-SNAPSHOT.jar</td><td>9.92 kB</td><td>18</td><td>6</td><td>1</td><td>1.6</td><td>debug</td></tr><tr class="a"><td>guava-annotations-r03.jar</td><td>3.80 kB</td><td>15</td><td>4</td><td>1</td><td>1.5</td><td>release</td></tr><tr class="b"><td>guava-base-r03.jar</td><td>99.43 kB</td><td>110</td><td>98</td><td>2</td><td>1.5</td><td>debug</td></tr><tr class="a"><td>guava-collections-r03.jar</td><td>580.82 kB</td><td>477</td><td>466</td><td>1</td><td>1.5</td><td>debug</td></tr><tr class="b"><td>guava-primitives-r03.jar</td><td>54.68 kB</td><td>40</td><td>29</td><td>1</td><td>1.5</td><td>debug</td></tr><tr class="a"><td>commons-codec-1.4.jar</td><td>56.80 kB</td><td>47</td><td>30</td><td>5</td><td>1.4</td><td>debug</td></tr><tr class="b"><td>commons-io-2.0.1.jar</td><td>155.77 kB</td><td>122</td><td>104</td><td>6</td><td>1.5</td><td>debug</td></tr><tr class="a"><td>junit-4.8.2.jar</td><td>231.78 kB</td><td>267</td><td>230</td><td>30</td><td>1.5</td><td>debug</td></tr><tr class="b"><td>stax-utils-20060502.jar</td><td>125.46 kB</td><td>90</td><td>82</td><td>5</td><td>1.3</td><td>debug</td></tr><tr class="a"><td>httpclient-4.0.3.jar</td><td>286.03 kB</td><td>267</td><td>231</td><td>22</td><td>1.5</td><td>debug</td></tr><tr class="b"><td>httpcore-4.0.1.jar</td><td>168.84 kB</td><td>181</td><td>158</td><td>10</td><td>1.3</td><td>debug</td></tr><tr class="a"><td>xmlsec-1.4.3.jar</td><td>437.14 kB</td><td>402</td><td>345</td><td>31</td><td>1.4</td><td>release</td></tr><tr class="b"><td>jcl-over-slf4j-1.6.1.jar</td><td>16.90 kB</td><td>23</td><td>9</td><td>2</td><td>1.3</td><td>debug</td></tr><tr class="a"><td>slf4j-api-1.6.1.jar</td><td>24.90 kB</td><td>34</td><td>23</td><td>3</td><td>1.3</td><td>debug</td></tr><tr class="b"><th>Total</th><th>Size</th><th>Entries</th><th>Classes</th><th>Packages</th><th>JDK Rev</th><th>Debug</th></tr><tr class="a"><td>17</td><td>2.75 MB</td><td>2,602</td><td>2,237</td><td>172</td><td>1.6</td><td>15</td></tr><tr class="b"><td>compile: 14</td><td>compile: 2.00 MB</td><td>compile: 1,864</td><td>compile: 1,609</td><td>compile: 92</td><td>-</td><td>compile: 12</td></tr><tr class="a"><td>test: 3</td><td>test: 763.55 kB</td><td>test: 738</td><td>test: 628</td><td>test: 80</td><td>-</td><td>test: 3</td></tr></table></div><div class="section"><h2>Dependency Repository Locations<a name="Dependency_Repository_Locations"></a></h2><table border="1" class="bodyTable"><tr class="a"><th>Repo ID</th><th>URL</th><th>Release</th><th>Snapshot</th></tr><tr class="b"><td>apache.snapshots</td><td><a class="externalLink" href="http://repository.apache.org/snapshots">http://repository.apache.org/snapshots</a></td><td>-</td><td>Yes</td></tr><tr class="a"><td>sonatype-nexus-snapshots</td><td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/snapshots">https://oss.sonatype.org/content/repositories/snapshots</a></td><td>Yes</td><td>-</td></tr><tr class="b"><td>central</td><td><a class="externalLink" href="http://repo1.maven.org/maven2">http://repo1.maven.org/maven2</a></td><td>Yes</td><td>-</td></tr></table><p>Repository locations for each of the Dependencies.</p><table border="1" class="bodyTable"><tr class="a"><th>Artifact</th><th>apache.snapshots</th><th>sonatype-nexus-snapshots</th><th>central</th></tr><tr class="b"><td>ch.qos.logback:logback-classic:jar:0.9.26</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/ch/qos/logback/logback-classic/0.9.26/logback-classic-0.9.26.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="a"><td>ch.qos.logback:logback-core:jar:0.9.26</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/ch/qos/logback/logback-core/0.9.26/logback-core-0.9.26.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="b"><td>com.github.cwilper.fcrepo-misc:fcrepo-dto-core:jar:0.0.1-SNAPSHOT</td><td>-</td><td>-</td><td>-</td></tr><tr class="a"><td>com.github.cwilper.fcrepo-misc:fcrepo-httpclient:jar:0.0.1-SNAPSHOT</td><td>-</td><td>-</td><td>-</td></tr><tr class="b"><td>com.google.guava:guava-annotations:jar:r03</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/com/google/guava/guava-annotations/r03/guava-annotations-r03.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="a"><td>com.google.guava:guava-base:jar:r03</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/com/google/guava/guava-base/r03/guava-base-r03.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="b"><td>com.google.guava:guava-collections:jar:r03</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/com/google/guava/guava-collections/r03/guava-collections-r03.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="a"><td>com.google.guava:guava-primitives:jar:r03</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/com/google/guava/guava-primitives/r03/guava-primitives-r03.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="b"><td>commons-codec:commons-codec:jar:1.4</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/commons-codec/commons-codec/1.4/commons-codec-1.4.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="a"><td>commons-io:commons-io:jar:2.0.1</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/commons-io/commons-io/2.0.1/commons-io-2.0.1.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="b"><td>junit:junit:jar:4.8.2</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/junit/junit/4.8.2/junit-4.8.2.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="a"><td>net.java.dev.stax-utils:stax-utils:jar:20060502</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/net/java/dev/stax-utils/stax-utils/20060502/stax-utils-20060502.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="b"><td>org.apache.httpcomponents:httpclient:jar:4.0.3</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="a"><td>org.apache.httpcomponents:httpcore:jar:4.0.1</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="b"><td>org.apache.santuario:xmlsec:jar:1.4.3</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/org/apache/santuario/xmlsec/1.4.3/xmlsec-1.4.3.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="a"><td>org.slf4j:jcl-over-slf4j:jar:1.6.1</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/1.6.1/jcl-over-slf4j-1.6.1.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="b"><td>org.slf4j:slf4j-api:jar:1.6.1</td><td>-</td><td>-</td><td><a class="externalLink" href="http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar"><img alt="Found at http://repo1.maven.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr><tr class="a"><th>Total</th><th>apache.snapshots</th><th>sonatype-nexus-snapshots</th><th>central</th></tr><tr class="b"><td>17 (compile: 14, test: 3)</td><td>0</td><td>0</td><td>15</td></tr></table></div>
+          </div>
+        </div>
+        <div class="clear">
+          <hr/>
+        </div>
+        <div id="footer">
+          <div class="xright">Copyright &#169;          
+   
           2011
     
-          
+                    <a href="http://duraspace.org/">DuraSpace</a>.
+            All Rights Reserved.    
   
 
   
@@ -905,9 +225,10 @@
   
     
   </div>
-      <div class="clear">
-        <hr/>
-      </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
     </div>
   </body>
 </html>
