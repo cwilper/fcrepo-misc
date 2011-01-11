@@ -11,6 +11,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 
+/**
+ * Utility methods for working with HTTPClients.
+ */
 public abstract class HttpUtil {
 
     // NOTE: the sink is not auto-closed

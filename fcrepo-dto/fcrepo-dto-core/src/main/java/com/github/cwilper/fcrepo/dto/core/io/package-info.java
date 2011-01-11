@@ -1,4 +1,4 @@
 /**
- * Read/Write interfaces and support classes for Fedora DTOs.
+ * Read/Write interfaces and supporting classes for Fedora DTOs.
  */
 package com.github.cwilper.fcrepo.dto.core.io;
