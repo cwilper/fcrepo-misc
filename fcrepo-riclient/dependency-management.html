@@ -1,39 +1,58 @@
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
-
-
-
-
-
-
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Fedora RI Client Library - Project Dependency Management</title>
-    <style type="text/css" media="all">
-      @import url("./css/maven-base.css");
-      @import url("./css/maven-theme.css");
-      @import url("./css/site.css");
-    </style>
+    <link rel="stylesheet" href="./css/maven-theme.css" type="text/css" />
+    <link rel="stylesheet" href="./css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/prettify.css" type="text/css"/>
     <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-      </head>
-  <body class="composite">
-    <div id="banner">
-                    <span id="bannerLeft">
+    <script type="text/javascript" src="./js/prettify.js"></script>
+    <script type="text/javascript" src="./js/niftycube.js"></script>
+    <script type="text/javascript">
+        window.onload=function() {
+            Nifty("div\#wrapper", "big");
+            Nifty("div#breadcrumbs", "small");
+            Nifty("div\#navcolumn", "small");
+            Nifty("div.source", "medium");
+            prettyPrint();
+        }
+    </script>
+        <meta name="Date-Revision-yyyymmdd" content="20110110" />
+                                                    
+<style>p { line-height: 1.3em }
+        #leftColumn { width: 170px }
+        #bodyColumn { margin-left: 190px }
+        .section { padding: 0px; }
+        h2 { padding: 0px; }
+        h3 { padding: 0px; }
+        h4 { padding: 0px; }
+        h5 { padding: 0px; }</style>
+                    </head>
+  <body>
+    <div id="wrapper">
+        <div id="banner">
+                        <div id="bannerLeft">
     
             Fedora RI Client Library
     
-            </span>
-                    <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="breadcrumbs">
-          
+            </div>
+                            <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="breadcrumbs">
+              
   
 
   
@@ -42,10 +61,13 @@
   
     
             <div class="xleft">
-        Last Published: 2011-01-08
-                  &nbsp;| Version: 0.0.1-SNAPSHOT
-                      </div>
-            <div class="xright">      
+          
+                <a href="../index.html">fcrepo-misc</a>
+                &gt;
+      
+                <a href="index.html">fcrepo-riclient</a>
+                  </div>
+                <div class="xright">      
   
 
   
@@ -53,14 +75,16 @@
             
   
     
-  </div>
-      <div class="clear">
-        <hr/>
-      </div>
-    </div>
-    <div id="leftColumn">
-      <div id="navcolumn">
-           
+             <span id="publishDate">Last Published: 2011-01-10</span>
+              &nbsp;| <span id="projectVersion">Version: 0.0.1-SNAPSHOT</span>
+            </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="leftColumn">
+          <div id="navcolumn">
+               
   
 
   
@@ -68,18 +92,15 @@
             
   
     
-                   <h5>Parent Project</h5>
-            <ul>
-              
-    <li class="none">
-                    <a href="../index.html">Fedora Misc Libs and Utils</a>
-          </li>
-          </ul>
-              <h5>Fedora RI Client Library</h5>
+                       <h5>Project Info</h5>
             <ul>
               
     <li class="none">
                     <a href="index.html">About</a>
+          </li>
+              
+    <li class="none">
+                    <a href="usage.html">Usage</a>
           </li>
               
     <li class="none">
@@ -90,7 +111,7 @@
                     <a href="dependencies.html">Dependencies</a>
           </li>
           </ul>
-              <h5>Project Reports</h5>
+              <h5>Reports</h5>
             <ul>
               
     <li class="none">
@@ -113,10 +134,30 @@
                     <a href="cpd.html">CPD</a>
           </li>
           </ul>
-                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
-            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+              <h5>Links</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="https://github.com/cwilper/fcrepo-misc" class="externalLink">GitHub Repository</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://fedora-commons.org/" class="externalLink">Fedora Commons</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://duraspace.org/" class="externalLink">DuraSpace</a>
+          </li>
+          </ul>
+                                               <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img class="poweredBy"
+                 alt="Built by Maven"
+                 src="./images/logos/maven-feather.png"
+                 width="90"
+                 height="30"
+                 border="1" />
           </a>
-                       
+                           
   
 
   
@@ -124,135 +165,23 @@
             
   
     
+            </div>
         </div>
-    </div>
-    <div id="bodyColumn">
-      <div id="contentBox">
-        <div class="section"><h2>Project Dependency Management</h2>
-<div class="section"><h3>compile</h3>
-<p>The following is a list of compile dependencies in the DependencyManagement of this project. These dependencies can be included in the submodules to compile and run the submodule:</p>
-<table class="bodyTable"><tr class="a"><th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Type</th>
-</tr>
-<tr class="b"><td>com.github.cwilper.fcrepo-misc</td>
-<td><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto" class="externalLink">fcrepo-dto</a></td>
-<td>0.0.1-SNAPSHOT</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>com.github.cwilper.fcrepo-misc</td>
-<td><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core" class="externalLink">fcrepo-dto-core</a></td>
-<td>0.0.1-SNAPSHOT</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>com.github.cwilper.fcrepo-misc</td>
-<td><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml" class="externalLink">fcrepo-dto-foxml</a></td>
-<td>0.0.1-SNAPSHOT</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>com.github.cwilper.fcrepo-misc</td>
-<td><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport" class="externalLink">fcrepo-flexport</a></td>
-<td>0.0.1-SNAPSHOT</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>com.github.cwilper.fcrepo-misc</td>
-<td><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient" class="externalLink">fcrepo-httpclient</a></td>
-<td>0.0.1-SNAPSHOT</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>com.github.cwilper.fcrepo-misc</td>
-<td><a href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient" class="externalLink">fcrepo-riclient</a></td>
-<td>0.0.1-SNAPSHOT</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>com.google.guava</td>
-<td><a href="http://code.google.com/p/guava-libraries/guava-collections" class="externalLink">guava-collections</a></td>
-<td>r03</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>commons-codec</td>
-<td><a href="http://commons.apache.org/codec/" class="externalLink">commons-codec</a></td>
-<td>1.4</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>commons-io</td>
-<td><a href="http://commons.apache.org/io/" class="externalLink">commons-io</a></td>
-<td>2.0.1</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>net.java.dev.stax-utils</td>
-<td><a href="http://stax-utils.dev.java.net/" class="externalLink">stax-utils</a></td>
-<td>20060502</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>org.apache.httpcomponents</td>
-<td><a href="http://hc.apache.org/httpcomponents-client" class="externalLink">httpclient</a></td>
-<td>4.0.3</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>org.apache.santuario</td>
-<td><a href="http://santuario.apache.org/" class="externalLink">xmlsec</a></td>
-<td>1.4.3</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>org.openrdf</td>
-<td><a href="http://www.openrdf.org" class="externalLink">rio</a></td>
-<td>1.0.10</td>
-<td>jar</td>
-</tr>
-<tr class="a"><td>org.slf4j</td>
-<td><a href="http://www.slf4j.org" class="externalLink">jcl-over-slf4j</a></td>
-<td>1.6.1</td>
-<td>jar</td>
-</tr>
-<tr class="b"><td>org.slf4j</td>
-<td><a href="http://www.slf4j.org" class="externalLink">slf4j-api</a></td>
-<td>1.6.1</td>
-<td>jar</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>runtime</h3>
-<p>The following is a list of runtime dependencies in the DependencyManagement of this project. These dependencies can be included in the submodules to run the submodule:</p>
-<table class="bodyTable"><tr class="a"><th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Type</th>
-</tr>
-<tr class="b"><td>ch.qos.logback</td>
-<td><a href="http://logback.qos.ch" class="externalLink">logback-classic</a></td>
-<td>0.9.26</td>
-<td>jar</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>test</h3>
-<p>The following is a list of test dependencies in the DependencyManagement of this project. These dependencies can be included in the submodules to compile and run unit tests for the submodule:</p>
-<table class="bodyTable"><tr class="a"><th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Type</th>
-</tr>
-<tr class="b"><td>junit</td>
-<td><a href="http://junit.org" class="externalLink">junit</a></td>
-<td>4.8.2</td>
-<td>jar</td>
-</tr>
-</table>
-</div>
-</div>
-
-      </div>
-    </div>
-    <div class="clear">
-      <hr/>
-    </div>
-    <div id="footer">
-      <div class="xright">&#169;  
+        <div id="bodyColumn">
+          <div id="contentBox">
+            <div class="section"><h2>Project Dependency Management<a name="Project_Dependency_Management"></a></h2><div class="section"><h3>compile<a name="compile"></a></h3><p>The following is a list of compile dependencies in the DependencyManagement of this project. These dependencies can be included in the submodules to compile and run the submodule:</p><table border="0" class="bodyTable"><tr class="a"><th>GroupId</th><th>ArtifactId</th><th>Version</th><th>Type</th></tr><tr class="b"><td>com.github.cwilper.fcrepo-misc</td><td><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/">fcrepo-dto</a></td><td>0.0.1-SNAPSHOT</td><td>jar</td></tr><tr class="a"><td>com.github.cwilper.fcrepo-misc</td><td><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core">fcrepo-dto-core</a></td><td>0.0.1-SNAPSHOT</td><td>jar</td></tr><tr class="b"><td>com.github.cwilper.fcrepo-misc</td><td><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/">fcrepo-dto-foxml</a></td><td>0.0.1-SNAPSHOT</td><td>jar</td></tr><tr class="a"><td>com.github.cwilper.fcrepo-misc</td><td><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-flexport">fcrepo-flexport</a></td><td>0.0.1-SNAPSHOT</td><td>jar</td></tr><tr class="b"><td>com.github.cwilper.fcrepo-misc</td><td><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-httpclient">fcrepo-httpclient</a></td><td>0.0.1-SNAPSHOT</td><td>jar</td></tr><tr class="a"><td>com.github.cwilper.fcrepo-misc</td><td><a class="externalLink" href="http://cwilper.github.com/fcrepo-misc/fcrepo-riclient">fcrepo-riclient</a></td><td>0.0.1-SNAPSHOT</td><td>jar</td></tr><tr class="b"><td>com.google.guava</td><td><a class="externalLink" href="http://code.google.com/p/guava-libraries/guava-collections">guava-collections</a></td><td>r03</td><td>jar</td></tr><tr class="a"><td>commons-codec</td><td><a class="externalLink" href="http://commons.apache.org/codec/">commons-codec</a></td><td>1.4</td><td>jar</td></tr><tr class="b"><td>commons-io</td><td><a class="externalLink" href="http://commons.apache.org/io/">commons-io</a></td><td>2.0.1</td><td>jar</td></tr><tr class="a"><td>net.java.dev.stax-utils</td><td><a class="externalLink" href="http://stax-utils.dev.java.net/">stax-utils</a></td><td>20060502</td><td>jar</td></tr><tr class="b"><td>org.apache.httpcomponents</td><td><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">httpclient</a></td><td>4.0.3</td><td>jar</td></tr><tr class="a"><td>org.apache.santuario</td><td><a class="externalLink" href="http://santuario.apache.org/">xmlsec</a></td><td>1.4.3</td><td>jar</td></tr><tr class="b"><td>org.openrdf</td><td><a class="externalLink" href="http://www.openrdf.org">rio</a></td><td>1.0.10</td><td>jar</td></tr><tr class="a"><td>org.slf4j</td><td><a class="externalLink" href="http://www.slf4j.org">jcl-over-slf4j</a></td><td>1.6.1</td><td>jar</td></tr><tr class="b"><td>org.slf4j</td><td><a class="externalLink" href="http://www.slf4j.org">slf4j-api</a></td><td>1.6.1</td><td>jar</td></tr></table></div><div class="section"><h3>test<a name="test"></a></h3><p>The following is a list of test dependencies in the DependencyManagement of this project. These dependencies can be included in the submodules to compile and run unit tests for the submodule:</p><table border="0" class="bodyTable"><tr class="a"><th>GroupId</th><th>ArtifactId</th><th>Version</th><th>Type</th></tr><tr class="b"><td>ch.qos.logback</td><td><a class="externalLink" href="http://logback.qos.ch">logback-classic</a></td><td>0.9.26</td><td>jar</td></tr><tr class="a"><td>junit</td><td><a class="externalLink" href="http://junit.org">junit</a></td><td>4.8.2</td><td>jar</td></tr></table></div></div>
+          </div>
+        </div>
+        <div class="clear">
+          <hr/>
+        </div>
+        <div id="footer">
+          <div class="xright">Copyright &#169;          
+   
           2011
     
-          
+                    <a href="http://duraspace.org/">DuraSpace</a>.
+            All Rights Reserved.    
   
 
   
@@ -261,9 +190,10 @@
   
     
   </div>
-      <div class="clear">
-        <hr/>
-      </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
     </div>
   </body>
 </html>
