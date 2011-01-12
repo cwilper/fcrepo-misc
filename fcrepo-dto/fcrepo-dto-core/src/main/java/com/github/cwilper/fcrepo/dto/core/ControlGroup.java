@@ -8,10 +8,10 @@ package com.github.cwilper.fcrepo.dto.core;
 public enum ControlGroup {
 
     /** E: Externally managed, but Fedora can dereference. */
-    EXTERNAL_REFERENCE("E"),
+    EXTERNAL("E"),
 
     /** M: Internally managed, can be stored outside of object XML. */
-    MANAGED_CONTENT("M"),
+    MANAGED("M"),
 
     /** R: Externally managed, and Fedora should only redirect. */
     REDIRECT("R"),

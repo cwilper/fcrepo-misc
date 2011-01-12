@@ -16,16 +16,16 @@ public class ControlGroupTest {
 
     @Test
     public void expectedShortNames() {
-        assertEquals("E", ControlGroup.EXTERNAL_REFERENCE.shortName());
-        assertEquals("M", ControlGroup.MANAGED_CONTENT.shortName());
+        assertEquals("E", ControlGroup.EXTERNAL.shortName());
+        assertEquals("M", ControlGroup.MANAGED.shortName());
         assertEquals("R", ControlGroup.REDIRECT.shortName());
         assertEquals("X", ControlGroup.INLINE_XML.shortName());
     }
 
     @Test
     public void getByShortNames() {
-        assertEquals(ControlGroup.EXTERNAL_REFERENCE, ControlGroup.forShortName("E"));
-        assertEquals(ControlGroup.MANAGED_CONTENT, ControlGroup.forShortName("M"));
+        assertEquals(ControlGroup.EXTERNAL, ControlGroup.forShortName("E"));
+        assertEquals(ControlGroup.MANAGED, ControlGroup.forShortName("M"));
         assertEquals(ControlGroup.REDIRECT, ControlGroup.forShortName("R"));
         assertEquals(ControlGroup.INLINE_XML, ControlGroup.forShortName("X"));
     }

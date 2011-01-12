@@ -120,14 +120,14 @@ public class FOXMLReadWriteTest {
     @Test
     public void dsControlGroupE() {
         obj.putDatastream(new Datastream("ds").controlGroup(
-                ControlGroup.EXTERNAL_REFERENCE));
+                ControlGroup.EXTERNAL));
         writeThenReadCheck("dsControlGroupE");
     }
 
     @Test
     public void dsControlGroupM() {
         obj.putDatastream(new Datastream("ds").controlGroup(
-                ControlGroup.MANAGED_CONTENT));
+                ControlGroup.MANAGED));
         writeThenReadCheck("dsControlGroupM");
     }
 
@@ -257,7 +257,7 @@ public class FOXMLReadWriteTest {
                     new FileOutputStream(tempFile));
             IOUtils.closeQuietly(sink);
             Datastream ds = new Datastream("ds").controlGroup(
-                    ControlGroup.MANAGED_CONTENT);
+                    ControlGroup.MANAGED);
             ds.addVersion(null).contentLocation(tempFile.toURI());
             DatastreamVersion origDSV = ds.versions().first();
             obj.putDatastream(ds);

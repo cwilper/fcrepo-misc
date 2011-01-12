@@ -16,8 +16,8 @@ public class DatastreamTest extends FedoraDTOTest {
         return new Object[] {
                 new Datastream("a"),
                 new Datastream("a"),
-                new Datastream("a").controlGroup(ControlGroup.MANAGED_CONTENT),
-                new Datastream("a").controlGroup(ControlGroup.MANAGED_CONTENT)
+                new Datastream("a").controlGroup(ControlGroup.MANAGED),
+                new Datastream("a").controlGroup(ControlGroup.MANAGED)
         };
     }
 
@@ -67,8 +67,8 @@ public class DatastreamTest extends FedoraDTOTest {
     public void controlGroupField() {
         Datastream ds = new Datastream("a");
         Assert.assertNull(ds.controlGroup());
-        ds.controlGroup(ControlGroup.MANAGED_CONTENT);
-        Assert.assertEquals(ControlGroup.MANAGED_CONTENT,
+        ds.controlGroup(ControlGroup.MANAGED);
+        Assert.assertEquals(ControlGroup.MANAGED,
                 ds.controlGroup());
     }
 

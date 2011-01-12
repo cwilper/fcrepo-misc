@@ -114,7 +114,7 @@ public class FOXMLWriter extends ContentResolvingDTOWriter {
         writeContentDigest(dsv.contentDigest());
         if (ds.controlGroup() == ControlGroup.INLINE_XML) {
             writeXMLContent(dsv);
-        } else if (ds.controlGroup() == ControlGroup.MANAGED_CONTENT
+        } else if (ds.controlGroup() == ControlGroup.MANAGED
                 && managedDatastreamsToEmbed.contains(ds.id())) {
             writeBinaryContent(dsv.contentLocation());
         } else {
