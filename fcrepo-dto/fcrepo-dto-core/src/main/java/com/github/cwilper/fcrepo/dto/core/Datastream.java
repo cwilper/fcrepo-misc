@@ -8,6 +8,8 @@ import java.util.TreeSet;
 
 /**
  * A Datastream within a <code>FedoraObject</code>.
+ *
+ * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */
 public class Datastream extends FedoraDTO {
 
@@ -21,10 +23,13 @@ public class Datastream extends FedoraDTO {
     private Boolean versionable;
 
     /**
-     * Creates an instance.
+     * Creates an empty instance with an id.  An id is the only required
+     * field of a datastream. It is immutable and must be provided at
+     * construction time.
      *
-     * @param id the id of the datastream (not null, immutable).
-     * @throws NullPointerException if id is given as <code>null</code>.
+     * @param id the id of the datastream (not null, immutable), which
+     *        will be string-normalized.
+     * @throws NullPointerException if the normalized id is <code>null</code>.
      */
     public Datastream(String id) {
         this.id = Util.normalize(id);
@@ -33,41 +38,104 @@ public class Datastream extends FedoraDTO {
         }
     }
 
+    /**
+     * Gets the id.
+     *
+     * @return the value, never <code>null</code>.
+     */
     public String id() {
         return id;
     }
 
+    /**
+     * Gets the state.
+     *
+     * @return the state, or <code>null</code> if undefined.
+     */
     public State state() {
         return state;
     }
 
+    /**
+     * Sets the state.
+     *
+     * @param state the new value, possibly <code>null</code>.
+     * @return this instance.
+     */
     public Datastream state(State state) {
         this.state = state;
         return this;
     }
 
+    /**
+     * Gets the control group.
+     *
+     * @return the value, or <code>null</code> if undefined.
+     */
     public ControlGroup controlGroup() {
         return controlGroup;
     }
 
+    /**
+     * Sets the control group.
+     *
+     * @param controlGroup the new value, possibly <code>null</code>.
+     * @return this instance.
+     */
     public Datastream controlGroup(ControlGroup controlGroup) {
         this.controlGroup = controlGroup;
         return this;
     }
 
+    /**
+     * Gets the versionable value.
+     *
+     * @return the value, or <code>null</code> if undefined.
+     */
     public Boolean versionable() {
         return versionable;
     }
 
+    /**
+     * Sets the versionable value.
+     *
+     * @param versionable the new value, possibly <code>null</code>.
+     * @return this instance.
+     */
     public Datastream versionable(Boolean versionable) {
         this.versionable = versionable;
         return this;
     }
 
+    /**
+     * Gets the (mutable) set of datastream versions for this
+     * datastream. Iterators over the elements of the set will provide
+     * the values in this order:
+     * <ul>
+     *   <li> First, any datastreams whose creation date is undefined
+     *        will be provided in ascending order of their ids.</li>
+     *   <li> Then, any datastreams whose creation date is defined will
+     *        be provided in descending order of dates.  If multiple
+     *        datastreams have the same creation date, they will occur in
+     *        ascending order of their ids.</li>
+     * </ul>
+     *
+     * @return the versions, possibly empty, but never <code>null</code>.
+     */
     public SortedSet<DatastreamVersion> versions() {
         return versions;
     }
 
+    /**
+     * Creates and adds a new datastream version with an automatically
+     * generated id that is unique within the existing versions.  The
+     * generated id will start with <code>this.id() + "."</code> and have a
+     * numeric suffix.
+     *
+     * @param createdDate the created date to use for the new datastream
+     *        version, possibly <code>null</code>.
+     * @return the new datastream version.
+     */
     public DatastreamVersion addVersion(Date createdDate) {
         int n = versions.size();
         while (hasVersion(id + "." + n)) {

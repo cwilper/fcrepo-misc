@@ -155,6 +155,10 @@ public abstract class XMLUtil implements XMLStreamConstants {
     public static void copy(XMLStreamReader source, XMLStreamWriter sink)
             throws XMLStreamException {
         sink.setNamespaceContext(source.getNamespaceContext());
+        // TODO: Make a version of XMLStreamUtils that automatically writes
+        // namespace declarations for any namespaces that aren't in it's
+        // (new) context yet, but are in the reader's context (currently set
+        // above, but it should probably not be...)
         XMLStreamUtils.copy(new BalancedXMLStreamReader(source), sink);
     }
 
