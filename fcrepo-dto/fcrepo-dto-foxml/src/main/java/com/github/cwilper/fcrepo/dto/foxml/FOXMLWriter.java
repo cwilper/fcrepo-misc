@@ -5,6 +5,7 @@ import com.github.cwilper.fcrepo.dto.core.ControlGroup;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
+import com.github.cwilper.fcrepo.dto.core.InlineXML;
 import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.ContentResolvingDTOWriter;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
@@ -154,12 +155,12 @@ public class FOXMLWriter extends ContentResolvingDTOWriter {
 
     private void writeXMLContent(DatastreamVersion dsv)
             throws IOException, XMLStreamException {
-        byte[] inlineXML = dsv.inlineXMLBytes();
+        InlineXML inlineXML = dsv.inlineXML();
         if (inlineXML != null) {
             w.writeStartElement(Constants.xmlContent);
             w.writeCharacters(Constants.LINE_FEED);
             w.flush();
-            sink.write(inlineXML);
+            sink.write(inlineXML.bytes());
             w.writeEndElement();
         }
     }

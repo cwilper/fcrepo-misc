@@ -5,6 +5,7 @@ import com.github.cwilper.fcrepo.dto.core.ControlGroup;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
+import com.github.cwilper.fcrepo.dto.core.InlineXML;
 import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.ContentHandlingDTOReader;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
@@ -192,7 +193,7 @@ public class FOXMLReader extends ContentHandlingDTOReader {
         ByteArrayOutputStream sink = new ByteArrayOutputStream();
         try {
             XMLUtil.copy(r, sink);
-            dsv.inlineXMLBytes(sink.toByteArray());
+            dsv.inlineXML(new InlineXML(sink.toByteArray()));
         } catch (Exception e) {
             throw new IOException("Error parsing foxml:xmlContent", e);
         }

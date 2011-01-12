@@ -8,6 +8,8 @@
   <logger name="com.github.cwilper.fcrepo" additivity="false" level="INFO">
     <appender-ref ref="STDOUT"/>
   </logger>
+  <!-- don't show canonicalization warnings during testing -->
+  <logger name="com.github.cwilper.fcrepo.dto.core.InlineXML" additivity="false" level="ERROR"/>
   <root additivity="false" level="WARN">
     <appender-ref ref="STDOUT"/>
   </root>

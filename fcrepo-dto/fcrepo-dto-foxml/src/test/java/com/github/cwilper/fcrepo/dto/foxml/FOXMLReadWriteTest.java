@@ -5,6 +5,7 @@ import com.github.cwilper.fcrepo.dto.core.ControlGroup;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
+import com.github.cwilper.fcrepo.dto.core.InlineXML;
 import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 import org.apache.commons.io.IOUtils;
@@ -225,7 +226,7 @@ public class FOXMLReadWriteTest {
     public void dsvInlineXML() throws IOException {
         Datastream ds = new Datastream("ds").controlGroup(
                 ControlGroup.INLINE_XML);
-        ds.addVersion(null).inlineXML("<doc></doc>");
+        ds.addVersion(null).inlineXML(new InlineXML("<doc></doc>"));
         obj.putDatastream(ds);
         writeThenReadCheck("dsvInlineXML");
     }
@@ -236,7 +237,7 @@ public class FOXMLReadWriteTest {
                 ControlGroup.INLINE_XML);
         String xml = IOUtils.toString(getClass().getClassLoader()
                 .getResourceAsStream("inlineRDFInput.xml"));
-        ds.addVersion(null).inlineXML(xml);
+        ds.addVersion(null).inlineXML(new InlineXML(xml));
         obj.putDatastream(ds);
         writeThenReadCheck("dsvInlineRDF");
     }

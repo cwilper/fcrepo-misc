@@ -50,7 +50,7 @@ public class Datastream extends FedoraDTO {
     /**
      * Gets the state.
      *
-     * @return the state, or <code>null</code> if undefined.
+     * @return the state, possibly <code>null</code>.
      */
     public State state() {
         return state;
@@ -70,7 +70,7 @@ public class Datastream extends FedoraDTO {
     /**
      * Gets the control group.
      *
-     * @return the value, or <code>null</code> if undefined.
+     * @return the value, possibly <code>null</code>.
      */
     public ControlGroup controlGroup() {
         return controlGroup;
@@ -90,7 +90,7 @@ public class Datastream extends FedoraDTO {
     /**
      * Gets the versionable value.
      *
-     * @return the value, or <code>null</code> if undefined.
+     * @return the value, possibly <code>null</code>.
      */
     public Boolean versionable() {
         return versionable;

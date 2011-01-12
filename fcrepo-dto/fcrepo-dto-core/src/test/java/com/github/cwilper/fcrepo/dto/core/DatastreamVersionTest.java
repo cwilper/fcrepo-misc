@@ -21,8 +21,10 @@ public class DatastreamVersionTest extends FedoraDTOTest {
                     new DatastreamVersion("a", null),
                     new DatastreamVersion("a", now),
                     new DatastreamVersion("a", now),
-                    new DatastreamVersion("a", null).inlineXML("<doc/>"),
-                    new DatastreamVersion("a", null).inlineXML("<doc></doc>")
+                    new DatastreamVersion("a", null)
+                            .inlineXML(new InlineXML("<doc/>")),
+                    new DatastreamVersion("a", null)
+                            .inlineXML(new InlineXML("<doc></doc>"))
             };
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -146,41 +148,17 @@ public class DatastreamVersionTest extends FedoraDTOTest {
     }
 
     @Test
-    public void canonicalizableInlineXML() throws IOException {
+    public void inlineXMLField() throws IOException {
         DatastreamVersion dsv = new DatastreamVersion("a", null);
         // value starts null
         Assert.assertNull(dsv.inlineXML());
-        Assert.assertNull(dsv.inlineXMLBytes());
-        // canonicalized starts false
-        Assert.assertFalse(dsv.inlineXMLCanonicalized());
-        // set value, get canonicalized value
-        dsv.inlineXML("<doc/>");
-        Assert.assertEquals("<doc></doc>", dsv.inlineXML());
-        Assert.assertEquals("<doc></doc>",
-                Util.getString(dsv.inlineXMLBytes()));
-        // canonicalized should now be true
-        Assert.assertTrue(dsv.inlineXMLCanonicalized());
+        // set value, get same value
+        InlineXML xml = new InlineXML("<doc/>");
+        dsv.inlineXML(xml);
+        Assert.assertEquals(xml, dsv.inlineXML());
         // set null, get null
         dsv.inlineXML(null);
         Assert.assertNull(dsv.inlineXML());
-        Assert.assertNull(dsv.inlineXMLBytes());
-        // canonicalized should now be false
-        Assert.assertFalse(dsv.inlineXMLCanonicalized());
-    }
-
-    @Test
-    public void nonCanonicalizableInlineXML() throws IOException {
-        String inputXML = "<a xmlns=\"relative-uri\"/>"; // pre-prettyPrinted
-        DatastreamVersion dsv = new DatastreamVersion("a", null);
-        dsv.inlineXMLBytes(Util.getBytes(inputXML));
-        Assert.assertEquals(inputXML, dsv.inlineXML());
-        Assert.assertFalse(dsv.inlineXMLCanonicalized());
-    }
-
-    @Test (expected=IOException.class)
-    public void malformedInlineXML() throws IOException {
-        DatastreamVersion dsv = new DatastreamVersion("a", null);
-        dsv.inlineXML("this isn't XML");
     }
 
     @Test
