@@ -5,6 +5,7 @@ package com.github.cwilper.fcrepo.dto.core;
  * <p>
  * A content digest has a type (<code>MD5</code>, <code>SHA-1</code>, etc.)
  * and a hex value (e.g. <code>ea309a2eb146a4d8bdf8946c4df23c70</code>).
+ * This class does not validate or normalize these field values in any way.
  *
  * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */
@@ -62,11 +63,7 @@ public class ContentDigest extends FedoraDTO {
 
     @Override
     Object[] getEqArray() {
-        if (hexValue == null) {
-            return new Object[] { type, null };
-        } else {
-            return new Object[] { type, hexValue.toUpperCase() };
-        }
+        return new Object[] { type, hexValue };
     }
 
 }

@@ -14,8 +14,8 @@ public class ContentDigestTest extends FedoraDTOTest {
                 new ContentDigest(),
                 new ContentDigest().type("a"),
                 new ContentDigest().type("a"),
-                new ContentDigest().hexValue("a"),
-                new ContentDigest().hexValue("A")
+                new ContentDigest().hexValue("a").type("b"),
+                new ContentDigest().hexValue("a").type("b")
         };
     }
 
