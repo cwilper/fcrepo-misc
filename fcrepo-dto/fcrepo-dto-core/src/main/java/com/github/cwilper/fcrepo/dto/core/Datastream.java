@@ -120,7 +120,7 @@ public class Datastream extends FedoraDTO {
      *        ascending order of their ids.</li>
      * </ul>
      *
-     * @return the versions, possibly empty, never <code>null</code>.
+     * @return the set, possibly empty, never <code>null</code>.
      */
     public SortedSet<DatastreamVersion> versions() {
         return versions;
@@ -128,13 +128,12 @@ public class Datastream extends FedoraDTO {
 
     /**
      * Creates and adds a new datastream version with an automatically
-     * generated id that is unique within the existing versions.  The
-     * generated id will start with <code>this.id() + "."</code> and have a
-     * numeric suffix.
+     * generated id that is unique within the existing versions. The id
+     * will start with <code>this.id() + "."</code> and have a numeric suffix.
      *
      * @param createdDate the created date to use for the new datastream
      *        version, possibly <code>null</code>.
-     * @return the new datastream version.
+     * @return the new version.
      */
     public DatastreamVersion addVersion(Date createdDate) {
         int n = versions.size();

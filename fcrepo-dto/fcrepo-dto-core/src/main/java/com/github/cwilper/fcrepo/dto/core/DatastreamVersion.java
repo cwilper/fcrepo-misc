@@ -12,6 +12,8 @@ import java.util.TreeSet;
 
 /**
  * A particular revision of a <code>Datastream</code>.
+ *
+ * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */
 public class DatastreamVersion extends FedoraDTO {
 
@@ -49,58 +51,129 @@ public class DatastreamVersion extends FedoraDTO {
         this.createdDate = Util.copy(createdDate);
     }
 
+    /**
+     * Gets the id.
+     *
+     * @return the value, never <code>null</code>.
+     */
     public String id() {
         return id;
     }
 
+    /**
+     * Gets the label.
+     *
+     * @return the value, possibly <code>null</code>.
+     */
     public String label() {
         return label;
     }
 
+    /**
+     * Sets the label.
+     *
+     * @param label the new value, which will be string-normalized.
+     * @return this instance.
+     */
     public DatastreamVersion label(String label) {
         this.label = Util.normalize(label);
         return this;
     }
 
+    /**
+     * Gets the created date.
+     *
+     * @return the value, possibly <code>null</code>.
+     */
     public Date createdDate() {
         return Util.copy(createdDate);
     }
 
+    /**
+     * Gets the mime type of the content.
+     *
+     * @return the value, possibly <code>null</code>.
+     */
     public String mimeType() {
         return mimeType;
     }
 
+    /**
+     * Sets the mime type of the content.
+     *
+     * @param mimeType the new value, which will be string-normalized.
+     * @return this instance.
+     */
     public DatastreamVersion mimeType(String mimeType) {
         this.mimeType = Util.normalize(mimeType);
         return this;
     }
 
+    /**
+     * Gets the (mutable) set of alternate ids. Iterators over the elements
+     * of the set will provide the values in ascending alphabetical order.
+     *
+     * @return the set, possibly empty, never <code>null</code>.
+     */
     public SortedSet<URI> altIds() {
         return altIds;
     }
 
+    /**
+     * Gets the format URI.
+     *
+     * @return the value, possibly <code>null</code>.
+     */
     public URI formatURI() {
         return formatURI;
     }
 
+    /**
+     * Sets the format URI.
+     *
+     * @param formatURI the new value, possibly <code>null</code>.
+     * @return this instance.
+     */
     public DatastreamVersion formatURI(URI formatURI) {
         this.formatURI = formatURI;
         return this;
     }
 
+    /**
+     * Gets the content digest.
+     *
+     * @return the value, possibly <code>null</code>.
+     */
     public ContentDigest contentDigest() {
         return contentDigest;
     }
 
+    /**
+     * Sets the content digest.
+     *
+     * @param contentDigest the new value, possibly <code>null</code>.
+     * @return this instance.
+     */
     public DatastreamVersion contentDigest(ContentDigest contentDigest) {
         this.contentDigest = contentDigest;
         return this;
     }
 
+    /**
+     * Gets the size of the content.
+     *
+     * @return the value, possibly <code>null</code>.
+     */
     public Long size() {
         return size;
     }
 
+    /**
+     * Sets the size of the content.
+     *
+     * @param size the new value, 0, positive, negative, or <code>null</code>.
+     * @return this instance.
+     */
     public DatastreamVersion size(Long size) {
         if (size != null && size < 0) throw new IllegalArgumentException();
         this.size = size;
