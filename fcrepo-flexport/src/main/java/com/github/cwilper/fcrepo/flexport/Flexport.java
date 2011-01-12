@@ -9,8 +9,21 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 
+/**
+ * A command-line utility for exporting selected objects and datastream
+ * content from Fedora repositories.
+ */
 public class Flexport {
 
+    /**
+     * Command-line entry point.  This currently just reads a FOXML file
+     * and writes it.  The default behavior is to pretty-print the output.
+     * If a second argument is given, it will be canonicalized (c14n11)
+     * instead.
+     *
+     * @param args one or two arguments as described above.
+     * @throws Exception if anything goes wrong, java will print a stack trace.
+     */
     public static void main(String[] args) throws Exception {
         FOXMLReader reader = new FOXMLReader();
         FOXMLWriter writer = new FOXMLWriter();
