@@ -20,11 +20,10 @@ import java.util.List;
  * The result of a Resource Index query.
  * <p>
  * <b>NOTE:</b> If an underlying error occurs while the result is being
- *              iterated, it will be wrapped and thrown as a
- *              <code>RuntimeException</code>.
+ * iterated, it will be wrapped and thrown as a <code>RuntimeException</code>.
  * <p>
  * <b>IMPORTANT:</b> Results must always be <code>close()</code>d when
- *                   finished, regardless of success or failure.
+ * finished, regardless of success or failure.
  */
 public class RIQueryResult extends AbstractIterator<List<Value>> {
 

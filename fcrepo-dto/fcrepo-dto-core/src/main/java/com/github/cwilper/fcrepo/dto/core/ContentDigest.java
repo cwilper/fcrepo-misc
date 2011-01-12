@@ -2,6 +2,9 @@ package com.github.cwilper.fcrepo.dto.core;
 
 /**
  * The computed checksum of a <code>DatastreamVersion</code>'s content.
+ * <p>
+ * A content digest has a type (<code>MD5</code>, <code>SHA-1</code>, etc.)
+ * and a hex value (e.g. <code>ea309a2eb146a4d8bdf8946c4df23c70</code>).
  *
  * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */
@@ -17,7 +20,7 @@ public class ContentDigest extends FedoraDTO {
     }
 
     /**
-     * Gets the type.
+     * Gets the type of digest.
      *
      * @return the value, or <code>null</code> if undefined.
      */
@@ -26,7 +29,7 @@ public class ContentDigest extends FedoraDTO {
     }
 
     /**
-     * Sets the type.
+     * Sets the type of digest.
      *
      * @param type the new value, which will be string-normalized.
      * @return this instance.

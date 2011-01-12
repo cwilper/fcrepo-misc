@@ -2,20 +2,21 @@ package com.github.cwilper.fcrepo.dto.core;
 
 /**
  * Superclass of all (non-Enum) Fedora Data Transfer Object classes.
- *
- * This superclass exists solely to provide correct implementations of
- * <code>Object.hashCode()</code> and <code>Object.equals(Object)</code>,
- * requiring only that subclasses implement <code>getEqArray()</code>.
+ * <p>
+ * This superclass exists solely to provide useful and correct implementations
+ * of <code>Object.hashCode()</code>, <code>Object.equals(Object)</code>,
+ * and <code>Object.toString()</code>, requiring only that subclasses
+ * implement {@link #getEqArray()}.
  */
 abstract class FedoraDTO {
 
     /**
      * Gets the hash code for this instance. In accordance with the contract
-     * for <code>Object.hashCode()</code>, this method is guaranteed to
-     * return the same hash code for two objects when
-     * <code>o1.equals(o2)</code>
+     * for <code>Object.hashCode()</code>, this method is guaranteed to return
+     * the same hash code for two objects when <code>o1.equals(o2)</code>
      *
      * @return the hash code.
+     * @see #equals(Object)
      */
     @Override
     public final int hashCode() {
@@ -27,10 +28,9 @@ abstract class FedoraDTO {
     }
 
     /**
-     * Tells whether an object is considered equivalent to this one.
-     * <p>
-     * In order to be considered equal, the object must be an instance of
-     * the same class and must have equivalent field values.
+     * Tells whether a given instance is considered equivalent to this one.
+     * To be equivalent, the object must be an instance of the same class
+     * and must have equivalent field values.
      *
      * @param o the object to compare with this one.
      * @return true if equal, false otherwise.
@@ -41,9 +41,9 @@ abstract class FedoraDTO {
     }
 
     /**
-     * Gets a one-line description of this instance, which fully describes
-     * its state.  This isn't intended for normal end-user consumption, but
-     * can be useful for logging, testing, and debugging.
+     * Gets a human-readable description of this instance, which fully
+     * describes its state. This isn't intended for normal end-user
+     * consumption, but can be useful for logging, testing, and debugging.
      *
      * @return the description.
      */
@@ -66,8 +66,8 @@ abstract class FedoraDTO {
     }
 
     /**
-     * Gets a comprehensive array of values that embody this object's state
-     * for the purpose of equality testing.
+     * Gets a comprehensive array of values that embody this instance's
+     * state, for the purpose of equality testing.
      *
      * @return the array of values, never <code>null</code>.
      */

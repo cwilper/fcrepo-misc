@@ -18,8 +18,9 @@ import java.util.List;
 
 /**
  * A Fedora Resource Index Client.
- *
- * TODO: Use a callback pattern (e.g. ResultHandler) instead of an iterator.
+ * <p>
+ * <b>TODO: Use a callback (e.g. <code>ResultHandler</code>) instead of an
+ * iterator.</b>
  */
 public class RIClient {
 

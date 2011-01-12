@@ -42,7 +42,7 @@
  *
  * <h3>Null Values and String Normalization</h3>
  * All DTO instances generally start with minimal state: most fields begin
- * with <code>null</code> values (or are empty, the the case of collections).
+ * with <code>null</code> values (or are empty, in the case of collections).
  * Any field that is settable can generally be set to <code>null</code>, and
  * any collection can have all elements removed.  In addition, all string
  * fields are auto-normalized when set, as follows:
@@ -61,5 +61,12 @@
  * This package is generally not concerned with validation of field values.
  * This is a concern best implemented elsewhere (higher level code, xml schema,
  * etc.)
+ *
+ * <h3>Collection Ordering</h3>
+ * Where collections (sets or maps) are used, they are generally sorted to
+ * to allow for reasonably deterministic iteration.  For example,
+ * <code>FedoraObject.datastreams().keySet()</code> is ordered by datastream
+ * id (ascending), and <code>Datastream.versions()</code> is ordered by
+ * creation date (descending), then id (ascending).
  */
 package com.github.cwilper.fcrepo.dto.core;

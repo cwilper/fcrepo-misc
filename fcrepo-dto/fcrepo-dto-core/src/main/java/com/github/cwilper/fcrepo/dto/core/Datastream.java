@@ -110,7 +110,7 @@ public class Datastream extends FedoraDTO {
     /**
      * Gets the (mutable) set of datastream versions for this
      * datastream. Iterators over the elements of the set will provide
-     * the values in this order:
+     * the values in order:
      * <ul>
      *   <li> First, any datastreams whose creation date is undefined
      *        will be provided in ascending order of their ids.</li>
@@ -120,7 +120,7 @@ public class Datastream extends FedoraDTO {
      *        ascending order of their ids.</li>
      * </ul>
      *
-     * @return the versions, possibly empty, but never <code>null</code>.
+     * @return the versions, possibly empty, never <code>null</code>.
      */
     public SortedSet<DatastreamVersion> versions() {
         return versions;

@@ -19,7 +19,7 @@ public class FedoraHttpClient extends MultiThreadedHttpClient {
      *
      * @param config the configuration to use.
      * @param baseURI the location of the Fedora repository. Trailing
-     *                slash characters will be dropped.
+     *        slash characters will be dropped.
      */
     public FedoraHttpClient(HttpClientConfig config,
                             URI baseURI) {
@@ -40,7 +40,7 @@ public class FedoraHttpClient extends MultiThreadedHttpClient {
      *
      * @param config the configuration to use.
      * @param baseURI the location of the Fedora repository. Trailing slash
-     *                characters will be dropped.
+     *        characters will be dropped.
      * @param username the username to use when challenged at baseURI.
      * @param password the password to use when challenged at baseURI.
      */

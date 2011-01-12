@@ -5,8 +5,13 @@ package com.github.cwilper.fcrepo.dto.core;
  */
 public enum State {
 
+    /** [A]ctive */
     ACTIVE("Active"),
+
+    /** [I]nactive */
     INACTIVE("Inactive"),
+
+    /** [D]eleted */
     DELETED("Deleted");
 
     private final String shortName;

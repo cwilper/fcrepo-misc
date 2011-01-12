@@ -16,8 +16,6 @@ import java.net.URI;
  */
 public abstract class HttpUtil {
 
-    // NOTE: the sink is not auto-closed
-
     /**
      * Performs an HTTP GET using the given client, sending the response body
      * to the given stream (which won't be auto-closed).
@@ -41,7 +39,7 @@ public abstract class HttpUtil {
 
     /**
      * Performs an HTTP GET using the given client, returning an input stream
-     * over the response body.  The caller MUST close the stream when finished.
+     * over the response body. The caller MUST close the stream when finished.
      *
      * @param httpClient the client to use.
      * @param requestURI the http or https url.
