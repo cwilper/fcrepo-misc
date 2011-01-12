@@ -190,6 +190,7 @@ public class DatastreamVersion extends FedoraDTO {
     /**
      * Sets the inline XML content.
      *
+     * @param inlineXML the new value, possibly <code>null</code>.
      * @return this instance.
      */
     public DatastreamVersion inlineXML(InlineXML inlineXML) {
@@ -197,10 +198,21 @@ public class DatastreamVersion extends FedoraDTO {
         return this;
     }
 
+    /**
+     * Gets the content location.
+     *
+     * @return the value, possibly <code>null</code>.
+     */
     public URI contentLocation() {
         return contentLocation;
     }
 
+    /**
+     * Sets the content location.
+     *
+     * @param contentLocation the new value, possibly <code>null</code>.
+     * @return this instance.
+     */
     public DatastreamVersion contentLocation(URI contentLocation) {
         this.contentLocation = contentLocation;
         return this;

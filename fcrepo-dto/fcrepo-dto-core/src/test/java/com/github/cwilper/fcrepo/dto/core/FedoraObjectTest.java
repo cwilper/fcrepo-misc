@@ -72,6 +72,11 @@ public class FedoraObjectTest extends FedoraDTOTest {
         Assert.assertEquals(ds, o.datastreams().get(ds.id()));
     }
 
+    @Test (expected=NullPointerException.class)
+    public void putDatastreamNull() {
+        new FedoraObject().putDatastream(null);
+    }
+
     @Test
     public void putDatastreamViaMap() {
         FedoraObject o = new FedoraObject();
@@ -81,6 +86,16 @@ public class FedoraObjectTest extends FedoraDTOTest {
         Assert.assertEquals(1, o.datastreams().keySet().size());
         // ...and it's this one
         Assert.assertEquals(ds, o.datastreams().get(ds.id()));
+    }
+
+    @Test (expected=NullPointerException.class)
+    public void putDatastreamViaMapNullKey() {
+        new FedoraObject().datastreams().put(null, new Datastream("a"));
+    }
+
+    @Test (expected=NullPointerException.class)
+    public void putDatastreamViaMapNullValue() {
+        new FedoraObject().datastreams().put("a", null);
     }
 
     @Test (expected=IllegalArgumentException.class)

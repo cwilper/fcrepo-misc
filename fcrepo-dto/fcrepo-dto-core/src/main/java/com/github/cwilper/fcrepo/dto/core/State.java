@@ -2,16 +2,18 @@ package com.github.cwilper.fcrepo.dto.core;
 
 /**
  * The State of a <code>FedoraObject</code> or <code>Datastream</code>.
+ *
+ * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */
 public enum State {
 
-    /** [A]ctive */
+    /** [A]ctive. */
     ACTIVE("Active"),
 
-    /** [I]nactive */
+    /** [I]nactive. */
     INACTIVE("Inactive"),
 
-    /** [D]eleted */
+    /** [D]eleted. */
     DELETED("Deleted");
 
     private final String shortName;
@@ -27,14 +29,32 @@ public enum State {
         this.longName = longName;
     }
 
+    /**
+     * Gets the abbreviated name (A, I, or D) often used in serializations.
+     *
+     * @return the short name, never <code>null</code>.
+     */
     public String shortName() {
         return shortName;
     }
 
+    /**
+     * Gets the long name (Active, Inactive, or Deleted) sometimes used in
+     * serializations.
+     *
+     * @return the short name, never <code>null</code>.
+     */
     public String longName() {
         return longName;
     }
 
+    /**
+     * Gets an instance from a short name.
+     *
+     * @param shortName the short name.
+     * @return the corresponding instance.
+     * @throws IllegalArgumentException if the short name is not recognized.
+     */
     public static State forShortName(String shortName) {
         for (State s: State.values()) {
             if (s.shortName().equals(shortName)) return s;
@@ -42,6 +62,13 @@ public enum State {
         throw new IllegalArgumentException();
     }
 
+    /**
+     * Gets an instance from a long name.
+     *
+     * @param longName the long name.
+     * @return the corresponding instance.
+     * @throws IllegalArgumentException if the long name is not recognized.
+     */
     public static State forLongName(String longName) {
         for (State s: State.values()) {
             if (s.longName().equals(longName)) return s;
