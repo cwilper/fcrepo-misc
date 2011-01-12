@@ -5,10 +5,22 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 
 import java.net.URI;
 
+/**
+ * A <code>MultiThreadedHttpClient</code> that knows where a Fedora
+ * respository is located and is configured to authenticate against
+ * it if needed.
+ */
 public class FedoraHttpClient extends MultiThreadedHttpClient {
 
     private final URI baseURI;
 
+    /**
+     * Creates an instance without Fedora credentials.
+     *
+     * @param config the configuration to use.
+     * @param baseURI the location of the Fedora repository. Trailing
+     *                slash characters will be dropped.
+     */
     public FedoraHttpClient(HttpClientConfig config,
                             URI baseURI) {
         super(config);
@@ -22,7 +34,16 @@ public class FedoraHttpClient extends MultiThreadedHttpClient {
         }
         this.baseURI = baseURI;
     }
-    
+
+    /**
+     * Creates an instance with Fedora credentials.
+     *
+     * @param config the configuration to use.
+     * @param baseURI the location of the Fedora repository. Trailing slash
+     *                characters will be dropped.
+     * @param username the username to use when challenged at baseURI.
+     * @param password the password to use when challenged at baseURI.
+     */
     public FedoraHttpClient(HttpClientConfig config,
                             URI baseURI,
                             String username,
@@ -41,6 +62,11 @@ public class FedoraHttpClient extends MultiThreadedHttpClient {
                 new UsernamePasswordCredentials(username, password));
     }
 
+    /**
+     * Gets the location of the Fedora repository this instance knows about.
+     *
+     * @return the base URI, which is guaranteed not to end with a slash.
+     */
     public URI getBaseURI() {
         return baseURI;
     }

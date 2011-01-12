@@ -42,6 +42,11 @@ public class MultiThreadedHttpClient extends DefaultHttpClient {
 
     private final HttpClientConfig config;
 
+    /**
+     * Creates an instance.
+     *
+     * @param config the configuration to use.
+     */
     public MultiThreadedHttpClient(HttpClientConfig config) {
         this.config = config;
         if (config.getPreemptiveAuthN()) {
@@ -78,6 +83,9 @@ public class MultiThreadedHttpClient extends DefaultHttpClient {
 
     }
 
+    /**
+     * Releases all reasources created by this instance.
+     */
     @PreDestroy
     public void close() {
         getConnectionManager().shutdown();

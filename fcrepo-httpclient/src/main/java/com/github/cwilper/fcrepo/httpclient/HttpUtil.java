@@ -12,11 +12,23 @@ import java.io.OutputStream;
 import java.net.URI;
 
 /**
- * Utility methods for working with HTTPClients.
+ * Utility methods for working with <code>HTTPClient</code>s.
  */
 public abstract class HttpUtil {
 
     // NOTE: the sink is not auto-closed
+
+    /**
+     * Performs an HTTP GET using the given client, sending the response body
+     * to the given stream (which won't be auto-closed).
+     *
+     * @param httpClient the client to use.
+     * @param requestURI the http or https url.
+     * @param sink the stream to send the content to (it won't be auto-closed)
+     * @return the resulting entity
+     * @throws IOException if the request fails for any reason, including
+     *         a non-200 status code.
+     */
     public static HttpEntity get(HttpClient httpClient,
                                  URI requestURI,
                                  OutputStream sink) throws IOException {
@@ -27,7 +39,16 @@ public abstract class HttpUtil {
         return entity;
     }
 
-    // NOTE: the input stream MUST be closed by the caller!
+    /**
+     * Performs an HTTP GET using the given client, returning an input stream
+     * over the response body.  The caller MUST close the stream when finished.
+     *
+     * @param httpClient the client to use.
+     * @param requestURI the http or https url.
+     * @return an input stream over the response body.
+     * @throws IOException if the request fails for any reason, including
+     *         a non-200 status code.
+     */
     public static InputStream get(HttpClient httpClient,
                                   URI requestURI) throws IOException {
         HttpEntity entity = doGet(httpClient, requestURI);
