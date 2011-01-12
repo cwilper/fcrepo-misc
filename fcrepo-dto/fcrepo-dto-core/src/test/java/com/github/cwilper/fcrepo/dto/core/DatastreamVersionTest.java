@@ -138,14 +138,11 @@ public class DatastreamVersionTest extends FedoraDTOTest {
         Assert.assertEquals(new Long(0), dsv.size());
         dsv.size(1L);
         Assert.assertEquals(new Long(1), dsv.size());
+        dsv.size(-1L);
+        Assert.assertEquals(new Long(-1), dsv.size());
         // set null, get null
         dsv.size(null);
         Assert.assertNull(dsv.size());
-    }
-
-    @Test (expected=IllegalArgumentException.class)
-    public void negativeSize() {
-        new DatastreamVersion("a", null).size(-1L);
     }
 
     @Test

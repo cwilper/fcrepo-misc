@@ -122,7 +122,8 @@ public class FOXMLReader extends ContentHandlingDTOReader {
             dsv.mimeType(readAttribute(Constants.MIMETYPE));
             dsv.formatURI(parseURI(readAttribute(Constants.FORMAT_URI),
                     "datastream format uri"));
-            dsv.size(parseSize(readAttribute(Constants.SIZE)));
+            dsv.size(parseLong(readAttribute(Constants.SIZE),
+                    "datastream size"));
             if (r.nextTag() == XMLStreamConstants.START_ELEMENT) {
                 if (r.getLocalName().equals(Constants.contentDigest)) {
                     readContentDigest(dsv);
@@ -280,19 +281,12 @@ public class FOXMLReader extends ContentHandlingDTOReader {
         }
     }
 
-    private static Long parseSize(String value) {
+    private static Long parseLong(String value, String kind) {
         if (value == null) return null;
         try {
-            long n = Long.parseLong(value);
-            if (n < 0) {
-                logger.warn("Ignoring negative datastream size value: "
-                        + value);
-                return null;
-            } else {
-                return n;
-            }
+            return Long.parseLong(value);
         } catch (NumberFormatException e) {
-            logger.warn("Ignoring invalid datastream size value: " + value);
+            logger.warn("Ignoring invalid " + kind + " value: " + value);
             return null;
         }
     }

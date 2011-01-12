@@ -175,7 +175,6 @@ public class DatastreamVersion extends FedoraDTO {
      * @return this instance.
      */
     public DatastreamVersion size(Long size) {
-        if (size != null && size < 0) throw new IllegalArgumentException();
         this.size = size;
         return this;
     }
