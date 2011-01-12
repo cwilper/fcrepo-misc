@@ -12,6 +12,9 @@ import java.util.TreeSet;
 
 /**
  * A particular revision of a <code>Datastream</code>.
+ * <p>
+ * <h2>Inline XML Canonicalization/Normalization</h2>
+ * Datatreams
  *
  * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */
@@ -160,7 +163,7 @@ public class DatastreamVersion extends FedoraDTO {
     }
 
     /**
-     * Gets the size of the content.
+     * Gets the size of the content, in bytes.
      *
      * @return the value, possibly <code>null</code>.
      */
@@ -169,7 +172,7 @@ public class DatastreamVersion extends FedoraDTO {
     }
 
     /**
-     * Sets the size of the content.
+     * Sets the size of the content, in bytes.
      *
      * @param size the new value, 0, positive, negative, or <code>null</code>.
      * @return this instance.
@@ -179,14 +182,71 @@ public class DatastreamVersion extends FedoraDTO {
         return this;
     }
 
+    /**
+     * Gets the inline XML as a UTF-8 encoded byte array.
+     * <p>
+     * If non-null, the value is guaranteed to be a well-formed, UTF-8 encoded,
+     * standalone and embeddable XML document. If canonicalization was
+     * possible when the value was set, it will also be in canonicalized
+     * (c14n11) form.
+     *
+     * @return the (possibly canonicalized) value, or <code>null</code>.
+     * @see #inlineXMLCanonicalized()
+     * @see <a href="http://www.w3.org/TR/xml-c14n11/">Canonical XML
+     *      Version 1.1</a>
+     * @see #inlineXMLCanonicalized()
+     */
     public byte[] inlineXMLBytes() {
         return Util.getBytes(inlineXML);
     }
 
+    /**
+     * Gets the inline XML as a string.
+     * <p>
+     * If non-null, the value is guaranteed to be a well-formed, standalone
+     * and embeddable XML document. If canonicalization was possible when the
+     * value was set, it will also be in canonicalized (c14n11) form.
+     *
+     * @return the (possibly canonicalized) value, or <code>null</code>.
+     * @see #inlineXMLCanonicalized()
+     * @see <a href="http://www.w3.org/TR/xml-c14n11/">Canonical XML
+     *      Version 1.1</a>
+     */
     public String inlineXML() {
         return inlineXML;
     }
 
+    /**
+     * Sets the inline XML from a string.
+     * <p>
+     * If non-null, the value must be a complete, well-formed XML document.
+     * It will be normalized according to the following rules:
+     * <ol>
+     *   <li> If possible, it will be canonicalized (c14n11).</li>
+     *   <li> Otherwise, it will normalized as follows:
+     *     <ol>
+     *       <li> Leading and trailing whitespace will be removed.</li>
+     *       <li> Any XML declaration, processing instructions, and doctype
+     *            declarations will be stripped. This ensures it can be
+     *            embedded within an XML document.</li>
+     *       <li> It will be reformatted to have two-space indents between
+     *            element start and end tags.</li>
+     *       <li> All empty elements (e.g.
+     *            <code>&lt;element&gt;&lt;element&gt;</code>) will be
+     *            collapsed (e.g. <code>&lt;element/&gt;</code></li>
+     *     </ol>
+     *   </li>
+     * </ol>
+     *
+     * @param inlineXML the new value, or <code>null</code>.
+     * @return this instance
+     * @throws IOException if the String is not <code>null</code> and cannot
+     *         be normalized into a well-formed, standalone and embeddable
+     *         XML document.
+     * @see #inlineXMLCanonicalized()
+     * @see <a href="http://www.w3.org/TR/xml-c14n11/">Canonical XML
+     *      Version 1.1</a>
+     */
     public DatastreamVersion inlineXML(String inlineXML) throws IOException {
         return inlineXMLBytes(Util.getBytes(inlineXML));
     }
