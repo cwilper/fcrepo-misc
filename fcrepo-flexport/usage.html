@@ -28,7 +28,7 @@
             prettyPrint();
         }
     </script>
-        <meta name="Date-Revision-yyyymmdd" content="20110110" />
+        <meta name="Date-Revision-yyyymmdd" content="20110113" />
                                                     
 <style>p { line-height: 1.3em }
         #leftColumn { width: 170px }
@@ -75,8 +75,8 @@
             
   
     
-             <span id="publishDate">Last Published: 2011-01-10</span>
-              &nbsp;| <span id="projectVersion">Version: 0.0.1-SNAPSHOT</span>
+             <span id="publishDate">Last Published: 2011-01-13</span>
+              &nbsp;| <span id="projectVersion">Version: 0.1.0</span>
             </div>
           <div class="clear">
             <hr/>
@@ -169,7 +169,9 @@
         </div>
         <div id="bodyColumn">
           <div id="contentBox">
-            <div class="section"><h2>Using fcrepo-flexport<a name="Using_fcrepo-flexport"></a></h2><div class="section"><h3>Installation<a name="Installation"></a></h3><ul><li>Make sure you have Java 6+ installed and <tt>java</tt> is in your <tt>PATH</tt></li><li>Download and unpack the distribution:<ul><li><a class="externalLink" href="http://repo2.maven.org/maven2/com/github/cwilper/fcrepo-misc/fcrepo-flexport/0.0.1-SNAPSHOT/fcrepo-flexport-0.0.1-SNAPSHOT-install.tar.gz">fcrepo-flexport-0.0.1-SNAPSHOT-install.tar.gz</a> (Unix/Mac)</li><li><a class="externalLink" href="http://repo2.maven.org/maven2/com/github/cwilper/fcrepo-misc/fcrepo-flexport/0.0.1-SNAPSHOT/fcrepo-flexport-0.0.1-SNAPSHOT-install.zip">fcrepo-flexport-0.0.1-SNAPSHOT-install.zip</a> (Windows)</li></ul></li><li>Optionally, add the <tt>bin</tt> directory to your <tt>PATH</tt></li></ul></div><div class="section"><h3>Command Line Usage<a name="Command_Line_Usage"></a></h3><div class="source"><pre>fcrepo-flexport flexport.conf flexport.spec [ list | dryrun | export ]</pre></div><p>Where:</p><ul><li>list - just prints the matching PIDs to standard output</li><li>dryrun - doesn't export any files; just validates the input and tells you what it would do</li><li>export - actually runs the export</li></ul></div><div class="section"><h3>Configuration<a name="Configuration"></a></h3><p><tt>flexport.conf</tt></p><div class="source"><pre># Fedora repository connection info
+            <div class="section"><h2>Using fcrepo-flexport<a name="Using_fcrepo-flexport"></a></h2><hr /><div class="source"><pre>        NOTE: THIS UTILITY IS NOT YET IMPLEMENTED!
+              Initial requirements and design are still being considered.
+              Please email cwilper at duraspace.org with any comments/suggestions!</pre></div><hr /><div class="section"><h3>Installation<a name="Installation"></a></h3><ul><li>Make sure you have Java 6+ installed and <tt>java</tt> is in your <tt>PATH</tt></li><li>Download and unpack the distribution:<ul><li><a class="externalLink" href="http://repo2.maven.org/maven2/com/github/cwilper/fcrepo-misc/fcrepo-flexport/0.1.0/fcrepo-flexport-0.1.0-install.tar.gz">fcrepo-flexport-0.1.0-install.tar.gz</a> (Unix/Mac)</li><li><a class="externalLink" href="http://repo2.maven.org/maven2/com/github/cwilper/fcrepo-misc/fcrepo-flexport/0.1.0/fcrepo-flexport-0.1.0-install.zip">fcrepo-flexport-0.1.0-install.zip</a> (Windows)</li></ul></li><li>Optionally, add the <tt>bin</tt> directory to your <tt>PATH</tt></li></ul></div><div class="section"><h3>Command Line Usage<a name="Command_Line_Usage"></a></h3><div class="source"><pre>fcrepo-flexport flexport.conf flexport.spec [ list | dryrun | export ]</pre></div><p>Where:</p><ul><li>list - just prints the matching PIDs to standard output</li><li>dryrun - doesn't export any files; just validates the input and tells you what it would do</li><li>export - actually runs the export</li></ul></div><div class="section"><h3>Configuration<a name="Configuration"></a></h3><p><tt>flexport.conf</tt></p><div class="source"><pre># Fedora repository connection info
 fedora.url  = http://localhost:8080/fedora
 fedora.user = fedoraAdmin
 fedora.pass = fedoraAdmin
@@ -200,6 +202,8 @@ filter ds.ID              DS or DS2 or DS3
 filter ds.CONTROL_GROUP   M
 filter dsv.MIME_TYPE      text/plain
 filter dsv.LATEST_VERSION true
+filter dsv.CREATED_AFTER  2011-01-01T12:23:33.328Z
+filter dsv.CREATED_BEFORE 2011-01-02T12:24:85.766Z
 action SAVE-TO            ${my.dir}/${pid.fn}/${ds.ID}.${dsv.ID}.txt
 action SET-REF            file://${my.dir}/${pid.fn}/${ds.ID}/${dsv.ID}.txt
 
