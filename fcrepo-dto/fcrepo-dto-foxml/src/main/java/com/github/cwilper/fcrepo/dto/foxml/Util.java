@@ -6,12 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+/** Package-private utility methods. */
 abstract class Util {
 
-    public static final String PREFERRED_DATE_FORMAT =
+    static final String PREFERRED_DATE_FORMAT =
             "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
-    public static final String[] ALLOWED_DATE_FORMATS = new String[] {
+    static final String[] ALLOWED_DATE_FORMATS = new String[] {
             PREFERRED_DATE_FORMAT,
             "yyyy-MM-dd'T'HH:mm:ss.SS'Z'",
             "yyyy-MM-dd'T'HH:mm:ss.S'Z'",
@@ -21,7 +22,7 @@ abstract class Util {
             "yyyy-MM-dd'T'HH:mm:ss"
     };
 
-    public static Date toDate(String dateString) {
+    static Date toDate(String dateString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat();
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         for (String format: ALLOWED_DATE_FORMATS) {
@@ -34,7 +35,7 @@ abstract class Util {
         return null;
     }
 
-    public static String toString(Date date) {
+    static String toString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat(PREFERRED_DATE_FORMAT);
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat.format(date);

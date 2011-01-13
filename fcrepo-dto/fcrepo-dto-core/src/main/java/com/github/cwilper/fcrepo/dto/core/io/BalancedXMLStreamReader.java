@@ -20,8 +20,13 @@ class BalancedXMLStreamReader extends StreamReaderDelegate {
 
     private int level;
 
-    public BalancedXMLStreamReader(XMLStreamReader reader)
-            throws XMLStreamException {
+    /**
+     * Creates an instance.
+     *
+     * @param reader the reader to wrap. It must be positioned on a
+     *        START_ELEMENT.
+     */
+    public BalancedXMLStreamReader(XMLStreamReader reader) {
         super(reader);
         this.reader = reader;
     }

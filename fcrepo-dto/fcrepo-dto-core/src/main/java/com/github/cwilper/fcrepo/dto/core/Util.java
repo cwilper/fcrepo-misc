@@ -3,18 +3,8 @@ package com.github.cwilper.fcrepo.dto.core;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
-/**
- * Utility methods for code in this package.
- */
+/** Package-private utility methods. */
 abstract class Util {
-
-    static int computeHash(Object... objects) {
-        int hash = 0;
-        for (Object o: objects) {
-            if (o != null) hash += o.hashCode();
-        }
-        return hash;
-    }
 
     static String normalize(String string) {
         if (string != null) {

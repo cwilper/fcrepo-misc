@@ -7,7 +7,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * A Datastream within a <code>FedoraObject</code>.
+ * A Datastream within a {@link FedoraObject}.
  *
  * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */

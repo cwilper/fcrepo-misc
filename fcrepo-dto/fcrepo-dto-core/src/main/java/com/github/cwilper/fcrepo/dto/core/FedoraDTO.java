@@ -4,15 +4,15 @@ package com.github.cwilper.fcrepo.dto.core;
  * Superclass of all (non-Enum) Fedora Data Transfer Object classes.
  * <p>
  * This superclass exists solely to provide useful and correct implementations
- * of <code>Object.hashCode()</code>, <code>Object.equals(Object)</code>,
- * and <code>Object.toString()</code>, requiring only that subclasses
+ * of {@link Object#hashCode()}, {@link Object#equals(Object)},
+ * and {@link Object#toString()}, requiring only that subclasses
  * implement {@link #getEqArray()}.
  */
 abstract class FedoraDTO {
 
     /**
      * Gets the hash code for this instance. In accordance with the contract
-     * for <code>Object.hashCode()</code>, this method is guaranteed to return
+     * for {@link Object#hashCode()}, this method is guaranteed to return
      * the same hash code for two objects when <code>o1.equals(o2)</code>
      *
      * @return the hash code.
@@ -34,6 +34,7 @@ abstract class FedoraDTO {
      *
      * @param o the object to compare with this one.
      * @return true if equal, false otherwise.
+     * @see #hashCode()
      */
     @Override
     public final boolean equals(Object o) {

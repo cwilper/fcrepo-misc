@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 /**
- * The inline XML content of a <code>DatastreamVersion</code>.
+ * The inline XML content of a {@link DatastreamVersion}.
  * <p>
  * <h2>Canonicalization and Normalization</h2>
  * The XML given at construction time must be well-formed.  It will be
@@ -22,7 +22,9 @@ import java.io.IOException;
  *   <li> All XML declaration, processing instructions, and doctype
  *        declarations will be removed. This ensures it can be
  *        embedded within an XML document.</li>
- *   <li> It will be reformatted to have two-space indents.</li>
+ *   <li> If Xalan is the currently active XML transformer (true by default in
+ *        Java 6), it will be reformatted to have two-space indents. Otherwise,
+ *        indenting behavior is undefined (it may or may not be indented).</li>
  *   <li> Attributes will use double-quotes around values.</li>
  *   <li> All empty elements (e.g.
  *        <code>&lt;element&gt;&lt;element&gt;</code>) will be

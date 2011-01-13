@@ -1,7 +1,7 @@
 package com.github.cwilper.fcrepo.dto.core;
 
 /**
- * The State of a <code>FedoraObject</code> or <code>Datastream</code>.
+ * The State of a {@link FedoraObject} or {@link Datastream}.
  *
  * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */

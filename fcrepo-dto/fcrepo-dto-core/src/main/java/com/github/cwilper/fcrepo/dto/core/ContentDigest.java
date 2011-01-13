@@ -1,7 +1,7 @@
 package com.github.cwilper.fcrepo.dto.core;
 
 /**
- * The computed checksum of a <code>DatastreamVersion</code>'s content.
+ * The computed checksum of a {@link DatastreamVersion}'s content.
  * <p>
  * A content digest has a type (<code>MD5</code>, <code>SHA-1</code>, etc.)
  * and a hex value (e.g. <code>ea309a2eb146a4d8bdf8946c4df23c70</code>).

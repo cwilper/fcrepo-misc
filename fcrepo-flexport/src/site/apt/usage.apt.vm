@@ -4,6 +4,16 @@
 
 Using ${artifactId}
 
+====
+
++--
+        NOTE: THIS UTILITY IS NOT YET IMPLEMENTED!
+              Initial requirements and design are still being considered.
+              Please email cwilper at duraspace.org with any comments/suggestions!
++--
+
+====
+
 * Installation
 
   * Make sure you have Java 6+ installed and <<<java>>> is in your <<<PATH>>>
@@ -73,6 +83,8 @@ filter ds.ID              DS or DS2 or DS3
 filter ds.CONTROL_GROUP   M
 filter dsv.MIME_TYPE      text/plain
 filter dsv.LATEST_VERSION true
+filter dsv.CREATED_AFTER  2011-01-01T12:23:33.328Z
+filter dsv.CREATED_BEFORE 2011-01-02T12:24:85.766Z
 action SAVE-TO            ${my.dir}/${pid.fn}/${ds.ID}.${dsv.ID}.txt
 action SET-REF            file://${my.dir}/${pid.fn}/${ds.ID}/${dsv.ID}.txt
 

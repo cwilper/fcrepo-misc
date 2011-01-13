@@ -28,6 +28,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A {@link com.github.cwilper.fcrepo.dto.core.io.DTOReader} that reads
+ * Fedora Object XML.
+ * <p>
+ * <b>NOTE:</b> Only FOXML version 1.1 is supported.
+ *
+ * @see <a href="https://wiki.duraspace.org/x/fABI">Introduction to FOXML</a>
+ * @see <a href="http://fedora-commons.org/definitions/1/0/foxml1-1.xsd">FOXML 1.1 XML Schema</a>
+ */
 public class FOXMLReader extends ContentHandlingDTOReader {
 
     private static final Logger logger = LoggerFactory.getLogger(
@@ -36,6 +45,9 @@ public class FOXMLReader extends ContentHandlingDTOReader {
     private FedoraObject obj;
     private XMLStreamReader r;
 
+    /**
+     * Creates an instance.
+     */
     public FOXMLReader() {
     }
 

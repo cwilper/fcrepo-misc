@@ -9,10 +9,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * A particular revision of a <code>Datastream</code>.
- * <p>
- * <h2>Inline XML Canonicalization/Normalization</h2>
- * Datatreams
+ * A particular revision of a {@link Datastream}.
  *
  * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */

@@ -170,10 +170,11 @@ public class FedoraObject extends FedoraDTO {
      * <p>
      * The returned map ensures that when datastreams are added via
      * <code>put(key, value)</code>, the key matches the id of the datastream.
-     * If this is violated, an <code>IllegalArgumentException</code> is thrown.
+     * If this is violated, an {@link IllegalArgumentException} is
+     * thrown.
      * <p>
      * Any attempt to put a <code>null</code> key or value will result in a
-     * <code>NullPointerException</code>.
+     * {@link NullPointerException}.
      *
      * @return the value, possibly empty, never <code>null</code>.
      */

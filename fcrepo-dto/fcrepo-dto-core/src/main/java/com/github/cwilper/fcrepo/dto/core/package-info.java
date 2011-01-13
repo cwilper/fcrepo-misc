@@ -1,6 +1,5 @@
 /**
- * <b>D</b>ata <b>T</b>ransfer <b>O</b>bject classes for the core Fedora
- * persistence entities.
+ * Data Transfer Object classes for the core Fedora persistence entities.
  * <p>
  * The classes in this package are intended primarily to aid in the
  * programmatic construction and inspection of Fedora objects and their

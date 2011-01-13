@@ -22,7 +22,15 @@ import java.net.URI;
 import java.util.Date;
 import java.util.Set;
 
-// not threadsafe!
+/**
+ * A {@link com.github.cwilper.fcrepo.dto.core.io.DTOWriter} that writes
+ * Fedora Object XML.
+ * <p>
+ * <b>NOTE:</b> Only FOXML version 1.1 is supported.
+ *
+ * @see <a href="https://wiki.duraspace.org/x/fABI">Introduction to FOXML</a>
+ * @see <a href="http://fedora-commons.org/definitions/1/0/foxml1-1.xsd">FOXML 1.1 XML Schema</a>
+ */
 public class FOXMLWriter extends ContentResolvingDTOWriter {
 
     private static final Logger logger =

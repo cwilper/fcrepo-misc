@@ -12,6 +12,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 
+/**
+ * A {@link ContentResolver} that resolves <code>http[s]</code> and local
+ * <code>file</code> URIs.
+ * <p>
+ * <b>NOTE:</b> This resolver only works with relative URIs when a base URI
+ * is also provided.
+ */
 public class DefaultContentResolver implements ContentResolver {
 
     private static final int FILE = 1;
@@ -21,10 +28,19 @@ public class DefaultContentResolver implements ContentResolver {
     
     private HttpClient httpClient;
 
+    /**
+     * Creates an instance that uses a new, single-threaded HTTP client.
+     */
     public DefaultContentResolver() {
         httpClient = defaultHttpClient;
     }
 
+    /**
+     * Sets the HTTP client. If the new client is different from the default,
+     * and the default is still in use, it will be automatically closed.
+     *
+     * @param httpClient the new value, never <code>null</code>.
+     */
     public void setHttpClient(HttpClient httpClient) {
         if (httpClient != defaultHttpClient
                 && this.httpClient == defaultHttpClient) {
@@ -73,7 +89,8 @@ public class DefaultContentResolver implements ContentResolver {
         }
     }
 
-    private static URI getAbsolute(URI base, URI ref) {
+    private static URI getAbsolute(URI base, URI ref)
+            throws IOException {
         if (base != null) {
             if (!base.isAbsolute()) {
                 throw new IllegalArgumentException("Base URI must be absolute");
@@ -82,7 +99,7 @@ public class DefaultContentResolver implements ContentResolver {
         } else if (ref.isAbsolute()) {
             return ref;
         } else {
-            throw new IllegalArgumentException("URI is not absolute and base "
+            throw new IOException("URI is not absolute and base "
                     + "URI not specified -- cannot resolve " + ref);
         }
     }

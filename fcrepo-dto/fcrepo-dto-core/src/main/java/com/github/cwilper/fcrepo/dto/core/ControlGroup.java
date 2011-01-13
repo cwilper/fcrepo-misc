@@ -1,22 +1,22 @@
 package com.github.cwilper.fcrepo.dto.core;
 
 /**
- * The Control Group of a <code>Datastream</code>.
+ * The Control Group of a {@link Datastream}.
  *
  * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */
 public enum ControlGroup {
 
-    /** E: Externally managed, but Fedora can dereference. */
+    /** [E]xternal: Externally managed, but Fedora can dereference. */
     EXTERNAL("E"),
 
-    /** M: Internally managed, can be stored outside of object XML. */
+    /** [M]anaged: Internally managed, can be stored outside of object XML. */
     MANAGED("M"),
 
-    /** R: Externally managed, and Fedora should only redirect. */
+    /** [R]edirect: Externally managed, and Fedora should only redirect. */
     REDIRECT("R"),
 
-    /** X: Internally managed, always stored inside object XML. */
+    /** Inline [X]ML: Internally managed, always stored inside object XML. */
     INLINE_XML("X");
 
     private final String shortName;

@@ -13,7 +13,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
-import java.io.StringWriter;
 import java.net.URI;
 import java.util.Date;
 import java.util.Set;
@@ -357,9 +355,8 @@ public class FOXMLReadWriteTest {
     private void writeCheck(String testName, Set<String> embedIds) {
         String filename = "foxml/" + testName + ".xml";
         try {
-            InputStream actualStream = new ByteArrayInputStream(
-                    getFOXML(embedIds).getBytes("UTF-8"));
-            String actualXML = XMLUtil.prettyPrint(actualStream, false);
+            byte[] actualBytes = getFOXML(embedIds).getBytes("UTF-8");
+            String actualXML = new String(actualBytes, "UTF-8");
             if (getClass().getClassLoader().getResource(filename) == null) {
                 if (testResources != null && testResources.isDirectory()) {
                     File testFile = new File(testResources, filename);
@@ -374,7 +371,9 @@ public class FOXMLReadWriteTest {
             } else {
                 InputStream expectedStream = getClass().getClassLoader()
                         .getResourceAsStream(filename);
-                String expectedXML = XMLUtil.prettyPrint(expectedStream, false);
+                byte[] expectedBytes = XMLUtil.prettyPrint(
+                        IOUtils.toByteArray(expectedStream), false);
+                String expectedXML = new String(expectedBytes, "UTF-8");
                 Assert.assertEquals(expectedXML, actualXML);
             }
         } catch (IOException e) {
@@ -399,17 +398,15 @@ public class FOXMLReadWriteTest {
     }
 
     private String getFOXML(Set<String> embedIds) {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
             FOXMLWriter writer = new FOXMLWriter();
             writer.setManagedDatastreamsToEmbed(embedIds);
-            StringWriter sink = new StringWriter();
-            XMLUtil.prettyPrint(writer, obj, sink);
-            return sink.toString();
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            writer.writeObject(obj, out);
+            byte[] pretty = XMLUtil.prettyPrint(out.toByteArray(), false);
+            return new String(pretty, "UTF-8");
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            IOUtils.closeQuietly(out);
         }
     }
 

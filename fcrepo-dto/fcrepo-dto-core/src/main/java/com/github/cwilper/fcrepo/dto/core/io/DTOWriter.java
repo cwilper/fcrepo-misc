@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Interface for writing a <code>FedoraObject</code> to a stream.
+ * Interface for writing a {@link FedoraObject} to a stream.
  */
 public interface DTOWriter {
 

@@ -12,6 +12,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * A {@link ContentHandler} that allocates files in a single local directory,
+ * using the filename <code>pid + dsId + dsVersionId</code> and sets the
+ * datastream <code>contentLocation</code> to a the corresponding
+ * <code>file:///</code> URI.
+ * <p>
+ * If the pid is <code>null</code>, that portion of the filename will be
+ * a unique string starting with <code>nopid:</code> and ending with a
+ * numeric value.
+ * <p>
+ * Initially, the directory to write to will be a new, temporary directory
+ * as provided by {@link File#createTempFile(String, String)}. The directory
+ * to use can be overridden via {@link #setBaseDir(File)} before the handler
+ * is used.
+ * <p>
+ * Content that is written will be automatically deleted when the handler
+ * is {@link #close()}d, unless {@link #setAutoDelete(boolean)} is called
+ * beforehand.
+ */
 public class DefaultContentHandler implements ContentHandler {
 
     private static Logger logger = LoggerFactory.getLogger(
@@ -20,10 +39,23 @@ public class DefaultContentHandler implements ContentHandler {
     private File baseDir;
     private boolean autoDelete;
 
+    /**
+     * Creates an instance.
+     */
     public DefaultContentHandler() {
         autoDelete = true;
     }
 
+    /**
+     * Sets the base directory. If the new base directory is different from
+     * the current one and <code>autoDelete</code> is true, the current
+     * base directory's will be deleted. The new base directory need not exist
+     * yet. If it doesn't exist, it and all parent directories will be created
+     * the first time it's needed.
+     *
+     * @param baseDir the new value, never <code>null</code>.
+     * @throws NullPointerException if the value is null.
+     */
     public void setBaseDir(File baseDir) {
         if (this.baseDir != null && this.baseDir != baseDir && autoDelete) {
             rmDir(this.baseDir);
@@ -31,6 +63,12 @@ public class DefaultContentHandler implements ContentHandler {
         this.baseDir = baseDir;
     }
 
+    /**
+     * Sets whether the base directory's contents should be deleted when
+     * this handler is closed or a new base directory is set.
+     *
+     * @param autoDelete the new value.
+     */
     public void setAutoDelete(boolean autoDelete) {
         this.autoDelete = autoDelete;
     }
@@ -70,6 +108,7 @@ public class DefaultContentHandler implements ContentHandler {
         return sb.toString();
     }
 
+    // allocates the temporary base directory lazily
     private File baseDir() throws IOException {
         if (baseDir == null) {
             baseDir = File.createTempFile("fcrepo-dto", null);
@@ -91,6 +130,7 @@ public class DefaultContentHandler implements ContentHandler {
         }
     }
 
+    // recursively remove a directory, logging warnings if needed.
     private static void rmDir(File dir) {
         for (File file: dir.listFiles()) {
             if (file.isDirectory()) {

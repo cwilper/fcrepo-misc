@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Interface for reading a <code>FedoraObject</code> from a stream.
+ * Interface for reading a {@link FedoraObject} from a stream.
  */
 public interface DTOReader {
 

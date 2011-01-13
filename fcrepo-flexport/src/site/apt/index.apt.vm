@@ -4,6 +4,16 @@
 
 About ${artifactId}
 
+====
+
++--
+        NOTE: THIS UTILITY IS NOT YET IMPLEMENTED!
+              Initial requirements and design are still being considered.
+              Please email cwilper at duraspace.org with any comments/suggestions!
++--
+
+==== 
+
   This command-line utility exports selected objects and datastream content
 from Fedora repositories.
  
