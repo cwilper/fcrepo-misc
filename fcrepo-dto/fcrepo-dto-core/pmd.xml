@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2011-01-10T22:34:13.193">
+<pmd version="4.2.5" timestamp="2011-01-13T11:02:15.598">
+<file name="/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-core/src/main/java/com/github/cwilper/fcrepo/dto/core/DatastreamVersion.java">
+<violation beginline="18" endline="18" begincolumn="33" endcolumn="38" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="com.github.cwilper.fcrepo.dto.core" class="DatastreamVersion" variable="logger" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
+Avoid unused private fields such as 'logger'.
+</violation>
+</file>
 </pmd>

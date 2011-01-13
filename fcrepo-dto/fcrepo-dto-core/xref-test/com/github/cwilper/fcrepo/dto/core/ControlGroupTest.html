@@ -26,16 +26,16 @@
 <a class="jxr_linenumber" name="16" href="#16">16</a>  
 <a class="jxr_linenumber" name="17" href="#17">17</a>      @Test
 <a class="jxr_linenumber" name="18" href="#18">18</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> expectedShortNames() {
-<a class="jxr_linenumber" name="19" href="#19">19</a>          assertEquals(<span class="jxr_string">"E"</span>, ControlGroup.EXTERNAL_REFERENCE.shortName());
-<a class="jxr_linenumber" name="20" href="#20">20</a>          assertEquals(<span class="jxr_string">"M"</span>, ControlGroup.MANAGED_CONTENT.shortName());
+<a class="jxr_linenumber" name="19" href="#19">19</a>          assertEquals(<span class="jxr_string">"E"</span>, ControlGroup.EXTERNAL.shortName());
+<a class="jxr_linenumber" name="20" href="#20">20</a>          assertEquals(<span class="jxr_string">"M"</span>, ControlGroup.MANAGED.shortName());
 <a class="jxr_linenumber" name="21" href="#21">21</a>          assertEquals(<span class="jxr_string">"R"</span>, ControlGroup.REDIRECT.shortName());
 <a class="jxr_linenumber" name="22" href="#22">22</a>          assertEquals(<span class="jxr_string">"X"</span>, ControlGroup.INLINE_XML.shortName());
 <a class="jxr_linenumber" name="23" href="#23">23</a>      }
 <a class="jxr_linenumber" name="24" href="#24">24</a>  
 <a class="jxr_linenumber" name="25" href="#25">25</a>      @Test
 <a class="jxr_linenumber" name="26" href="#26">26</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> getByShortNames() {
-<a class="jxr_linenumber" name="27" href="#27">27</a>          assertEquals(ControlGroup.EXTERNAL_REFERENCE, ControlGroup.forShortName(<span class="jxr_string">"E"</span>));
-<a class="jxr_linenumber" name="28" href="#28">28</a>          assertEquals(ControlGroup.MANAGED_CONTENT, ControlGroup.forShortName(<span class="jxr_string">"M"</span>));
+<a class="jxr_linenumber" name="27" href="#27">27</a>          assertEquals(ControlGroup.EXTERNAL, ControlGroup.forShortName(<span class="jxr_string">"E"</span>));
+<a class="jxr_linenumber" name="28" href="#28">28</a>          assertEquals(ControlGroup.MANAGED, ControlGroup.forShortName(<span class="jxr_string">"M"</span>));
 <a class="jxr_linenumber" name="29" href="#29">29</a>          assertEquals(ControlGroup.REDIRECT, ControlGroup.forShortName(<span class="jxr_string">"R"</span>));
 <a class="jxr_linenumber" name="30" href="#30">30</a>          assertEquals(ControlGroup.INLINE_XML, ControlGroup.forShortName(<span class="jxr_string">"X"</span>));
 <a class="jxr_linenumber" name="31" href="#31">31</a>      }
