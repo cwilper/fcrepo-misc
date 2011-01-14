@@ -39,6 +39,39 @@ public class Datastream extends FedoraDTO {
     }
 
     /**
+     * Creates an instance based on the current state of this one.
+     *
+     * @return a deep copy.
+     */
+    public Datastream copy() {
+        Datastream copy = new Datastream(id)
+                .state(state)
+                .controlGroup(controlGroup)
+                .versionable(versionable);
+        for (DatastreamVersion version: versions) {
+            copy.versions().add(version.copy());
+        }
+        return copy;
+    }
+
+    /**
+     * Creates an instance based on the current state of this one, but with a
+     * different id.
+     *
+     * @return a deep copy.
+     */
+    public Datastream copy(String id) {
+        Datastream copy = new Datastream(id)
+                .state(state)
+                .controlGroup(controlGroup)
+                .versionable(versionable);
+        for (DatastreamVersion version: versions) {
+            copy.versions().add(version.copy());
+        }
+        return copy;
+    }
+
+    /**
      * Gets the id.
      *
      * @return the value, never <code>null</code>.

@@ -8,6 +8,7 @@ import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import com.github.cwilper.fcrepo.dto.core.InlineXML;
 import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.ContentResolvingDTOWriter;
+import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.slf4j.Logger;
@@ -200,7 +201,7 @@ public class FOXMLWriter extends ContentResolvingDTOWriter {
     private void writeAttribute(String name, Date value)
             throws XMLStreamException {
         if (value != null) {
-            writeAttribute(name, Util.toString(value));
+            writeAttribute(name, DateUtil.toString(value));
         }
     }
 
@@ -235,7 +236,7 @@ public class FOXMLWriter extends ContentResolvingDTOWriter {
     private void writeProperty(String name, Date value)
             throws XMLStreamException {
         if (value != null) {
-            writeProperty(name, Util.toString(value));
+            writeProperty(name, DateUtil.toString(value));
         }
     }
 

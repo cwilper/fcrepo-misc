@@ -1,5 +1,7 @@
 package com.github.cwilper.fcrepo.dto.core;
 
+import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
+
 import java.util.Date;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -24,6 +26,25 @@ public class FedoraObject extends FedoraDTO {
      * Creates an instance.
      */
     public FedoraObject() {
+    }
+
+    /**
+     * Creates an instance based on the current state of this one.
+     *
+     * @return a deep copy.
+     */
+    public FedoraObject copy() {
+        FedoraObject copy = new FedoraObject()
+                .pid(pid)
+                .state(state)
+                .label(label)
+                .ownerId(ownerId)
+                .createdDate(Util.copy(createdDate))
+                .lastModifiedDate(Util.copy(lastModifiedDate));
+        for (Datastream ds: datastreams.values()) {
+            copy.putDatastream(ds.copy());
+        }
+        return copy;
     }
 
     /**
@@ -184,8 +205,14 @@ public class FedoraObject extends FedoraDTO {
 
     @Override
     Object[] getEqArray() {
-        return new Object[] { pid, state, label, ownerId, createdDate,
-                lastModifiedDate, datastreams };
+        return new Object[] {
+                pid,
+                state,
+                label,
+                ownerId,
+                DateUtil.toString(createdDate),
+                DateUtil.toString(lastModifiedDate),
+                datastreams };
     }
 
     // ensures datastreams can't be added with a key differing from their id

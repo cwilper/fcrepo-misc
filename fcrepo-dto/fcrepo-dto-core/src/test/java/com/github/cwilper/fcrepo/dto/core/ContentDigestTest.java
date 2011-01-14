@@ -1,5 +1,6 @@
 package com.github.cwilper.fcrepo.dto.core;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -25,6 +26,16 @@ public class ContentDigestTest extends FedoraDTOTest {
                 new ContentDigest(),
                 new ContentDigest().type("a")
         };
+    }
+
+    @Test
+    public void copy() {
+        ContentDigest o1 = new ContentDigest().type("a").hexValue("a");
+        ContentDigest o2 = o1.copy();
+        Assert.assertEquals(o1, o2);
+        Assert.assertNotSame(o1, o2);
+        o1.type("b");
+        Assert.assertFalse(o1.equals(o2));
     }
 
     @Test

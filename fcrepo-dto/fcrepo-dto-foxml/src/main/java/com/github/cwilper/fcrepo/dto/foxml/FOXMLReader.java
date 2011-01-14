@@ -8,6 +8,7 @@ import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 import com.github.cwilper.fcrepo.dto.core.InlineXML;
 import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.ContentHandlingDTOReader;
+import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.apache.commons.io.IOUtils;
@@ -247,7 +248,7 @@ public class FOXMLReader extends ContentHandlingDTOReader {
 
     private static Date parseDate(String value, String kind) {
         if (value == null) return null;
-        Date date = Util.toDate(value);
+        Date date = DateUtil.toDate(value);
         if (date == null) {
             logger.warn("Ignoring malformed " + kind + " date value: " + value);
         }

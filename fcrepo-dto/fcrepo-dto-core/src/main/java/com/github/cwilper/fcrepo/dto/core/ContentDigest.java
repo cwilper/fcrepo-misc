@@ -21,6 +21,15 @@ public class ContentDigest extends FedoraDTO {
     }
 
     /**
+     * Creates an instance based on the current state of this one.
+     *
+     * @return a deep copy.
+     */
+    public ContentDigest copy() {
+        return new ContentDigest().type(this.type).hexValue(this.hexValue);
+    }
+
+    /**
      * Gets the type of digest.
      *
      * @return the value, or <code>null</code> if undefined.
@@ -59,7 +68,6 @@ public class ContentDigest extends FedoraDTO {
         this.hexValue = Util.normalize(hexValue);
         return this;
     }
-
 
     @Override
     Object[] getEqArray() {

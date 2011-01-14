@@ -18,8 +18,8 @@
   <url>http://cwilper.github.com/fcrepo-misc/</url>
 
   <modules>
-    <module>fcrepo-flexport</module>
     <module>fcrepo-dto</module>
+    <module>fcrepo-flexport</module>
     <module>fcrepo-httpclient</module>
     <module>fcrepo-riclient</module>
   </modules>

@@ -5,7 +5,7 @@ package com.github.cwilper.fcrepo.dto.core;
  * <p>
  * This superclass exists solely to provide useful and correct implementations
  * of {@link Object#hashCode()}, {@link Object#equals(Object)},
- * and {@link Object#toString()}, requiring only that subclasses
+ * and {@link Object#toString()}, by requiring that subclasses
  * implement {@link #getEqArray()}.
  */
 abstract class FedoraDTO {
@@ -46,7 +46,7 @@ abstract class FedoraDTO {
      * describes its state. This isn't intended for normal end-user
      * consumption, but can be useful for logging, testing, and debugging.
      *
-     * @return the description.
+     * @return the description, never <code>null</code>.
      */
     @Override
     public final String toString() {

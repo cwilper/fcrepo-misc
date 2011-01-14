@@ -1,5 +1,6 @@
 package com.github.cwilper.fcrepo.dto.core;
 
+import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +46,49 @@ public class DatastreamVersion extends FedoraDTO {
             throw new NullPointerException();
         }
         this.createdDate = Util.copy(createdDate);
+    }
+
+    /**
+     * Creates an instance based on the current state of this one.
+     *
+     * @return a deep copy.
+     */
+    public DatastreamVersion copy() {
+        DatastreamVersion copy = new DatastreamVersion(id,
+                                                       Util.copy(createdDate))
+                .label(label)
+                .mimeType(mimeType)
+                .formatURI(formatURI)
+                .size(size)
+                .contentDigest(contentDigest == null ? null : contentDigest.copy())
+                .inlineXML(inlineXML)
+                .contentLocation(contentLocation);
+        copy.altIds().addAll(altIds);
+        return copy;
+    }
+
+    /**
+     * Creates an instance based on the current state of this one, but with a
+     * different id and createdDate.
+     *
+     * @param id the id of the version (not null, immutable).
+     * @param createdDate the date the version was created
+     *        (possibly null, immutable).
+     * @return a deep copy.
+     * @throws NullPointerException if id is given as <code>null</code>.
+     */
+    public DatastreamVersion copy(String id, Date createdDate) {
+        DatastreamVersion copy = new DatastreamVersion(id,
+                                                       Util.copy(createdDate))
+                .label(label)
+                .mimeType(mimeType)
+                .formatURI(formatURI)
+                .size(size)
+                .contentDigest(contentDigest == null ? null : contentDigest.copy())
+                .inlineXML(inlineXML)
+                .contentLocation(contentLocation);
+        copy.altIds().addAll(altIds);
+        return copy;
     }
 
     /**
@@ -217,8 +261,17 @@ public class DatastreamVersion extends FedoraDTO {
 
     @Override
     Object[] getEqArray() {
-        return new Object[] { id, label, createdDate, mimeType, formatURI,
-                contentDigest, size, inlineXML, contentLocation, altIds };
+        return new Object[] {
+                id,
+                label,
+                DateUtil.toString(createdDate),
+                mimeType,
+                formatURI,
+                contentDigest,
+                size,
+                inlineXML,
+                contentLocation,
+                altIds };
     }
 
 }

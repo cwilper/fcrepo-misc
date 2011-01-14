@@ -30,6 +30,28 @@ public class DatastreamTest extends FedoraDTOTest {
     }
 
     @Test
+    public void copy() {
+        Datastream o1 = new Datastream("a");
+        o1.addVersion(new Date(0));
+        Datastream o2 = o1.copy();
+        Assert.assertEquals(o1, o2);
+        Assert.assertNotSame(o1, o2);
+        o1.addVersion(new Date(1));
+        Assert.assertFalse(o1.equals(o2));
+        o2 = o1.copy();
+        Assert.assertEquals(o1, o2);
+        o1.versions().add(new DatastreamVersion("a.2", new Date(2)));
+        Assert.assertFalse(o1.equals(o2));
+    }
+
+    @Test
+    public void copyWithArg() {
+        Datastream o1 = new Datastream("a");
+        Datastream o2 = o1.copy("b");
+        Assert.assertFalse(o1.equals(o2));
+    }
+
+    @Test
     public void idFieldNormal() {
         Assert.assertEquals("a", new Datastream("a").id());
     }

@@ -3,6 +3,8 @@ package com.github.cwilper.fcrepo.dto.core;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Date;
+
 /**
  * Unit tests for <code>FedoraObject</code>.
  */
@@ -11,10 +13,10 @@ public class FedoraObjectTest extends FedoraDTOTest {
     @Override
     Object[] getEqualInstances() {
         return new Object[] {
-                new FedoraObject(),
-                new FedoraObject(),
-                new FedoraObject().pid("a"),
-                new FedoraObject().pid("a")
+                new FedoraObject().createdDate(new Date(0)),
+                new FedoraObject().createdDate(new Date(0)),
+                new FedoraObject().lastModifiedDate(new Date(1)),
+                new FedoraObject().lastModifiedDate(new Date(1))
         };
     }
 
@@ -22,8 +24,39 @@ public class FedoraObjectTest extends FedoraDTOTest {
     Object[] getNonEqualInstances() {
         return new Object[] {
                 new FedoraObject(),
-                new ContentDigest().type("a")
+                new FedoraObject().createdDate(new Date(0)),
+                new FedoraObject().createdDate(new Date(0)),
+                new FedoraObject().createdDate(new Date(1)),
+                new FedoraObject().lastModifiedDate(new Date(0)),
+                new FedoraObject().lastModifiedDate(new Date(1))
         };
+    }
+
+    @Test
+    public void copy() {
+        FedoraObject o1 = new FedoraObject()
+                .createdDate(new Date(0))
+                .lastModifiedDate(new Date(0))
+                .putDatastream(new Datastream("a"));
+        FedoraObject o2 = o1.copy();
+        Assert.assertEquals(o1, o2);
+        Assert.assertNotSame(o1, o2);
+        o1.createdDate(new Date(1));
+        System.out.println(o1.createdDate().getTime());
+        System.out.println(o2.createdDate().getTime());
+        Assert.assertFalse(o1.equals(o2));
+        o2 = o1.copy();
+        Assert.assertEquals(o1, o2);
+        o1.lastModifiedDate(new Date(1));
+        Assert.assertFalse(o1.equals(o2));
+        o2 = o1.copy();
+        Assert.assertEquals(o1, o2);
+        o1.putDatastream(new Datastream("b"));
+        Assert.assertFalse(o1.equals(o2));
+        o2 = o1.copy();
+        Assert.assertEquals(o1, o2);
+        o1.datastreams().put("c", new Datastream("c"));
+        Assert.assertFalse(o1.equals(o2));
     }
 
     @Test
