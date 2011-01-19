@@ -1,7 +1,9 @@
 package com.github.cwilper.fcrepo.dto.foxml;
 
 /** Package-private constants. */
-abstract class Constants {
+final class Constants {
+
+    private Constants() { }
 
     static final String XML_VERSION = "1.0";
     static final String CHAR_ENCODING = "UTF-8";
@@ -57,4 +59,5 @@ abstract class Constants {
     static final String xmlContent = "xmlContent";
 
     static final String binaryContent = "binaryContent";
+
 }

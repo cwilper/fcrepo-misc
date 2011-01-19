@@ -14,7 +14,9 @@ import java.net.URI;
 /**
  * Utility methods for working with <code>HTTPClient</code>s.
  */
-public abstract class HttpUtil {
+public final class HttpUtil {
+
+    private HttpUtil() { }
 
     /**
      * Performs an HTTP GET using the given client, sending the response body

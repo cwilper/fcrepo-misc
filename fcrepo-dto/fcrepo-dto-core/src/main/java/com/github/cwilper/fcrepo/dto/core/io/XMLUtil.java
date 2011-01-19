@@ -31,7 +31,7 @@ import java.io.Writer;
  * XML reading and writing utility methods used by <code>dto.core</code>
  * and available for external use.
  */
-public abstract class XMLUtil implements XMLStreamConstants {
+public final class XMLUtil implements XMLStreamConstants {
 
     private final static Logger logger =
             LoggerFactory.getLogger(XMLUtil.class);
@@ -66,6 +66,8 @@ public abstract class XMLUtil implements XMLStreamConstants {
         // initialize xmlsec
         org.apache.xml.security.Init.init();
     }
+
+    private XMLUtil() { }
 
     /**
      * Pretty-prints the given XML.

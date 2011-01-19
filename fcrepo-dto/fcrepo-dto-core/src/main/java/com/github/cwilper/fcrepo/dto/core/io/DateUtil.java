@@ -9,7 +9,9 @@ import java.util.TimeZone;
 /**
  * Date-related utility methods.
  */
-public abstract class DateUtil {
+public final class DateUtil {
+
+    private DateUtil() { }
 
     /**
      * The preferred date format, output by {@link #toString(java.util.Date)}

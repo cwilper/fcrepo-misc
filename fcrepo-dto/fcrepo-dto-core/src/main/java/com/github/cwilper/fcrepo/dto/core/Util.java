@@ -4,7 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 /** Package-private utility methods. */
-abstract class Util {
+final class Util {
+
+    private Util() { }
 
     static String normalize(String string) {
         if (string != null) {
