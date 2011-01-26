@@ -22,13 +22,13 @@
     </dependency>
 
     <dependency>
-      <groupId>com.github.cwilper.fcrepo-misc</groupId>
-      <artifactId>fcrepo-httpclient</artifactId>
+      <groupId>com.github.cwilper</groupId>
+      <artifactId>ttff</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava-collections</artifactId>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-httpclient</artifactId>
     </dependency>
 
     <dependency>
