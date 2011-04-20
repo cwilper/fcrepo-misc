@@ -1,8 +1,0 @@
-#!/bin/sh
-
-appdir="`dirname "$0"`/.."
-classpath="$appdir/conf:$appdir/lib/*"
-
-java -cp "$classpath" ${mainClass} "$@"
-
-exit $?
