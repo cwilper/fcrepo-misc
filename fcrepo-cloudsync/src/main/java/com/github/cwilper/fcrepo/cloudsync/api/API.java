@@ -1,18 +1,20 @@
 package com.github.cwilper.fcrepo.cloudsync.api;
 
-import javax.ws.rs.DELETE;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 public class API {
-    
+
+    private static final Logger logger = LoggerFactory.getLogger(API.class);
+
     @GET
     @Path("/tasks/")
     public Response listTasks() {
+        logger.info("Got request to listTasks");
         Response r = Response.ok("Hello").build();
         return r;
     }
