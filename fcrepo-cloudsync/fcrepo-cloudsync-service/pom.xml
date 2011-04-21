@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.cwilper.fcrepo-misc</groupId>
+    <artifactId>fcrepo-cloudsync</artifactId>
+    <version>0.1.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>fcrepo-cloudsync-service</artifactId>
+  <packaging>war</packaging>
+  <name>Fedora CloudSync Service</name>
+  <description>
+    A web application for backing up and restoring Fedora content in DuraCloud.
+  </description>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper</groupId>
+      <artifactId>ttff</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-httpclient</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-dto-foxml</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openrdf</groupId>
+      <artifactId>rio</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+    </dependency>
+
+    <dependency>                                                                  
+      <groupId>org.slf4j</groupId>                                                                               
+      <artifactId>jcl-over-slf4j</artifactId> 
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+  </dependencies>
+
+</project>
