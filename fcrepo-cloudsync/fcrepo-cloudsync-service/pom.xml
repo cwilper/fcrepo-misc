@@ -29,6 +29,11 @@
 
     <dependency>
       <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-cloudsync-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
       <artifactId>fcrepo-httpclient</artifactId>
     </dependency>
 

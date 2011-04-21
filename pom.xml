@@ -94,6 +94,18 @@
 
       <dependency>
         <groupId>com.github.cwilper.fcrepo-misc</groupId>
+        <artifactId>fcrepo-cloudsync-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.cwilper.fcrepo-misc</groupId>
+        <artifactId>fcrepo-cloudsync-service</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.cwilper.fcrepo-misc</groupId>
         <artifactId>fcrepo-dto</artifactId>
         <version>${project.version}</version>
       </dependency>

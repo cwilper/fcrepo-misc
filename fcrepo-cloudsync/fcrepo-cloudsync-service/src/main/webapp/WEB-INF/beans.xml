@@ -11,10 +11,14 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
   <import resource="classpath:META-INF/cxf/cxf.xml"/>
   <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 
-  <jaxrs:server id="restService" address="/">
+  <jaxrs:server id="restService" address="/rest">
     <jaxrs:serviceBeans>
       <ref bean="taskResource"/>
     </jaxrs:serviceBeans>
+    <jaxrs:extensionMappings>
+      <entry key="json" value="application/json" />
+      <entry key="xml" value="application/xml" />
+    </jaxrs:extensionMappings>
   </jaxrs:server>
 
   <bean id="taskResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskResource"/>
