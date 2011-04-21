@@ -18,6 +18,7 @@
   <url>http://cwilper.github.com/fcrepo-misc/</url>
 
   <modules>
+    <module>fcrepo-cloudsync</module>
     <module>fcrepo-dto</module>
     <module>fcrepo-httpclient</module>
     <module>fcrepo-riclient</module>
@@ -153,6 +154,12 @@
       </dependency>
 
       <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        <version>2.4.0</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
         <version>4.0.3</version>
@@ -192,6 +199,18 @@
         <groupId>org.slf4j</groupId>
         <artifactId>jcl-over-slf4j</artifactId>
         <version>1.6.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>3.0.5.RELEASE</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
 
     </dependencies>
