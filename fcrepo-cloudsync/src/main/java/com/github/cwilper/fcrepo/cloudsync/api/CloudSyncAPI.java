@@ -7,9 +7,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-public class API {
+public class CloudSyncAPI {
 
-    private static final Logger logger = LoggerFactory.getLogger(API.class);
+    private static final Logger logger = LoggerFactory.getLogger(CloudSyncAPI.class);
 
     @GET
     @Path("/tasks/")

@@ -11,11 +11,11 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
   <import resource="classpath:META-INF/cxf/cxf.xml"/>
   <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 
-  <jaxrs:server id="API" address="/">
+  <jaxrs:server id="CloudSyncAPI" address="/">
     <jaxrs:serviceBeans>
       <ref bean="apiBean"/>
     </jaxrs:serviceBeans>
   </jaxrs:server>
 
-  <bean id="apiBean" class="com.github.cwilper.fcrepo.cloudsync.api.API"/>
+  <bean id="apiBean" class="com.github.cwilper.fcrepo.cloudsync.api.CloudSyncAPI"/>
 </beans>
