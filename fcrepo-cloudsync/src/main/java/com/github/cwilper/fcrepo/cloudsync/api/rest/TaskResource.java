@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.cloudsync.api;
+package com.github.cwilper.fcrepo.cloudsync.api.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,23 +7,25 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-public class CloudSyncAPI {
+@Path("/tasks/")
+public class TaskResource {
 
-    private static final Logger logger = LoggerFactory.getLogger(CloudSyncAPI.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(TaskResource.class);
 
     @GET
-    @Path("/tasks/")
-    public Response listTasks() {
-        logger.info("Got request to listTasks");
-        Response r = Response.ok("Hello").build();
+    @Path("/")
+    public Response list() {
+        logger.info("Got request to list");
+        Response r = Response.ok("Here's the list of tasks").build();
         return r;
     }
 
-/*
+    /*
     @PUT
     @Path("/customers/{id}")
     Response updateCustomer(@PathParam("id") Long id, Customer customer);
-    
+
     @POST
     @Path("/customers/")
     Response addCustomer(Customer customer);
