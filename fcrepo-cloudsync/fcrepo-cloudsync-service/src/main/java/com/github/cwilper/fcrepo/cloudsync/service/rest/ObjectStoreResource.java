@@ -33,7 +33,6 @@ public class ObjectStoreResource {
 
     @GET
     @Path("/")
-    @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
         @Description(value = "Lists all object stores", target = DocTarget.METHOD),
@@ -46,7 +45,6 @@ public class ObjectStoreResource {
 
     @GET
     @Path("{id}")
-    @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
             @Description(value = "Gets an object store", target = DocTarget.METHOD),
@@ -59,7 +57,6 @@ public class ObjectStoreResource {
 
     @GET
     @Path("{id}/objects")
-    @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
         @Description(value = "Queries an object store", target = DocTarget.METHOD),
@@ -88,7 +85,6 @@ public class ObjectStoreResource {
 
     @DELETE
     @Path("{id}")
-    @Consumes({})
     @Produces({})
     @Descriptions({
         @Description(value = "Deletes an object store", target = DocTarget.METHOD),

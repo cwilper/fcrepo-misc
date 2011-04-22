@@ -32,7 +32,6 @@ public class ObjectSetResource {
 
     @GET
     @Path("/")
-    @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
         @Description(value = "Lists all object sets", target = DocTarget.METHOD),
@@ -45,7 +44,6 @@ public class ObjectSetResource {
 
     @GET
     @Path("{id}")
-    @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
         @Description(value = "Gets an object set", target = DocTarget.METHOD),
@@ -71,7 +69,6 @@ public class ObjectSetResource {
 
     @DELETE
     @Path("{id}")
-    @Consumes({})
     @Produces({})
     @Descriptions({
         @Description(value = "Deletes an object set", target = DocTarget.METHOD),

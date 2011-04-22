@@ -17,7 +17,6 @@ public class TaskLogResource {
 
     @GET
     @Path("/")
-    @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
         @Description(value = "Lists all task logs", target = DocTarget.METHOD),
@@ -30,7 +29,6 @@ public class TaskLogResource {
 
     @GET
     @Path("{id}")
-    @Consumes({})
     @Produces({"text/plain"})
     @Descriptions({
         @Description(value = "Gets a task log", target = DocTarget.METHOD),
@@ -43,7 +41,6 @@ public class TaskLogResource {
 
     @DELETE
     @Path("{id}")
-    @Consumes({})
     @Produces({})
     @Descriptions({
         @Description(value = "Deletes a task log", target = DocTarget.METHOD),

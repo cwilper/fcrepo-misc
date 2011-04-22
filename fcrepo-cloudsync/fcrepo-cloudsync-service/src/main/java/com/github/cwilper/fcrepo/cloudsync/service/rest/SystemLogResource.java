@@ -17,7 +17,6 @@ public class SystemLogResource {
 
     @GET
     @Path("/")
-    @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
         @Description(value = "Lists all system logs", target = DocTarget.METHOD),
@@ -30,7 +29,6 @@ public class SystemLogResource {
 
     @GET
     @Path("{id}")
-    @Consumes({})
     @Produces({"text/plain"})
     @Descriptions({
         @Description(value = "Gets a system log", target = DocTarget.METHOD),
@@ -43,7 +41,6 @@ public class SystemLogResource {
 
     @DELETE
     @Path("{id}")
-    @Consumes({})
     @Produces({})
     @Descriptions({
         @Description(value = "Deletes a system log", target = DocTarget.METHOD),
