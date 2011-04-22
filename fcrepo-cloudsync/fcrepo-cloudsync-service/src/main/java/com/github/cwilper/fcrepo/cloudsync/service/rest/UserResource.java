@@ -14,18 +14,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-@Path("tasks")
-public class TaskResource {
+@Path("users")
+public class UserResource {
 
     @POST
     @Path("/")
     @Consumes({"application/xml", "application/json"})
     @Produces({})
     @Descriptions({
-        @Description(value = "Creates a task", target = DocTarget.METHOD),
+        @Description(value = "Creates a user", target = DocTarget.METHOD),
         @Description(value = "Status: 201 Created", target = DocTarget.RESPONSE)
     })
-    public Response createTask() {
+    public Response createUser() {
         Response r = Response.created(null).build();
         return r;
     }
@@ -35,10 +35,10 @@ public class TaskResource {
     @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
-        @Description(value = "Lists all tasks", target = DocTarget.METHOD),
+        @Description(value = "Lists all users", target = DocTarget.METHOD),
         @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
     })
-    public Response listTasks() {
+    public Response listUsers() {
         Response r = Response.ok().build();
         return r;
     }
@@ -48,10 +48,10 @@ public class TaskResource {
     @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
-        @Description(value = "Gets a task", target = DocTarget.METHOD),
+        @Description(value = "Gets a user", target = DocTarget.METHOD),
         @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
     })
-    public Response getTask(@PathParam("id") String id) {
+    public Response getUser(@PathParam("id") String id) {
         Response r = Response.ok().build();
         return r;
     }
@@ -61,10 +61,10 @@ public class TaskResource {
     @Consumes({"application/xml", "application/json"})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
-        @Description(value = "Updates a task", target = DocTarget.METHOD),
+        @Description(value = "Updates a user", target = DocTarget.METHOD),
         @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
     })
-    public Response updateTask(@PathParam("id") String id) {
+    public Response updateUser(@PathParam("id") String id) {
         Response r = Response.ok().build();
         return r;
     }
@@ -74,10 +74,10 @@ public class TaskResource {
     @Consumes({})
     @Produces({})
     @Descriptions({
-        @Description(value = "Deletes a task", target = DocTarget.METHOD),
+        @Description(value = "Deletes a user", target = DocTarget.METHOD),
         @Description(value = "Status: 204 No Content", target = DocTarget.RESPONSE)
     })
-    public Response deleteTask(@PathParam("id") String id) {
+    public Response deleteUser(@PathParam("id") String id) {
         Response r = Response.noContent().build();
         return r;
     }

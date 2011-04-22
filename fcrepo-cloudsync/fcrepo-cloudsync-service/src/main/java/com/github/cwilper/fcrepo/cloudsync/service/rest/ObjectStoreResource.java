@@ -12,20 +12,21 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-@Path("tasks")
-public class TaskResource {
+@Path("objectstores")
+public class ObjectStoreResource {
 
     @POST
     @Path("/")
     @Consumes({"application/xml", "application/json"})
     @Produces({})
     @Descriptions({
-        @Description(value = "Creates a task", target = DocTarget.METHOD),
+        @Description(value = "Creates an object store", target = DocTarget.METHOD),
         @Description(value = "Status: 201 Created", target = DocTarget.RESPONSE)
     })
-    public Response createTask() {
+    public Response createObjectStore() {
         Response r = Response.created(null).build();
         return r;
     }
@@ -35,10 +36,10 @@ public class TaskResource {
     @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
-        @Description(value = "Lists all tasks", target = DocTarget.METHOD),
+        @Description(value = "Lists all object stores", target = DocTarget.METHOD),
         @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
     })
-    public Response listTasks() {
+    public Response listObjectStores() {
         Response r = Response.ok().build();
         return r;
     }
@@ -48,10 +49,26 @@ public class TaskResource {
     @Consumes({})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
-        @Description(value = "Gets a task", target = DocTarget.METHOD),
+            @Description(value = "Gets an object store", target = DocTarget.METHOD),
+            @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+    })
+    public Response getObjectStore(@PathParam("id") String id) {
+        Response r = Response.ok().build();
+        return r;
+    }
+
+    @GET
+    @Path("{id}/objects")
+    @Consumes({})
+    @Produces({"application/xml", "application/json"})
+    @Descriptions({
+        @Description(value = "Queries an object store", target = DocTarget.METHOD),
         @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
     })
-    public Response getTask(@PathParam("id") String id) {
+    public Response queryObjectStore(@PathParam("id") String id,
+                                     @QueryParam("set") String set,
+                                     @QueryParam("limit") long limit,
+                                     @QueryParam("offset") long offset) {
         Response r = Response.ok().build();
         return r;
     }
@@ -61,10 +78,10 @@ public class TaskResource {
     @Consumes({"application/xml", "application/json"})
     @Produces({"application/xml", "application/json"})
     @Descriptions({
-        @Description(value = "Updates a task", target = DocTarget.METHOD),
+        @Description(value = "Updates an object store", target = DocTarget.METHOD),
         @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
     })
-    public Response updateTask(@PathParam("id") String id) {
+    public Response updateObjectStore(@PathParam("id") String id) {
         Response r = Response.ok().build();
         return r;
     }
@@ -74,10 +91,10 @@ public class TaskResource {
     @Consumes({})
     @Produces({})
     @Descriptions({
-        @Description(value = "Deletes a task", target = DocTarget.METHOD),
+        @Description(value = "Deletes an object store", target = DocTarget.METHOD),
         @Description(value = "Status: 204 No Content", target = DocTarget.RESPONSE)
     })
-    public Response deleteTask(@PathParam("id") String id) {
+    public Response deleteObjectStore(@PathParam("id") String id) {
         Response r = Response.noContent().build();
         return r;
     }

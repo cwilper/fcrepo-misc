@@ -13,7 +13,13 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 
   <jaxrs:server id="restService" address="/rest">
     <jaxrs:serviceBeans>
+      <ref bean="configurationResource"/>
+      <ref bean="userResource"/>
       <ref bean="taskResource"/>
+      <ref bean="objectSetResource"/>
+      <ref bean="objectStoreResource"/>
+      <ref bean="systemLogResource"/>
+      <ref bean="taskLogResource"/>
     </jaxrs:serviceBeans>
     <jaxrs:extensionMappings>
       <entry key="json" value="application/json" />
@@ -21,5 +27,11 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
     </jaxrs:extensionMappings>
   </jaxrs:server>
 
+  <bean id="configurationResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.ConfigurationResource"/>
+  <bean id="userResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.UserResource"/>
   <bean id="taskResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskResource"/>
+  <bean id="objectSetResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.ObjectSetResource"/>
+  <bean id="objectStoreResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.ObjectStoreResource"/>
+  <bean id="systemLogResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.SystemLogResource"/>
+  <bean id="taskLogResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskLogResource"/>
 </beans>
