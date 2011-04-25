@@ -5,5 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="configuration")
 public class Configuration {
 
-    public String name = "default name";
+    public Long keepSysLogDays;
+    public Long keepTaskLogDays;
+
 }

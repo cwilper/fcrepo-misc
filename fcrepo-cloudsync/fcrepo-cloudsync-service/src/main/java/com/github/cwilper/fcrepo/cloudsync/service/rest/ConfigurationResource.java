@@ -1,5 +1,6 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
+import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
 import com.github.cwilper.fcrepo.cloudsync.api.Configuration;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
@@ -10,33 +11,35 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 
 @Path("configuration")
-public class ConfigurationResource {
+public class ConfigurationResource extends AbstractResource {
+
+    public ConfigurationResource(CloudSyncService service) {
+        super(service);
+    }
 
     @GET
     @Path("/")
-    @Produces({"application/xml", "application/json"})
+    @Produces({XML, JSON})
     @Descriptions({
         @Description(value = "Gets the configuration", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
     public Configuration getConfiguration() {
-        return new Configuration();
+        return service.getConfiguration();
     }
 
     @PUT
     @Path("/")
-    @Consumes({"application/xml", "application/json"})
-    @Produces({"application/xml", "application/json"})
+    @Consumes({XML, JSON})
+    @Produces({XML, JSON})
     @Descriptions({
         @Description(value = "Updates the configuration", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response updateConfiguration() {
-        Response r = Response.ok().build();
-        return r;
+    public Configuration updateConfiguration(Configuration configuration) {
+        return service.updateConfiguration(configuration);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
+import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
+import com.github.cwilper.fcrepo.cloudsync.api.Task;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
@@ -12,74 +14,76 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
+import java.util.List;
 
 @Path("tasks")
-public class TaskResource {
+public class TaskResource extends AbstractResource {
+
+    public TaskResource(CloudSyncService service) {
+        super(service);
+    }
 
     @POST
     @Path("/")
-    @Consumes({"application/xml", "application/json"})
-    @Produces({})
+    @Consumes({XML, JSON})
     @Descriptions({
         @Description(value = "Creates a task", target = DocTarget.METHOD),
-        @Description(value = "Status: 201 Created", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_201_CREATED, target = DocTarget.RESPONSE)
     })
-    public Response createTask() {
-        Response r = Response.created(null).build();
-        return r;
+    public Response createTask(@Context UriInfo uriInfo,
+                               Task task) {
+        String id = service.createTask(task);
+        URI uri = getResourceURI(uriInfo.getRequestUri(), id);
+        return Response.created(uri).build();
     }
 
     @GET
     @Path("/")
-    @Consumes({})
-    @Produces({"application/xml", "application/json"})
+    @Produces({XML, JSON})
     @Descriptions({
         @Description(value = "Lists all tasks", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response listTasks() {
-        Response r = Response.ok().build();
-        return r;
+    public List<Task> listTasks() {
+        return service.listTasks();
     }
 
     @GET
     @Path("{id}")
-    @Consumes({})
-    @Produces({"application/xml", "application/json"})
+    @Produces({XML, JSON})
     @Descriptions({
         @Description(value = "Gets a task", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response getTask(@PathParam("id") String id) {
-        Response r = Response.ok().build();
-        return r;
+    public Task getTask(@PathParam("id") String id) {
+        return service.getTask(id);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
-    @Produces({"application/xml", "application/json"})
+    @Consumes({XML, JSON})
+    @Produces({XML, JSON})
     @Descriptions({
         @Description(value = "Updates a task", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response updateTask(@PathParam("id") String id) {
-        Response r = Response.ok().build();
-        return r;
+    public Task updateTask(@PathParam("id") String id,
+                           Task task) {
+        return service.updateTask(id, task);
     }
 
     @DELETE
     @Path("{id}")
-    @Consumes({})
-    @Produces({})
     @Descriptions({
         @Description(value = "Deletes a task", target = DocTarget.METHOD),
-        @Description(value = "Status: 204 No Content", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_204_NO_CONTENT, target = DocTarget.RESPONSE)
     })
-    public Response deleteTask(@PathParam("id") String id) {
-        Response r = Response.noContent().build();
-        return r;
+    public void deleteTask(@PathParam("id") String id) {
+        service.deleteTask(id);
     }
 
 }

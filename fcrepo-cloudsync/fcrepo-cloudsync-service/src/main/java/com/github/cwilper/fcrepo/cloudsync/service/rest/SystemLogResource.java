@@ -1,54 +1,56 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
+import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
+import com.github.cwilper.fcrepo.cloudsync.api.SystemLog;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
+import java.io.InputStream;
+import java.util.List;
 
 @Path("logs/system")
-public class SystemLogResource {
+public class SystemLogResource extends AbstractResource {
+
+    public SystemLogResource(CloudSyncService service) {
+        super(service);
+    }
 
     @GET
     @Path("/")
-    @Produces({"application/xml", "application/json"})
+    @Produces({XML, JSON})
     @Descriptions({
         @Description(value = "Lists all system logs", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response listSystemLogs() {
-        Response r = Response.ok().build();
-        return r;
+    public List<SystemLog> listSystemLogs() {
+        return service.listSystemLogs();
     }
 
     @GET
     @Path("{id}")
-    @Produces({"text/plain"})
+    @Produces({TEXT})
     @Descriptions({
         @Description(value = "Gets a system log", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response getSystemLog(@PathParam("id") String id) {
-        Response r = Response.ok().build();
-        return r;
+    public InputStream getSystemLog(@PathParam("id") String id) {
+        return service.getSystemLog(id);
     }
 
     @DELETE
     @Path("{id}")
-    @Produces({})
     @Descriptions({
         @Description(value = "Deletes a system log", target = DocTarget.METHOD),
-        @Description(value = "Status: 204 No Content", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_204_NO_CONTENT, target = DocTarget.RESPONSE)
     })
-    public Response deleteSystemLog(@PathParam("id") String id) {
-        Response r = Response.noContent().build();
-        return r;
+    public void deleteSystemLog(@PathParam("id") String id) {
+        service.deleteSystemLog(id);
     }
 
 }

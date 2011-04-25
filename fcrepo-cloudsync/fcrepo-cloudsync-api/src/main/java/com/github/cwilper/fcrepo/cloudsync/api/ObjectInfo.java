@@ -1,0 +1,17 @@
+package com.github.cwilper.fcrepo.cloudsync.api;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="objectinfo")
+public class ObjectInfo {
+
+    private String pid;
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+}

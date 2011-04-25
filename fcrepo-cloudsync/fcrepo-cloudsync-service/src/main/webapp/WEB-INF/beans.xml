@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-    xsi:schemaLocation="
-http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd
 http://cxf.apache.org/jaxrs
-http://cxf.apache.org/schemas/jaxrs.xsd">
+http://cxf.apache.org/schemas/jaxrs.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
   <import resource="classpath:META-INF/cxf/cxf.xml"/>
   <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
@@ -21,17 +21,53 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
       <ref bean="systemLogResource"/>
       <ref bean="taskLogResource"/>
     </jaxrs:serviceBeans>
+    <jaxrs:providers>
+      <ref bean="jsonProvider"/>
+    </jaxrs:providers>
     <jaxrs:extensionMappings>
       <entry key="json" value="application/json" />
       <entry key="xml" value="application/xml" />
     </jaxrs:extensionMappings>
   </jaxrs:server>
 
-  <bean id="configurationResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.ConfigurationResource"/>
-  <bean id="userResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.UserResource"/>
-  <bean id="taskResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskResource"/>
-  <bean id="objectSetResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.ObjectSetResource"/>
-  <bean id="objectStoreResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.ObjectStoreResource"/>
-  <bean id="systemLogResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.SystemLogResource"/>
-  <bean id="taskLogResource" class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskLogResource"/>
+  <util:list id="jsonKeys">
+    <value>users</value>
+  </util:list>
+
+  <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.JSONProvider">
+    <property name="serializeAsArray" value="true"/>
+    <property name="arrayKeys" ref="jsonKeys"/>
+  </bean>
+
+  <bean id="configurationResource"
+        class="com.github.cwilper.fcrepo.cloudsync.service.rest.ConfigurationResource">
+    <constructor-arg ref="serviceImpl"/>
+  </bean>
+  <bean id="userResource"
+        class="com.github.cwilper.fcrepo.cloudsync.service.rest.UserResource">
+    <constructor-arg ref="serviceImpl"/>
+  </bean>
+  <bean id="taskResource"
+        class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskResource">
+    <constructor-arg ref="serviceImpl"/>
+  </bean>
+  <bean id="objectSetResource"
+        class="com.github.cwilper.fcrepo.cloudsync.service.rest.ObjectSetResource">
+    <constructor-arg ref="serviceImpl"/>
+  </bean>
+  <bean id="objectStoreResource"
+        class="com.github.cwilper.fcrepo.cloudsync.service.rest.ObjectStoreResource">
+    <constructor-arg ref="serviceImpl"/>
+  </bean>
+  <bean id="systemLogResource"
+        class="com.github.cwilper.fcrepo.cloudsync.service.rest.SystemLogResource">
+    <constructor-arg ref="serviceImpl"/>
+  </bean>
+  <bean id="taskLogResource"
+        class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskLogResource">
+    <constructor-arg ref="serviceImpl"/>
+  </bean>
+
+  <bean id="serviceImpl"
+        class="com.github.cwilper.fcrepo.cloudsync.service.CloudSyncServiceImpl"/>
 </beans>

@@ -1,5 +1,7 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
+import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
+import com.github.cwilper.fcrepo.cloudsync.api.User;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
@@ -12,74 +14,77 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 
 @Path("users")
-public class UserResource {
+public class UserResource extends AbstractResource {
+
+    public UserResource(CloudSyncService service) {
+        super(service);
+    }
 
     @POST
     @Path("/")
-    @Consumes({"application/xml", "application/json"})
-    @Produces({})
+    @Consumes({XML, JSON})
     @Descriptions({
         @Description(value = "Creates a user", target = DocTarget.METHOD),
-        @Description(value = "Status: 201 Created", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_201_CREATED, target = DocTarget.RESPONSE)
     })
-    public Response createUser() {
-        Response r = Response.created(null).build();
-        return r;
+    public Response createUser(@Context UriInfo uriInfo,
+                               User user) {
+        String id = service.createUser(user);
+        URI uri = getResourceURI(uriInfo.getRequestUri(), id);
+        return Response.created(uri).build();
     }
 
     @GET
     @Path("/")
-    @Consumes({})
-    @Produces({"application/xml", "application/json"})
+    @Produces({XML, JSON})
     @Descriptions({
         @Description(value = "Lists all users", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response listUsers() {
-        Response r = Response.ok().build();
-        return r;
+    public Users listUsers() {
+        Users users = new Users();
+        users.setUser(service.listUsers());
+        return users;
     }
 
     @GET
     @Path("{id}")
-    @Consumes({})
-    @Produces({"application/xml", "application/json"})
+    @Produces({XML, JSON})
     @Descriptions({
         @Description(value = "Gets a user", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response getUser(@PathParam("id") String id) {
-        Response r = Response.ok().build();
-        return r;
+    public User getUser(@PathParam("id") String id) {
+        return service.getUser(id);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
-    @Produces({"application/xml", "application/json"})
+    @Consumes({XML, JSON})
+    @Produces({XML, JSON})
     @Descriptions({
         @Description(value = "Updates a user", target = DocTarget.METHOD),
-        @Description(value = "Status: 200 OK", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response updateUser(@PathParam("id") String id) {
-        Response r = Response.ok().build();
-        return r;
+    public User updateUser(@PathParam("id") String id,
+                           User user) {
+        return service.updateUser(id, user);
     }
 
     @DELETE
     @Path("{id}")
-    @Consumes({})
-    @Produces({})
     @Descriptions({
         @Description(value = "Deletes a user", target = DocTarget.METHOD),
-        @Description(value = "Status: 204 No Content", target = DocTarget.RESPONSE)
+        @Description(value = STATUS_204_NO_CONTENT, target = DocTarget.RESPONSE)
     })
-    public Response deleteUser(@PathParam("id") String id) {
-        Response r = Response.noContent().build();
-        return r;
+    public void deleteUser(@PathParam("id") String id) {
+        service.deleteUser(id);
     }
 
 }
