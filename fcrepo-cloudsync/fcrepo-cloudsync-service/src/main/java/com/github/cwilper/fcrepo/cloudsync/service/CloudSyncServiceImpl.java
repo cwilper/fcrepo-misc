@@ -10,8 +10,10 @@ import com.github.cwilper.fcrepo.cloudsync.api.Task;
 import com.github.cwilper.fcrepo.cloudsync.api.TaskLog;
 import com.github.cwilper.fcrepo.cloudsync.api.User;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public Configuration updateConfiguration(Configuration configuration) {
-        return null;
+        return configuration;
     }
 
     // -----------------------------------------------------------------------
@@ -54,23 +56,24 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     @Override
     public List<User> listUsers() {
         List<User> list = new ArrayList<User>();
-        User user1 = new User();
-        user1.setId("1");
-        list.add(user1);
-//        User user2 = new User();
-//        user2.setId("2");
-//        list.add(user2);
+        User user = new User();
+        user.setId("1");
+        list.add(user);
         return list;
     }
 
     @Override
     public User getUser(String id) {
-        return null;
+        User user = new User();
+        user.setId(id);
+        return user;
     }
 
     @Override
     public User updateUser(String id, User user) {
-        return null;
+        User u = new User();
+        u.setId("updatedId" + user.getId());
+        return u;
     }
 
     @Override
@@ -83,7 +86,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public String createTask(Task task) {
-        return null;
+        return "1";
     }
 
     @Override
@@ -97,12 +100,14 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public Task getTask(String id) {
-        return null;
+        Task item = new Task();
+        item.setId(id);
+        return item;
     }
 
     @Override
     public Task updateTask(String id, Task task) {
-        return null;
+        return task;
     }
 
     @Override
@@ -115,7 +120,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public String createObjectSet(ObjectSet objectSet) {
-        return null;
+        return "1";
     }
 
     @Override
@@ -129,12 +134,14 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public ObjectSet getObjectSet(String id) {
-        return null;
+        ObjectSet item = new ObjectSet();
+        item.setId(id);
+        return item;
     }
 
     @Override
     public ObjectSet updateObjectSet(String id, ObjectSet objectSet) {
-        return null;
+        return objectSet;
     }
 
     @Override
@@ -147,7 +154,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public String createObjectStore(ObjectStore objectStore) {
-        return null;
+        return "1";
     }
 
     @Override
@@ -161,17 +168,23 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public ObjectStore getObjectStore(String id) {
-        return null;
+        ObjectStore item = new ObjectStore();
+        item.setId(id);
+        return item;
     }
 
     @Override
     public List<ObjectInfo> queryObjectStore(String id, String set, long limit, long offset) {
-        return null;
+        List<ObjectInfo> list = new ArrayList<ObjectInfo>();
+        ObjectInfo i = new ObjectInfo();
+        i.setPid("test:object1");
+        list.add(i);
+        return list;
     }
 
     @Override
     public ObjectStore updateObjectStore(String id, ObjectStore objectStore) {
-        return null;
+        return objectStore;
     }
 
     @Override
@@ -193,7 +206,11 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public InputStream getSystemLog(String id) {
-        return null;
+        try {
+            return new ByteArrayInputStream(("System log " + id + " content").getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException wontHappen) {
+            throw new RuntimeException(wontHappen);
+        }
     }
 
     @Override
@@ -215,7 +232,11 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public InputStream getTaskLog(String id) {
-        return null;
+        try {
+            return new ByteArrayInputStream(("Task log " + id + " content").getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException wontHappen) {
+            throw new RuntimeException(wontHappen);
+        }
     }
 
     @Override

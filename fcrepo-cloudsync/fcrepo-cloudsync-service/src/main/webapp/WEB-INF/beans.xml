@@ -31,6 +31,7 @@ http://cxf.apache.org/schemas/jaxrs.xsd http://www.springframework.org/schema/ut
   </jaxrs:server>
 
   <util:list id="jsonArrayKeys">
+    <value>objects</value>
     <value>objectsets</value>
     <value>objectstores</value>
     <value>systemlogs</value>
