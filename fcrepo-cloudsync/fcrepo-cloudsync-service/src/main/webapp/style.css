@@ -1,0 +1,16 @@
+#heading {
+}
+
+#title {
+  float: left;
+  font-size: 2em;
+}
+
+#whoami {
+  float: right;
+  text-align: right;
+}
+
+#tabs {
+  clear: both;
+}
