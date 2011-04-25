@@ -50,8 +50,10 @@ public class ObjectStoreResource extends AbstractResource {
         @Description(value = "Lists all object stores", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public List<ObjectStore> listObjectStores() {
-        return service.listObjectStores();
+    public ObjectStores listObjectStores() {
+        ObjectStores list = new ObjectStores();
+        list.setObjectstore(service.listObjectStores());
+        return list;
     }
 
     @GET

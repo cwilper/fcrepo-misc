@@ -18,7 +18,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
-import java.util.List;
 
 @Path("objectsets")
 public class ObjectSetResource extends AbstractResource {
@@ -48,8 +47,10 @@ public class ObjectSetResource extends AbstractResource {
         @Description(value = "Lists all object sets", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public List<ObjectSet> listObjectSets() {
-        return service.listObjectSets();
+    public ObjectSets listObjectSets() {
+        ObjectSets list = new ObjectSets();
+        list.setObjectset(service.listObjectSets());
+        return list;
     }
 
     @GET

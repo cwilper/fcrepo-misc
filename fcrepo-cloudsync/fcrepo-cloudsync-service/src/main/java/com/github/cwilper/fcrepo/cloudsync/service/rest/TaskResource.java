@@ -48,8 +48,10 @@ public class TaskResource extends AbstractResource {
         @Description(value = "Lists all tasks", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public List<Task> listTasks() {
-        return service.listTasks();
+    public Tasks listTasks() {
+        Tasks list = new Tasks();
+        list.setTask(service.listTasks());
+        return list;
     }
 
     @GET

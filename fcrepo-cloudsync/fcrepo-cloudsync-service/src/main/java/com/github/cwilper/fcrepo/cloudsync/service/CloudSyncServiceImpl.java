@@ -88,7 +88,11 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public List<Task> listTasks() {
-        return null;
+        List<Task> list = new ArrayList<Task>();
+        Task item = new Task();
+        item.setId("1");
+        list.add(item);
+        return list;
     }
 
     @Override
@@ -116,7 +120,11 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public List<ObjectSet> listObjectSets() {
-        return null;
+        List<ObjectSet> list = new ArrayList<ObjectSet>();
+        ObjectSet item = new ObjectSet();
+        item.setId("1");
+        list.add(item);
+        return list;
     }
 
     @Override
@@ -144,7 +152,11 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public List<ObjectStore> listObjectStores() {
-        return null;
+        List<ObjectStore> list = new ArrayList<ObjectStore>();
+        ObjectStore item = new ObjectStore();
+        item.setId("1");
+        list.add(item);
+        return list;
     }
 
     @Override
@@ -172,7 +184,11 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public List<SystemLog> listSystemLogs() {
-        return null;
+        List<SystemLog> list = new ArrayList<SystemLog>();
+        SystemLog item = new SystemLog();
+        item.setId("1");
+        list.add(item);
+        return list;
     }
 
     @Override
@@ -190,7 +206,11 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public List<TaskLog> listTaskLogs() {
-        return null;
+        List<TaskLog> list = new ArrayList<TaskLog>();
+        TaskLog item = new TaskLog();
+        item.setId("1");
+        list.add(item);
+        return list;
     }
 
     @Override

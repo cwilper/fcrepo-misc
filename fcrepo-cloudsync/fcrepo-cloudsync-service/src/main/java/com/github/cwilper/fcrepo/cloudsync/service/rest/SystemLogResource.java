@@ -1,7 +1,6 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
-import com.github.cwilper.fcrepo.cloudsync.api.SystemLog;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
@@ -12,9 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.io.InputStream;
-import java.util.List;
 
-@Path("logs/system")
+@Path("systemlogs")
 public class SystemLogResource extends AbstractResource {
 
     public SystemLogResource(CloudSyncService service) {
@@ -28,8 +26,10 @@ public class SystemLogResource extends AbstractResource {
         @Description(value = "Lists all system logs", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public List<SystemLog> listSystemLogs() {
-        return service.listSystemLogs();
+    public SystemLogs listSystemLogs() {
+        SystemLogs list = new SystemLogs();
+        list.setSystemlog(service.listSystemLogs());
+        return list;
     }
 
     @GET

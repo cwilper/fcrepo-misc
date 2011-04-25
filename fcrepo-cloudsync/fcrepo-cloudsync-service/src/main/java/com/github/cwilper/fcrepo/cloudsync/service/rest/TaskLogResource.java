@@ -1,7 +1,6 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
-import com.github.cwilper.fcrepo.cloudsync.api.TaskLog;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
@@ -12,9 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.io.InputStream;
-import java.util.List;
 
-@Path("logs/tasks")
+@Path("tasklogs")
 public class TaskLogResource extends AbstractResource {
 
     public TaskLogResource(CloudSyncService service) {
@@ -28,8 +26,10 @@ public class TaskLogResource extends AbstractResource {
         @Description(value = "Lists all task logs", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public List<TaskLog> listTaskLogs() {
-        return service.listTaskLogs();
+    public TaskLogs listTaskLogs() {
+        TaskLogs list = new TaskLogs();
+        list.setTasklog(service.listTaskLogs());
+        return list;
     }
 
     @GET
