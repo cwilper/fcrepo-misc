@@ -24,7 +24,7 @@ function CloudSyncClient(baseURL) {
   };
 
   function doDelete(path, success, error) {
-    doGetOrDelete("DELETE", path, success, error);
+    doGetOrDelete("DELETE", "json", path, success, error);
   };
 
   function doGetOrDelete(method, dataType, path, success, error) {
