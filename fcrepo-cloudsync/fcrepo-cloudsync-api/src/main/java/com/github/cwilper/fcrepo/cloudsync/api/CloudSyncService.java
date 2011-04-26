@@ -17,7 +17,7 @@ public interface CloudSyncService {
     //                                Users
     // -----------------------------------------------------------------------
 
-    String createUser(User user);
+    User createUser(User user);
 
     List<User> listUsers();
 
@@ -31,7 +31,7 @@ public interface CloudSyncService {
     //                                Tasks
     // -----------------------------------------------------------------------
 
-    String createTask(Task task);
+    Task createTask(Task task);
 
     List<Task> listTasks();
 
@@ -45,7 +45,7 @@ public interface CloudSyncService {
     //                             Object Sets
     // -----------------------------------------------------------------------
 
-    String createObjectSet(ObjectSet objectSet);
+    ObjectSet createObjectSet(ObjectSet objectSet);
 
     List<ObjectSet> listObjectSets();
 
@@ -59,7 +59,7 @@ public interface CloudSyncService {
     //                            Object Stores
     // -----------------------------------------------------------------------
 
-    String createObjectStore(ObjectStore objectStore);
+    ObjectStore createObjectStore(ObjectStore objectStore);
 
     List<ObjectStore> listObjectStores();
 
@@ -77,7 +77,9 @@ public interface CloudSyncService {
 
     List<SystemLog> listSystemLogs();
 
-    InputStream getSystemLog(String id);
+    SystemLog getSystemLog(String id);
+
+    InputStream getSystemLogContent(String id);
 
     void deleteSystemLog(String id);
 
@@ -87,7 +89,9 @@ public interface CloudSyncService {
 
     List<TaskLog> listTaskLogs();
 
-    InputStream getTaskLog(String id);
+    TaskLog getTaskLog(String id);
+
+    InputStream getTaskLogContent(String id);
 
     void deleteTaskLog(String id);
 

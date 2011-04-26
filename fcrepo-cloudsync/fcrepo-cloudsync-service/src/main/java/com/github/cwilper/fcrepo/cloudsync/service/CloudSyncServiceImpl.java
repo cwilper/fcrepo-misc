@@ -49,8 +49,8 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     // -----------------------------------------------------------------------
 
     @Override
-    public String createUser(User user) {
-        return "1";
+    public User createUser(User user) {
+        return user;
     }
 
     @Override
@@ -85,8 +85,8 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     // -----------------------------------------------------------------------
 
     @Override
-    public String createTask(Task task) {
-        return "1";
+    public Task createTask(Task task) {
+        return task;
     }
 
     @Override
@@ -119,8 +119,8 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     // -----------------------------------------------------------------------
 
     @Override
-    public String createObjectSet(ObjectSet objectSet) {
-        return "1";
+    public ObjectSet createObjectSet(ObjectSet objectSet) {
+        return objectSet;
     }
 
     @Override
@@ -153,8 +153,8 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     // -----------------------------------------------------------------------
 
     @Override
-    public String createObjectStore(ObjectStore objectStore) {
-        return "1";
+    public ObjectStore createObjectStore(ObjectStore objectStore) {
+        return objectStore;
     }
 
     @Override
@@ -205,7 +205,14 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public InputStream getSystemLog(String id) {
+    public SystemLog getSystemLog(String id) {
+        SystemLog item = new SystemLog();
+        item.setId(id);
+        return item;
+    }
+
+    @Override
+    public InputStream getSystemLogContent(String id) {
         try {
             return new ByteArrayInputStream(("System log " + id + " content").getBytes("UTF-8"));
         } catch (UnsupportedEncodingException wontHappen) {
@@ -231,7 +238,14 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public InputStream getTaskLog(String id) {
+    public TaskLog getTaskLog(String id) {
+        TaskLog item = new TaskLog();
+        item.setId(id);
+        return item;
+    }
+
+    @Override
+    public InputStream getTaskLogContent(String id) {
         try {
             return new ByteArrayInputStream(("Task log " + id + " content").getBytes("UTF-8"));
         } catch (UnsupportedEncodingException wontHappen) {

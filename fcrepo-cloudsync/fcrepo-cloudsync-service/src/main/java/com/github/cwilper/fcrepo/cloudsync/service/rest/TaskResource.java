@@ -18,7 +18,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
-import java.util.List;
 
 @Path("tasks")
 public class TaskResource extends AbstractResource {
@@ -36,9 +35,9 @@ public class TaskResource extends AbstractResource {
     })
     public Response createTask(@Context UriInfo uriInfo,
                                Task task) {
-        String id = service.createTask(task);
-        URI uri = getResourceURI(uriInfo.getRequestUri(), id);
-        return Response.created(uri).build();
+        Task newTask = service.createTask(task);
+        URI uri = getResourceURI(uriInfo.getRequestUri(), newTask.getId());
+        return Response.created(uri).entity(newTask).build();
     }
 
     @GET

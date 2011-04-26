@@ -1,6 +1,7 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
+import com.github.cwilper.fcrepo.cloudsync.api.TaskLog;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
@@ -34,13 +35,24 @@ public class TaskLogResource extends AbstractResource {
 
     @GET
     @Path("{id}")
+    @Produces({XML, JSON})
+    @Descriptions({
+            @Description(value = "Gets a task log", target = DocTarget.METHOD),
+            @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
+    })
+    public TaskLog getTaskLog(@PathParam("id") String id) {
+        return service.getTaskLog(id);
+    }
+
+    @GET
+    @Path("{id}/content")
     @Produces({TEXT})
     @Descriptions({
-        @Description(value = "Gets a task log", target = DocTarget.METHOD),
+        @Description(value = "Gets a task log's content", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public InputStream getTaskLog(@PathParam("id") String id) {
-        return service.getTaskLog(id);
+    public InputStream getTaskLogContent(@PathParam("id") String id) {
+        return service.getTaskLogContent(id);
     }
 
     @DELETE
@@ -50,7 +62,7 @@ public class TaskLogResource extends AbstractResource {
         @Description(value = STATUS_204_NO_CONTENT, target = DocTarget.RESPONSE)
     })
     public void deleteTaskLog(@PathParam("id") String id) {
-        deleteTaskLog(id);
+        service.deleteTaskLog(id);
     }
 
 }
