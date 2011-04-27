@@ -36,7 +36,7 @@ public class ObjectSetResource extends AbstractResource {
     public Response createObjectSet(@Context UriInfo uriInfo,
                                     ObjectSet objectSet) {
         ObjectSet newObjectSet = service.createObjectSet(objectSet);
-        URI uri = getResourceURI(uriInfo.getRequestUri(), newObjectSet.getId());
+        URI uri = getResourceURI(uriInfo.getRequestUri(), newObjectSet.id);
         return Response.created(uri).entity(newObjectSet).build();
     }
 

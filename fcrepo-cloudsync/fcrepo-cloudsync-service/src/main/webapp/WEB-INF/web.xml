@@ -8,12 +8,6 @@
     <param-value>WEB-INF/beans.xml</param-value>
   </context-param>
 
-  <listener>
-    <listener-class>
-      org.springframework.web.context.ContextLoaderListener
-    </listener-class>
-  </listener>
-
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -23,6 +17,18 @@
     <filter-name>springSecurityFilterChain</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+  <listener>
+    <listener-class>
+      com.github.cwilper.fcrepo.cloudsync.service.CloudSyncInitializer
+    </listener-class>
+  </listener>
+
+  <listener>
+    <listener-class>
+      org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener>
 
   <servlet>
     <servlet-name>CXFServlet</servlet-name>

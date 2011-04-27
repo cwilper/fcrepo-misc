@@ -36,7 +36,7 @@ public class UserResource extends AbstractResource {
     public Response createUser(@Context UriInfo uriInfo,
                                User user) {
         User newUser = service.createUser(user);
-        URI uri = getResourceURI(uriInfo.getRequestUri(), newUser.getId());
+        URI uri = getResourceURI(uriInfo.getRequestUri(), newUser.id);
         return Response.created(uri).entity(newUser).build();
     }
 

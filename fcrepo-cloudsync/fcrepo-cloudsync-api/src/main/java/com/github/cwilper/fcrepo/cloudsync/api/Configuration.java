@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="configuration")
 public class Configuration {
 
-    public Long keepSysLogDays;
-    public Long keepTaskLogDays;
+    public Integer keepSysLogDays;
+    public Integer keepTaskLogDays;
 
 }
