@@ -29,7 +29,10 @@ $(function() {
 
   $("#button-Logout").click(
     function() {
-      alert("This would log you out and take you to the login page.");
+     // alert("This would log you out and take you to the login page.");
+      document.location = 'j_spring_security_logout';
+//      $.get('j_spring_security_logout'); // clear cookies
+//      window.location.reload();
     }
   );
 
