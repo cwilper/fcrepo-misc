@@ -29,7 +29,7 @@ function CloudSyncClient(baseURL) {
 
   function doGetOrDelete(method, dataType, path, success, error) {
     var url = baseURL + path;
-    alert("Request:\n\n" + method + " " + url);
+//    alert("Request:\n\n" + method + " " + url);
     var errorCallback = error;
     if (typeof error === 'undefined') {
       errorCallback = this.errorCallback;
@@ -105,6 +105,10 @@ function CloudSyncClient(baseURL) {
 
   this.getUser = function(id, success, error) {
     doGet("users/" + id, success, error);
+  };
+
+  this.getCurrentUser = function(success, error) {
+    doGet("users/current", success, error);
   };
 
   this.updateUser = function(id, data, success, error) {

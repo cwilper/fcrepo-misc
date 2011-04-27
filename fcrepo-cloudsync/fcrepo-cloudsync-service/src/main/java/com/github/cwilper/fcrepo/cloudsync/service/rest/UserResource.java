@@ -57,11 +57,22 @@ public class UserResource extends AbstractResource {
     @Path("{id}")
     @Produces({XML, JSON})
     @Descriptions({
-        @Description(value = "Gets a user", target = DocTarget.METHOD),
-        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
+            @Description(value = "Gets a user", target = DocTarget.METHOD),
+            @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
     public User getUser(@PathParam("id") String id) {
         return service.getUser(id);
+    }
+
+    @GET
+    @Path("current")
+    @Produces({XML, JSON})
+    @Descriptions({
+        @Description(value = "Gets the currently logged in user", target = DocTarget.METHOD),
+        @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
+    })
+    public User getCurrentUser() {
+        return service.getCurrentUser();
     }
 
     @PUT

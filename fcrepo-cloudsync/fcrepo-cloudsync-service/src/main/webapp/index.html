@@ -99,6 +99,12 @@ $(function() {
       }
     }
   });
+
+  service.getCurrentUser(function(data, status, x) {
+    $("#username").text(data.user.name);
+            //JSON.stringify(data[0]));
+  });
+
 });
 
 //
@@ -123,7 +129,7 @@ function showText(data, status, x) {
 </div>
 
 <div id="whoami">
-  Logged in as cwilper<br/>
+  Logged in as <span id="username">..</span><br/>
   <button id="button-Logout">Logout</button>
 </div>
 

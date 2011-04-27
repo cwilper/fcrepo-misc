@@ -23,6 +23,8 @@ public interface CloudSyncService {
 
     User getUser(String id);
 
+    User getCurrentUser();
+
     User updateUser(String id, User user);
 
     void deleteUser(String id);

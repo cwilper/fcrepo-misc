@@ -9,6 +9,7 @@ import com.github.cwilper.fcrepo.cloudsync.api.SystemLog;
 import com.github.cwilper.fcrepo.cloudsync.api.Task;
 import com.github.cwilper.fcrepo.cloudsync.api.TaskLog;
 import com.github.cwilper.fcrepo.cloudsync.api.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -66,6 +67,17 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     public User getUser(String id) {
         User user = new User();
         user.setId(id);
+        return user;
+    }
+
+    @Override
+    public User getCurrentUser() {
+        User user = new User();
+        user.setId("9");
+        org.springframework.security.core.userdetails.User u =
+                (org.springframework.security.core.userdetails.User)
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user.setName(u.getUsername());
         return user;
     }
 
