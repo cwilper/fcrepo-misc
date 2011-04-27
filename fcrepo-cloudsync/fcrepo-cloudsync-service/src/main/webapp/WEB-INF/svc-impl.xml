@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="serviceImpl"
+        class="com.github.cwilper.fcrepo.cloudsync.service.CloudSyncServiceImpl"/>
+
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    <property name="driverClass" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+    <property name="jdbcUrl" value="jdbc:derby:cloudsync;create=true"/>
+  </bean>
+
+</beans>

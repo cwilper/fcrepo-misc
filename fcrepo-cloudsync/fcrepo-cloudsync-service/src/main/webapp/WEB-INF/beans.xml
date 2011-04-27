@@ -1,98 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:security="http://www.springframework.org/schema/security"
-       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
-http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
-http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <import resource="classpath:META-INF/cxf/cxf.xml"/>
-  <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+  <import resource="security.xml"/>
+  <import resource="rest-api.xml"/>
+  <import resource="svc-impl.xml"/>
 
-  <jaxrs:server id="restService" address="/rest">
-    <jaxrs:serviceBeans>
-      <ref bean="configurationResource"/>
-      <ref bean="userResource"/>
-      <ref bean="taskResource"/>
-      <ref bean="objectSetResource"/>
-      <ref bean="objectStoreResource"/>
-      <ref bean="systemLogResource"/>
-      <ref bean="taskLogResource"/>
-    </jaxrs:serviceBeans>
-    <jaxrs:providers>
-      <ref bean="jsonProvider"/>
-    </jaxrs:providers>
-    <jaxrs:extensionMappings>
-      <entry key="json" value="application/json" />
-      <entry key="xml" value="application/xml" />
-    </jaxrs:extensionMappings>
-  </jaxrs:server>
-
-  <util:list id="jsonArrayKeys">
-    <value>objects</value>
-    <value>objectsets</value>
-    <value>objectstores</value>
-    <value>systemlogs</value>
-    <value>tasklogs</value>
-    <value>tasks</value>
-    <value>users</value>
-  </util:list>
-
-  <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.JSONProvider">
-    <property name="serializeAsArray" value="true"/>
-    <property name="arrayKeys" ref="jsonArrayKeys"/>
-  </bean>
-
-  <bean id="configurationResource"
-        class="com.github.cwilper.fcrepo.cloudsync.service.rest.ConfigurationResource">
-    <constructor-arg ref="serviceImpl"/>
-  </bean>
-  <bean id="userResource"
-        class="com.github.cwilper.fcrepo.cloudsync.service.rest.UserResource">
-    <constructor-arg ref="serviceImpl"/>
-  </bean>
-  <bean id="taskResource"
-        class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskResource">
-    <constructor-arg ref="serviceImpl"/>
-  </bean>
-  <bean id="objectSetResource"
-        class="com.github.cwilper.fcrepo.cloudsync.service.rest.ObjectSetResource">
-    <constructor-arg ref="serviceImpl"/>
-  </bean>
-  <bean id="objectStoreResource"
-        class="com.github.cwilper.fcrepo.cloudsync.service.rest.ObjectStoreResource">
-    <constructor-arg ref="serviceImpl"/>
-  </bean>
-  <bean id="systemLogResource"
-        class="com.github.cwilper.fcrepo.cloudsync.service.rest.SystemLogResource">
-    <constructor-arg ref="serviceImpl"/>
-  </bean>
-  <bean id="taskLogResource"
-        class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskLogResource">
-    <constructor-arg ref="serviceImpl"/>
-  </bean>
-
-  <bean id="serviceImpl"
-        class="com.github.cwilper.fcrepo.cloudsync.service.CloudSyncServiceImpl"/>
-
-  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-    <property name="driverClass" value="org.apache.derby.jdbc.EmbeddedDriver"/>
-    <property name="jdbcUrl" value="jdbc:derby:cloudsync;create=true"/>
-  </bean>
-
-  <security:http auto-config="true">
-    <security:intercept-url pattern="/**" access="ROLE_USER"/>
-  </security:http>
-
-  <security:authentication-manager>
-    <security:authentication-provider>
-      <security:user-service>
-        <security:user name="admin" password="apass" authorities="ROLE_USER, ROLE_ADMIN"/>
-        <security:user name="cwilper" password="cpass" authorities="ROLE_USER"/>
-      </security:user-service>
-    </security:authentication-provider>
-  </security:authentication-manager>
 </beans>
