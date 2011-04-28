@@ -5,6 +5,8 @@
 <title>Fedora CloudSync: Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
+<link rel="shortcut icon" href="static/favicon.ico"/>
+
 <link rel="stylesheet" type="text/css" href="static/style.css"/>
 <link rel="stylesheet" type="text/css" href="static/jquery-ui-1.8.12.custom.css"/>
 

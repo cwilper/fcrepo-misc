@@ -5,6 +5,8 @@
 <title>Fedora CloudSync</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
+<link rel="shortcut icon" href="static/favicon.ico"/>
+
 <link rel="stylesheet" type="text/css" href="static/style.css"/>
 <link rel="stylesheet" type="text/css" href="static/jquery-ui-1.8.12.custom.css"/>
 
@@ -22,6 +24,8 @@ var service = new CloudSyncClient(document.location.href + "api/rest/");
 $(function() {
 
   // initialize ui elements
+
+  $(".expandable").accordion({collapsible: true, active: false});
 
   $("#button-Logout").button({
     icons: { primary: "ui-icon-power" }
@@ -122,26 +126,70 @@ $(function() {
 
   <ul>
     <li><a href="#tab-Tasks">Tasks</a></li>
-    <li><a href="#tab-ObjectSets">Object Sets</a></li>
-    <li><a href="#tab-ObjectStores">Object Stores</a></li>
+    <li><a href="#tab-ObjectSets">Sets</a></li>
+    <li><a href="#tab-ObjectStores">Stores</a></li>
   </ul>
   <div id="tab-Tasks">
     <button id="button-NewTask" style="float:right">New Task</button>
-    <div style="clear: both">
-      A <em>Task</em> defines work that is to be performed or is currently being performed.
+    <div style="clear: both; padding-top: 10px">
+      <hr size="1" style="color: #dddddd"/>
+        <h3>Active</h3>
+        <dir>
+            None.
+        </dir>
+        <h3>Scheduled</h3>
+        <dir>
+            None.
+        </dir>
+        <h3>Completed Logs</h3>
+        <dir>
+            None.
+        </dir>
     </div>
+    <p style="text-align: right;">
+        <input type="checkbox"/>
+        Auto-delete completed logs; keep the latest
+        <select>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </p>
   </div>
   <div id="tab-ObjectSets">
-    <button id="button-NewObjectSet" style="float:right">New Object Set</button>
-    <div style="clear: both">
-      An <em>Object Set</em> specifies a group of Fedora Objects for use with tasks.
+    <button id="button-NewObjectSet" style="float:right">New Set</button>
+    <div style="clear: both; padding-top: 10px; padding-bottom: 10px;">
+      <hr size="1" style="color: #dddddd"/>
+      <h3>Built-in</h3>
+        <dir>
+        <div class="expandable">
+            <h3><a href="#">All objects, including inline XML (X) datastreams only</a></h3>
+            <div>Here's the previously hidden text!</div>
+        </div>
+        <div class="expandable">
+            <h3><a href="#">All objects, including inline XML (X) and managed (M) datastreams</a></h3>
+            <div>Here's the previously hidden text!</div>
+        </div>
+      <div class="expandable">
+          <h3><a href="#">All objects, including inline XML (X), managed (M), and external (E) datastreams</a></h3>
+          <div>Here's the previously hidden text!</div>
+      </div>
+        </dir>
+      <h3>Custom</h3>
+        <dir>
+        None.
+        </dir>
     </div>
   </div>
   <div id="tab-ObjectStores">
-    <button id="button-NewObjectStore" style="float:right">New Object Store</button>
-    <div style="clear: both">
-      An <em>Object Store</em> is a source or destination of Fedora Objects and
-      associated datastreams.
+    <button id="button-NewObjectStore" style="float:right">New Store</button>
+    <div style="clear: both; padding-top: 10px; padding-bottom: 10px;">
+      <hr size="1" style="color: #dddddd"/>
+      <h3>DuraCloud</h3>
+        <dir>None.</dir>
+      <h3>Fedora</h3>
+        <dir>None.</dir>
     </div>
   </div>
 
