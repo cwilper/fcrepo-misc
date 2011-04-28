@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.cloudsync.service;
+package com.github.cwilper.fcrepo.cloudsync.service.util;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
