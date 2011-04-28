@@ -6,7 +6,10 @@
 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
   <http auto-config="true">
+    <intercept-url pattern="/static/**" filters="none"/>
+    <intercept-url pattern="/login*" filters="none"/>
     <intercept-url pattern="/**" access="ROLE_USER"/>
+    <form-login login-page="/login"/>
   </http>
 
   <authentication-manager>

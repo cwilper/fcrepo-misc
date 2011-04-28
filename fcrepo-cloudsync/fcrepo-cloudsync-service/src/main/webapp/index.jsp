@@ -5,20 +5,15 @@
 <title>Fedora CloudSync</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-<meta http-equiv="pragma" content="no-cache" />
-<meta http-equiv="cache-control" content="max-age=0" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="cache-control" content="no-store" />
+<link rel="stylesheet" type="text/css" href="static/style.css"/>
+<link rel="stylesheet" type="text/css" href="static/jquery-ui-1.8.12.custom.css"/>
 
-<link rel="stylesheet" type="text/css" href="style.css"/>
-<link rel="stylesheet" type="text/css" href="jquery-ui-1.8.12.custom.css"/>
+<script type="text/javascript" src="static/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="static/jquery-ui-1.8.12.custom.min.js"></script>
 
-<script type="text/javascript" src="jquery-1.5.2.min.js"></script>
-<script type="text/javascript" src="jquery-ui-1.8.12.custom.min.js"></script>
+<script type="text/javascript" src="static/json2.js"></script>
 
-<script type="text/javascript" src="json2.js"></script>
-
-<script type="text/javascript" src="cloudsync-client.js"></script>
+<script type="text/javascript" src="static/cloudsync-client.js"></script>
 
 <script type="text/javascript"><!--
 
@@ -127,11 +122,11 @@ function showText(data, status, x) {
 <body>
 
 <div id="title">
-  Fedora CloudSync
+  <img src="static/logo.png"/>
 </div>
 
 <div id="whoami">
-  Logged in as <span id="username">..</span><br/>
+  <em>Logged in as <span id="username">..</span></em><br/>
   <button id="button-Logout">Logout</button>
 </div>
 
