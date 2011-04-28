@@ -92,9 +92,14 @@ public class UserResource extends AbstractResource {
         @Description(value = "Updates a user", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public User updateUser(@PathParam("id") String id,
+    public Response updateUser(@PathParam("id") String id,
                            User user) {
-        return service.updateUser(id, user);
+        User updated = service.updateUser(id, user);
+        if (updated != null) {
+            return Response.ok(updated).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 
     @DELETE

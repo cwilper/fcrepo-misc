@@ -15,8 +15,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
   <authentication-manager>
     <authentication-provider>
       <user-service>
-        <user name="admin" password="apass" authorities="ROLE_USER, ROLE_ADMIN"/>
-        <user name="cwilper" password="cpass" authorities="ROLE_USER"/>
+        <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN"/>
       </user-service>
     </authentication-provider>
   </authentication-manager>
