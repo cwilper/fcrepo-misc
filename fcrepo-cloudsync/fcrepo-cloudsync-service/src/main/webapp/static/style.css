@@ -8,6 +8,7 @@ body {
 #title {
   float: left;
   font-size: 2em;
+  margin-bottom: 5px;
 }
 
 #whoami {
