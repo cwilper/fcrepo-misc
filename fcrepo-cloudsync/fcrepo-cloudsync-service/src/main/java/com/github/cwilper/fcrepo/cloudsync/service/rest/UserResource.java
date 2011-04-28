@@ -36,8 +36,12 @@ public class UserResource extends AbstractResource {
     public Response createUser(@Context UriInfo uriInfo,
                                User user) {
         User newUser = service.createUser(user);
-        URI uri = getResourceURI(uriInfo.getRequestUri(), newUser.id);
-        return Response.created(uri).entity(newUser).build();
+        if (newUser != null) {
+            URI uri = getResourceURI(uriInfo.getRequestUri(), newUser.id);
+            return Response.created(uri).entity(newUser).build();
+        } else {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
     }
 
     @GET
@@ -60,8 +64,13 @@ public class UserResource extends AbstractResource {
             @Description(value = "Gets a user", target = DocTarget.METHOD),
             @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public User getUser(@PathParam("id") String id) {
-        return service.getUser(id);
+    public Response getUser(@PathParam("id") String id) {
+        User user = service.getUser(id);
+        if (user != null) {
+            return Response.ok(user).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 
     @GET

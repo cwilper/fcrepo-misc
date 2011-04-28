@@ -5,6 +5,11 @@
 <title>Fedora CloudSync</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="cache-control" content="no-store" />
+
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel="stylesheet" type="text/css" href="jquery-ui-1.8.12.custom.css"/>
 
@@ -29,10 +34,7 @@ $(function() {
 
   $("#button-Logout").click(
     function() {
-     // alert("This would log you out and take you to the login page.");
       document.location = 'j_spring_security_logout';
-//      $.get('j_spring_security_logout'); // clear cookies
-//      window.location.reload();
     }
   );
 
@@ -151,7 +153,7 @@ function showText(data, status, x) {
     Configuration:
     <ul>
       <li> <button onclick="service.getConfiguration(show);">getConfiguration</button></li>
-      <li> <button onclick="service.updateConfiguration({'configuration':{'name':'value'}}, show);">updateConfiguration</button></li>
+      <li> <button onclick="service.updateConfiguration({'configuration':{'keepSysLogDays':10, 'keepTaskLogDays':20}}, show);">updateConfiguration</button></li>
     </ul>
     Users:
     <ul>

@@ -29,10 +29,9 @@ function CloudSyncClient(baseURL) {
 
   function doGetOrDelete(method, dataType, path, success, error) {
     var url = baseURL + path;
-//    alert("Request:\n\n" + method + " " + url);
     var errorCallback = error;
     if (typeof error === 'undefined') {
-      errorCallback = this.errorCallback;
+      errorCallback = defaultErrorCallback;
     }
     $.ajax({
       type: method,
@@ -40,8 +39,7 @@ function CloudSyncClient(baseURL) {
       dataType: dataType,
       success: success,
       error: function(httpRequest) {
-        //callback(method, url, httpRequest);
-        errorCallback("GET", url, httpRequest)
+        errorCallback(method, url, httpRequest);
       }
     })
   };
@@ -51,7 +49,7 @@ function CloudSyncClient(baseURL) {
     alert("Request:\n\n" + method + " " + url + "\n\n" + JSON.stringify(data));
     var errorCallback = error;
     if (typeof error === 'undefined') {
-      errorCallback = this.errorCallback;
+      errorCallback = defaultErrorCallback;
     }
     $.ajax({
       type: method,
@@ -74,7 +72,7 @@ function CloudSyncClient(baseURL) {
   // in response to a REST request. To override, the caller may pass a
   // callback (with the same signature as this one) as the last argument to
   // the method.
-  this.errorCallback = function(method, url, httpRequest) {
+  function defaultErrorCallback(method, url, httpRequest) {
     alert("[CloudSync Service Error]\n\nUnexpected HTTP response code ("
         + httpRequest.status + ") from request:\n\n" + method + " " + url);
   };
