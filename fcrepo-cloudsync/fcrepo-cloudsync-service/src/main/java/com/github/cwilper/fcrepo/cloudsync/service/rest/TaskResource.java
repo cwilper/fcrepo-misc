@@ -18,6 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.List;
 
 @Path("tasks")
 public class TaskResource extends AbstractResource {
@@ -47,10 +48,8 @@ public class TaskResource extends AbstractResource {
         @Description(value = "Lists all tasks", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Tasks listTasks() {
-        Tasks list = new Tasks();
-        list.setTask(service.listTasks());
-        return list;
+    public List<Task> listTasks() {
+        return service.listTasks();
     }
 
     @GET

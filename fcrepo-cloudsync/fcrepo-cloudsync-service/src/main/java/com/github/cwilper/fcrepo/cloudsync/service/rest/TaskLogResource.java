@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.io.InputStream;
+import java.util.List;
 
 @Path("tasklogs")
 public class TaskLogResource extends AbstractResource {
@@ -27,10 +28,8 @@ public class TaskLogResource extends AbstractResource {
         @Description(value = "Lists all task logs", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public TaskLogs listTaskLogs() {
-        TaskLogs list = new TaskLogs();
-        list.setTasklog(service.listTaskLogs());
-        return list;
+    public List<TaskLog> listTaskLogs() {
+        return service.listTaskLogs();
     }
 
     @GET

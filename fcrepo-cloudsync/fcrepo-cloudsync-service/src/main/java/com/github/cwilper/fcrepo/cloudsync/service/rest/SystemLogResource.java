@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.io.InputStream;
+import java.util.List;
 
 @Path("systemlogs")
 public class SystemLogResource extends AbstractResource {
@@ -27,10 +28,8 @@ public class SystemLogResource extends AbstractResource {
         @Description(value = "Lists all system logs", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public SystemLogs listSystemLogs() {
-        SystemLogs list = new SystemLogs();
-        list.setSystemlog(service.listSystemLogs());
-        return list;
+    public List<SystemLog> listSystemLogs() {
+        return service.listSystemLogs();
     }
 
     @GET

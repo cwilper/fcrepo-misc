@@ -18,6 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.List;
 
 @Path("users")
 public class UserResource extends AbstractResource {
@@ -51,10 +52,8 @@ public class UserResource extends AbstractResource {
         @Description(value = "Lists all users", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Users listUsers() {
-        Users users = new Users();
-        users.setUser(service.listUsers());
-        return users;
+    public List<User> listUsers() {
+        return service.listUsers();
     }
 
     @GET

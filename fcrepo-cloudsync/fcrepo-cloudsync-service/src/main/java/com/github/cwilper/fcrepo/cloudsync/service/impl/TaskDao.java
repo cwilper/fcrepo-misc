@@ -8,6 +8,8 @@ import java.util.List;
 
 class TaskDao {
 
+    int num = 0;
+
     private final JdbcTemplate db;
 
     public TaskDao(JdbcTemplate db) {
@@ -20,20 +22,15 @@ class TaskDao {
 
     public List<Task> listTasks() {
         List<Task> list = new ArrayList<Task>();
-        /*
-        Task item = new Task();
-        item.id = "1";
-        list.add(item);
-        Task item2 = new Task();
-        item2.id = "2";
-        list.add(item2);
-        Task item3 = new Task();
-        item3.id = "3";
-        list.add(item3);
-        Task item4 = new Task();
-        item4.id = "4";
-        list.add(item4);
-        */
+        for (int i = 0; i < num; i++ ) {
+            Task item = new Task();
+            item.id = "" + i;
+            list.add(item);
+        }
+        num++;
+        if (num == 4) {
+            num = 0;
+        }
         return list;
     }
 

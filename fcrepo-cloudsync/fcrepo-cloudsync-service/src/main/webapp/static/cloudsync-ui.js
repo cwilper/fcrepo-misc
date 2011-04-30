@@ -2,25 +2,25 @@ var service = new CloudSyncClient(document.location.href + "api/rest/");
 
 function refreshTasks() {
   service.listTasks(function(data) {
-    doSection(data.tasks, "task", "tasks-active", getActiveTaskHtml);
-    doSection(data.tasks, "task", "tasks-scheduled", getScheduledTaskHtml);
+    doSection(data.tasks, "Active Task", "tasks-active", getActiveTaskHtml);
+    doSection(data.tasks, "Scheduled Task", "tasks-scheduled", getScheduledTaskHtml);
   });
   service.listTaskLogs(function(data) {
-    doSection(data.tasklogs, "tasklog", "tasks-completed", getTaskLogHtml);
+    doSection(data.tasklogs, "Completed Task Log", "tasks-completed", getTaskLogHtml);
   });
 }
 
 function refreshSets() {
   service.listObjectSets(function(data) {
-    doSection(data.objectsets, "objectset", "sets-built-in", getBuiltInSetHtml);
-    doSection(data.objectsets, "objectset", "sets-custom", getCustomSetHtml);
+    doSection(data.objectsets, "Built-in Set", "sets-built-in", getBuiltInSetHtml);
+    doSection(data.objectsets, "Custom Set", "sets-custom", getCustomSetHtml);
   });
 }
 
 function refreshStores() {
   service.listObjectStores(function(data) {
-    doSection(data.objectstores, "objectstore", "stores-duracloud", getDuraCloudStoreHtml);
-    doSection(data.objectstores, "objectstore", "stores-fedora", getFedoraStoreHtml);
+    doSection(data.objectstores, "DuraCloud-based Store", "stores-duracloud", getDuraCloudStoreHtml);
+    doSection(data.objectstores, "Fedora-based Store", "stores-fedora", getFedoraStoreHtml);
   });
 }
 
@@ -57,10 +57,9 @@ function doSection(items, itemType, sectionName, itemHtmlGetter) {
   var count = 0;
   $.each(items, function(index, item) {
     count++;
-    var itemData = item[itemType];
     html += getExpandable(
         "Name of " + itemType + " #" + count,
-        itemHtmlGetter(itemData));
+        itemHtmlGetter(item));
   });
   if (count > 0) {
     $("#" + sectionName).html(html);

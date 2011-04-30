@@ -50,10 +50,8 @@ public class ObjectStoreResource extends AbstractResource {
         @Description(value = "Lists all object stores", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public ObjectStores listObjectStores() {
-        ObjectStores list = new ObjectStores();
-        list.setObjectstore(service.listObjectStores());
-        return list;
+    public List<ObjectStore> listObjectStores() {
+        return service.listObjectStores();
     }
 
     @GET
@@ -74,14 +72,11 @@ public class ObjectStoreResource extends AbstractResource {
         @Description(value = "Queries an object store", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Objects queryObjectStore(@PathParam("id") String id,
+    public List<ObjectInfo> queryObjectStore(@PathParam("id") String id,
                                      @QueryParam("set") String set,
                                      @QueryParam("limit") long limit,
                                      @QueryParam("offset") long offset) {
-        Objects list = new Objects();
-        List<ObjectInfo> i = service.queryObjectStore(id, set, limit, offset);
-        list.setObject(i);
-        return list;
+        return service.queryObjectStore(id, set, limit, offset);
     }
 
     @PUT
