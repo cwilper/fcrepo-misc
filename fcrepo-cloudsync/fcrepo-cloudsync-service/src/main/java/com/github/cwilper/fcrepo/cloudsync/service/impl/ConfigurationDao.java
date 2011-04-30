@@ -7,17 +7,22 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-class ConfigurationDao {
-
-    private final JdbcTemplate db;
+class ConfigurationDao extends AbstractDao {
 
     public ConfigurationDao(JdbcTemplate db) {
-        this.db = db;
+        super(db);
+    }
+
+    @Override
+    public void initDb() {
+        db.execute("create table Configuration (keepSysLogDays int not null, keepTaskLogDays int not null)");
+        db.execute("insert into Configuration values (-1, -1)");
     }
 
     public Configuration getConfiguration() {
         return db.query("select * from Configuration",
                 new ResultSetExtractor<Configuration>() {
+                    @Override
                     public Configuration extractData(ResultSet rs)
                             throws SQLException {
                         rs.next();

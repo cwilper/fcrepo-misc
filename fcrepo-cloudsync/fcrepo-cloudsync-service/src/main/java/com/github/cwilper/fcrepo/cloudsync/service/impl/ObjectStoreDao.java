@@ -7,12 +7,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-class ObjectStoreDao {
-
-    private final JdbcTemplate db;
+class ObjectStoreDao extends AbstractDao {
 
     public ObjectStoreDao(JdbcTemplate db) {
-        this.db = db;
+        super(db);
+    }
+
+    @Override
+    public void initDb() {
+        // TODO: Implement me
     }
 
     public ObjectStore createObjectStore(ObjectStore objectStore) {

@@ -6,14 +6,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-class TaskDao {
+class TaskDao extends AbstractDao {
 
     int num = 0;
 
-    private final JdbcTemplate db;
-
     public TaskDao(JdbcTemplate db) {
-        this.db = db;
+        super(db);
+    }
+
+    @Override
+    public void initDb() {
+        // TODO: Implement me
     }
 
     public Task createTask(Task task) {

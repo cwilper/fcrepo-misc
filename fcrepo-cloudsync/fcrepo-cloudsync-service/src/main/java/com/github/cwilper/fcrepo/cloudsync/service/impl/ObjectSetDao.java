@@ -6,12 +6,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-class ObjectSetDao {
-
-    private final JdbcTemplate db;
+class ObjectSetDao extends AbstractDao {
 
     public ObjectSetDao(JdbcTemplate db) {
-        this.db = db;
+        super(db);
+    }
+
+    @Override
+    public void initDb() {
+        // TODO: implement me
     }
 
     public ObjectSet createObjectSet(ObjectSet objectSet) {

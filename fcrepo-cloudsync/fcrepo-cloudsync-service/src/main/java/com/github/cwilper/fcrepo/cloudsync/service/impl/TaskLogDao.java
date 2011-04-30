@@ -9,12 +9,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-class TaskLogDao {
-
-    private final JdbcTemplate db;
+class TaskLogDao extends AbstractDao {
 
     public TaskLogDao(JdbcTemplate db) {
-        this.db = db;
+        super(db);
+    }
+
+    @Override
+    public void initDb() {
+        // TODO: Implement me
     }
 
     public List<TaskLog> listTaskLogs() {
