@@ -24,32 +24,103 @@ function refreshStores() {
   });
 }
 
-function getActiveTaskHtml(task) {
-  return "This area will allow you to pause, cancel, and view details about this active task";
+function getActiveTaskHtml(item) {
+  var html = "";
+  html += "<div class='item-actions'>";
+  html += "  <button>Pause</button>";
+  html += "  <button>Cancel</button>";
+  html += "</div>";
+  html += "<div class='item-attributes'>Attributes:";
+  $.each(item, function(key, value) {
+    html += "<br/>" + key + ": " + value;
+  });
+  html += "</div>";
+  return html;
 }
 
-function getScheduledTaskHtml(task) {
-  return "This area will allow you to modify, delete, and view details about this scheduled task";
+function getScheduledTaskHtml(item) {
+  var html = "";
+  html += "<div class='item-actions'>";
+  html += "  <button>Edit</button>";
+  html += "  <button>Delete</button>";
+  html += "</div>";
+  html += "<div class='item-attributes'>Attributes:";
+  $.each(item, function(key, value) {
+    html += "<br/>" + key + ": " + value;
+  });
+  html += "</div>";
+  return html;
 }
 
-function getTaskLogHtml(taskLog) {
-  return "This area will allow you to delete and view details about this completed task";
+function getTaskLogHtml(item) {
+  var html = "";
+  html += "<div class='item-actions'>";
+  html += "  <button>View Content</button>";
+  html += "</div>";
+  html += "<div class='item-attributes'>Attributes:";
+  $.each(item, function(key, value) {
+    html += "<br/>" + key + ": " + value;
+  });
+  html += "</div>";
+  return html;
 }
 
-function getBuiltInSetHtml(set) {
-  return "This area will allow you to view details about this built-in set";
+function getBuiltInSetHtml(item) {
+  var html = "";
+  html += "<div class='item-actions'>";
+  html += "  <button>Test</button>";
+  html += "</div>";
+  html += "<div class='item-attributes'>Attributes:";
+  $.each(item, function(key, value) {
+    html += "<br/>" + key + ": " + value;
+  });
+  html += "</div>";
+  return html;
 }
 
-function getCustomSetHtml(set) {
-  return "This area will allow you to modify, delete, and view details about this custom set";
+function getCustomSetHtml(item) {
+  var html = "";
+  html += "<div class='item-actions'>";
+  html += "  <button>Test</button>";
+  html += "  <button>Edit</button>";
+  html += "  <button>Delete</button>";
+  html += "</div>";
+  html += "<div class='item-attributes'>Attributes:";
+  $.each(item, function(key, value) {
+    html += "<br/>" + key + ": " + value;
+  });
+  html += "</div>";
+  return html;
 }
 
-function getDuraCloudStoreHtml(set) {
-  return "This area will allow you to modify, delete, and view details about this DuraCloud-based store";
+function getDuraCloudStoreHtml(item) {
+  var html = "";
+  html += "<div class='item-actions'>";
+  html += "  <button>Count Objects</button>";
+  html += "  <button>Edit</button>";
+  html += "  <button>Delete</button>";
+  html += "</div>";
+  html += "<div class='item-attributes'>Attributes:";
+  $.each(item, function(key, value) {
+    html += "<br/>" + key + ": " + value;
+  });
+  html += "</div>";
+  return html;
 }
 
-function getFedoraStoreHtml(set) {
-  return "This area will allow you to modify, delete, and view details about this Fedora-based store";
+function getFedoraStoreHtml(item) {
+  var html = "";
+  html += "<div class='item-actions'>";
+  html += "  <button>Count Objects</button>";
+  html += "  <button>Edit</button>";
+  html += "  <button>Delete</button>";
+  html += "</div>";
+  html += "<div class='item-attributes'>Attributes:";
+  $.each(item, function(key, value) {
+    html += "<br/>" + key + ": " + value;
+  });
+  html += "</div>";
+  return html;
 }
 
 function doSection(items, itemType, sectionName, itemHtmlGetter) {
@@ -63,6 +134,7 @@ function doSection(items, itemType, sectionName, itemHtmlGetter) {
   });
   if (count > 0) {
     $("#" + sectionName).html(html);
+    $("#" + sectionName + " .item-actions button").button();
     $("#" + sectionName + " .expandable").accordion({collapsible: true, active: false});
   } else {
     $("#" + sectionName).html("None.");

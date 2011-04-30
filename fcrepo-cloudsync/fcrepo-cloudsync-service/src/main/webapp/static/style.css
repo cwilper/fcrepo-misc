@@ -69,3 +69,10 @@ body {
   padding-top: 0px;
   padding-bottom: 5px;
 }
+
+.item-actions {
+  float: right;
+}
+
+.item-attributes {
+}
