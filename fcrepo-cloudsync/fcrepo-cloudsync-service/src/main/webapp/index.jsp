@@ -41,7 +41,8 @@
 
   <div id="tasks" class="tab">
     <div class="tab-header">
-      <button id="button-NewTask">New Task</button>
+      <button id="button-NewTask">Add</button>
+      <button class="button-Reload">Reload</button>
     </div>
     <div class="tab-body">
       <div class="tab-section">
@@ -67,7 +68,8 @@
 
   <div id="sets" class="tab">
     <div class="tab-header">
-      <button id="button-NewSet">New Set</button>
+      <button id="button-NewSet">Add</button>
+      <button class="button-Reload">Reload</button>
     </div>
     <div class="tab-body">
       <div class="tab-section">
@@ -80,12 +82,6 @@
         <h2>Custom</h2>
         <div id="sets-custom" class="tab-section-body">
           ...
-          <!--
-          <div class="expandable">
-            <h3><a href="#">All objects, including inline XML (X) datastreams only</a></h3>
-            <div>Here's the previously hidden text!</div>
-          </div>
-          -->
         </div>
       </div>
     </div>
@@ -93,7 +89,8 @@
 
   <div id="stores" class="tab">
     <div class="tab-header">
-      <button id="button-NewStore">New Store</button>
+      <button id="button-NewStore">Add</button>
+      <button class="button-Reload">Reload</button>
     </div>
     <div class="tab-body">
       <div class="tab-section">
