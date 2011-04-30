@@ -1,81 +1,27 @@
 // Javascript Client Library for Fedora CloudSync.
 // Requires jQuery 1.5+ and http://www.JSON.org/json2.js
-
+//
+// All calls are asynchronous and accept a "success" callback function.
+// If the call returns JSON data, it will be deserialized and provided
+// as the first argument to the callback.
+//
+// When an unexpected response (a non-20x, etc) occurs, the default behavior
+// is to put up an alert explaining the problem, or in certain cases,
+// reload the application. To override this on a per-method basis, the
+// caller may provide an "error" callback to be used instead. The signature
+// should match that of the private defaultErrorCallback method below.
+//
+// The constructor creates a CloudSyncClient, against which all REST calls can
+// be made. The baseURL should be absolute and must end with a slash.
+// For example:
+//
+// var service = new CloudSyncClient(document.location.href + "api/rest/");
+//
 function CloudSyncClient(baseURL) {
-
-  //==========================================================================
-  //                           PRIVATE METHODS
-  //==========================================================================
-
-  function doGet(path, success, error) {
-    doGetOrDelete("GET", "json", path, success, error);
-  };
-
-  function doGetText(path, success, error) {
-    doGetOrDelete("GET", "text", path, success, error);
-  };
-
-  function doPost(path, data, success, error) {
-    doPostOrPut("POST", path, data, success, error);
-  };
-
-  function doPut(path, data, success, error) {
-    doPostOrPut("PUT", path, data, success, error);
-  };
-
-  function doDelete(path, success, error) {
-    doGetOrDelete("DELETE", "json", path, success, error);
-  };
-
-  function doGetOrDelete(method, dataType, path, success, error) {
-    var url = baseURL + path;
-    var errorCallback = error;
-    if (typeof error === 'undefined') {
-      errorCallback = defaultErrorCallback;
-    }
-    $.ajax({
-      type: method,
-      url: url,
-      dataType: dataType,
-      success: success,
-      error: function(httpRequest) {
-        errorCallback(method, url, httpRequest);
-      }
-    })
-  };
-
-  function doPostOrPut(method, path, data, success, error) {
-    var url = baseURL + path;
-    alert("Request:\n\n" + method + " " + url + "\n\n" + JSON.stringify(data));
-    var errorCallback = error;
-    if (typeof error === 'undefined') {
-      errorCallback = defaultErrorCallback;
-    }
-    $.ajax({
-      type: method,
-      url: url,
-      contentType: "application/json",
-      data: JSON.stringify(data),
-      dataType: "json",
-      success: success,
-      error: function(jqXHR) {
-        errorCallback(method, url, jqXHR)
-      }
-    })
-  };
 
   //==========================================================================
   //                            PUBLIC METHODS
   //==========================================================================
-
-  // Default behavior is to put up an alert when a non-20x response occurs
-  // in response to a REST request. To override, the caller may pass a
-  // callback (with the same signature as this one) as the last argument to
-  // the method.
-  function defaultErrorCallback(method, url, httpRequest) {
-    alert("[CloudSync Service Error]\n\nUnexpected HTTP response code ("
-        + httpRequest.status + ") from request:\n\n" + method + " " + url);
-  };
 
   //--------------------------------------------------------------------------
   //                             Configuration
@@ -232,5 +178,79 @@ function CloudSyncClient(baseURL) {
   this.deleteTaskLog = function(id, success, error) {
     doDelete("tasklogs/" + id, success, error);
   };
+
+  //==========================================================================
+  //                           PRIVATE METHODS
+  //==========================================================================
+
+  function doGet(path, success, error) {
+    doGetOrDelete("GET", "json", path, success, error);
+  }
+
+  function doGetText(path, success, error) {
+    doGetOrDelete("GET", "text", path, success, error);
+  }
+
+  function doPost(path, data, success, error) {
+    doPostOrPut("POST", path, data, success, error);
+  }
+
+  function doPut(path, data, success, error) {
+    doPostOrPut("PUT", path, data, success, error);
+  }
+
+  function doDelete(path, success, error) {
+    doGetOrDelete("DELETE", "json", path, success, error);
+  }
+
+  function doGetOrDelete(method, dataType, path, success, error) {
+    var url = baseURL + path;
+    var errorCallback = error;
+    if (typeof error === 'undefined') {
+      errorCallback = defaultErrorCallback;
+    }
+    $.ajax({
+      type: method,
+      url: url,
+      dataType: dataType,
+      success: success,
+      error: function(httpRequest, textStatus, errorThrown) {
+        errorCallback(httpRequest, method, url, textStatus, errorThrown);
+      }
+    })
+  }
+
+  function doPostOrPut(method, path, data, success, error) {
+    var url = baseURL + path;
+    //alert("Request:\n\n" + method + " " + url + "\n\n" + JSON.stringify(data));
+    var errorCallback = error;
+    if (typeof error === 'undefined') {
+      errorCallback = defaultErrorCallback;
+    }
+    $.ajax({
+      type: method,
+      url: url,
+      contentType: "application/json",
+      data: JSON.stringify(data),
+      dataType: "json",
+      success: success,
+      error: function(httpRequest) {
+        errorCallback(httpRequest, method, url, textStatus, errorThrown);
+      }
+    })
+  }
+
+  function defaultErrorCallback(httpRequest, method, url, textStatus, errorThrown) {
+    if (httpRequest.status == 0) {
+      alert("[Service Unreachable]");
+      window.location.reload();
+    } else if (httpRequest.status == 200) {
+      alert("Your session has expired.\n\nPlease login again.");
+      window.location.reload();
+    } else {
+      alert("[Service Error]\n\nUnexpected HTTP response code ("
+          + httpRequest.status + ") from request:\n\n" + method + " " + url);
+    }
+  }
 
 }

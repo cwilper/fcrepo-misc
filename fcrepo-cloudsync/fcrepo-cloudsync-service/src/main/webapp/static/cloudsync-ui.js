@@ -1,11 +1,5 @@
 var service = new CloudSyncClient(document.location.href + "api/rest/");
 
-function refreshAll() {
-  refreshTasks();
-  refreshSets();
-  refreshStores();
-}
-
 function refreshTasks() {
   service.listTasks(function(data) {
     doSection(data.tasks, "task", "tasks-active", getActiveTaskHtml);
@@ -92,8 +86,6 @@ var loadedStores = false;
 $(function() {
 
   // initialize ui elements
-
-//  $(".expandable").accordion({collapsible: true, active: false});
 
   $(".button-Reload").button({
     icons: { primary: "ui-icon-arrowrefresh-1-e" }//,
