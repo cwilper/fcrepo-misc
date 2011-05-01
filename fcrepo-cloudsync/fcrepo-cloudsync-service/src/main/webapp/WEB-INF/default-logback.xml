@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+<configuration scan="true" scanPeriod="30 seconds">
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${cloudsync.home}/systemlogs/cloudsync.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>cloudsync.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
     <encoder>
       <pattern>%p %d{HH:mm:ss.SSS} (%c{0}\\) %m%n</pattern>
     </encoder>
   </appender>
   <logger name="com.github.cwilper.fcrepo.cloudsync" additivity="false" level="INFO">
-    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
   </logger>
   <root additivity="false" level="WARN">
-    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
   </root>
 </configuration>

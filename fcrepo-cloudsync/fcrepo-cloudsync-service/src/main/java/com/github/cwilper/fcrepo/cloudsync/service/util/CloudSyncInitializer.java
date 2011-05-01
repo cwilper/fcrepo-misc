@@ -80,6 +80,13 @@ public class CloudSyncInitializer implements ServletContextListener {
             }
             SLF4JBridgeHandler.install();
 
+            // Make sure the systemlogs directory exists
+            File systemLogDir = new File(homeDir, "systemlogs");
+            if (!systemLogDir.isDirectory() && !systemLogDir.mkdir()) {
+                throw new IOException("Unable to create CloudSync system log "
+                        + "directory: " + systemLogDir.getPath());
+            }
+
             // Log a startup message
             logger = LoggerFactory.getLogger(this.getClass());
             logger.info("Starting CloudSync. Home directory is " + homeDir.getPath());
