@@ -41,13 +41,13 @@
 
   <div id="tasks" class="tab">
     <div class="tab-header">
-      <button id="button-NewTask">Add</button>
-      <button class="button-Reload">Reload</button>
+      <button id="button-NewTask">New</button>
+      <button class="button-Refresh">Refresh</button>
     </div>
     <div class="tab-body">
       <div class="tab-section">
-        <h2>Active</h2>
-        <div id="tasks-active" class="tab-section-body">
+        <h2>On-demand</h2>
+        <div id="tasks-ondemand" class="tab-section-body">
           ...
         </div>
       </div>
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="tab-section">
-        <h2>Completed Logs</h2>
+        <h2>Completed</h2>
         <div id="tasks-completed" class="tab-section-body">
           ...
         </div>
@@ -68,8 +68,8 @@
 
   <div id="sets" class="tab">
     <div class="tab-header">
-      <button id="button-NewSet">Add</button>
-      <button class="button-Reload">Reload</button>
+      <button id="button-NewSet">New</button>
+      <button class="button-Refresh">Refresh</button>
     </div>
     <div class="tab-body">
       <div class="tab-section">
@@ -89,8 +89,8 @@
 
   <div id="stores" class="tab">
     <div class="tab-header">
-      <button id="button-NewStore">Add</button>
-      <button class="button-Reload">Reload</button>
+      <button id="button-NewStore">New</button>
+      <button class="button-Refresh">Refresh</button>
     </div>
     <div class="tab-body">
       <div class="tab-section">

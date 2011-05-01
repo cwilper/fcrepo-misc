@@ -45,16 +45,13 @@ public class CloudSyncServiceImpl implements CloudSyncService {
         if (db.queryForInt("select count(*) from sys.systables where tablename = 'CLOUDSYNC'") == 0) {
             initDb();
         }
-
         logger.info("Service initialization complete. Ready to handle requests.");
     }
 
     private void initDb() {
         logger.info("First run detected. Creating database tables.");
-
         db.execute("create table CloudSync(schemaVersion int)");
         db.update("insert into CloudSync values (1)");
-
         configurationDao.initDb();
         userDao.initDb();
         taskDao.initDb();
@@ -62,7 +59,6 @@ public class CloudSyncServiceImpl implements CloudSyncService {
         objectStoreDao.initDb();
         systemLogDao.initDb();
         taskLogDao.initDb();
-
     }
 
     // -----------------------------------------------------------------------

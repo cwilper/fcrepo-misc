@@ -2,11 +2,12 @@ var service = new CloudSyncClient(document.location.href + "api/rest/");
 
 function refreshTasks() {
   service.listTasks(function(data) {
-    doSection(data.tasks, "Active Task", "tasks-active", getActiveTaskHtml);
+//    doSection(data.tasks, "Active Task", "tasks-active", getActiveTaskHtml);
+    doSection(data.tasks, "On-demand Task", "tasks-ondemand", getOnDemandTaskHtml);
     doSection(data.tasks, "Scheduled Task", "tasks-scheduled", getScheduledTaskHtml);
   });
   service.listTaskLogs(function(data) {
-    doSection(data.tasklogs, "Completed Task Log", "tasks-completed", getTaskLogHtml);
+    doSection(data.tasklogs, "Completed Task Record", "tasks-completed", getTaskLogHtml);
   });
 }
 
@@ -28,7 +29,24 @@ function getActiveTaskHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
   html += "  <button>Pause</button>";
-  html += "  <button>Cancel</button>";
+  html += "  <button>Abort</button>";
+  html += "</div>";
+  html += "<div class='item-attributes'>Attributes:";
+  $.each(item, function(key, value) {
+    html += "<br/>" + key + ": " + value;
+  });
+  html += "</div>";
+  return html;
+}
+
+function getOnDemandTaskHtml(item) {
+  var html = "";
+  html += "<div class='item-actions'>";
+  html += "  <button class='button-pauseTask'>Pause</button>";
+  html += "  <button class='button-abortTask'>Abort</button>";
+  html += "  <button class='button-runTask'>Run</button>";
+  html += "  <button class='button-editTask'>Edit</button>";
+  html += "  <button class='button-deleteTask'>Delete</button>";
   html += "</div>";
   html += "<div class='item-attributes'>Attributes:";
   $.each(item, function(key, value) {
@@ -41,8 +59,11 @@ function getActiveTaskHtml(item) {
 function getScheduledTaskHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
-  html += "  <button>Edit</button>";
-  html += "  <button>Delete</button>";
+  html += "  <button class='button-pauseTask'>Pause</button>";
+  html += "  <button class='button-abortTask'>Abort</button>";
+  html += "  <button class='button-runTask'>Run</button>";
+  html += "  <button class='button-editTask'>Edit</button>";
+  html += "  <button class='button-deleteTask'>Delete</button>";
   html += "</div>";
   html += "<div class='item-attributes'>Attributes:";
   $.each(item, function(key, value) {
@@ -55,7 +76,7 @@ function getScheduledTaskHtml(item) {
 function getTaskLogHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
-  html += "  <button>View Content</button>";
+  html += "  <button>View Log</button>";
   html += "</div>";
   html += "<div class='item-attributes'>Attributes:";
   $.each(item, function(key, value) {
@@ -135,6 +156,8 @@ function doSection(items, itemType, sectionName, itemHtmlGetter) {
   if (count > 0) {
     $("#" + sectionName).html(html);
     $("#" + sectionName + " .item-actions button").button();
+    $("#" + sectionName + " .item-actions .button-pauseTask").button({disabled: true});
+    $("#" + sectionName + " .item-actions .button-abortTask").button({disabled: true});
     $("#" + sectionName + " .expandable").accordion({collapsible: true, active: false});
   } else {
     $("#" + sectionName).html("None.");
@@ -158,13 +181,13 @@ $(function() {
 
   // initialize ui elements
 
-  $(".button-Reload").button({
+  $(".button-Refresh").button({
     icons: { primary: "ui-icon-arrowrefresh-1-e" }//,
   });
 
-  $("#tasks .button-Reload").click(function() { refreshTasks(); });
-  $("#sets .button-Reload").click(function() { refreshSets(); });
-  $("#stores .button-Reload").click(function() { refreshStores(); });
+  $("#tasks .button-Refresh").click(function() { refreshTasks(); });
+  $("#sets .button-Refresh").click(function() { refreshSets(); });
+  $("#stores .button-Refresh").click(function() { refreshStores(); });
 
   $("#button-Logout").button({
     icons: { primary: "ui-icon-power" }
