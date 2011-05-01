@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.cloudsync.service.impl;
+package com.github.cwilper.fcrepo.cloudsync.service.dao;
 
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectSet;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-class ObjectSetDao extends AbstractDao {
+public class ObjectSetDao extends AbstractDao {
 
     public ObjectSetDao(JdbcTemplate db) {
         super(db);

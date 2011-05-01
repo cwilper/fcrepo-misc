@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.cloudsync.service.impl;
+package com.github.cwilper.fcrepo.cloudsync.service.dao;
 
 import com.github.cwilper.fcrepo.cloudsync.api.SystemLog;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-class SystemLogDao extends AbstractDao {
+public class SystemLogDao extends AbstractDao {
 
     public SystemLogDao(JdbcTemplate db) {
         super(db);

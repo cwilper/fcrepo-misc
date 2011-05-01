@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.cloudsync.service.impl;
+package com.github.cwilper.fcrepo.cloudsync.service.dao;
 
 import com.github.cwilper.fcrepo.cloudsync.api.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-class ConfigurationDao extends AbstractDao {
+public class ConfigurationDao extends AbstractDao {
 
     public ConfigurationDao(JdbcTemplate db) {
         super(db);

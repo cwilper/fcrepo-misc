@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.cloudsync.service.impl;
+package com.github.cwilper.fcrepo.cloudsync.service;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
 import com.github.cwilper.fcrepo.cloudsync.api.Configuration;
@@ -9,6 +9,13 @@ import com.github.cwilper.fcrepo.cloudsync.api.SystemLog;
 import com.github.cwilper.fcrepo.cloudsync.api.Task;
 import com.github.cwilper.fcrepo.cloudsync.api.TaskLog;
 import com.github.cwilper.fcrepo.cloudsync.api.User;
+import com.github.cwilper.fcrepo.cloudsync.service.dao.ConfigurationDao;
+import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectSetDao;
+import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectStoreDao;
+import com.github.cwilper.fcrepo.cloudsync.service.dao.SystemLogDao;
+import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskDao;
+import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskLogDao;
+import com.github.cwilper.fcrepo.cloudsync.service.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;

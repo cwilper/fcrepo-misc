@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <bean id="serviceImpl"
-        class="com.github.cwilper.fcrepo.cloudsync.service.impl.CloudSyncServiceImpl">
+        class="com.github.cwilper.fcrepo.cloudsync.service.CloudSyncServiceImpl">
     <constructor-arg ref="dataSource"/>
   </bean>
 

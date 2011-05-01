@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.cloudsync.service.impl;
+package com.github.cwilper.fcrepo.cloudsync.service.dao;
 
 import com.github.cwilper.fcrepo.cloudsync.api.User;
 import org.springframework.dao.DuplicateKeyException;
@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-class UserDao extends AbstractDao {
+public class UserDao extends AbstractDao {
 
     public UserDao(JdbcTemplate db) {
         super(db);

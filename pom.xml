@@ -215,6 +215,12 @@
       </dependency>
 
       <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-jaxrs</artifactId>
+        <version>1.8.0</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.openrdf</groupId>
         <artifactId>rio</artifactId>
         <version>1.0.10</version>

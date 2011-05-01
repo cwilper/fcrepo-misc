@@ -6,5 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ObjectStore {
 
     public String id;
+    public String name;
+    public String type;
+    public String data;
 
 }

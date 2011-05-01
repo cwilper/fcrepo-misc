@@ -80,7 +80,7 @@ function showText(data, status, x) {
     </ul>
     Object Stores:
     <ul>
-      <li> <button onclick="service.createObjectStore({'objectstore':{'name':'value'}}, show);">createObjectStore</button></li>
+      <li> <button onclick="service.createObjectStore({'objectstore':{'name':'My Object Store', 'type':'fedora', 'data': '{&quot;url&quot;: &quot;urn:example.org&quot;, &quot;username&quot;: &quot;bob&quot, &quot;password&quot;: &quot;pass&quot;}'}}, show);">createObjectStore</button></li>
       <li> <button onclick="service.listObjectStores(show);">listObjectStores</button></li>
       <li> <button onclick="service.getObjectStore(2, show);">getObjectStore</button></li>
       <li> <button onclick="service.queryObjectStore(2, 2, -1, 0, show);">queryObjectStore</button></li>
