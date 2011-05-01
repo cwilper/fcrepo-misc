@@ -23,14 +23,14 @@ public class TaskLogDao extends AbstractDao {
     public List<TaskLog> listTaskLogs() {
         List<TaskLog> list = new ArrayList<TaskLog>();
         TaskLog item = new TaskLog();
-        item.id = "1";
+        item.setId("1");
         list.add(item);
         return list;
     }
 
     public TaskLog getTaskLog(String id) {
         TaskLog item = new TaskLog();
-        item.id = id;
+        item.setId(id);
         return item;
     }
 

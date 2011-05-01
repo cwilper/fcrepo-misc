@@ -24,14 +24,14 @@ public class ObjectSetDao extends AbstractDao {
     public List<ObjectSet> listObjectSets() {
         List<ObjectSet> list = new ArrayList<ObjectSet>();
         ObjectSet item = new ObjectSet();
-        item.id = "1";
+        item.setId("1");
         list.add(item);
         return list;
     }
 
     public ObjectSet getObjectSet(String id) {
         ObjectSet item = new ObjectSet();
-        item.id = "1";
+        item.setId("1");
         return item;
     }
 

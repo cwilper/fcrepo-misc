@@ -23,14 +23,14 @@ public class SystemLogDao extends AbstractDao {
     public List<SystemLog> listSystemLogs() {
         List<SystemLog> list = new ArrayList<SystemLog>();
         SystemLog item = new SystemLog();
-        item.id = "1";
+        item.setId("1");
         list.add(item);
         return list;
     }
 
     public SystemLog getSystemLog(String id) {
         SystemLog item = new SystemLog();
-        item.id = id;
+        item.setId(id);
         return item;
     }
 

@@ -27,7 +27,7 @@ public class TaskDao extends AbstractDao {
         List<Task> list = new ArrayList<Task>();
         for (int i = 0; i < num; i++ ) {
             Task item = new Task();
-            item.id = "" + i;
+            item.setId("" + i);
             list.add(item);
         }
         num++;
@@ -39,7 +39,7 @@ public class TaskDao extends AbstractDao {
 
     public Task getTask(String id) {
         Task item = new Task();
-        item.id = id;
+        item.setId(id);
         return item;
     }
 

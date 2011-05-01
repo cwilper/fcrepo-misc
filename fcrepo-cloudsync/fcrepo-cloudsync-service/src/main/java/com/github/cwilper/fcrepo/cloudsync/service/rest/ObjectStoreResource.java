@@ -39,7 +39,7 @@ public class ObjectStoreResource extends AbstractResource {
     public Response createObjectStore(@Context UriInfo uriInfo,
                                       ObjectStore objectStore) {
         ObjectStore newObjectStore = service.createObjectStore(objectStore);
-        URI uri = getResourceURI(uriInfo.getRequestUri(), newObjectStore.id);
+        URI uri = getResourceURI(uriInfo.getRequestUri(), newObjectStore.getId());
         return Response.created(uri).entity(newObjectStore).build();
     }
 

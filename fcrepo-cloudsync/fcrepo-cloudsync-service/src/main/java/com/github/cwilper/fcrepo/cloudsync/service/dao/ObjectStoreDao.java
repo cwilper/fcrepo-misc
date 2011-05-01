@@ -49,21 +49,21 @@ public class ObjectStoreDao extends AbstractDao {
     public List<ObjectStore> listObjectStores() {
         List<ObjectStore> list = new ArrayList<ObjectStore>();
         ObjectStore item = new ObjectStore();
-        item.id = "1";
+        item.setId("1");
         list.add(item);
         return list;
     }
 
     public ObjectStore getObjectStore(String id) {
         ObjectStore item = new ObjectStore();
-        item.id = id;
+        item.setId(id);
         return item;
     }
 
     public List<ObjectInfo> queryObjectStore(String id, String set, long limit, long offset) {
         List<ObjectInfo> list = new ArrayList<ObjectInfo>();
         ObjectInfo item = new ObjectInfo();
-        item.pid = "test:object1";
+        item.setPid("test:object1");
         list.add(item);
         return list;
     }

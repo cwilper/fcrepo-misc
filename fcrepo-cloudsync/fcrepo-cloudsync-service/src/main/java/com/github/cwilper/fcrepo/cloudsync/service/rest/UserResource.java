@@ -38,7 +38,7 @@ public class UserResource extends AbstractResource {
                                User user) {
         User newUser = service.createUser(user);
         if (newUser != null) {
-            URI uri = getResourceURI(uriInfo.getRequestUri(), newUser.id);
+            URI uri = getResourceURI(uriInfo.getRequestUri(), newUser.getId());
             return Response.created(uri).entity(newUser).build();
         } else {
             return Response.status(Response.Status.CONFLICT).build();

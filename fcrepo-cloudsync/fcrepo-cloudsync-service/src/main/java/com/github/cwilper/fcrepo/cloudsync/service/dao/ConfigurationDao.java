@@ -27,8 +27,8 @@ public class ConfigurationDao extends AbstractDao {
                             throws SQLException {
                         rs.next();
                         Configuration c = new Configuration();
-                        c.keepSysLogDays = rs.getInt("keepSysLogDays");
-                        c.keepTaskLogDays = rs.getInt("keepTaskLogDays");
+                        c.setKeepSysLogDays(rs.getInt("keepSysLogDays"));
+                        c.setKeepTaskLogDays(rs.getInt("keepTaskLogDays"));
                         return c;
                     }
                 });
@@ -36,14 +36,14 @@ public class ConfigurationDao extends AbstractDao {
 
     public Configuration updateConfiguration(Configuration configuration) {
         Configuration updated = getConfiguration();
-        if (configuration.keepSysLogDays != null) {
-            updated.keepSysLogDays = configuration.keepSysLogDays;
+        if (configuration.getKeepSysLogDays() != null) {
+            updated.setKeepSysLogDays(configuration.getKeepSysLogDays());
         }
-        if (configuration.keepTaskLogDays != null) {
-            updated.keepTaskLogDays = configuration.keepTaskLogDays;
+        if (configuration.getKeepTaskLogDays() != null) {
+            updated.setKeepTaskLogDays(configuration.getKeepTaskLogDays());
         }
         db.update("update Configuration set keepSysLogDays = ?, keepTaskLogDays = ?",
-                updated.keepSysLogDays, updated.keepTaskLogDays);
+                updated.getKeepSysLogDays(), updated.getKeepTaskLogDays());
         return updated;
     }
 

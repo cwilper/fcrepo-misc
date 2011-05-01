@@ -5,6 +5,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="object")
 public class ObjectInfo {
 
-    public String pid;
+    private String pid;
 
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 }

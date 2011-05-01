@@ -37,7 +37,7 @@ public class TaskResource extends AbstractResource {
     public Response createTask(@Context UriInfo uriInfo,
                                Task task) {
         Task newTask = service.createTask(task);
-        URI uri = getResourceURI(uriInfo.getRequestUri(), newTask.id);
+        URI uri = getResourceURI(uriInfo.getRequestUri(), newTask.getId());
         return Response.created(uri).entity(newTask).build();
     }
 

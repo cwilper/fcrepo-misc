@@ -39,7 +39,7 @@ public class UserDao extends AbstractDao {
 
     // returns null if the user name conflicts with an existing one
     public User createUser(final User user) {
-        if (user.name == null || user.name.trim().length() == 0) {
+        if (user.getName() == null || user.getName().trim().length() == 0) {
             throw new IllegalArgumentException("User.name must be specified");
         }
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -50,7 +50,7 @@ public class UserDao extends AbstractDao {
                     PreparedStatement ps = conn.prepareStatement(
                             "insert into Users (name) values (?)",
                             new String[] { "ID" }); // must be caps
-                    ps.setString(1, user.name.trim());
+                    ps.setString(1, user.getName().trim());
                     return ps;
                 }
             }, keyHolder);
@@ -65,8 +65,8 @@ public class UserDao extends AbstractDao {
                 new RowMapper<User>() {
                     public User mapRow(ResultSet rs, int i) throws SQLException {
                         User user = new User();
-                        user.id = "" + rs.getInt("id");
-                        user.name = "" + rs.getString("name");
+                        user.setId("" + rs.getInt("id"));
+                        user.setName("" + rs.getString("name"));
                         return user;
                     }
                 });
@@ -79,8 +79,8 @@ public class UserDao extends AbstractDao {
                             throws SQLException {
                         if (rs.next()) {
                             User u = new User();
-                            u.id = "" + rs.getInt("id");
-                            u.name = rs.getString("name");
+                            u.setId("" + rs.getInt("id"));
+                            u.setName(rs.getString("name"));
                             return u;
                         } else {
                             return null;

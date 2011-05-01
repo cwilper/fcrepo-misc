@@ -5,6 +5,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="objectset")
 public class ObjectSet {
 
-    public String id;
+    private String id;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
