@@ -89,7 +89,7 @@ function getTaskLogHtml(item) {
 function getBuiltInSetHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
-  html += "  <button>Test</button>";
+  html += "  <button>List Matching Objects</button>";
   html += "</div>";
   html += "<div class='item-attributes'>Attributes:";
   $.each(item, function(key, value) {
@@ -102,7 +102,7 @@ function getBuiltInSetHtml(item) {
 function getCustomSetHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
-  html += "  <button>Test</button>";
+  html += "  <button>List Matching Objects</button>";
   html += "  <button>Edit</button>";
   html += "  <button>Delete</button>";
   html += "</div>";
