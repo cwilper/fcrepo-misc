@@ -1,6 +1,6 @@
 package com.github.cwilper.fcrepo.cloudsync.service.backend;
 
-public interface ObjectCountResultHandler {
+public interface ObjectCountHandler {
 
     void handleCountUpdate(long totalSoFar, boolean finished);
 }

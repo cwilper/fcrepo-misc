@@ -7,21 +7,21 @@ import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 
 import java.io.InputStream;
 
-public class FedoraObjectStoreConnector extends ObjectStoreConnector {
+public class DuraCloudConnector extends StoreConnector {
 
     private final ObjectStore store;
 
-    public FedoraObjectStoreConnector(ObjectStore store) {
+    public DuraCloudConnector(ObjectStore store) {
         this.store = store;
         // TODO: validate store fields, including json data
     }
 
     @Override
-    public void countObjects(ObjectQuery query, ObjectCountResultHandler handler) {
+    public void countObjects(ObjectQuery query, ObjectCountHandler handler) {
     }
 
     @Override
-    public void listObjects(ObjectQuery query, ObjectListResultHandler handler) {
+    public void listObjects(ObjectQuery query, ObjectListHandler handler) {
     }
 
     @Override

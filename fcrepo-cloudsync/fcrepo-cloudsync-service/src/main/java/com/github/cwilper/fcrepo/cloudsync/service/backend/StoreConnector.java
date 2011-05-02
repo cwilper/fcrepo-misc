@@ -7,14 +7,14 @@ import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 
 import java.io.InputStream;
 
-public abstract class ObjectStoreConnector {
+public abstract class StoreConnector {
 
-    public static final ObjectStoreConnector getInstance(ObjectStore store) {
+    public static final StoreConnector getInstance(ObjectStore store) {
         if (store.getType() != null && store.getType().length() > 0) {
             if (store.getType().equals("fedora")) {
-                return new FedoraObjectStoreConnector(store);
+                return new FedoraConnector(store);
             } else if (store.getType().equals("duracloud")) {
-                return new DuraCloudObjectStoreConnector(store);
+                return new DuraCloudConnector(store);
             } else {
                 throw new IllegalArgumentException("Unrecognized ObjectStore type: " + store.getType());
             }
@@ -24,10 +24,10 @@ public abstract class ObjectStoreConnector {
     }
 
     public abstract void countObjects(ObjectQuery query,
-                                      ObjectCountResultHandler handler);
+                                      ObjectCountHandler handler);
 
     public abstract void listObjects(ObjectQuery query,
-                                     ObjectListResultHandler handler);
+                                     ObjectListHandler handler);
 
     public abstract FedoraObject getObject(String pid);
 
