@@ -76,3 +76,7 @@ body {
 
 .item-attributes {
 }
+
+#dialog-NewStore p {
+  text-align: center;
+}

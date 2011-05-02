@@ -19,6 +19,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
       <ref bean="objectStoreResource"/>
       <ref bean="systemLogResource"/>
       <ref bean="taskLogResource"/>
+      <ref bean="duraCloudResource"/>
     </jaxrs:serviceBeans>
     <jaxrs:providers>
       <ref bean="jsonProvider"/>
@@ -70,6 +71,10 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
   </bean>
   <bean id="taskLogResource"
         class="com.github.cwilper.fcrepo.cloudsync.service.rest.TaskLogResource">
+    <constructor-arg ref="serviceImpl"/>
+  </bean>
+  <bean id="duraCloudResource"
+        class="com.github.cwilper.fcrepo.cloudsync.service.rest.DuraCloudResource">
     <constructor-arg ref="serviceImpl"/>
   </bean>
 

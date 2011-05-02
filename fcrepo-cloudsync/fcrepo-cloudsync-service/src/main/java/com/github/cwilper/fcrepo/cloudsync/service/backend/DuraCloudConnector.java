@@ -22,6 +22,7 @@ public class DuraCloudConnector extends StoreConnector {
 
     @Override
     public void listObjects(ObjectQuery query, ObjectListHandler handler) {
+        // https://demo.duracloud.org/durastore/cwilper-test?storeID=0
     }
 
     @Override
@@ -31,6 +32,9 @@ public class DuraCloudConnector extends StoreConnector {
 
     @Override
     public InputStream getContent(FedoraObject o, Datastream ds, DatastreamVersion dsv) {
+        // https://demo.duracloud.org/durastore/cwilper-test/content-id?storeID=0
+        // note: if content-id has slashes, they should not be URL-encoded
         return null;
     }
+
 }

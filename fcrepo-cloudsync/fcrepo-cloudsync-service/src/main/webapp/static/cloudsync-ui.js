@@ -89,7 +89,7 @@ function getTaskLogHtml(item) {
 function getBuiltInSetHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
-  html += "  <button>List Matching Objects</button>";
+  html += "  <button>Query</button>";
   html += "</div>";
   html += "<div class='item-attributes'>Attributes:";
   $.each(item, function(key, value) {
@@ -102,7 +102,7 @@ function getBuiltInSetHtml(item) {
 function getCustomSetHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
-  html += "  <button>List Matching Objects</button>";
+  html += "  <button>Query</button>";
   html += "  <button>Edit</button>";
   html += "  <button>Delete</button>";
   html += "</div>";
@@ -117,7 +117,7 @@ function getCustomSetHtml(item) {
 function getDuraCloudStoreHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
-  html += "  <button>Count Objects</button>";
+  html += "  <button>Query</button>";
   html += "  <button>Edit</button>";
   html += "  <button>Delete</button>";
   html += "</div>";
@@ -132,7 +132,7 @@ function getDuraCloudStoreHtml(item) {
 function getFedoraStoreHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
-  html += "  <button>Count Objects</button>";
+  html += "  <button>Query</button>";
   html += "  <button>Edit</button>";
   html += "  <button>Delete</button>";
   html += "</div>";
@@ -156,8 +156,8 @@ function doSection(items, itemType, sectionName, itemHtmlGetter) {
   if (count > 0) {
     $("#" + sectionName).html(html);
     $("#" + sectionName + " .item-actions button").button();
-    $("#" + sectionName + " .item-actions .button-pauseTask").button({disabled: true});
-    $("#" + sectionName + " .item-actions .button-abortTask").button({disabled: true});
+    $("#" + sectionName + " .item-actions .button-pauseTask").button();
+    $("#" + sectionName + " .item-actions .button-abortTask").button();
     $("#" + sectionName + " .expandable").accordion({collapsible: true, active: false});
   } else {
     $("#" + sectionName).html("None.");
@@ -267,19 +267,46 @@ $(function() {
   });
   $("#dialog-NewStore").dialog({
     autoOpen: false,
-    width: 550,
+    modal: true
+  });
+  $("#dialog-NewDuraCloudStore").dialog({
+    autoOpen: false,
     modal: true,
     buttons: {
-      Ok: function() {
+      Next: function() {
+        $(this).dialog("close");
+      }
+    }
+  });
+  $("#dialog-NewFedoraStore").dialog({
+    autoOpen: false,
+    modal: true,
+    buttons: {
+      OK: function() {
         $(this).dialog("close");
       }
     }
   });
 
+  $("#dialog-NewStore button").button();
+  $("#dialog-NewStore button").button("enable");
+
+  $("#button-NewDuraCloudStore").click(
+      function() {
+        $("#dialog-NewStore").dialog("close");
+        $("#dialog-NewDuraCloudStore").dialog("open");
+      }
+  );
+
+  $("#button-NewFedoraStore").click(
+    function() {
+      $("#dialog-NewStore").dialog("close");
+      $("#dialog-NewFedoraStore").dialog("open");
+    }
+  );
+
   service.getCurrentUser(function(data, status, x) {
     $("#username").text(data.user.name);
   });
-
-  //refreshAll();
 
 });

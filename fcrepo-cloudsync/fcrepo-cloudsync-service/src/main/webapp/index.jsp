@@ -118,8 +118,50 @@
   Here's where you would create a new Object Set.
 </div>
 
-<div class="ui-helper-hidden" id="dialog-NewStore">
-  Here's where you would create a new Object Store.
+<div class="ui-helper-hidden" id="dialog-NewStore" title="New Store">
+  <p>
+    What kind of Store do you want to add?
+  </p>
+  <p>
+    <button id="button-NewDuraCloudStore">DuraCloud</button>
+  </p>
+  <p>
+    <button id="button-NewFedoraStore">Fedora</button>
+  </p>
+</div>
+
+<div class="ui-helper-hidden" id="dialog-NewDuraCloudStore" title="New DuraCloud Store">
+  <table>
+    <tr>
+      <td>DuraStore URL</td>
+      <td><input type="text" value="https://"/></td>
+    </tr>
+    <tr>
+      <td>DuraCloud Username</td>
+      <td><input type="text"/></td>
+    </tr>
+    <tr>
+      <td>DuraCloud Password</td>
+      <td><input type="password"/></td>
+    </tr>
+  </table>
+</div>
+
+<div class="ui-helper-hidden" id="dialog-NewFedoraStore" title="New Fedora Store">
+  <table>
+    <tr>
+      <td>Fedora Base URL</td>
+      <td><input type="text" value="https://"/></td>
+    </tr>
+    <tr>
+      <td>Fedora Username</td>
+      <td><input type="text"/></td>
+    </tr>
+    <tr>
+      <td>Fedora Password</td>
+      <td><input type="password"/></td>
+    </tr>
+  </table>
 </div>
 
 </body>
