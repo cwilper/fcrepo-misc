@@ -101,6 +101,11 @@ function showText(data, status, x) {
       <li> <button onclick="service.getTaskLogContent(2, showText)">getTaskLogContent</button></li>
       <li> <button onclick="service.deleteTaskLog(2, show);">deleteTaskLog</button></li>
     </ul>
+    DuraCloud:
+    <ul>
+      <li> <button onclick="service.listProviderAccounts('https://example.org/durastore', 'exampleuser', 'examplepass', show);">listProviderAccounts</button></li>
+      <li> <button onclick="service.listSpaces('https://example.org/durastore', 'exampleuser', 'examplepass', '1', show);">listSpaces</button></li>
+    </ul>
     </p>
 </div>
 

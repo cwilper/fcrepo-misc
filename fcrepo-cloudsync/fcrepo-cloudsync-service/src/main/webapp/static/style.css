@@ -2,6 +2,11 @@ body {
   font-size: 12px;
 }
 
+td {
+  padding: 2px;
+  margin: 0px;
+}
+
 #title {
   float: left;
   margin-bottom: 5px;
@@ -71,10 +76,12 @@ body {
 }
 
 .item-actions {
-  float: right;
-}
-
-.item-attributes {
+  text-align: right;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #dcdcdc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 #dialog-NewStore p {

@@ -179,6 +179,18 @@ function CloudSyncClient(baseURL) {
     doDelete("tasklogs/" + id, success, error);
   };
 
+  //--------------------------------------------------------------------------
+  //                              DuraCloud
+  //--------------------------------------------------------------------------
+
+  this.listProviderAccounts = function(url, username, password, success, error) {
+    doGet("duracloud/provideraccounts?url=" + url + "&username=" + username + "&password=" + password, success, error);
+  };
+
+  this.listSpaces = function(url, username, password, providerAccountId, success, error) {
+    doGet("duracloud/spaces?url=" + url + "&username=" + username + "&password=" + password + "&providerAccountId=" + providerAccountId, success, error);
+  };
+
   //==========================================================================
   //                           PRIVATE METHODS
   //==========================================================================
@@ -234,7 +246,7 @@ function CloudSyncClient(baseURL) {
       data: JSON.stringify(data),
       dataType: "json",
       success: success,
-      error: function(httpRequest) {
+      error: function(httpRequest, textStatus, errorThrown) {
         errorCallback(httpRequest, method, url, textStatus, errorThrown);
       }
     })

@@ -11,6 +11,10 @@ public abstract class StoreConnector {
 
     public static final StoreConnector getInstance(ObjectStore store) {
         if (store.getType() != null && store.getType().length() > 0) {
+            // validate and normalize strings
+            store.setName(normalize(nonEmpty("name", store.getName())));
+            store.setType(normalize(nonEmpty("type", store.getType())));
+            store.setData(normalize(nonEmpty("data", store.getData())));
             if (store.getType().equals("fedora")) {
                 return new FedoraConnector(store);
             } else if (store.getType().equals("duracloud")) {
@@ -34,5 +38,17 @@ public abstract class StoreConnector {
     public abstract InputStream getContent(FedoraObject o,
                                            Datastream ds,
                                            DatastreamVersion dsv);
+
+    protected static String normalize(String val) {
+        if (val == null || val.trim().length() == 0) return null;
+        return val.trim();
+    }
+
+    protected static String nonEmpty(String name, String value) {
+        if (value == null || value.trim().length() == 0) {
+            throw new IllegalArgumentException(name + " must be specified");
+        }
+        return value;
+    }
 
 }

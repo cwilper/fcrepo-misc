@@ -1,8 +1,14 @@
 package com.github.cwilper.fcrepo.cloudsync.service.dao;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 abstract class AbstractDao {
 
@@ -46,14 +52,23 @@ abstract class AbstractDao {
                 + " ]");
     }
 
-    protected JsonNode validateJson(String name, String value)
-            throws IllegalArgumentException {
+    protected String insert(final String sql, final String... values) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(value, JsonNode.class);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Malformed JSON specified for"
-                    + "'" + name + "'", e);
+            db.update(new PreparedStatementCreator() {
+                public PreparedStatement createPreparedStatement(Connection conn)
+                        throws SQLException {
+                    PreparedStatement ps = conn.prepareStatement(sql,
+                            new String[] { "ID" }); // must be caps
+                    for (int i = 1; i <= values.length; i++) {
+                        ps.setString(i, values[i-1].trim());
+                    }
+                    return ps;
+                }
+            }, keyHolder);
+            return keyHolder.getKey().toString();
+        } catch (DuplicateKeyException e) {
+            return null;
         }
     }
 }

@@ -1,19 +1,35 @@
 package com.github.cwilper.fcrepo.cloudsync.service.backend;
 
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
+import com.github.cwilper.fcrepo.cloudsync.service.util.JSON;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 
 import java.io.InputStream;
+import java.util.Map;
 
 public class DuraCloudConnector extends StoreConnector {
 
     private final ObjectStore store;
+    private final String url;
+    private final String username;
+    private final String password;
+    private final String providerId;
+    private final String providerName;
+    private final String space;
+    private final String prefix;
 
     public DuraCloudConnector(ObjectStore store) {
         this.store = store;
-        // TODO: validate store fields, including json data
+        Map<String, String> map = JSON.getMap(JSON.parse(store.getData()));
+        url = normalize(nonEmpty("url", map.get("url")));
+        username = normalize(nonEmpty("username", map.get("username")));
+        password = nonEmpty("password", map.get("password"));
+        providerId = normalize(nonEmpty("providerId", map.get("providerId")));
+        providerName = normalize(nonEmpty("providerName", map.get("providerName")));
+        space = normalize(nonEmpty("space", map.get("space")));
+        prefix = normalize(map.get("prefix"));
     }
 
     @Override

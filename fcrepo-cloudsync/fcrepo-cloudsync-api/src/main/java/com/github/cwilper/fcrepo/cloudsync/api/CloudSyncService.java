@@ -97,4 +97,17 @@ public interface CloudSyncService {
 
     void deleteTaskLog(String id);
 
+    // -----------------------------------------------------------------------
+    //                             DuraCloud
+    // -----------------------------------------------------------------------
+
+    List<ProviderAccount> listProviderAccounts(String url,
+                                               String username,
+                                               String password);
+
+    List<Space> listSpaces(String url,
+                           String username,
+                           String password,
+                           String providerAccountId);
+
 }

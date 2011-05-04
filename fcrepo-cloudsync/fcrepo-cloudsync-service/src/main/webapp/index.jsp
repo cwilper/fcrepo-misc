@@ -41,7 +41,7 @@
 
   <div id="tasks" class="tab">
     <div class="tab-header">
-      <button id="button-NewTask">New</button>
+      <button id="button-NewTask">Add</button>
       <button class="button-Refresh">Refresh</button>
     </div>
     <div class="tab-body">
@@ -68,19 +68,25 @@
 
   <div id="sets" class="tab">
     <div class="tab-header">
-      <button id="button-NewSet">New</button>
+      <button id="button-NewSet">Add</button>
       <button class="button-Refresh">Refresh</button>
     </div>
     <div class="tab-body">
       <div class="tab-section">
-        <h2>Built-in</h2>
-        <div id="sets-built-in" class="tab-section-body">
+        <h2>PID Patterns</h2>
+        <div id="sets-pidpatterns" class="tab-section-body">
           ...
         </div>
       </div>
       <div class="tab-section">
-        <h2>Custom</h2>
-        <div id="sets-custom" class="tab-section-body">
+        <h2>PID Lists</h2>
+        <div id="sets-pidlists" class="tab-section-body">
+          ...
+        </div>
+      </div>
+      <div class="tab-section">
+        <h2>RDF Queries</h2>
+        <div id="sets-rdfqueries" class="tab-section-body">
           ...
         </div>
       </div>
@@ -89,7 +95,7 @@
 
   <div id="stores" class="tab">
     <div class="tab-header">
-      <button id="button-NewStore">New</button>
+      <button id="button-NewStore">Add</button>
       <button class="button-Refresh">Refresh</button>
     </div>
     <div class="tab-body">
@@ -123,45 +129,122 @@
     What kind of Store do you want to add?
   </p>
   <p>
-    <button id="button-NewDuraCloudStore">DuraCloud</button>
+    <button id="button-NewDuraCloudStore">DuraCloud-based</button>
   </p>
   <p>
-    <button id="button-NewFedoraStore">Fedora</button>
+    <button id="button-NewFedoraStore">Fedora-based</button>
   </p>
 </div>
 
-<div class="ui-helper-hidden" id="dialog-NewDuraCloudStore" title="New DuraCloud Store">
+<div class="ui-helper-hidden" id="dialog-NewDuraCloudStore" title="New DuraCloud-based Store">
   <table>
     <tr>
       <td>DuraStore URL</td>
-      <td><input type="text" value="https://"/></td>
+      <td><input id="NewDuraCloudStore-url" type="text" value="https://"/></td>
     </tr>
     <tr>
       <td>DuraCloud Username</td>
-      <td><input type="text"/></td>
+      <td><input id="NewDuraCloudStore-username" type="text"/></td>
     </tr>
     <tr>
       <td>DuraCloud Password</td>
-      <td><input type="password"/></td>
+      <td><input id="NewDuraCloudStore-password" type="password"/></td>
     </tr>
   </table>
 </div>
 
-<div class="ui-helper-hidden" id="dialog-NewFedoraStore" title="New Fedora Store">
+<div class="ui-helper-hidden" id="dialog-NewDuraCloudStoreStep2" title="New DuraCloud-based Store">
+  <p style="text-align: center">
+    Storage Provider:<br/>
+    <select id="NewDuraCloudStore-providerId">
+      <option>...</option>
+    </select>
+  </p>
+  <p style="text-align: center">
+    Space:<br/>
+    <select id="NewDuraCloudStore-space">
+      <option>...</option>
+    </select>
+  </p>
+  <p style="text-align: center">
+    Content Id Prefix (Optional):<br/>
+    <input id="NewDuraCloudStore-prefix" type="text"/>
+  </p>
+</div>
+
+<div class="ui-helper-hidden" id="dialog-NewDuraCloudStoreStep3" title="New DuraCloud-based Store">
+  <table>
+    <tr>
+      <td>DuraStore URL</td>
+      <td id="NewDuraCloudStoreStep3-url">...</td>
+    </tr>
+    <tr>
+      <td>Username</td>
+      <td id="NewDuraCloudStoreStep3-username">...</td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td>(Not shown)</td>
+    </tr>
+    <tr>
+      <td>Storage Provider</td>
+      <td id="NewDuraCloudStoreStep3-providerName">...</td>
+    </tr>
+    <tr>
+      <td>Space</td>
+      <td id="NewDuraCloudStoreStep3-space">...</td>
+    </tr>
+    <tr>
+      <td>Content Id Prefix</td>
+      <td id="NewDuraCloudStoreStep3-prefix">...</td>
+    </tr>
+    <tr>
+      <td>Store Name</td>
+      <td><input id="NewDuraCloudStoreStep3-name" type="text" size="40" value="..."/></td>
+    </tr>
+  </table>
+</div>
+
+<div class="ui-helper-hidden" id="dialog-NewFedoraStore" title="New Fedora-based Store">
   <table>
     <tr>
       <td>Fedora Base URL</td>
-      <td><input type="text" value="https://"/></td>
+      <td><input id="NewFedoraStore-url" type="text" value="https://"/></td>
     </tr>
     <tr>
       <td>Fedora Username</td>
-      <td><input type="text"/></td>
+      <td><input id="NewFedoraStore-username" type="text"/></td>
     </tr>
     <tr>
       <td>Fedora Password</td>
-      <td><input type="password"/></td>
+      <td><input id="NewFedoraStore-password" type="password"/></td>
     </tr>
   </table>
+</div>
+
+<div class="ui-helper-hidden" id="dialog-NewFedoraStoreStep2" title="New Fedora-based Store">
+  <table>
+    <tr>
+      <td>Base URL</td>
+      <td id="NewFedoraStoreStep2-url">...</td>
+    </tr>
+    <tr>
+      <td>Username</td>
+      <td id="NewFedoraStoreStep2-username">...</td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td>(Not shown)</td>
+    </tr>
+    <tr>
+      <td>Store Name</td>
+      <td><input id="NewFedoraStoreStep2-name" type="text" size="40" value="..."/></td>
+    </tr>
+  </table>
+</div>
+
+<div class="ui-helper-hidden" id="dialog-confirm" title="Are you sure?">
+  ...
 </div>
 
 </body>
