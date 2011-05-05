@@ -46,14 +46,14 @@
     </div>
     <div class="tab-body">
       <div class="tab-section">
-        <h2>On-demand</h2>
-        <div id="tasks-ondemand" class="tab-section-body">
+        <h2>Active</h2>
+        <div id="tasks-active" class="tab-section-body">
           ...
         </div>
       </div>
       <div class="tab-section">
-        <h2>Scheduled</h2>
-        <div id="tasks-scheduled" class="tab-section-body">
+        <h2>Idle</h2>
+        <div id="tasks-idle" class="tab-section-body">
           ...
         </div>
       </div>
@@ -85,8 +85,8 @@
         </div>
       </div>
       <div class="tab-section">
-        <h2>RDF Queries</h2>
-        <div id="sets-rdfqueries" class="tab-section-body">
+        <h2>Queries</h2>
+        <div id="sets-queries" class="tab-section-body">
           ...
         </div>
       </div>
@@ -120,13 +120,76 @@
   Here's where you would create a new Task.
 </div>
 
-<div class="ui-helper-hidden" id="dialog-NewSet">
-  Here's where you would create a new Object Set.
+<div class="ui-helper-hidden" id="dialog-NewSet" title="New Set">
+  <p>
+    What kind of Object Set do you want to add?
+  </p>
+  <p>
+    <button id="button-NewPidPattern">PID Pattern</button>
+  </p>
+  <p>
+    <button id="button-NewPidList">PID List</button>
+  </p>
+  <p>
+    <button id="button-NewQuery">Query</button>
+  </p>
 </div>
+
+<div class="ui-helper-hidden" id="dialog-NewPidPattern" title="New PID Pattern">
+  <table>
+    <tr>
+      <td>Name</td>
+      <td><input id="NewPidPattern-name" type="text" value=""/></td>
+    </tr>
+    <tr>
+      <td>Pattern (* is wildcard)</td>
+      <td><input id="NewPidPattern-data" type="text" value=""/></td>
+    </tr>
+  </table>
+</div>
+
+<div class="ui-helper-hidden" id="dialog-NewPidList" title="New PID List">
+  <table>
+    <tr>
+      <td>Name</td>
+      <td><input id="NewPidList-name" type="text" value=""/></td>
+    </tr>
+    <tr>
+      <td>PIDs (one per line)</td>
+      <td>
+        <textarea id="NewPidList-data" rows="10" cols="20"></textarea>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="ui-helper-hidden" id="dialog-NewQuery" title="New Query">
+  <table>
+    <tr>
+      <td>Name</td>
+      <td><input id="NewQuery-name" type="text" value=""/></td>
+    </tr>
+    <tr>
+      <td>Query Type</td>
+      <td><select id="NewQuery-queryType">
+        <option>SPARQL</option>
+        <option>iTQL</option>
+        <option>SPO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td>Query Text</td>
+      <td>
+        <textarea id="NewQuery-queryText" rows="10" cols="40"></textarea>
+      </td>
+    </tr>
+  </table>
+</div>
+
 
 <div class="ui-helper-hidden" id="dialog-NewStore" title="New Store">
   <p>
-    What kind of Store do you want to add?
+    What kind of Object Store do you want to add?
   </p>
   <p>
     <button id="button-NewDuraCloudStore">DuraCloud-based</button>

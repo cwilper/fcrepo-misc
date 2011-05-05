@@ -27,6 +27,11 @@ public class ObjectSetDao extends AbstractDao {
     @Override
     public void initDb() {
         db.execute(CREATE_DDL);
+        ObjectSet o = new ObjectSet();
+        o.setName("All Objects");
+        o.setType("pidPattern");
+        o.setData("*");
+        createObjectSet(o);
     }
 
     public ObjectSet createObjectSet(ObjectSet objectSet) {

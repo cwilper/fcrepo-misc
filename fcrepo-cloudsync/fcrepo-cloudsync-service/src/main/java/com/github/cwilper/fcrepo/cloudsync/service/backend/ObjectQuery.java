@@ -12,8 +12,8 @@ public class ObjectQuery {
     private final String type;
     private final String pidPattern;
     private final List<String> pidList;
-    private final String rdfQueryType;
-    private final String rdfQueryText;
+    private final String queryType;
+    private final String queryText;
 
     public ObjectQuery(ObjectSet set) {
         this.type = set.getType();
@@ -25,8 +25,8 @@ public class ObjectQuery {
             // TODO: validate?
             pidPattern = set.getData();
             pidList = null;
-            rdfQueryType = null;
-            rdfQueryText = null;
+            queryType = null;
+            queryText = null;
         } else if (type.equals("pidList")) {
             // TODO: validate?
             pidPattern = null;
@@ -35,15 +35,15 @@ public class ObjectQuery {
             for (String pid: pids) {
                 pidList.add(pid);
             }
-            rdfQueryType = null;
-            rdfQueryText = null;
-        } else if (type.equals("rdfQuery")) {
+            queryType = null;
+            queryText = null;
+        } else if (type.equals("query")) {
             // TODO: validate?
             pidPattern = null;
             pidList = null;
             Map<String, String> map = JSON.getMap(JSON.parse(set.getData()));
-            rdfQueryType = map.get("rdfQueryType");
-            rdfQueryText = map.get("rdfQueryText");
+            queryType = map.get("queryType");
+            queryText = map.get("queryText");
         } else {
             throw new IllegalArgumentException("Unrecognized ObjectSet type: " + type);
         }
@@ -61,12 +61,12 @@ public class ObjectQuery {
         return pidList;
     }
 
-    public String getRdfQueryType() {
-        return rdfQueryType;
+    public String getQueryType() {
+        return queryType;
     }
 
-    public String getRdfQueryText() {
-        return rdfQueryText;
+    public String getQueryText() {
+        return queryText;
     }
 
 }

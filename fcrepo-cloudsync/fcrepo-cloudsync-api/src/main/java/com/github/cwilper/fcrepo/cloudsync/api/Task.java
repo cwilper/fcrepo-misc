@@ -6,6 +6,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Task {
 
     private String id;
+    private String name;
+    private String type;
+    private String logId;
+    private String schedule;
+    private String data;
 
     public String getId() {
         return id;
