@@ -409,6 +409,10 @@ $(function() {
     hide: 'fade',
     buttons: {
       Next: function() {
+        var h = $("#NewDuraCloudStore-url").val();
+        if (h.indexOf("/") == -1) {
+          $("#NewDuraCloudStore-url").val("https://" + h + "/durastore");
+        }
         service.listProviderAccounts(
           $("#NewDuraCloudStore-url").val(),
           $("#NewDuraCloudStore-username").val(),

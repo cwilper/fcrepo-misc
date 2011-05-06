@@ -8,7 +8,7 @@ public class Task {
     private String id;
     private String name;
     private String type;
-    private String logId;
+    private String activeLogId;
     private String schedule;
     private String data;
 
@@ -36,12 +36,12 @@ public class Task {
         this.type = type;
     }
 
-    public String getLogId() {
-        return logId;
+    public String getActiveLogId() {
+        return activeLogId;
     }
 
-    public void setLogId(String logId) {
-        this.logId = logId;
+    public void setActiveLogId(String activeLogId) {
+        this.activeLogId = activeLogId;
     }
 
     public String getSchedule() {

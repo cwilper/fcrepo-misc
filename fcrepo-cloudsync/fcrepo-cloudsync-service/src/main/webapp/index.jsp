@@ -202,8 +202,8 @@
 <div class="ui-helper-hidden" id="dialog-NewDuraCloudStore" title="New DuraCloud-based Store">
   <table>
     <tr>
-      <td>DuraStore URL</td>
-      <td><input id="NewDuraCloudStore-url" type="text" value="https://"/></td>
+      <td>Hostname or URL</td>
+      <td><input id="NewDuraCloudStore-url" type="text"/></td>
     </tr>
     <tr>
       <td>DuraCloud Username</td>
@@ -238,7 +238,7 @@
 <div class="ui-helper-hidden" id="dialog-NewDuraCloudStoreStep3" title="New DuraCloud-based Store">
   <table>
     <tr>
-      <td>DuraStore URL</td>
+      <td>URL</td>
       <td id="NewDuraCloudStoreStep3-url">...</td>
     </tr>
     <tr>
@@ -271,8 +271,8 @@
 <div class="ui-helper-hidden" id="dialog-NewFedoraStore" title="New Fedora-based Store">
   <table>
     <tr>
-      <td>Fedora Base URL</td>
-      <td><input id="NewFedoraStore-url" type="text" value="https://"/></td>
+      <td>Base URL</td>
+      <td><input id="NewFedoraStore-url" type="text" value=""/></td>
     </tr>
     <tr>
       <td>Fedora Username</td>
@@ -288,7 +288,7 @@
 <div class="ui-helper-hidden" id="dialog-NewFedoraStoreStep2" title="New Fedora-based Store">
   <table>
     <tr>
-      <td>Base URL</td>
+      <td>URL</td>
       <td id="NewFedoraStoreStep2-url">...</td>
     </tr>
     <tr>
