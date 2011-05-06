@@ -15,7 +15,7 @@ public class ConfigurationDao extends AbstractDao {
 
     @Override
     public void initDb() {
-        db.execute("create table Configuration (keepSysLogDays int not null, keepTaskLogDays int not null)");
+        db.execute("create table Configuration (keepSysLogDays INTEGER NOT NULL, keepTaskLogDays INTEGER NOT NULL)");
         db.execute("insert into Configuration values (-1, -1)");
     }
 

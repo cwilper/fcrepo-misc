@@ -66,9 +66,9 @@ public class CloudSyncServiceImpl implements CloudSyncService {
         db.update("insert into CloudSync values (1)");
         configurationDao.initDb();
         userDao.initDb();
-        taskDao.initDb();
         objectSetDao.initDb();
         objectStoreDao.initDb();
+        taskDao.initDb();
         systemLogDao.initDb();
         taskLogDao.initDb();
     }
