@@ -302,15 +302,10 @@ $(function() {
 
   $("#dialog-NewTask").dialog({
     autoOpen: false,
-    width: 550,
     modal: true,
+    width: 'auto',
     show: 'fade',
-    hide: 'fade',
-    buttons: {
-      OK: function() {
-        $(this).dialog("close");
-      }
-    }
+    hide: 'fade'
   });
 
   $("#dialog-NewSet").dialog({
@@ -567,14 +562,14 @@ $(function() {
         $("#dialog-NewSet").dialog("close");
         $("#dialog-NewPidPattern").dialog("open");
       }
-      );
+  );
 
   $("#button-NewPidList").click(
       function() {
         $("#dialog-NewSet").dialog("close");
         $("#dialog-NewPidList").dialog("open");
       }
-      );
+  );
 
   $("#button-NewQuery").click(
       function() {
@@ -583,11 +578,85 @@ $(function() {
       }
   );
 
+  $("#dialog-NewTask button").button();
+
+  $("#button-NewListTask").click(
+      function() {
+        $("#dialog-NewTask").dialog("close");
+        // populate selects for new list task
+        service.listObjectSets(function(sets) {
+          // populate sets in dialog, then get stores
+          var setOptions = "";
+          $.each(sets.objectsets, function(index, set) {
+            setOptions += "<option value=\"" + set.id + "\">"
+            setOptions += set.name;
+            setOptions += "</option>";
+          });
+          $("#NewListTask-setId").html(setOptions);
+          $("#NewListTask-setId").change(showNewListTaskName);
+          service.listObjectStores(function(stores) {
+            // populate stores in dialog, then show dialog
+            var storeOptions = "";
+            $.each(stores.objectstores, function(index, store) {
+              storeOptions += "<option value=\"" + store.id + "\">"
+              storeOptions += store.name;
+              storeOptions += "</option>";
+            });
+            $("#NewListTask-name").attr("size", 60);
+            $("#NewListTask-storeId").html(storeOptions);
+            $("#NewListTask-storeId").change(showNewListTaskName);
+            showNewListTaskName();
+
+            $("#dialog-NewListTask").dialog("open");
+          });
+        });
+      }
+  );
+
+  $("#button-NewCopyTask").click(
+      function() {
+        $("#dialog-NewTask").dialog("close");
+        $("#dialog-NewCopyTask").dialog("open");
+      }
+  );
+
+  $("#dialog-NewListTask").dialog({
+    autoOpen: false,
+    modal: true,
+    width: 'auto',
+    show: 'fade',
+    hide: 'fade',
+    buttons: {
+      Next: function() {
+        $(this).dialog("close");
+      }
+    }
+  });
+
+  $("#dialog-NewCopyTask").dialog({
+    autoOpen: false,
+    modal: true,
+    width: 'auto',
+    show: 'fade',
+    hide: 'fade',
+    buttons: {
+      OK: function() {
+        $(this).dialog("close");
+      }
+    }
+  });
+
   service.getCurrentUser(function(data, status, x) {
     $("#username").text(data.user.name);
   });
 
 });
+
+function showNewListTaskName() {
+  var name = "List " + $("#NewListTask-setId option:selected").text()
+      + " in " + $("#NewListTask-storeId option:selected").text();
+  $("#NewListTask-name").val(name);
+}
 
 function showSpacesForProvider(id) {
   service.listSpaces(

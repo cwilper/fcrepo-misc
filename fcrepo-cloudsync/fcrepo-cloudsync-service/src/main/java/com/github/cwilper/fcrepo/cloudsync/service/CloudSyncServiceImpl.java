@@ -22,6 +22,8 @@ import com.github.cwilper.fcrepo.cloudsync.service.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 import java.io.InputStream;
@@ -32,6 +34,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     private static final Logger logger = LoggerFactory.getLogger(CloudSyncServiceImpl.class);
 
     private final JdbcTemplate db;
+    private final TransactionTemplate tt;
 
     private final ConfigurationDao configurationDao;
     private final UserDao userDao;
@@ -42,12 +45,14 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     private final TaskLogDao taskLogDao;
     private final DuraCloudDao duraCloudDao;
 
-    public CloudSyncServiceImpl(DataSource dataSource) {
+    public CloudSyncServiceImpl(DataSource dataSource,
+                                PlatformTransactionManager txMan) {
         db = new JdbcTemplate(dataSource);
+        tt = new TransactionTemplate(txMan);
 
         configurationDao = new ConfigurationDao(db);
         userDao = new UserDao(db);
-        taskDao = new TaskDao(db);
+        taskDao = new TaskDao(db, tt);
         objectSetDao = new ObjectSetDao(db);
         objectStoreDao = new ObjectStoreDao(db);
         systemLogDao = new SystemLogDao(db);

@@ -1,9 +1,16 @@
 package com.github.cwilper.fcrepo.cloudsync.service.dao;
 
 import com.github.cwilper.fcrepo.cloudsync.api.Task;
+import com.github.cwilper.fcrepo.cloudsync.service.backend.TaskRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class TaskDao extends AbstractDao {
@@ -14,14 +21,16 @@ public class TaskDao extends AbstractDao {
         + "  name VARCHAR(256) NOT NULL,\n"
         + "  type VARCHAR(32) NOT NULL,\n"
         + "  state VARCHAR(16) NOT NULL,\n"
+        + "  activeLogId INTEGER,\n"
         + "  schedule VARCHAR(1024),\n"
         + "  data VARCHAR(32672) NOT NULL,\n"
         + "  CONSTRAINT TaskUniqueName UNIQUE (name))";
+        // + "  CONSTRAINT Task_Log_FK FOREIGN_KEY (activeLogId) REFERENCES TaskLogs (id))";
 
     private static final String CREATE_DDL2 =
           "CREATE TABLE TaskSetDeps (\n"
-        + "  taskId INT NOT NULL,\n"
-        + "  setId INT NOT NULL,\n"
+        + "  taskId INTEGER NOT NULL,\n"
+        + "  setId INTEGER NOT NULL,\n"
         + "  CONSTRAINT TaskSetDep_Task_FK FOREIGN KEY (taskId) REFERENCES Tasks (id),\n"
         + "  CONSTRAINT TaskSetDep_Set_FK FOREIGN KEY (setId) REFERENCES ObjectSets (id))";
 
@@ -32,11 +41,21 @@ public class TaskDao extends AbstractDao {
         + "  CONSTRAINT TaskStoreDep_Task_FK FOREIGN KEY (taskId) REFERENCES Tasks (id),\n"
         + "  CONSTRAINT TaskStoreDep_Store_FK FOREIGN KEY (storeId) REFERENCES ObjectStores (id))";
 
+    private static final String INSERT_SQL =
+            "INSERT INTO Tasks (name, type, state, activeLogId, schedule, data) \n"
+                    + "VALUES (?, ?, ?, ?, ?)";
 
-    int num = 0;
+    private static final String INSERT_SQL2 =
+            "INSERT INTO TaskSetDeps (taskId, setId) VALUES (?, ?)";
 
-    public TaskDao(JdbcTemplate db) {
+    private static final String INSERT_SQL3 =
+          "INSERT INTO TaskStoreDeps (taskId, storeId) VALUES (?, ?)";
+
+    private final TransactionTemplate tt;
+
+    public TaskDao(JdbcTemplate db, TransactionTemplate tt) {
         super(db);
+        this.tt = tt;
     }
 
     @Override
@@ -46,36 +65,86 @@ public class TaskDao extends AbstractDao {
         db.execute(CREATE_DDL3);
     }
 
-    public Task createTask(Task task) {
+    public Task createTask(final Task task) {
+        final TaskRunner runner = TaskRunner.getInstance(task);
 
-        return task;
+        String id = tt.execute(new TransactionCallback<String>() {
+            public String doInTransaction(TransactionStatus status) {
+                try {
+                    Integer activeLogId = null;
+                    if (task.getActiveLogId() != null) {
+                        activeLogId = Integer.parseInt(task.getActiveLogId());
+                    }
+                    String id = insert(INSERT_SQL,
+                            task.getName(),
+                            task.getType(),
+                            task.getState(),
+                            activeLogId,
+                            task.getSchedule(),
+                            task.getData());
+                    Integer taskId = Integer.parseInt(id);
+                    for (Integer setId: runner.getRelatedSetIds()) {
+                        db.update(INSERT_SQL2, taskId, setId);
+                    }
+                    for (Integer storeId: runner.getRelatedStoreIds()) {
+                        db.update(INSERT_SQL3, taskId, storeId);
+                    }
+                    return id;
+                } catch (Exception e) {
+                    status.setRollbackOnly();
+                    return null;
+                }
+            }
+        });
+        if (id == null) return null; // duplicate key or other db error
+        return getTask(id);
     }
 
     public List<Task> listTasks() {
-        List<Task> list = new ArrayList<Task>();
-        for (int i = 0; i < num; i++ ) {
-            Task item = new Task();
-            item.setId("" + i);
-            list.add(item);
-        }
-        num++;
-        if (num == 4) {
-            num = 0;
-        }
-        return list;
+        return db.query("SELECT * FROM Tasks",
+                new RowMapper<Task>() {
+                    public Task mapRow(ResultSet rs, int i) throws SQLException {
+                        return getTask(rs);
+                    }
+                });
     }
 
     public Task getTask(String id) {
-        Task item = new Task();
-        item.setId(id);
-        return item;
+        return db.query("SELECT * FROM Tasks WHERE id = ?",
+                new ResultSetExtractor<Task>() {
+                    public Task extractData(ResultSet rs) throws SQLException {
+                        if (rs.next()) {
+                            return getTask(rs);
+                        } else {
+                            return null;
+                        }
+                    }
+                },
+                Integer.parseInt(id));
+    }
+
+    private Task getTask(ResultSet rs) throws SQLException {
+        Task task = new Task();
+        task.setId("" + rs.getInt("id"));
+        task.setName(rs.getString("name"));
+        task.setType(rs.getString("name"));
+        task.setState(rs.getString("name"));
+        Integer activeLogId = rs.getInt("activeLogId");
+        if (activeLogId != null) {
+            task.setActiveLogId(activeLogId.toString());
+        }
+        task.setSchedule(rs.getString("schedule"));
+        task.setData(rs.getString("data"));
+        return task;
     }
 
     public Task updateTask(String id, Task task) {
+        // TODO: Implement me
         return task;
     }
 
     public void deleteTask(String id) {
+        db.update("DELETE FROM Tasks WHERE id = ?", Integer.parseInt(id));
     }
 
 }

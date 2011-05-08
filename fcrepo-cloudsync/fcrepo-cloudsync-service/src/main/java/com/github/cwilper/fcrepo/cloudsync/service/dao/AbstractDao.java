@@ -52,7 +52,7 @@ abstract class AbstractDao {
                 + " ]");
     }
 
-    protected String insert(final String sql, final String... values) {
+    protected String insert(final String sql, final Object... values) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         try {
             db.update(new PreparedStatementCreator() {
@@ -61,7 +61,10 @@ abstract class AbstractDao {
                     PreparedStatement ps = conn.prepareStatement(sql,
                             new String[] { "ID" }); // must be caps
                     for (int i = 1; i <= values.length; i++) {
-                        ps.setString(i, values[i-1].trim());
+                        // Value may be null, so here we depend on Derby's
+                        // ability to handle this in version 10.7.1.1+
+                        // https://issues.apache.org/jira/browse/DERBY-1938
+                        ps.setObject(i, values[i-1]);
                     }
                     return ps;
                 }

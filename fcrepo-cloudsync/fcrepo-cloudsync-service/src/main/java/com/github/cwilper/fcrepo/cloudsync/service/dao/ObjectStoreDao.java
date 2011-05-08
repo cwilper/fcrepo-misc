@@ -49,12 +49,7 @@ public class ObjectStoreDao extends AbstractDao {
         return db.query("SELECT * FROM ObjectStores",
                 new RowMapper<ObjectStore>() {
                     public ObjectStore mapRow(ResultSet rs, int i) throws SQLException {
-                        ObjectStore o = new ObjectStore();
-                        o.setId("" + rs.getInt("id"));
-                        o.setName(rs.getString("name"));
-                        o.setType(rs.getString("type"));
-                        o.setData(rs.getString("data"));
-                        return o;
+                        return getObjectStore(rs);
                     }
                 });
     }
@@ -65,18 +60,22 @@ public class ObjectStoreDao extends AbstractDao {
                     public ObjectStore extractData(ResultSet rs)
                             throws SQLException {
                         if (rs.next()) {
-                            ObjectStore o = new ObjectStore();
-                            o.setId("" + rs.getInt("id"));
-                            o.setName(rs.getString("name"));
-                            o.setType(rs.getString("type"));
-                            o.setData(rs.getString("data"));
-                            return o;
+                            return getObjectStore(rs);
                         } else {
                             return null;
                         }
                     }
                 },
                 Integer.parseInt(id));
+    }
+
+    private ObjectStore getObjectStore(ResultSet rs) throws SQLException {
+        ObjectStore o = new ObjectStore();
+        o.setId("" + rs.getInt("id"));
+        o.setName(rs.getString("name"));
+        o.setType(rs.getString("type"));
+        o.setData(rs.getString("data"));
+        return o;
     }
 
     public List<ObjectInfo> queryObjectStore(String id, String set, long limit, long offset) {

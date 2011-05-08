@@ -8,6 +8,7 @@ public class Task {
     private String id;
     private String name;
     private String type;
+    private String state;
     private String activeLogId;
     private String schedule;
     private String data;
@@ -58,5 +59,13 @@ public class Task {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

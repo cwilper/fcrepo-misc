@@ -31,6 +31,8 @@
   <button id="button-Logout">Logout</button>
 </div>
 
+<!-- Tabs -->
+
 <div id="tabs">
 
   <ul>
@@ -116,9 +118,48 @@
 
 </div>
 
+<!-- Tasks -->
+
 <div class="ui-helper-hidden" id="dialog-NewTask">
-  Here's where you would create a new Task.
+  <p>
+    What kind of Task do you want to add?
+  </p>
+  <p>
+    <button id="button-NewListTask">List Objects</button>
+  </p>
+  <p>
+    <button id="button-NewCopyTask">Copy Objects</button>
+  </p>
 </div>
+
+<div class="ui-helper-hidden" id="dialog-NewListTask" title="New List Task">
+  <table>
+    <tr>
+      <td>Store</td>
+      <td><select id="NewListTask-storeId">
+        ...
+      </select></td>
+    </tr>
+    <tr>
+      <td>Set to List</td>
+      <td><select id="NewListTask-setId">
+        ...
+      </select></td>
+    </tr>
+    <tr>
+      <td>Task Name</td>
+      <td>
+        <input id="NewListTask-name" type="text"/>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="ui-helper-hidden" id="dialog-NewCopyTask" title="New Copy Task">
+  <p>Not Implemented</p>
+</div>
+
+<!-- Sets -->
 
 <div class="ui-helper-hidden" id="dialog-NewSet" title="New Set">
   <p>
@@ -186,6 +227,7 @@
   </table>
 </div>
 
+<!-- Stores -->
 
 <div class="ui-helper-hidden" id="dialog-NewStore" title="New Store">
   <p>
@@ -305,6 +347,8 @@
     </tr>
   </table>
 </div>
+
+<!-- Misc -->
 
 <div class="ui-helper-hidden" id="dialog-confirm" title="Are you sure?">
   ...

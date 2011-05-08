@@ -111,7 +111,6 @@ public class DuraCloudDao {
 
     private Document parseXML(String xmlString)
             throws ParserConfigurationException, IOException, SAXException {
-        System.out.println("About to parse: " + xmlString);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = factory.newDocumentBuilder();
         InputSource inStream = new InputSource();
