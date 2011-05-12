@@ -2,6 +2,8 @@ package com.github.cwilper.fcrepo.cloudsync.service.dao;
 
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectSet;
 import com.github.cwilper.fcrepo.cloudsync.service.backend.ObjectQuery;
+import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
@@ -34,15 +36,22 @@ public class ObjectSetDao extends AbstractDao {
         createObjectSet(o);
     }
 
-    public ObjectSet createObjectSet(ObjectSet objectSet) {
-        // validate and normalize objectSet fields
-        new ObjectQuery(objectSet);
+    public ObjectSet createObjectSet(ObjectSet objectSet)
+            throws DuplicateKeyException {
+        // normalize and validate fields
+        if (StringUtil.normalize(objectSet.getId()) != null) {
+            throw new IllegalArgumentException("Specifying the Object Set "
+                    + "id during creation is not permitted");
+        }
+        objectSet.setName(StringUtil.validate("name", objectSet.getName(), 256));
+        objectSet.setType(StringUtil.validate("type", objectSet.getType(), 32));
+        objectSet.setData(StringUtil.validate("data", objectSet.getData(), 32672));
+        new ObjectQuery(objectSet); // do type-specific validation
         String id = insert(
                 "INSERT INTO ObjectSets (name, type, data) VALUES (?, ?, ?)",
                 objectSet.getName(),
                 objectSet.getType(),
                 objectSet.getData());
-        if (id == null) return null; // duplicate key
         return getObjectSet(id);
     }
 
@@ -50,12 +59,7 @@ public class ObjectSetDao extends AbstractDao {
         return db.query("SELECT * FROM ObjectSets",
                 new RowMapper<ObjectSet>() {
                     public ObjectSet mapRow(ResultSet rs, int i) throws SQLException {
-                        ObjectSet o = new ObjectSet();
-                        o.setId("" + rs.getInt("id"));
-                        o.setName(rs.getString("name"));
-                        o.setType(rs.getString("type"));
-                        o.setData(rs.getString("data"));
-                        return o;
+                        return getObjectSet(rs);
                     }
                 });
     }
@@ -66,18 +70,22 @@ public class ObjectSetDao extends AbstractDao {
                     public ObjectSet extractData(ResultSet rs)
                             throws SQLException {
                         if (rs.next()) {
-                            ObjectSet o = new ObjectSet();
-                            o.setId("" + rs.getInt("id"));
-                            o.setName(rs.getString("name"));
-                            o.setType(rs.getString("type"));
-                            o.setData(rs.getString("data"));
-                            return o;
+                            return getObjectSet(rs);
                         } else {
                             return null;
                         }
                     }
                 },
                 Integer.parseInt(id));
+    }
+
+    private ObjectSet getObjectSet(ResultSet rs) throws SQLException {
+        ObjectSet o = new ObjectSet();
+        o.setId("" + rs.getInt("id"));
+        o.setName(rs.getString("name"));
+        o.setType(rs.getString("type"));
+        o.setData(rs.getString("data"));
+        return o;
     }
 
     public ObjectSet updateObjectSet(String id, ObjectSet objectSet) {

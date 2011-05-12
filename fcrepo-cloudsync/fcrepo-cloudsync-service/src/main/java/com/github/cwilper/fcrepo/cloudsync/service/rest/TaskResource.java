@@ -1,6 +1,7 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
+import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.Task;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
@@ -14,6 +15,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -36,9 +38,13 @@ public class TaskResource extends AbstractResource {
     })
     public Response createTask(@Context UriInfo uriInfo,
                                Task task) {
-        Task newTask = service.createTask(task);
-        URI uri = getResourceURI(uriInfo.getRequestUri(), newTask.getId());
-        return Response.created(uri).entity(newTask).build();
+        try {
+            Task newTask = service.createTask(task);
+            URI uri = getResourceURI(uriInfo.getRequestUri(), newTask.getId());
+            return Response.created(uri).entity(newTask).build();
+        } catch (NameConflictException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
+        }
     }
 
     @GET
@@ -73,7 +79,11 @@ public class TaskResource extends AbstractResource {
     })
     public Task updateTask(@PathParam("id") String id,
                            Task task) {
-        return service.updateTask(id, task);
+        try {
+            return service.updateTask(id, task);
+        } catch (NameConflictException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
+        }
     }
 
     @DELETE

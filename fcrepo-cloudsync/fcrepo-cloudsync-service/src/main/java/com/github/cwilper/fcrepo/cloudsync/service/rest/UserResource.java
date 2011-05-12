@@ -1,6 +1,7 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
+import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.User;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
@@ -14,6 +15,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -36,12 +38,12 @@ public class UserResource extends AbstractResource {
     })
     public Response createUser(@Context UriInfo uriInfo,
                                User user) {
-        User newUser = service.createUser(user);
-        if (newUser != null) {
+        try {
+            User newUser = service.createUser(user);
             URI uri = getResourceURI(uriInfo.getRequestUri(), newUser.getId());
             return Response.created(uri).entity(newUser).build();
-        } else {
-            return Response.status(Response.Status.CONFLICT).build();
+        } catch (NameConflictException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
         }
     }
 
@@ -93,11 +95,15 @@ public class UserResource extends AbstractResource {
     })
     public Response updateUser(@PathParam("id") String id,
                            User user) {
-        User updated = service.updateUser(id, user);
-        if (updated != null) {
-            return Response.ok(updated).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+        try {
+            User updated = service.updateUser(id, user);
+            if (updated != null) {
+                return Response.ok(updated).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+        } catch (NameConflictException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
         }
     }
 

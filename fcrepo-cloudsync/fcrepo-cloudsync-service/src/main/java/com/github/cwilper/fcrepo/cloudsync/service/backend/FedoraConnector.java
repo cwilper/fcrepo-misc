@@ -2,6 +2,7 @@ package com.github.cwilper.fcrepo.cloudsync.service.backend;
 
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
 import com.github.cwilper.fcrepo.cloudsync.service.util.JSON;
+import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
@@ -19,9 +20,9 @@ public class FedoraConnector extends StoreConnector {
     public FedoraConnector(ObjectStore store) {
         this.store = store;
         Map<String, String> map = JSON.getMap(JSON.parse(store.getData()));
-        url = normalize(nonEmpty("url", map.get("url")));
-        username = normalize(nonEmpty("username", map.get("username")));
-        password = nonEmpty("password", map.get("password"));
+        url = StringUtil.validate("url", map.get("url"));
+        username = StringUtil.validate("username", map.get("username"));
+        password = StringUtil.validate("password", map.get("password"));
     }
 
     @Override

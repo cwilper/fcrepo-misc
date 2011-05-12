@@ -1,6 +1,7 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
+import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectSet;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
@@ -14,6 +15,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -36,9 +38,13 @@ public class ObjectSetResource extends AbstractResource {
     })
     public Response createObjectSet(@Context UriInfo uriInfo,
                                     ObjectSet objectSet) {
-        ObjectSet newObjectSet = service.createObjectSet(objectSet);
-        URI uri = getResourceURI(uriInfo.getRequestUri(), newObjectSet.getId());
-        return Response.created(uri).entity(newObjectSet).build();
+        try {
+            ObjectSet newObjectSet = service.createObjectSet(objectSet);
+            URI uri = getResourceURI(uriInfo.getRequestUri(), newObjectSet.getId());
+            return Response.created(uri).entity(newObjectSet).build();
+        } catch (NameConflictException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
+        }
     }
 
     @GET
@@ -73,7 +79,11 @@ public class ObjectSetResource extends AbstractResource {
     })
     public ObjectSet updateObjectSet(@PathParam("id") String id,
                                      ObjectSet objectSet) {
-        return service.updateObjectSet(id, objectSet);
+        try {
+            return service.updateObjectSet(id, objectSet);
+        } catch (NameConflictException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
+        }
     }
 
     @DELETE

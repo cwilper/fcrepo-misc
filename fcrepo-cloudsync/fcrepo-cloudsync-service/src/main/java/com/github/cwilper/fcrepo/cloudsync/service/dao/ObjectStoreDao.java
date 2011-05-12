@@ -3,6 +3,8 @@ package com.github.cwilper.fcrepo.cloudsync.service.dao;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectInfo;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
 import com.github.cwilper.fcrepo.cloudsync.service.backend.StoreConnector;
+import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
@@ -33,15 +35,22 @@ public class ObjectStoreDao extends AbstractDao {
         db.execute(CREATE_DDL);
     }
 
-    public ObjectStore createObjectStore(ObjectStore objectStore) {
-        // validate and normalize objectStore fields
-        StoreConnector.getInstance(objectStore);
+    public ObjectStore createObjectStore(ObjectStore objectStore)
+            throws DuplicateKeyException {
+        // normalize and validate fields
+        if (StringUtil.normalize(objectStore.getId()) != null) {
+            throw new IllegalArgumentException("Specifying the Object Store "
+                    + "id during creation is not permitted");
+        }
+        objectStore.setName(StringUtil.validate("name", objectStore.getName(), 256));
+        objectStore.setType(StringUtil.validate("type", objectStore.getType(), 32));
+        objectStore.setData(StringUtil.validate("data", objectStore.getData(), 1024));
+        StoreConnector.getInstance(objectStore); // do type-specific validation
         String id = insert(
                 "INSERT INTO ObjectStores (name, type, data) VALUES (?, ?, ?)",
                 objectStore.getName(),
                 objectStore.getType(),
                 objectStore.getData());
-        if (id == null) return null; // duplicate key
         return getObjectStore(id);
     }
 

@@ -1,6 +1,7 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
+import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectInfo;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
 import org.apache.cxf.jaxrs.model.wadl.Description;
@@ -16,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -38,9 +40,13 @@ public class ObjectStoreResource extends AbstractResource {
     })
     public Response createObjectStore(@Context UriInfo uriInfo,
                                       ObjectStore objectStore) {
-        ObjectStore newObjectStore = service.createObjectStore(objectStore);
-        URI uri = getResourceURI(uriInfo.getRequestUri(), newObjectStore.getId());
-        return Response.created(uri).entity(newObjectStore).build();
+        try {
+            ObjectStore newObjectStore = service.createObjectStore(objectStore);
+            URI uri = getResourceURI(uriInfo.getRequestUri(), newObjectStore.getId());
+            return Response.created(uri).entity(newObjectStore).build();
+        } catch (NameConflictException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
+        }
     }
 
     @GET
@@ -89,7 +95,11 @@ public class ObjectStoreResource extends AbstractResource {
     })
     public ObjectStore updateObjectStore(@PathParam("id") String id,
                                          ObjectStore objectStore) {
-        return service.updateObjectStore(id, objectStore);
+        try {
+            return service.updateObjectStore(id, objectStore);
+        } catch (NameConflictException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
+        }
     }
 
     @DELETE

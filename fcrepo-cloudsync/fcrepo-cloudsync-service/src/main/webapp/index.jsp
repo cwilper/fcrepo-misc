@@ -135,14 +135,14 @@
 <div class="ui-helper-hidden" id="dialog-NewListTask" title="New List Task">
   <table>
     <tr>
-      <td>Store</td>
-      <td><select id="NewListTask-storeId">
+      <td>List</td>
+      <td><select id="NewListTask-setId">
         ...
       </select></td>
     </tr>
     <tr>
-      <td>Set to List</td>
-      <td><select id="NewListTask-setId">
+      <td>in</td>
+      <td><select id="NewListTask-storeId">
         ...
       </select></td>
     </tr>

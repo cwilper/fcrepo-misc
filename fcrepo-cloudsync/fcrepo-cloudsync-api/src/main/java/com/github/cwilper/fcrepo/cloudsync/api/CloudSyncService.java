@@ -17,7 +17,7 @@ public interface CloudSyncService {
     //                                Users
     // -----------------------------------------------------------------------
 
-    User createUser(User user);
+    User createUser(User user) throws NameConflictException;
 
     List<User> listUsers();
 
@@ -25,7 +25,7 @@ public interface CloudSyncService {
 
     User getCurrentUser();
 
-    User updateUser(String id, User user);
+    User updateUser(String id, User user) throws NameConflictException;
 
     void deleteUser(String id);
 
@@ -33,13 +33,13 @@ public interface CloudSyncService {
     //                                Tasks
     // -----------------------------------------------------------------------
 
-    Task createTask(Task task);
+    Task createTask(Task task) throws NameConflictException;
 
     List<Task> listTasks();
 
     Task getTask(String id);
 
-    Task updateTask(String id, Task task);
+    Task updateTask(String id, Task task) throws NameConflictException;
 
     void deleteTask(String id);
 
@@ -47,13 +47,13 @@ public interface CloudSyncService {
     //                             Object Sets
     // -----------------------------------------------------------------------
 
-    ObjectSet createObjectSet(ObjectSet objectSet);
+    ObjectSet createObjectSet(ObjectSet objectSet) throws NameConflictException;
 
     List<ObjectSet> listObjectSets();
 
     ObjectSet getObjectSet(String id);
 
-    ObjectSet updateObjectSet(String id, ObjectSet objectSet);
+    ObjectSet updateObjectSet(String id, ObjectSet objectSet) throws NameConflictException;
 
     void deleteObjectSet(String id);
 
@@ -61,7 +61,7 @@ public interface CloudSyncService {
     //                            Object Stores
     // -----------------------------------------------------------------------
 
-    ObjectStore createObjectStore(ObjectStore objectStore);
+    ObjectStore createObjectStore(ObjectStore objectStore) throws NameConflictException;
 
     List<ObjectStore> listObjectStores();
 
@@ -69,7 +69,7 @@ public interface CloudSyncService {
 
     List<ObjectInfo> queryObjectStore(String id, String set, long limit, long offset);
 
-    ObjectStore updateObjectStore(String id, ObjectStore objectStore);
+    ObjectStore updateObjectStore(String id, ObjectStore objectStore) throws NameConflictException;
 
     void deleteObjectStore(String id);
 

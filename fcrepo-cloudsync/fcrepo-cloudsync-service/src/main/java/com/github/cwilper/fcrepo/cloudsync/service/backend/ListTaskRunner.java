@@ -9,7 +9,6 @@ import java.util.Set;
 
 public class ListTaskRunner extends TaskRunner {
 
-    private final Task task;
     private final Integer setId;
     private final Integer storeId;
 
@@ -17,7 +16,7 @@ public class ListTaskRunner extends TaskRunner {
     private final Set<Integer> relatedStoreIds = new HashSet<Integer>();
 
     public ListTaskRunner(Task task) {
-        this.task = task;
+        super(task);
         Map<String, String> map = JSON.getMap(JSON.parse(task.getData()));
         setId = Integer.parseInt(map.get("setId"));
         storeId = Integer.parseInt(map.get("storeId"));
@@ -27,11 +26,11 @@ public class ListTaskRunner extends TaskRunner {
 
     @Override
     public Set<Integer> getRelatedSetIds() {
-        return null;
+        return relatedSetIds;
     }
 
     @Override
     public Set<Integer> getRelatedStoreIds() {
-        return null;
+        return relatedStoreIds;
     }
 }

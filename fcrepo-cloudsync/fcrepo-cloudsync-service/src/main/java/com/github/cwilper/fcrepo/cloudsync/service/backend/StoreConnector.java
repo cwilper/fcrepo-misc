@@ -10,20 +10,12 @@ import java.io.InputStream;
 public abstract class StoreConnector {
 
     public static final StoreConnector getInstance(ObjectStore store) {
-        if (store.getType() != null && store.getType().length() > 0) {
-            // validate and normalize strings
-            store.setName(normalize(nonEmpty("name", store.getName())));
-            store.setType(normalize(nonEmpty("type", store.getType())));
-            store.setData(normalize(nonEmpty("data", store.getData())));
-            if (store.getType().equals("fedora")) {
-                return new FedoraConnector(store);
-            } else if (store.getType().equals("duracloud")) {
-                return new DuraCloudConnector(store);
-            } else {
-                throw new IllegalArgumentException("Unrecognized ObjectStore type: " + store.getType());
-            }
+        if (store.getType().equals("fedora")) {
+            return new FedoraConnector(store);
+        } else if (store.getType().equals("duracloud")) {
+            return new DuraCloudConnector(store);
         } else {
-            throw new IllegalArgumentException("ObjectStore type not specified");
+            throw new IllegalArgumentException("Unrecognized ObjectStore type: " + store.getType());
         }
     }
 
@@ -39,16 +31,6 @@ public abstract class StoreConnector {
                                            Datastream ds,
                                            DatastreamVersion dsv);
 
-    protected static String normalize(String val) {
-        if (val == null || val.trim().length() == 0) return null;
-        return val.trim();
-    }
 
-    protected static String nonEmpty(String name, String value) {
-        if (value == null || value.trim().length() == 0) {
-            throw new IllegalArgumentException(name + " must be specified");
-        }
-        return value;
-    }
 
 }

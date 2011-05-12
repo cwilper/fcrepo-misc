@@ -2,6 +2,7 @@ package com.github.cwilper.fcrepo.cloudsync.service;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
 import com.github.cwilper.fcrepo.cloudsync.api.Configuration;
+import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectInfo;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectSet;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
@@ -21,6 +22,7 @@ import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskLogDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -98,8 +100,12 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     // return null if the user name conflicts with an existing one
     @Override
-    public User createUser(User user) {
-        return userDao.createUser(user);
+    public User createUser(User user) throws NameConflictException {
+        try {
+            return userDao.createUser(user);
+        } catch (DuplicateKeyException e) {
+            throw new NameConflictException("User name is already in use", e);
+        }
     }
 
     @Override
@@ -121,8 +127,13 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     // return null if user not found
     @Override
-    public User updateUser(String id, User user) {
-        return userDao.updateUser(id, user);
+    public User updateUser(String id, User user)
+            throws NameConflictException {
+        try {
+            return userDao.updateUser(id, user);
+        } catch (DuplicateKeyException e) {
+            throw new NameConflictException("User name is already in use", e);
+        }
     }
 
     // no error if user not found
@@ -136,8 +147,12 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     // -----------------------------------------------------------------------
 
     @Override
-    public Task createTask(Task task) {
-        return taskDao.createTask(task);
+    public Task createTask(Task task) throws NameConflictException {
+        try {
+            return taskDao.createTask(task);
+        } catch (DuplicateKeyException e) {
+            throw new NameConflictException("Task name is already in use", e);
+        }
     }
 
     @Override
@@ -151,8 +166,12 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public Task updateTask(String id, Task task) {
-        return taskDao.updateTask(id, task);
+    public Task updateTask(String id, Task task) throws NameConflictException {
+        try {
+            return taskDao.updateTask(id, task);
+        } catch (DuplicateKeyException e) {
+            throw new NameConflictException("Task name is already in use", e);
+        }
     }
 
     @Override
@@ -165,8 +184,13 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     // -----------------------------------------------------------------------
 
     @Override
-    public ObjectSet createObjectSet(ObjectSet objectSet) {
-        return objectSetDao.createObjectSet(objectSet);
+    public ObjectSet createObjectSet(ObjectSet objectSet)
+            throws NameConflictException {
+        try {
+            return objectSetDao.createObjectSet(objectSet);
+        } catch (DuplicateKeyException e) {
+            throw new NameConflictException("Object Set name is already in use", e);
+        }
     }
 
     @Override
@@ -180,8 +204,13 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public ObjectSet updateObjectSet(String id, ObjectSet objectSet) {
-        return objectSetDao.updateObjectSet(id, objectSet);
+    public ObjectSet updateObjectSet(String id, ObjectSet objectSet)
+            throws NameConflictException {
+        try {
+            return objectSetDao.updateObjectSet(id, objectSet);
+        } catch (DuplicateKeyException e) {
+            throw new NameConflictException("Object Set name is already in use", e);
+        }
     }
 
     @Override
@@ -194,8 +223,13 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     // -----------------------------------------------------------------------
 
     @Override
-    public ObjectStore createObjectStore(ObjectStore objectStore) {
-        return objectStoreDao.createObjectStore(objectStore);
+    public ObjectStore createObjectStore(ObjectStore objectStore)
+            throws NameConflictException {
+        try {
+            return objectStoreDao.createObjectStore(objectStore);
+        } catch (DuplicateKeyException e) {
+            throw new NameConflictException("Object Store name is already in use", e);
+        }
     }
 
     @Override
@@ -214,8 +248,13 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public ObjectStore updateObjectStore(String id, ObjectStore objectStore) {
-        return objectStoreDao.updateObjectStore(id, objectStore);
+    public ObjectStore updateObjectStore(String id, ObjectStore objectStore)
+            throws NameConflictException {
+        try {
+            return objectStoreDao.updateObjectStore(id, objectStore);
+        } catch (DuplicateKeyException e) {
+            throw new NameConflictException("Object Store name is already in use", e);
+        }
     }
 
     @Override

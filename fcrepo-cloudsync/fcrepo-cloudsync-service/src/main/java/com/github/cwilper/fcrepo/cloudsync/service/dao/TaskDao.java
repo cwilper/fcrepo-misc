@@ -2,11 +2,16 @@ package com.github.cwilper.fcrepo.cloudsync.service.dao;
 
 import com.github.cwilper.fcrepo.cloudsync.api.Task;
 import com.github.cwilper.fcrepo.cloudsync.service.backend.TaskRunner;
+import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.sql.ResultSet;
@@ -14,6 +19,29 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TaskDao extends AbstractDao {
+
+    // IDLE tasks can transition to STARTING
+    private static final String IDLE = "idle";
+
+    // STARTING tasks can transition to RUNNING, PAUSING, or CANCELING
+    private static final String STARTING = "starting";
+
+    // RUNNING tasks can transition to PAUSING, CANCELING, or IDLE
+    private static final String RUNNING = "running";
+
+    // PAUSING tasks can transition to CANCELING or RESUMING
+    private static final String PAUSING = "pausing";
+
+    // PAUSED tasks can transition to RESUMING or CANCELING
+    private static final String PAUSED = "paused";
+
+    // RESUMING tasks can transition to PAUSING or CANCELING
+    private static final String RESUMING = "resuming";
+
+    // CANCELING tasks can transition to IDLE
+    private static final String CANCELING = "canceling";
+
+    private static final Logger logger = LoggerFactory.getLogger(TaskDao.class);
 
     private static final String CREATE_DDL =
           "CREATE TABLE Tasks (\n"
@@ -42,14 +70,22 @@ public class TaskDao extends AbstractDao {
         + "  CONSTRAINT TaskStoreDep_Store_FK FOREIGN KEY (storeId) REFERENCES ObjectStores (id))";
 
     private static final String INSERT_SQL =
-            "INSERT INTO Tasks (name, type, state, activeLogId, schedule, data) \n"
-                    + "VALUES (?, ?, ?, ?, ?)";
+          "INSERT INTO Tasks (name, type, state, schedule, data) \n"
+        + "VALUES (?, ?, ?, ?, ?)";
 
     private static final String INSERT_SQL2 =
-            "INSERT INTO TaskSetDeps (taskId, setId) VALUES (?, ?)";
+          "INSERT INTO TaskSetDeps (taskId, setId) VALUES (?, ?)";
 
     private static final String INSERT_SQL3 =
           "INSERT INTO TaskStoreDeps (taskId, storeId) VALUES (?, ?)";
+
+    private static final String UPDATE_SQL =
+          "UPDATE Tasks\n"
+        + "SET name = ?, type = ?, state = ?, schedule = ?, data = ?\n"
+        + "WHERE id = ?";
+
+    private static final String UPDATE_SQL2 =
+          "UPDATE Tasks SET state = ? WHERE id = ?";
 
     private final TransactionTemplate tt;
 
@@ -66,20 +102,36 @@ public class TaskDao extends AbstractDao {
     }
 
     public Task createTask(final Task task) {
+        // normalize and validate fields
+        if (StringUtil.normalize(task.getId()) != null) {
+            throw new IllegalArgumentException("Specifying the Task "
+                    + "id during creation is not permitted");
+        }
+        task.setName(StringUtil.validate("name", task.getName(), 256));
+        task.setType(StringUtil.validate("type", task.getType(), 32));
+        task.setState(StringUtil.validate("state", task.getState(), new String[] { IDLE, STARTING }));
+        if (StringUtil.normalize(task.getActiveLogId()) != null) {
+            throw new IllegalArgumentException("Specifying the Task "
+                    + "activeLogId during creation is not permitted");
+        }
+        String sched = StringUtil.normalize(task.getSchedule());
+        if (sched != null) {
+            task.setSchedule(StringUtil.validate("schedule", sched, 1024));
+        }
+        task.setData(StringUtil.validate("data", task.getData(), 32672));
+        // Validate schedule content, type-specific data,
+        // and do dependency determination
         final TaskRunner runner = TaskRunner.getInstance(task);
 
+        // persist task and deps, validating that the deps (foreign keys) exist
         String id = tt.execute(new TransactionCallback<String>() {
             public String doInTransaction(TransactionStatus status) {
+                boolean success = false;
                 try {
-                    Integer activeLogId = null;
-                    if (task.getActiveLogId() != null) {
-                        activeLogId = Integer.parseInt(task.getActiveLogId());
-                    }
                     String id = insert(INSERT_SQL,
                             task.getName(),
                             task.getType(),
                             task.getState(),
-                            activeLogId,
                             task.getSchedule(),
                             task.getData());
                     Integer taskId = Integer.parseInt(id);
@@ -89,14 +141,15 @@ public class TaskDao extends AbstractDao {
                     for (Integer storeId: runner.getRelatedStoreIds()) {
                         db.update(INSERT_SQL3, taskId, storeId);
                     }
+                    success = true;
                     return id;
-                } catch (Exception e) {
-                    status.setRollbackOnly();
-                    return null;
+                } finally {
+                    if (!success) {
+                        status.setRollbackOnly();
+                    }
                 }
             }
         });
-        if (id == null) return null; // duplicate key or other db error
         return getTask(id);
     }
 
@@ -127,8 +180,8 @@ public class TaskDao extends AbstractDao {
         Task task = new Task();
         task.setId("" + rs.getInt("id"));
         task.setName(rs.getString("name"));
-        task.setType(rs.getString("name"));
-        task.setState(rs.getString("name"));
+        task.setType(rs.getString("type"));
+        task.setState(rs.getString("state"));
         Integer activeLogId = rs.getInt("activeLogId");
         if (activeLogId != null) {
             task.setActiveLogId(activeLogId.toString());
@@ -138,13 +191,162 @@ public class TaskDao extends AbstractDao {
         return task;
     }
 
-    public Task updateTask(String id, Task task) {
-        // TODO: Implement me
-        return task;
+    // TODO: Add methods for internal use...the scheduler should be
+    // able to switch the state from starting to running, among others.
+    // Also, it should be able to set activeLogId. But the service doesn't
+    // expose these capabilities to the outside world.
+
+    public Task updateTask(String id, Task task)
+            throws DuplicateKeyException {
+        // Validate the changes implied by the given Task object,
+        // fully populating a newTask object along the way.
+        Task orig = getTask(id);
+        // id and activeLogId are never user-settable
+        String newId = StringUtil.normalize(task.getId());
+        if (newId != null && !newId.equals(id)) {
+            throw new UnsupportedOperationException("Changing the task id is not permitted");
+        }
+        String newActiveLogId = StringUtil.normalize(task.getActiveLogId());
+        if (newActiveLogId != null) {
+            String oldActiveLogId = orig.getActiveLogId();
+            if (oldActiveLogId == null || !oldActiveLogId.equals(newActiveLogId)) {
+                throw new UnsupportedOperationException("Changing the task activeLogId is not permitted");
+            }
+        }
+
+        if (orig.getState().equals(IDLE)) {
+            updateIdleTask(orig, task);
+        } else {
+            updateActiveTask(orig, task);
+        }
+        return getTask(orig.getId());
     }
 
+    // allow prop changes and state transition to "starting"
+    private void updateIdleTask(final Task orig, Task mods) {
+        // only allow transition to "starting" state
+        String newState = StringUtil.normalize(mods.getState());
+        if (newState != null && !newState.equals(IDLE) && !newState.equals(STARTING)) {
+            throw new IllegalArgumentException("Illegal state transition: idle -> " + newState);
+        }
+        if (newState != null) {
+            orig.setState(newState);
+        }
+
+        // At this point, id, activeLogId, and state have been validated/set.
+        // Now we need to validate/set name, type, schedule, and data.
+        if (StringUtil.normalize(mods.getName()) != null) {
+            orig.setName(StringUtil.validate("name", mods.getName(), 256));
+        }
+        if (StringUtil.normalize(mods.getType()) != null) {
+            orig.setType(StringUtil.validate("type", mods.getType(), 32));
+        }
+        if (StringUtil.normalize(mods.getSchedule()) != null) {
+            orig.setSchedule(StringUtil.validate("schedule", mods.getType(), 1024));
+        }
+        if (StringUtil.normalize(mods.getData()) != null) {
+            orig.setData(StringUtil.validate("data", mods.getData(), 32672));
+        }
+
+        // Validate schedule content, type-specific data,
+        // and do dependency determination
+        final TaskRunner runner = TaskRunner.getInstance(orig);
+
+        // Finally, update the necessary tables in a transaction
+        final int taskId = Integer.parseInt(orig.getId());
+        tt.execute(new TransactionCallbackWithoutResult() {
+            public void doInTransactionWithoutResult(TransactionStatus status) {
+                boolean success = false;
+                try {
+                    db.update(UPDATE_SQL,
+                            orig.getName(),
+                            orig.getType(),
+                            orig.getState(),
+                            orig.getSchedule(),
+                            orig.getData(),
+                            taskId);
+                    db.update("DELETE FROM TaskSetDeps WHERE taskId = ?", taskId);
+                    db.update("DELETE FROM TaskStoreDeps WHERE taskId = ?", taskId);
+                    for (Integer setId: runner.getRelatedSetIds()) {
+                        db.update(INSERT_SQL2, taskId, setId);
+                    }
+                    for (Integer storeId: runner.getRelatedStoreIds()) {
+                        db.update(INSERT_SQL3, taskId, storeId);
+                    }
+                } finally {
+                    if (!success) {
+                        status.setRollbackOnly();
+                    }
+                }
+            }
+        });
+    }
+
+    // Disallow prop changes. Only allow the following state transitions:
+    //
+    // (STARTING, RUNNING, RESUMING) -> (PAUSING, CANCELING)
+    // (PAUSING, PAUSED) -> (RESUMING, CANCELING)
+    //
+    private void updateActiveTask(Task orig, Task mods) {
+        // Check for valid state transition
+        String oldState = orig.getState();
+        String newState = StringUtil.normalize(mods.getState());
+        if (newState != null && !newState.equals(oldState)) {
+            boolean illegal = false;
+            if (oldState.equals(STARTING) || oldState.equals(RUNNING) || oldState.equals(RESUMING)) {
+                if (!newState.equals(PAUSING) && !newState.equals(CANCELING)) {
+                    illegal = true;
+                }
+            } else if (oldState.equals(PAUSING) || oldState.equals(PAUSED)) {
+                if (!newState.equals(RESUMING) && !newState.equals(CANCELING)) {
+                    illegal = true;
+                }
+            } else {
+                illegal = true;
+            }
+            if (illegal) {
+                throw new IllegalArgumentException("Illegal state transition: "
+                        + oldState + " -> " + newState);
+            }
+        }
+
+        // Check that prop changes are not being requested.
+        cannotChangeWhileActive("name", orig.getName(), mods.getName());
+        cannotChangeWhileActive("type", orig.getType(), mods.getType());
+        cannotChangeWhileActive("state", orig.getState(), mods.getState());
+        cannotChangeWhileActive("schedule", orig.getSchedule(), mods.getSchedule());
+        cannotChangeWhileActive("data", orig.getData(), mods.getData());
+
+        // Finally, if the state has changed, write it
+        if (newState != null && !newState.equals(oldState)) {
+            db.update(UPDATE_SQL2, newState, Integer.parseInt(orig.getId()));
+        }
+    }
+
+    private static void cannotChangeWhileActive(String name, String oldVal, String newVal) {
+        if (newVal != null && !newVal.equals(oldVal)) {
+            throw new IllegalArgumentException("Cannot change task " + name + " while active");
+        }
+    }
+
+
     public void deleteTask(String id) {
-        db.update("DELETE FROM Tasks WHERE id = ?", Integer.parseInt(id));
+        final int taskId = Integer.parseInt(id);
+        tt.execute(new TransactionCallbackWithoutResult() {
+            public void doInTransactionWithoutResult(TransactionStatus status) {
+                boolean success = false;
+                try {
+                    db.update("DELETE FROM TaskSetDeps WHERE taskId = ?", taskId);
+                    db.update("DELETE FROM TaskStoreDeps WHERE taskId = ?", taskId);
+                    db.update("DELETE FROM Tasks WHERE id = ?", taskId);
+                    success = true;
+                } finally {
+                    if (!success) {
+                        status.setRollbackOnly();
+                    }
+                }
+            }
+        });
     }
 
 }

@@ -33,32 +33,51 @@ function refreshStores() {
   });
 }
 
+function doDeleteTask(id, name) {
+  $("#dialog-confirm").html("<span class=\"ui-icon ui-icon-alert\" style=\"float:left; margin:0 7px 20px 0;\"/>Delete Task <strong>" + esc(name) + "</strong>?");
+  $("#dialog-confirm").dialog("option", "buttons", {
+    "No": function() {
+      $(this).dialog("close");
+    },
+    "Yes": function() {
+      $(this).dialog("close");
+      service.deleteTask(id, function() {
+        refreshTasks();
+      });
+    }
+  });
+  $("#dialog-confirm").dialog("open");
+}
+
 function getActiveTaskHtml(item) {
   var html = "";
-  html += "<div class='item-actions'>";
-  html += "  <button class='button-pauseTask'>Pause</button>";
-  html += "  <button class='button-abortTask'>Abort</button>";
-  html += "</div>";
-  html += "<div class='item-attributes'>Attributes:";
-  $.each(item, function(key, value) {
-    html += "<br/>" + key + ": " + value;
-  });
-  html += "</div>";
+  if (item.state != 'idle') {
+    html += "<div class='item-actions'>";
+    html += "  <button class='button-pauseTask'>Pause</button>";
+    html += "  <button class='button-abortTask'>Abort</button>";
+    html += "</div>";
+    html += "<div class='item-attributes'>Attributes:";
+    $.each(item, function(key, value) {
+      html += "<br/>" + key + ": " + value;
+    });
+    html += "</div>";
+  }
   return html;
 }
 
 function getIdleTaskHtml(item) {
   var html = "";
-  html += "<div class='item-actions'>";
-  html += "  <button class='button-runTask'>Run</button>";
-  html += "  <button class='button-editTask'>Edit</button>";
-  html += "  <button class='button-deleteTask'>Delete</button>";
-  html += "</div>";
-  html += "<div class='item-attributes'>Attributes:";
-  $.each(item, function(key, value) {
-    html += "<br/>" + key + ": " + value;
-  });
-  html += "</div>";
+  if (item.state == 'idle') {
+    html += "<div class='item-actions'>";
+    html += "  <button class='button-runTask'>Run</button>";
+    html += "  <button onClick='doDeleteTask(" + item.id + ", \"" + esc(item.name) + "\");'>Delete</button>";
+    html += "</div>";
+    html += "<div class='item-attributes'>Attributes:";
+    $.each(item, function(key, value) {
+      html += "<br/>" + key + ": " + value;
+    });
+    html += "</div>";
+  }
   return html;
 }
 
@@ -627,8 +646,24 @@ $(function() {
     show: 'fade',
     hide: 'fade',
     buttons: {
-      Next: function() {
-        $(this).dialog("close");
+      Save: function() {
+        // attempt to save it
+        var typeSpecificData = {
+          "setId"  : $("#NewListTask-setId").val(),
+          "storeId": $("#NewListTask-storeId").val()
+        };
+        var data = { task: {
+          "name" : $("#NewListTask-name").val(),
+          "type" : "list",
+          "state": "idle",
+          "data" : JSON.stringify(typeSpecificData)
+        }};
+        service.createTask(data,
+          function() {
+            $("#dialog-NewListTask").dialog("close");
+            refreshTasks();
+          }
+        );
       }
     }
   });

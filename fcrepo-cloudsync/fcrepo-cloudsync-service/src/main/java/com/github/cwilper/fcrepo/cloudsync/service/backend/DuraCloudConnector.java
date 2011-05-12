@@ -2,6 +2,7 @@ package com.github.cwilper.fcrepo.cloudsync.service.backend;
 
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
 import com.github.cwilper.fcrepo.cloudsync.service.util.JSON;
+import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
@@ -23,13 +24,13 @@ public class DuraCloudConnector extends StoreConnector {
     public DuraCloudConnector(ObjectStore store) {
         this.store = store;
         Map<String, String> map = JSON.getMap(JSON.parse(store.getData()));
-        url = normalize(nonEmpty("url", map.get("url")));
-        username = normalize(nonEmpty("username", map.get("username")));
-        password = nonEmpty("password", map.get("password"));
-        providerId = normalize(nonEmpty("providerId", map.get("providerId")));
-        providerName = normalize(nonEmpty("providerName", map.get("providerName")));
-        space = normalize(nonEmpty("space", map.get("space")));
-        prefix = normalize(map.get("prefix"));
+        url = StringUtil.validate("url", map.get("url"));
+        username = StringUtil.validate("username", map.get("username"));
+        password = StringUtil.validate("password", map.get("password"));
+        providerId = StringUtil.validate("providerId", map.get("providerId"));
+        providerName = StringUtil.validate("providerName", map.get("providerName"));
+        space = StringUtil.validate("space", map.get("space"));
+        prefix = StringUtil.normalize(map.get("prefix"));
     }
 
     @Override
