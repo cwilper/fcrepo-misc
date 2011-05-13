@@ -7,6 +7,7 @@ import com.github.cwilper.fcrepo.cloudsync.api.ObjectInfo;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectSet;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
 import com.github.cwilper.fcrepo.cloudsync.api.ProviderAccount;
+import com.github.cwilper.fcrepo.cloudsync.api.ResourceInUseException;
 import com.github.cwilper.fcrepo.cloudsync.api.Space;
 import com.github.cwilper.fcrepo.cloudsync.api.SystemLog;
 import com.github.cwilper.fcrepo.cloudsync.api.Task;
@@ -22,6 +23,7 @@ import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskLogDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -138,8 +140,12 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     // no error if user not found
     @Override
-    public void deleteUser(String id) {
-        userDao.deleteUser(id);
+    public void deleteUser(String id) throws ResourceInUseException {
+        if (!id.equals(getCurrentUser().getId())) {
+            userDao.deleteUser(id);
+        } else {
+            throw new ResourceInUseException("You can't delete yourself");
+        }
     }
 
     // -----------------------------------------------------------------------
@@ -175,8 +181,12 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public void deleteTask(String id) {
-        taskDao.deleteTask(id);
+    public void deleteTask(String id) throws ResourceInUseException {
+        if (taskDao.getTask(id).getState().equals("idle")) {
+            taskDao.deleteTask(id);
+        } else {
+            throw new ResourceInUseException("Task cannot be deleted while active");
+        }
     }
 
     // -----------------------------------------------------------------------
@@ -214,8 +224,12 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public void deleteObjectSet(String id) {
-        objectSetDao.deleteObjectSet(id);
+    public void deleteObjectSet(String id) throws ResourceInUseException {
+        try {
+            objectSetDao.deleteObjectSet(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new ResourceInUseException("Object Set is currently being used by a Task", e);
+        }
     }
 
     // -----------------------------------------------------------------------
@@ -258,8 +272,12 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public void deleteObjectStore(String id) {
-        objectStoreDao.deleteObjectStore(id);
+    public void deleteObjectStore(String id) throws ResourceInUseException {
+        try {
+            objectStoreDao.deleteObjectStore(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new ResourceInUseException("Object Store is currently being used by a Task", e);
+        }
     }
 
     // -----------------------------------------------------------------------
@@ -283,6 +301,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public void deleteSystemLog(String id) {
+        // TODO: throw ResourceInUseException if id = latest system log (still being written)
         systemLogDao.deleteSystemLog(id);
     }
 
@@ -307,6 +326,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public void deleteTaskLog(String id) {
+        // TODO: throw ResourceInUseException if task log is still being written
         taskLogDao.deleteTaskLog(id);
     }
 

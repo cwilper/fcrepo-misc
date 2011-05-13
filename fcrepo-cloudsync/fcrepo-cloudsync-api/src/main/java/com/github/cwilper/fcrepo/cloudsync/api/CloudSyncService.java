@@ -27,7 +27,7 @@ public interface CloudSyncService {
 
     User updateUser(String id, User user) throws NameConflictException;
 
-    void deleteUser(String id);
+    void deleteUser(String id) throws ResourceInUseException;
 
     // -----------------------------------------------------------------------
     //                                Tasks
@@ -41,7 +41,7 @@ public interface CloudSyncService {
 
     Task updateTask(String id, Task task) throws NameConflictException;
 
-    void deleteTask(String id);
+    void deleteTask(String id) throws ResourceInUseException;
 
     // -----------------------------------------------------------------------
     //                             Object Sets
@@ -55,7 +55,7 @@ public interface CloudSyncService {
 
     ObjectSet updateObjectSet(String id, ObjectSet objectSet) throws NameConflictException;
 
-    void deleteObjectSet(String id);
+    void deleteObjectSet(String id) throws ResourceInUseException;
 
     // -----------------------------------------------------------------------
     //                            Object Stores
@@ -71,7 +71,7 @@ public interface CloudSyncService {
 
     ObjectStore updateObjectStore(String id, ObjectStore objectStore) throws NameConflictException;
 
-    void deleteObjectStore(String id);
+    void deleteObjectStore(String id) throws ResourceInUseException;
 
     // -----------------------------------------------------------------------
     //                             System Logs
@@ -83,7 +83,7 @@ public interface CloudSyncService {
 
     InputStream getSystemLogContent(String id);
 
-    void deleteSystemLog(String id);
+    void deleteSystemLog(String id) throws ResourceInUseException;
 
     // -----------------------------------------------------------------------
     //                              Task Logs
@@ -95,7 +95,7 @@ public interface CloudSyncService {
 
     InputStream getTaskLogContent(String id);
 
-    void deleteTaskLog(String id);
+    void deleteTaskLog(String id) throws ResourceInUseException;
 
     // -----------------------------------------------------------------------
     //                             DuraCloud

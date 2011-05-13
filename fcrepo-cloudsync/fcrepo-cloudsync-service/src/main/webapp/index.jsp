@@ -118,7 +118,7 @@
 
 <!-- Tasks -->
 
-<div class="ui-helper-hidden" id="dialog-NewTask">
+<div class="ui-helper-hidden" id="dialog-NewTask" title="New Task">
   <p>
     What kind of Task do you want to add?
   </p>

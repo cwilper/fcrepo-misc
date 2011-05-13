@@ -3,6 +3,7 @@ package com.github.cwilper.fcrepo.cloudsync.service.rest;
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
 import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectSet;
+import com.github.cwilper.fcrepo.cloudsync.api.ResourceInUseException;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
@@ -93,7 +94,11 @@ public class ObjectSetResource extends AbstractResource {
         @Description(value = STATUS_204_NO_CONTENT, target = DocTarget.RESPONSE)
     })
     public void deleteObjectSet(@PathParam("id") String id) {
-        service.deleteObjectSet(id);
+        try {
+            service.deleteObjectSet(id);
+        } catch (ResourceInUseException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
+        }
     }
 
 }

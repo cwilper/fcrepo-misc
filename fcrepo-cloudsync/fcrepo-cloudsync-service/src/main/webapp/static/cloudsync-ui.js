@@ -58,9 +58,19 @@ function doDeleteTask(id, name) {
     },
     "Yes": function() {
       $(this).dialog("close");
-      service.deleteTask(id, function() {
-        refreshTasks();
-      });
+      service.deleteTask(id,
+        function() {
+          refreshTasks();
+        },
+        function(httpRequest, method, url) {
+          if (httpRequest.status == 409) {
+            alert("Can't delete Task; it is currently active.");
+          } else {
+            alert("[Service Error]\n\nUnexpected HTTP response code ("
+                + httpRequest.status + ") from request:\n\n" + method + " " + url);
+          }
+        }
+      );
     }
   });
   $("#dialog-confirm").dialog("open");
@@ -123,9 +133,19 @@ function doDeleteObjectSet(id, name) {
     },
     "Yes": function() {
       $(this).dialog("close");
-      service.deleteObjectSet(id, function() {
-        refreshSets();
-      });
+      service.deleteObjectSet(id,
+        function() {
+          refreshSets();
+        },
+        function(httpRequest, method, url) {
+          if (httpRequest.status == 409) {
+            alert("Can't delete Set; it is being used by one or more Tasks.");
+          } else {
+            alert("[Service Error]\n\nUnexpected HTTP response code ("
+                + httpRequest.status + ") from request:\n\n" + method + " " + url);
+          }
+        }
+      );
     }
   });
   $("#dialog-confirm").dialog("open");
@@ -182,9 +202,19 @@ function doForgetObjectStore(id, name) {
     },
     "Yes": function() {
       $(this).dialog("close");
-      service.deleteObjectStore(id, function() {
-        refreshStores();
-      });
+      service.deleteObjectStore(id,
+        function() {
+          refreshStores();
+        },
+        function(httpRequest, method, url) {
+          if (httpRequest.status == 409) {
+            alert("Can't forget Store; it is being used by one or more Tasks.");
+          } else {
+            alert("[Service Error]\n\nUnexpected HTTP response code ("
+                + httpRequest.status + ") from request:\n\n" + method + " " + url);
+          }
+        }
+      );
     }
   });
   $("#dialog-confirm").dialog("open");
@@ -381,10 +411,11 @@ $(function() {
           "type": "pidPattern",
           "data": $("#NewPidPattern-data").val()
         }};
-        service.createObjectSet(data, function() {
-          $("#dialog-NewPidPattern").dialog("close");
-          refreshSets();
-        });
+        service.createObjectSet(data,
+          function() {
+            $("#dialog-NewPidPattern").dialog("close");
+            refreshSets();
+          }, handleNameCollision);
       }
     }
   });
@@ -405,7 +436,7 @@ $(function() {
         service.createObjectSet(data, function() {
           $("#dialog-NewPidList").dialog("close");
           refreshSets();
-        });
+        }, handleNameCollision);
       }
     }
   });
@@ -430,7 +461,7 @@ $(function() {
         service.createObjectSet(data, function() {
           $("#dialog-NewQuery").dialog("close");
           refreshSets();
-        });
+        }, handleNameCollision);
       }
     }
   });
@@ -540,7 +571,7 @@ $(function() {
             function() {
               $("#dialog-NewDuraCloudStoreStep3").dialog("close");
               refreshStores();
-            });
+            }, handleNameCollision);
       }
     }
   });
@@ -586,7 +617,7 @@ $(function() {
             function() {
               $("#dialog-NewFedoraStoreStep2").dialog("close");
               refreshStores();
-            });
+            }, handleNameCollision);
       }
     }
   });
@@ -695,8 +726,7 @@ $(function() {
           function() {
             $("#dialog-NewListTask").dialog("close");
             refreshTasks();
-          }
-        );
+          }, handleNameCollision);
       }
     }
   });
@@ -737,6 +767,15 @@ $(function() {
   }, 5000);
 
 });
+
+function handleNameCollision(httpRequest, method, url) {
+  if (httpRequest.status == 409) {
+    alert("Please use a different name; that one is already used.");
+  } else {
+    alert("[Service Error]\n\nUnexpected HTTP response code ("
+        + httpRequest.status + ") from request:\n\n" + method + " " + url);
+  }
+}
 
 function showNewListTaskName() {
   var name = "List " + $("#NewListTask-setId option:selected").text()

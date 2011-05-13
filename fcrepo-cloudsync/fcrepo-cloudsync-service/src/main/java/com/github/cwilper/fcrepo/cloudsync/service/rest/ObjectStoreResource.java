@@ -4,6 +4,7 @@ import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
 import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectInfo;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
+import com.github.cwilper.fcrepo.cloudsync.api.ResourceInUseException;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
@@ -109,7 +110,11 @@ public class ObjectStoreResource extends AbstractResource {
         @Description(value = STATUS_204_NO_CONTENT, target = DocTarget.RESPONSE)
     })
     public void deleteObjectStore(@PathParam("id") String id) {
-        service.deleteObjectStore(id);
+        try {
+            service.deleteObjectStore(id);
+        } catch (ResourceInUseException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
+        }
     }
 
 }

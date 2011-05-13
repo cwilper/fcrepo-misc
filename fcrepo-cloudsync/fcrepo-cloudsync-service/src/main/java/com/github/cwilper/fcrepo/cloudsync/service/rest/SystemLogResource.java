@@ -1,6 +1,7 @@
 package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
+import com.github.cwilper.fcrepo.cloudsync.api.ResourceInUseException;
 import com.github.cwilper.fcrepo.cloudsync.api.SystemLog;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
@@ -11,6 +12,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.io.InputStream;
 import java.util.List;
 
@@ -61,7 +64,11 @@ public class SystemLogResource extends AbstractResource {
         @Description(value = STATUS_204_NO_CONTENT, target = DocTarget.RESPONSE)
     })
     public void deleteSystemLog(@PathParam("id") String id) {
-        service.deleteSystemLog(id);
+        try {
+            service.deleteSystemLog(id);
+        } catch (ResourceInUseException e) {
+            throw new WebApplicationException(e, Response.Status.CONFLICT);
+        }
     }
 
 }
