@@ -273,6 +273,7 @@ public class TaskDao extends AbstractDao {
                     for (Integer storeId: runner.getRelatedStoreIds()) {
                         db.update(INSERT_SQL3, taskId, storeId);
                     }
+                    success = true;
                 } finally {
                     if (!success) {
                         status.setRollbackOnly();
@@ -313,7 +314,6 @@ public class TaskDao extends AbstractDao {
         // Check that prop changes are not being requested.
         cannotChangeWhileActive("name", orig.getName(), mods.getName());
         cannotChangeWhileActive("type", orig.getType(), mods.getType());
-        cannotChangeWhileActive("state", orig.getState(), mods.getState());
         cannotChangeWhileActive("schedule", orig.getSchedule(), mods.getSchedule());
         cannotChangeWhileActive("data", orig.getData(), mods.getData());
 

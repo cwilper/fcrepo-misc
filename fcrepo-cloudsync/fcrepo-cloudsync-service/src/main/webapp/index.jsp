@@ -44,7 +44,7 @@
   <div id="tasks" class="tab">
     <div class="tab-header">
       <button id="button-NewTask">Add</button>
-      <button class="button-Refresh">Refresh</button>
+<!--      <button class="button-Refresh">Refresh</button> -->
     </div>
     <div class="tab-body">
       <div class="tab-section">
@@ -71,7 +71,6 @@
   <div id="sets" class="tab">
     <div class="tab-header">
       <button id="button-NewSet">Add</button>
-      <button class="button-Refresh">Refresh</button>
     </div>
     <div class="tab-body">
       <div class="tab-section">
@@ -98,7 +97,6 @@
   <div id="stores" class="tab">
     <div class="tab-header">
       <button id="button-NewStore">Add</button>
-      <button class="button-Refresh">Refresh</button>
     </div>
     <div class="tab-body">
       <div class="tab-section">

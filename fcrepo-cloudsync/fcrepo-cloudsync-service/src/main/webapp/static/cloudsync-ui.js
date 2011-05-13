@@ -1,5 +1,10 @@
 var service = new CloudSyncClient(document.location.href + "api/rest/");
 
+var numActiveTasks = 0;
+var secondsSinceTaskRefresh = 0;
+var secondsSinceSetRefresh = 0;
+var secondsSinceStoreRefresh = 0;
+
 function esc(value) {
   return value.replace(/&/g, "&amp;")
               .replace(/</g, "&lt;")
@@ -10,12 +15,13 @@ function esc(value) {
 
 function refreshTasks() {
   service.listTasks(function(data) {
-    doSection(data.tasks, "tasks-active", getActiveTaskHtml);
+    numActiveTasks = doSection(data.tasks, "tasks-active", getActiveTaskHtml);
     doSection(data.tasks, "tasks-idle", getIdleTaskHtml);
   });
   service.listTaskLogs(function(data) {
     doSection(data.tasklogs, "tasks-completed", getTaskLogHtml);
   });
+  secondsSinceTaskRefresh = 0;
 }
 
 function refreshSets() {
@@ -24,12 +30,23 @@ function refreshSets() {
     doSection(data.objectsets, "sets-pidlists", getPidListSetHtml);
     doSection(data.objectsets, "sets-queries", getQuerySetHtml);
   });
+  secondsSinceSetRefresh = 0;
 }
 
 function refreshStores() {
   service.listObjectStores(function(data) {
     doSection(data.objectstores, "stores-duracloud", getDuraCloudStoreHtml);
     doSection(data.objectstores, "stores-fedora", getFedoraStoreHtml);
+  });
+  secondsSinceStoreRefresh = 0;
+}
+
+function doSetTaskState(id, state) {
+  var data = { task: {
+    "state" : state
+  }};
+  service.updateTask(id, data, function() {
+    refreshTasks();
   });
 }
 
@@ -53,8 +70,12 @@ function getActiveTaskHtml(item) {
   var html = "";
   if (item.state != 'idle') {
     html += "<div class='item-actions'>";
-    html += "  <button class='button-pauseTask'>Pause</button>";
-    html += "  <button class='button-abortTask'>Abort</button>";
+    if (item.state != 'pausing' && item.state != 'canceling') {
+      html += "  <button onclick='doSetTaskState(" + item.id + ", \"pausing\");'>Pause</button>";
+    }
+    if (item.state != 'canceling') {
+      html += "  <button onclick='doSetTaskState(" + item.id + ", \"canceling\");'>Cancel</button>";
+    }
     html += "</div>";
     html += "<div class='item-attributes'>Attributes:";
     $.each(item, function(key, value) {
@@ -69,7 +90,7 @@ function getIdleTaskHtml(item) {
   var html = "";
   if (item.state == 'idle') {
     html += "<div class='item-actions'>";
-    html += "  <button class='button-runTask'>Run</button>";
+    html += "  <button onClick='doSetTaskState(" + item.id + ", \"starting\");'>Run</button>";
     html += "  <button onClick='doDeleteTask(" + item.id + ", \"" + esc(item.name) + "\");'>Delete</button>";
     html += "</div>";
     html += "<div class='item-attributes'>Attributes:";
@@ -215,23 +236,35 @@ function doSection(items, sectionName, itemHtmlGetter) {
     var body = itemHtmlGetter(item);
     if (body) {
       count++;
-      html += getExpandable(item.name, body);
+      var name = item.name;
+      if (sectionName == 'tasks-active') {
+        name = item.state.toUpperCase() + ": " + item.name;
+      }
+      html += getExpandable(name, body, sectionName + "-" + item.id);
     }
   });
   if (count > 0) {
     $("#" + sectionName).html(html);
     $("#" + sectionName + " .item-actions button").button();
-    $("#" + sectionName + " .item-actions .button-pauseTask").button();
-    $("#" + sectionName + " .item-actions .button-abortTask").button();
-    $("#" + sectionName + " .expandable").accordion({collapsible: true, active: false});
+    $("#" + sectionName + " .expandable-collapsed").accordion({collapsible: true, active: false});
+    $("#" + sectionName + " .expandable-expanded").accordion({collapsible: true, active: 0});
   } else {
     $("#" + sectionName).html("None.");
   }
+  return count;
 }
 
-function getExpandable(title, bodyHtml) {
+function isExpanded(id) {
+  return $("#" + id).accordion("option", "active") === 0;
+}
+
+function getExpandable(title, bodyHtml, id) {
   var html = "";
-  html += "<div class='expandable'>";
+  var suffix = "collapsed";
+  if (isExpanded(id)) {
+    suffix = "expanded";
+  }
+  html += "<div id='" + id + "' class='expandable-" + suffix + "'>";
   html += "  <h3><a href='#'>" + esc(title) + "</a></h3>";
   html += "  <div class='expandable-body'>" + bodyHtml + "</div>";
   html += "</div>";
@@ -246,13 +279,13 @@ $(function() {
 
   // initialize ui elements
 
-  $(".button-Refresh").button({
-    icons: { primary: "ui-icon-arrowrefresh-1-e" }//,
-  });
-
-  $("#tasks .button-Refresh").click(function() { refreshTasks(); });
-  $("#sets .button-Refresh").click(function() { refreshSets(); });
-  $("#stores .button-Refresh").click(function() { refreshStores(); });
+// manual refresh disabled
+//  $(".button-Refresh").button({
+//    icons: { primary: "ui-icon-arrowrefresh-1-e" }//,
+//  });
+//  $("#tasks .button-Refresh").click(function() { refreshTasks(); });
+//  $("#sets .button-Refresh").click(function() { refreshSets(); });
+//  $("#stores .button-Refresh").click(function() { refreshStores(); });
 
   $("#button-Logout").button({
     icons: { primary: "ui-icon-power" }
@@ -684,6 +717,24 @@ $(function() {
   service.getCurrentUser(function(data, status, x) {
     $("#username").text(data.user.name);
   });
+
+  // refresh content of selected tab every 30 seconds,
+  // or every 5 seconds for tasks if any are active
+  setInterval(function() {
+    var selectedTab = $("#tabs").tabs("option", "selected");
+    secondsSinceTaskRefresh += 5;
+    if (selectedTab === 0 && (numActiveTasks > 0 || secondsSinceTaskRefresh >= 30)) {
+      refreshTasks();
+    }
+    secondsSinceSetRefresh += 5;
+    if (selectedTab === 1 && secondsSinceSetRefresh >= 30) {
+      refreshSets();
+    }
+    secondsSinceStoreRefresh += 5;
+    if (selectedTab === 2 && secondsSinceStoreRefresh >= 30) {
+      refreshStores();
+    }
+  }, 5000);
 
 });
 
