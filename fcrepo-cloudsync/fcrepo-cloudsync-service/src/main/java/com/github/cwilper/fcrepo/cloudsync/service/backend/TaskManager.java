@@ -1,12 +1,15 @@
 package com.github.cwilper.fcrepo.cloudsync.service.backend;
 
 import com.github.cwilper.fcrepo.cloudsync.api.Task;
+import com.github.cwilper.fcrepo.cloudsync.api.TaskLog;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectSetDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectStoreDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskDao;
+import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskLogDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +55,7 @@ public class TaskManager extends Thread implements TaskCompletionListener {
     private static final int POLL_SECONDS = 5;
 
     private final TaskDao taskDao;
+    private final TaskLogDao taskLogDao;
     private final ObjectSetDao objectSetDao;
     private final ObjectStoreDao objectStoreDao;
 
@@ -59,9 +63,12 @@ public class TaskManager extends Thread implements TaskCompletionListener {
 
     private boolean shutdownRequested;
 
-    public TaskManager(TaskDao taskDao, ObjectSetDao objectSetDao,
+    public TaskManager(TaskDao taskDao,
+                       TaskLogDao taskLogDao,
+                       ObjectSetDao objectSetDao,
                        ObjectStoreDao objectStoreDao) {
         this.taskDao = taskDao;
+        this.taskLogDao = taskLogDao;
         this.objectSetDao = objectSetDao;
         this.objectStoreDao = objectStoreDao;
         this.runners = new HashMap<String, TaskRunner>();
@@ -88,15 +95,15 @@ public class TaskManager extends Thread implements TaskCompletionListener {
 
     @Override
     public void run() {
-        cleanup(); // in case of unclean shutdown
+        cleanup(true); // in case of unclean shutdown
         while (!shutdownRequested) {
             mainLoop();
         }
-        cleanup();
+        cleanup(false);
     }
 
     // Cancel any non-idle tasks and wait for them to go idle
-    private void cleanup() {
+    private void cleanup(boolean atStartup) {
         boolean allTasksIdle = false;
         while (!allTasksIdle) {
             int activeCount = 0;
@@ -108,10 +115,21 @@ public class TaskManager extends Thread implements TaskCompletionListener {
                         taskDao.setTaskState(task.getId(), Task.CANCELING);
                         task.setState(Task.CANCELING);
                     }
-                    cancelTask(task);
+                    if (atStartup) {
+                        // We're cleaning up after an unclean shutdown.
+                        // Since the TaskRunner isn't actually running, we make
+                        // the direct call here to clean up the state in the
+                        // database, marking it as canceled.
+                        taskCanceled(task);
+                    } else {
+                        // In the normal case, the TaskRunner is running in a
+                        // separate thread and we just need to request that
+                        // it cancel at the next available opportunity.
+                        cancelTask(task);
+                    }
                 }
             }
-            if (activeCount == 0) {
+            if (activeCount == 0 || atStartup) {
                 allTasksIdle = true;
             } else {
                 logger.info("Waiting for " + activeCount + " task(s) to go idle.");
@@ -121,11 +139,17 @@ public class TaskManager extends Thread implements TaskCompletionListener {
     }
 
     private void startTask(Task task) {
-        TaskRunner runner = TaskRunner.getInstance(task, taskDao, objectSetDao, objectStoreDao, null, this);
+        String taskLogId = taskLogDao.start(task.getId());
+        PrintWriter logWriter = taskLogDao.getContentWriter(taskLogId);
+        TaskRunner runner = TaskRunner.getInstance(task, taskDao, objectSetDao, objectStoreDao, logWriter, this);
         synchronized (runners) {
             runners.put(task.getId(), runner);
         }
         runner.start();
+
+        task.setActiveLogId(taskLogId);
+        taskDao.setActiveLogId(task.getId(), task.getActiveLogId());
+
         taskDao.setTaskState(task.getId(), Task.RUNNING);
     }
 
@@ -179,19 +203,19 @@ public class TaskManager extends Thread implements TaskCompletionListener {
 
     @Override
     public void taskSucceeded(Task task) {
-        // TODO: Do other task completion stuff (taskLog, etc)
-        taskDao.setTaskState(task.getId(), Task.IDLE);
+        taskLogDao.finish(task.getActiveLogId(), TaskLog.SUCCEEDED);
+        taskDao.goIdle(task.getId());
     }
 
     @Override
     public void taskFailed(Task task, Throwable cause) {
-        // TODO: Do other task completion stuff (taskLog, etc)
-        taskDao.setTaskState(task.getId(), Task.IDLE);
+        taskLogDao.finish(task.getActiveLogId(), TaskLog.FAILED);
+        taskDao.goIdle(task.getId());
     }
 
     @Override
     public void taskCanceled(Task task) {
-        // TODO: Do other task completion stuff (taskLog, etc)
-        taskDao.setTaskState(task.getId(), Task.IDLE);
+        taskLogDao.finish(task.getActiveLogId(), TaskLog.CANCELED);
+        taskDao.goIdle(task.getId());
     }
 }

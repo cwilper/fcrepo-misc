@@ -1,17 +1,11 @@
 package com.github.cwilper.fcrepo.cloudsync.service.dao;
 
 import com.github.cwilper.fcrepo.cloudsync.api.User;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -37,37 +31,16 @@ public class UserDao extends AbstractDao {
                 */
     }
 
-    // returns null if the user name conflicts with an existing one
     public User createUser(final User user) {
-        if (user.getName() == null || user.getName().trim().length() == 0) {
-            throw new IllegalArgumentException("User.name must be specified");
-        }
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        try {
-            db.update(new PreparedStatementCreator() {
-                public PreparedStatement createPreparedStatement(Connection conn)
-                        throws SQLException {
-                    PreparedStatement ps = conn.prepareStatement(
-                            "insert into Users (name) values (?)",
-                            new String[] { "ID" }); // must be caps
-                    ps.setString(1, user.getName().trim());
-                    return ps;
-                }
-            }, keyHolder);
-            return getUser(keyHolder.getKey().toString());
-        } catch (DuplicateKeyException e) {
-            return null;
-        }
+        // TODO: Implement
+        return null;
     }
 
     public List<User> listUsers() {
         return db.query("select * from Users",
                 new RowMapper<User>() {
                     public User mapRow(ResultSet rs, int i) throws SQLException {
-                        User user = new User();
-                        user.setId("" + rs.getInt("id"));
-                        user.setName("" + rs.getString("name"));
-                        return user;
+                        return getUser(rs);
                     }
                 });
     }
@@ -78,10 +51,7 @@ public class UserDao extends AbstractDao {
                     public User extractData(ResultSet rs)
                             throws SQLException {
                         if (rs.next()) {
-                            User u = new User();
-                            u.setId("" + rs.getInt("id"));
-                            u.setName(rs.getString("name"));
-                            return u;
+                            return getUser(rs);
                         } else {
                             return null;
                         }
@@ -90,21 +60,20 @@ public class UserDao extends AbstractDao {
                 Integer.parseInt(id));
     }
 
+    private static User getUser(ResultSet rs) throws SQLException {
+        User u = new User();
+        u.setId("" + rs.getInt("id"));
+        u.setName(rs.getString("name"));
+        return u;
+    }
+
     public User getCurrentUser() {
         return getUser("" + getUserId(getCurrentUserName()));
     }
 
     public User updateUser(String id, User user) {
-        User updated = getUser(id);
-        if (updated == null) return null;
-        /*
-        TODO: fill in details when modifiable user fields are defined...
-        if (user.field != null) {
-            updated.field = user.field;
-        }
-        db.update(...);
-        */
-        return updated;
+        // TODO: Implement
+        return null;
     }
 
     public void deleteUser(String id) {

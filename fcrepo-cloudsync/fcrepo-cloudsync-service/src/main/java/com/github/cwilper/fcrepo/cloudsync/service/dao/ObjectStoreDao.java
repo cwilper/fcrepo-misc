@@ -78,7 +78,7 @@ public class ObjectStoreDao extends AbstractDao {
                 Integer.parseInt(id));
     }
 
-    private ObjectStore getObjectStore(ResultSet rs) throws SQLException {
+    private static ObjectStore getObjectStore(ResultSet rs) throws SQLException {
         ObjectStore o = new ObjectStore();
         o.setId("" + rs.getInt("id"));
         o.setName(rs.getString("name"));

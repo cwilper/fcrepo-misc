@@ -3,6 +3,7 @@ package com.github.cwilper.fcrepo.cloudsync.service.rest;
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
 import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.ResourceInUseException;
+import com.github.cwilper.fcrepo.cloudsync.api.ResourceNotFoundException;
 import com.github.cwilper.fcrepo.cloudsync.api.User;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
@@ -66,12 +67,11 @@ public class UserResource extends AbstractResource {
             @Description(value = "Gets a user", target = DocTarget.METHOD),
             @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response getUser(@PathParam("id") String id) {
-        User user = service.getUser(id);
-        if (user != null) {
-            return Response.ok(user).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+    public User getUser(@PathParam("id") String id) {
+        try {
+            return service.getUser(id);
+        } catch (ResourceNotFoundException e) {
+            throw new WebApplicationException(e, Response.Status.NOT_FOUND);
         }
     }
 
@@ -94,15 +94,12 @@ public class UserResource extends AbstractResource {
         @Description(value = "Updates a user", target = DocTarget.METHOD),
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
-    public Response updateUser(@PathParam("id") String id,
+    public User updateUser(@PathParam("id") String id,
                            User user) {
         try {
-            User updated = service.updateUser(id, user);
-            if (updated != null) {
-                return Response.ok(updated).build();
-            } else {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
+            return service.updateUser(id, user);
+        } catch (ResourceNotFoundException e) {
+            throw new WebApplicationException(e, Response.Status.NOT_FOUND);
         } catch (NameConflictException e) {
             throw new WebApplicationException(e, Response.Status.CONFLICT);
         }

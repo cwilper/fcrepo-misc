@@ -5,6 +5,7 @@ import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectInfo;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
 import com.github.cwilper.fcrepo.cloudsync.api.ResourceInUseException;
+import com.github.cwilper.fcrepo.cloudsync.api.ResourceNotFoundException;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
@@ -69,7 +70,11 @@ public class ObjectStoreResource extends AbstractResource {
             @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
     public ObjectStore getObjectStore(@PathParam("id") String id) {
-        return service.getObjectStore(id);
+        try {
+            return service.getObjectStore(id);
+        } catch (ResourceNotFoundException e) {
+            throw new WebApplicationException(e, Response.Status.NOT_FOUND);
+        }
     }
 
     @GET
@@ -98,6 +103,8 @@ public class ObjectStoreResource extends AbstractResource {
                                          ObjectStore objectStore) {
         try {
             return service.updateObjectStore(id, objectStore);
+        } catch (ResourceNotFoundException e) {
+            throw new WebApplicationException(e, Response.Status.NOT_FOUND);
         } catch (NameConflictException e) {
             throw new WebApplicationException(e, Response.Status.CONFLICT);
         }

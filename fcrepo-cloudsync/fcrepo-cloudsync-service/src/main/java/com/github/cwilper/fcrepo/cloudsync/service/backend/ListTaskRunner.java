@@ -37,6 +37,7 @@ public class ListTaskRunner extends TaskRunner {
     public void runTask() throws Exception {
         // Fake running a task that takes 10 seconds or so, with an
         // opportunity to pause or cancel halfway through.
+        logWriter.println("Hi. I'm the ListTaskRunner, and I'm running.");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -46,6 +47,7 @@ public class ListTaskRunner extends TaskRunner {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
         }
+        logWriter.println("Hi. I'm the ListTaskRunner, and I'm done.");
     }
 
     @Override

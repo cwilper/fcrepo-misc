@@ -79,7 +79,7 @@ public class ObjectSetDao extends AbstractDao {
                 Integer.parseInt(id));
     }
 
-    private ObjectSet getObjectSet(ResultSet rs) throws SQLException {
+    private static ObjectSet getObjectSet(ResultSet rs) throws SQLException {
         ObjectSet o = new ObjectSet();
         o.setId("" + rs.getInt("id"));
         o.setName(rs.getString("name"));

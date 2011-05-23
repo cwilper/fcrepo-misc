@@ -78,6 +78,8 @@ public abstract class TaskRunner extends Thread {
         } catch (Throwable th) {
             logger.info("Task " + task.getId() + " failed (" + task.getName() + ")");
             completionListener.taskFailed(task, th);
+        } finally {
+            logWriter.close();
         }
     }
 

@@ -2,6 +2,7 @@ package com.github.cwilper.fcrepo.cloudsync.service.rest;
 
 import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
 import com.github.cwilper.fcrepo.cloudsync.api.ResourceInUseException;
+import com.github.cwilper.fcrepo.cloudsync.api.ResourceNotFoundException;
 import com.github.cwilper.fcrepo.cloudsync.api.TaskLog;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
@@ -43,7 +44,11 @@ public class TaskLogResource extends AbstractResource {
             @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
     public TaskLog getTaskLog(@PathParam("id") String id) {
-        return service.getTaskLog(id);
+        try {
+            return service.getTaskLog(id);
+        } catch (ResourceNotFoundException e) {
+            throw new WebApplicationException(e, Response.Status.NOT_FOUND);
+        }
     }
 
     @GET
@@ -54,7 +59,11 @@ public class TaskLogResource extends AbstractResource {
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
     public InputStream getTaskLogContent(@PathParam("id") String id) {
-        return service.getTaskLogContent(id);
+        try {
+            return service.getTaskLogContent(id);
+        } catch (ResourceNotFoundException e) {
+            throw new WebApplicationException(e, Response.Status.NOT_FOUND);
+        }
     }
 
     @DELETE

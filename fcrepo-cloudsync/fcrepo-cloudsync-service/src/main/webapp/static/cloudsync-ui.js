@@ -1,4 +1,5 @@
-var service = new CloudSyncClient(document.location.href + "api/rest/");
+var restBaseUrl = document.location.href + "api/rest/";
+var service = new CloudSyncClient(restBaseUrl);
 
 var numActiveTasks = 0;
 var secondsSinceTaskRefresh = 0;
@@ -76,11 +77,36 @@ function doDeleteTask(id, name) {
   $("#dialog-confirm").dialog("open");
 }
 
+function doViewTaskLog(id) {
+  var url = restBaseUrl + "tasklogs/" + id + "/content";
+  window.open(url, "tasklog");
+}
+
+function doDeleteTaskLog(id, name) {
+  $("#dialog-confirm").html("<span class=\"ui-icon ui-icon-alert\" style=\"float:left; margin:0 7px 20px 0;\"/>Delete Task Log <strong>" + esc(name) + "</strong>?");
+  $("#dialog-confirm").dialog("option", "buttons", {
+    "No": function() {
+      $(this).dialog("close");
+    },
+    "Yes": function() {
+      $(this).dialog("close");
+      service.deleteTaskLog(id,
+          function() {
+            refreshTasks();
+          });
+    }
+  });
+  $("#dialog-confirm").dialog("open");
+}
+
 function getActiveTaskHtml(item) {
   var html = "";
   if (item.state != 'idle') {
     html += "<div class='item-actions'>";
-    if (item.state != 'pausing' && item.state != 'canceling') {
+    if (item.state != 'starting') {
+        html += "  <button onclick='doViewTaskLog(" + item.activeLogId + ")'>View Log</button>";
+    }
+    if (item.state != 'paused' && item.state != 'pausing' && item.state != 'canceling') {
       html += "  <button onclick='doSetTaskState(" + item.id + ", \"pausing\");'>Pause</button>";
     }
     if (item.state != 'canceling') {
@@ -115,7 +141,8 @@ function getIdleTaskHtml(item) {
 function getTaskLogHtml(item) {
   var html = "";
   html += "<div class='item-actions'>";
-  html += "  <button>View Log</button>";
+  html += "  <button onclick='doViewTaskLog(" + item.id + ")'>View Log</button>";
+  html += "  <button onclick='doDeleteTaskLog(" + item.id + ", \"" + item.finishDate + "\")'>Delete</button>";
   html += "</div>";
   html += "<div class='item-attributes'>Attributes:";
   $.each(item, function(key, value) {
@@ -266,7 +293,12 @@ function doSection(items, sectionName, itemHtmlGetter) {
     var body = itemHtmlGetter(item);
     if (body) {
       count++;
-      var name = item.name;
+      var name;
+      if (sectionName == 'tasks-completed') {
+        name = item.finishDate;
+      } else {
+        name = item.name;
+      }
       if (sectionName == 'tasks-active') {
         name = item.state.toUpperCase() + ": " + item.name;
       }

@@ -8,6 +8,7 @@ import com.github.cwilper.fcrepo.cloudsync.api.ObjectSet;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
 import com.github.cwilper.fcrepo.cloudsync.api.ProviderAccount;
 import com.github.cwilper.fcrepo.cloudsync.api.ResourceInUseException;
+import com.github.cwilper.fcrepo.cloudsync.api.ResourceNotFoundException;
 import com.github.cwilper.fcrepo.cloudsync.api.Space;
 import com.github.cwilper.fcrepo.cloudsync.api.SystemLog;
 import com.github.cwilper.fcrepo.cloudsync.api.Task;
@@ -32,6 +33,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -72,7 +74,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
         }
         logger.info("Service initialization complete. Ready to handle requests.");
 
-        taskManager = new TaskManager(taskDao, objectSetDao, objectStoreDao);
+        taskManager = new TaskManager(taskDao, taskLogDao, objectSetDao, objectStoreDao);
         taskManager.start();
     }
 
@@ -112,7 +114,6 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     //                                Users
     // -----------------------------------------------------------------------
 
-    // return null if the user name conflicts with an existing one
     @Override
     public User createUser(User user) throws NameConflictException {
         try {
@@ -127,30 +128,34 @@ public class CloudSyncServiceImpl implements CloudSyncService {
         return userDao.listUsers();
     }
 
-    // return null if user not found
     @Override
-    public User getUser(String id) {
-        return userDao.getUser(id);
+    public User getUser(String id) throws ResourceNotFoundException {
+        User result = userDao.getUser(id);
+        if (result == null) {
+            throw new ResourceNotFoundException("No such user: " + id);
+        }
+        return result;
     }
 
-    // return null if user not found
     @Override
     public User getCurrentUser() {
         return userDao.getCurrentUser();
     }
 
-    // return null if user not found
     @Override
     public User updateUser(String id, User user)
-            throws NameConflictException {
+            throws ResourceNotFoundException, NameConflictException {
         try {
-            return userDao.updateUser(id, user);
+            User result = userDao.updateUser(id, user);
+            if (result == null) {
+                throw new ResourceNotFoundException("No such user: " + id);
+            }
+            return result;
         } catch (DuplicateKeyException e) {
             throw new NameConflictException("User name is already in use", e);
         }
     }
 
-    // no error if user not found
     @Override
     public void deleteUser(String id) throws ResourceInUseException {
         if (!id.equals(getCurrentUser().getId())) {
@@ -179,14 +184,23 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public Task getTask(String id) {
-        return taskDao.getTask(id);
+    public Task getTask(String id) throws ResourceNotFoundException {
+        Task result = taskDao.getTask(id);
+        if (result == null) {
+            throw new ResourceNotFoundException("No such task: " + id);
+        }
+        return result;
     }
 
     @Override
-    public Task updateTask(String id, Task task) throws NameConflictException {
+    public Task updateTask(String id, Task task)
+            throws ResourceNotFoundException, NameConflictException {
         try {
-            return taskDao.updateTask(id, task);
+            Task result = taskDao.updateTask(id, task);
+            if (result == null) {
+                throw new ResourceNotFoundException("No such task: " + id);
+            }
+            return result;
         } catch (DuplicateKeyException e) {
             throw new NameConflictException("Task name is already in use", e);
         }
@@ -211,7 +225,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
         try {
             return objectSetDao.createObjectSet(objectSet);
         } catch (DuplicateKeyException e) {
-            throw new NameConflictException("Object Set name is already in use", e);
+            throw new NameConflictException("Object set name is already in use", e);
         }
     }
 
@@ -221,17 +235,25 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public ObjectSet getObjectSet(String id) {
-        return objectSetDao.getObjectSet(id);
+    public ObjectSet getObjectSet(String id) throws ResourceNotFoundException {
+        ObjectSet result = objectSetDao.getObjectSet(id);
+        if (result == null) {
+            throw new ResourceNotFoundException("No such object set: " + id);
+        }
+        return result;
     }
 
     @Override
     public ObjectSet updateObjectSet(String id, ObjectSet objectSet)
-            throws NameConflictException {
+            throws ResourceNotFoundException, NameConflictException {
         try {
-            return objectSetDao.updateObjectSet(id, objectSet);
+            ObjectSet result = objectSetDao.updateObjectSet(id, objectSet);
+            if (result == null) {
+                throw new ResourceNotFoundException("No such object set: " + id);
+            }
+            return result;
         } catch (DuplicateKeyException e) {
-            throw new NameConflictException("Object Set name is already in use", e);
+            throw new NameConflictException("Object set name is already in use", e);
         }
     }
 
@@ -240,7 +262,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
         try {
             objectSetDao.deleteObjectSet(id);
         } catch (DataIntegrityViolationException e) {
-            throw new ResourceInUseException("Object Set is currently being used by a Task", e);
+            throw new ResourceInUseException("Object set is currently being used by a task", e);
         }
     }
 
@@ -254,7 +276,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
         try {
             return objectStoreDao.createObjectStore(objectStore);
         } catch (DuplicateKeyException e) {
-            throw new NameConflictException("Object Store name is already in use", e);
+            throw new NameConflictException("Object store name is already in use", e);
         }
     }
 
@@ -264,8 +286,12 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public ObjectStore getObjectStore(String id) {
-        return objectStoreDao.getObjectStore(id);
+    public ObjectStore getObjectStore(String id) throws ResourceNotFoundException {
+        ObjectStore result = objectStoreDao.getObjectStore(id);
+        if (result == null) {
+            throw new ResourceNotFoundException("No such object store: " + id);
+        }
+        return result;
     }
 
     @Override
@@ -275,11 +301,15 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public ObjectStore updateObjectStore(String id, ObjectStore objectStore)
-            throws NameConflictException {
+            throws ResourceNotFoundException, NameConflictException {
         try {
-            return objectStoreDao.updateObjectStore(id, objectStore);
+            ObjectStore result = objectStoreDao.updateObjectStore(id, objectStore);
+            if (result == null) {
+                throw new ResourceNotFoundException("No such object store: " + id);
+            }
+            return result;
         } catch (DuplicateKeyException e) {
-            throw new NameConflictException("Object Store name is already in use", e);
+            throw new NameConflictException("Object store name is already in use", e);
         }
     }
 
@@ -288,7 +318,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
         try {
             objectStoreDao.deleteObjectStore(id);
         } catch (DataIntegrityViolationException e) {
-            throw new ResourceInUseException("Object Store is currently being used by a Task", e);
+            throw new ResourceInUseException("Object store is currently being used by a task", e);
         }
     }
 
@@ -302,13 +332,21 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public SystemLog getSystemLog(String id) {
-        return systemLogDao.getSystemLog(id);
+    public SystemLog getSystemLog(String id) throws ResourceNotFoundException {
+        SystemLog result = systemLogDao.getSystemLog(id);
+        if (result == null) {
+            throw new ResourceNotFoundException("No such system log: " + id);
+        }
+        return result;
     }
 
     @Override
-    public InputStream getSystemLogContent(String id) {
-        return systemLogDao.getSystemLogContent(id);
+    public InputStream getSystemLogContent(String id) throws ResourceNotFoundException {
+        try {
+            return systemLogDao.getSystemLogContent(id);
+        } catch (FileNotFoundException e) {
+            throw new ResourceNotFoundException("No such system log: " + id, e);
+        }
     }
 
     @Override
@@ -327,13 +365,21 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     }
 
     @Override
-    public TaskLog getTaskLog(String id) {
-        return taskLogDao.getTaskLog(id);
+    public TaskLog getTaskLog(String id) throws ResourceNotFoundException {
+        TaskLog result = taskLogDao.getTaskLog(id);
+        if (result == null) {
+            throw new ResourceNotFoundException("No such task log: " + id);
+        }
+        return result;
     }
 
     @Override
-    public InputStream getTaskLogContent(String id) {
-        return taskLogDao.getTaskLogContent(id);
+    public InputStream getTaskLogContent(String id) throws ResourceNotFoundException {
+        try {
+            return taskLogDao.getTaskLogContent(id);
+        } catch (FileNotFoundException e) {
+            throw new ResourceNotFoundException("No such task log: " + id, e);
+        }
     }
 
     @Override

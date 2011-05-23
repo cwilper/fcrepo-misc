@@ -6,9 +6,12 @@ import java.util.Date;
 @XmlRootElement(name="tasklog")
 public class TaskLog {
 
+    public static final String INCOMPLETE = "Incomplete";
+    public static final String SUCCEEDED = "Succeeded";
+    public static final String FAILED = "Failed";
+    public static final String CANCELED = "Canceled";
+
     private String id;
-    private String name;
-    private String startedByUser;
     private String taskId;
     private String resultType;
     private Date startDate;
@@ -20,22 +23,6 @@ public class TaskLog {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStartedByUser() {
-        return startedByUser;
-    }
-
-    public void setStartedByUser(String startedByUser) {
-        this.startedByUser = startedByUser;
     }
 
     public String getTaskId() {

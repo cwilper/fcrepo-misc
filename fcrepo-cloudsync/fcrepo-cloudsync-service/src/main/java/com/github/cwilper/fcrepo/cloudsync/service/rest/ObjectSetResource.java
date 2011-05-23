@@ -4,6 +4,7 @@ import com.github.cwilper.fcrepo.cloudsync.api.CloudSyncService;
 import com.github.cwilper.fcrepo.cloudsync.api.NameConflictException;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectSet;
 import com.github.cwilper.fcrepo.cloudsync.api.ResourceInUseException;
+import com.github.cwilper.fcrepo.cloudsync.api.ResourceNotFoundException;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
@@ -67,7 +68,11 @@ public class ObjectSetResource extends AbstractResource {
         @Description(value = STATUS_200_OK, target = DocTarget.RESPONSE)
     })
     public ObjectSet getObjectSet(@PathParam("id") String id) {
-        return service.getObjectSet(id);
+        try {
+            return service.getObjectSet(id);
+        } catch (ResourceNotFoundException e) {
+            throw new WebApplicationException(e, Response.Status.NOT_FOUND);
+        }
     }
 
     @PUT
@@ -82,6 +87,8 @@ public class ObjectSetResource extends AbstractResource {
                                      ObjectSet objectSet) {
         try {
             return service.updateObjectSet(id, objectSet);
+        } catch (ResourceNotFoundException e) {
+            throw new WebApplicationException(e, Response.Status.NOT_FOUND);
         } catch (NameConflictException e) {
             throw new WebApplicationException(e, Response.Status.CONFLICT);
         }

@@ -165,7 +165,7 @@ public class TaskDao extends AbstractDao {
                 Integer.parseInt(id));
     }
 
-    private Task getTask(ResultSet rs) throws SQLException {
+    private static Task getTask(ResultSet rs) throws SQLException {
         Task task = new Task();
         task.setId("" + rs.getInt("id"));
         task.setName(rs.getString("name"));
@@ -180,9 +180,25 @@ public class TaskDao extends AbstractDao {
         return task;
     }
 
-    // Called by TaskManager
+    // TaskManager use only
     public void setTaskState(String id, String newState) {
         db.update(UPDATE_SQL2, newState, Integer.parseInt(id));
+    }
+
+    // TaskManager use only
+    public void goIdle(String id) {
+        setTaskState(id, Task.IDLE);
+        setActiveLogId(id, null);
+    }
+
+    // TaskManager use only
+    public void setActiveLogId(String id, String activeLogId) {
+        Integer value = null;
+        if (activeLogId != null) {
+            value = Integer.parseInt(activeLogId);
+        }
+        db.update("UPDATE Tasks SET activeLogId = ? WHERE id = ?",
+                value, Integer.parseInt(id));
     }
 
     public Task updateTask(String id, Task task)
