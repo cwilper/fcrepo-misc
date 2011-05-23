@@ -232,7 +232,7 @@ public class TaskDao extends AbstractDao {
         // only allow transition to "starting" state
         String newState = StringUtil.normalize(mods.getState());
         if (newState != null && !newState.equals(Task.IDLE) && !newState.equals(Task.STARTING)) {
-            throw new IllegalArgumentException("Illegal state transition: idle -> " + newState);
+            throw new IllegalArgumentException("Illegal state transition: " + Task.IDLE + " -> " + newState);
         }
         if (newState != null) {
             orig.setState(newState);

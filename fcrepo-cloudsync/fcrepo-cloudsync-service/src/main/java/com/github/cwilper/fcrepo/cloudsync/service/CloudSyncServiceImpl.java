@@ -208,8 +208,12 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
     @Override
     public void deleteTask(String id) throws ResourceInUseException {
-        if (taskDao.getTask(id).getState().equals("idle")) {
-            taskDao.deleteTask(id);
+        if (taskDao.getTask(id).getState().equals(Task.IDLE)) {
+            try {
+                taskDao.deleteTask(id);
+            } catch (DataIntegrityViolationException e) {
+                throw new ResourceInUseException("Task cannot be deleted; it is being used by a task log", e);
+            }
         } else {
             throw new ResourceInUseException("Task cannot be deleted while active");
         }

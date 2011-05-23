@@ -18,11 +18,11 @@ function refreshTasks() {
   service.listTasks(function(data) {
     numActiveTasks = doSection(data.tasks, "tasks-active", getActiveTaskHtml);
     doSection(data.tasks, "tasks-idle", getIdleTaskHtml);
+    service.listTaskLogs(function(data2) {
+      doSection(data2.tasklogs, "tasks-completed", getTaskLogHtml);
+      secondsSinceTaskRefresh = 0;
+    });
   });
-  service.listTaskLogs(function(data) {
-    doSection(data.tasklogs, "tasks-completed", getTaskLogHtml);
-  });
-  secondsSinceTaskRefresh = 0;
 }
 
 function refreshSets() {
@@ -30,16 +30,16 @@ function refreshSets() {
     doSection(data.objectsets, "sets-pidpatterns", getPidPatternSetHtml);
     doSection(data.objectsets, "sets-pidlists", getPidListSetHtml);
     doSection(data.objectsets, "sets-queries", getQuerySetHtml);
+    secondsSinceSetRefresh = 0;
   });
-  secondsSinceSetRefresh = 0;
 }
 
 function refreshStores() {
   service.listObjectStores(function(data) {
     doSection(data.objectstores, "stores-duracloud", getDuraCloudStoreHtml);
     doSection(data.objectstores, "stores-fedora", getFedoraStoreHtml);
+    secondsSinceStoreRefresh = 0;
   });
-  secondsSinceStoreRefresh = 0;
 }
 
 function doSetTaskState(id, state) {
@@ -65,7 +65,7 @@ function doDeleteTask(id, name) {
         },
         function(httpRequest, method, url) {
           if (httpRequest.status == 409) {
-            alert("Can't delete Task; it is currently active.");
+            alert("Can't delete Task; it is currently active or being referenced by a task log.");
           } else {
             alert("[Service Error]\n\nUnexpected HTTP response code ("
                 + httpRequest.status + ") from request:\n\n" + method + " " + url);
@@ -101,16 +101,16 @@ function doDeleteTaskLog(id, name) {
 
 function getActiveTaskHtml(item) {
   var html = "";
-  if (item.state != 'idle') {
+  if (item.state != 'Idle') {
     html += "<div class='item-actions'>";
-    if (item.state != 'starting') {
-        html += "  <button onclick='doViewTaskLog(" + item.activeLogId + ")'>View Log</button>";
-    }
-    if (item.state != 'paused' && item.state != 'pausing' && item.state != 'canceling') {
-      html += "  <button onclick='doSetTaskState(" + item.id + ", \"pausing\");'>Pause</button>";
-    }
-    if (item.state != 'canceling') {
-      html += "  <button onclick='doSetTaskState(" + item.id + ", \"canceling\");'>Cancel</button>";
+    if (item.state != 'Starting') {
+      html += "  <button onclick='doViewTaskLog(" + item.activeLogId + ")'>View Log</button>";
+      if (item.state != 'Paused' && item.state != 'Pausing' && item.state != 'Canceling') {
+        html += "  <button onclick='doSetTaskState(" + item.id + ", \"Pausing\");'>Pause</button>";
+      }
+      if (item.state != 'Canceling') {
+        html += "  <button onclick='doSetTaskState(" + item.id + ", \"Canceling\");'>Cancel</button>";
+      }
     }
     html += "</div>";
     html += "<div class='item-attributes'>Attributes:";
@@ -124,9 +124,9 @@ function getActiveTaskHtml(item) {
 
 function getIdleTaskHtml(item) {
   var html = "";
-  if (item.state == 'idle') {
+  if (item.state == 'Idle') {
     html += "<div class='item-actions'>";
-    html += "  <button onClick='doSetTaskState(" + item.id + ", \"starting\");'>Run</button>";
+    html += "  <button onClick='doSetTaskState(" + item.id + ", \"Starting\");'>Run</button>";
     html += "  <button onClick='doDeleteTask(" + item.id + ", \"" + esc(item.name) + "\");'>Delete</button>";
     html += "</div>";
     html += "<div class='item-attributes'>Attributes:";
@@ -140,15 +140,17 @@ function getIdleTaskHtml(item) {
 
 function getTaskLogHtml(item) {
   var html = "";
-  html += "<div class='item-actions'>";
-  html += "  <button onclick='doViewTaskLog(" + item.id + ")'>View Log</button>";
-  html += "  <button onclick='doDeleteTaskLog(" + item.id + ", \"" + item.finishDate + "\")'>Delete</button>";
-  html += "</div>";
-  html += "<div class='item-attributes'>Attributes:";
-  $.each(item, function(key, value) {
-    html += "<br/>" + key + ": " + value;
-  });
-  html += "</div>";
+  if (item.resultType != 'Incomplete') {
+    html += "<div class='item-actions'>";
+    html += "  <button onclick='doViewTaskLog(" + item.id + ")'>View Log</button>";
+    html += "  <button onclick='doDeleteTaskLog(" + item.id + ", \"" + item.finishDate + "\")'>Delete</button>";
+    html += "</div>";
+    html += "<div class='item-attributes'>Attributes:";
+    $.each(item, function(key, value) {
+      html += "<br/>" + key + ": " + value;
+    });
+    html += "</div>";
+  }
   return html;
 }
 
@@ -295,12 +297,12 @@ function doSection(items, sectionName, itemHtmlGetter) {
       count++;
       var name;
       if (sectionName == 'tasks-completed') {
-        name = item.finishDate;
+        name = item.resultType + " at " + item.finishDate;
       } else {
         name = item.name;
       }
       if (sectionName == 'tasks-active') {
-        name = item.state.toUpperCase() + ": " + item.name;
+        name = item.state + " - " + item.name;
       }
       html += getExpandable(name, body, sectionName + "-" + item.id);
     }
@@ -751,7 +753,7 @@ $(function() {
         var data = { task: {
           "name" : $("#NewListTask-name").val(),
           "type" : "list",
-          "state": "idle",
+          "state": "Idle",
           "data" : JSON.stringify(typeSpecificData)
         }};
         service.createTask(data,
