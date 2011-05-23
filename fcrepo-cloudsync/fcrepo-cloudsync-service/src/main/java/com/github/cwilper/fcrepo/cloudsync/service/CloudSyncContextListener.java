@@ -1,4 +1,4 @@
-package com.github.cwilper.fcrepo.cloudsync.service.util;
+package com.github.cwilper.fcrepo.cloudsync.service;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class CloudSyncInitializer implements ServletContextListener {
+public class CloudSyncContextListener implements ServletContextListener {
 
     private Logger logger = null;
 

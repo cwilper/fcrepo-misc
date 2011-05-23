@@ -20,27 +20,6 @@ import java.util.List;
 
 public class TaskDao extends AbstractDao {
 
-    // IDLE tasks can transition to STARTING
-    private static final String IDLE = "idle";
-
-    // STARTING tasks can transition to RUNNING, PAUSING, or CANCELING
-    private static final String STARTING = "starting";
-
-    // RUNNING tasks can transition to PAUSING, CANCELING, or IDLE
-    private static final String RUNNING = "running";
-
-    // PAUSING tasks can transition to CANCELING or RESUMING
-    private static final String PAUSING = "pausing";
-
-    // PAUSED tasks can transition to RESUMING or CANCELING
-    private static final String PAUSED = "paused";
-
-    // RESUMING tasks can transition to PAUSING or CANCELING
-    private static final String RESUMING = "resuming";
-
-    // CANCELING tasks can transition to IDLE
-    private static final String CANCELING = "canceling";
-
     private static final Logger logger = LoggerFactory.getLogger(TaskDao.class);
 
     private static final String CREATE_DDL =
@@ -89,9 +68,17 @@ public class TaskDao extends AbstractDao {
 
     private final TransactionTemplate tt;
 
-    public TaskDao(JdbcTemplate db, TransactionTemplate tt) {
+    private final ObjectSetDao objectSetDao;
+
+    private final ObjectStoreDao objectStoreDao;
+
+    public TaskDao(JdbcTemplate db, TransactionTemplate tt,
+                   ObjectSetDao objectSetDao,
+                   ObjectStoreDao objectStoreDao) {
         super(db);
         this.tt = tt;
+        this.objectSetDao = objectSetDao;
+        this.objectStoreDao = objectStoreDao;
     }
 
     @Override
@@ -109,7 +96,8 @@ public class TaskDao extends AbstractDao {
         }
         task.setName(StringUtil.validate("name", task.getName(), 256));
         task.setType(StringUtil.validate("type", task.getType(), 32));
-        task.setState(StringUtil.validate("state", task.getState(), new String[] { IDLE, STARTING }));
+        task.setState(StringUtil.validate("state", task.getState(),
+                new String[] { Task.IDLE, Task.STARTING }));
         if (StringUtil.normalize(task.getActiveLogId()) != null) {
             throw new IllegalArgumentException("Specifying the Task "
                     + "activeLogId during creation is not permitted");
@@ -121,7 +109,8 @@ public class TaskDao extends AbstractDao {
         task.setData(StringUtil.validate("data", task.getData(), 32672));
         // Validate schedule content, type-specific data,
         // and do dependency determination
-        final TaskRunner runner = TaskRunner.getInstance(task);
+        final TaskRunner runner = TaskRunner.getInstance(task, this,
+                objectSetDao, objectStoreDao, null, null);
 
         // persist task and deps, validating that the deps (foreign keys) exist
         String id = tt.execute(new TransactionCallback<String>() {
@@ -191,10 +180,10 @@ public class TaskDao extends AbstractDao {
         return task;
     }
 
-    // TODO: Add methods for internal use...the scheduler should be
-    // able to switch the state from starting to running, among others.
-    // Also, it should be able to set activeLogId. But the service doesn't
-    // expose these capabilities to the outside world.
+    // Called by TaskManager
+    public void setTaskState(String id, String newState) {
+        db.update(UPDATE_SQL2, newState, Integer.parseInt(id));
+    }
 
     public Task updateTask(String id, Task task)
             throws DuplicateKeyException {
@@ -214,7 +203,7 @@ public class TaskDao extends AbstractDao {
             }
         }
 
-        if (orig.getState().equals(IDLE)) {
+        if (orig.getState().equals(Task.IDLE)) {
             updateIdleTask(orig, task);
         } else {
             updateActiveTask(orig, task);
@@ -226,7 +215,7 @@ public class TaskDao extends AbstractDao {
     private void updateIdleTask(final Task orig, Task mods) {
         // only allow transition to "starting" state
         String newState = StringUtil.normalize(mods.getState());
-        if (newState != null && !newState.equals(IDLE) && !newState.equals(STARTING)) {
+        if (newState != null && !newState.equals(Task.IDLE) && !newState.equals(Task.STARTING)) {
             throw new IllegalArgumentException("Illegal state transition: idle -> " + newState);
         }
         if (newState != null) {
@@ -250,7 +239,8 @@ public class TaskDao extends AbstractDao {
 
         // Validate schedule content, type-specific data,
         // and do dependency determination
-        final TaskRunner runner = TaskRunner.getInstance(orig);
+        final TaskRunner runner = TaskRunner.getInstance(orig, this,
+                objectSetDao, objectStoreDao, null, null);
 
         // Finally, update the necessary tables in a transaction
         final int taskId = Integer.parseInt(orig.getId());
@@ -294,12 +284,12 @@ public class TaskDao extends AbstractDao {
         String newState = StringUtil.normalize(mods.getState());
         if (newState != null && !newState.equals(oldState)) {
             boolean illegal = false;
-            if (oldState.equals(STARTING) || oldState.equals(RUNNING) || oldState.equals(RESUMING)) {
-                if (!newState.equals(PAUSING) && !newState.equals(CANCELING)) {
+            if (oldState.equals(Task.STARTING) || oldState.equals(Task.RUNNING) || oldState.equals(Task.RESUMING)) {
+                if (!newState.equals(Task.PAUSING) && !newState.equals(Task.CANCELING)) {
                     illegal = true;
                 }
-            } else if (oldState.equals(PAUSING) || oldState.equals(PAUSED)) {
-                if (!newState.equals(RESUMING) && !newState.equals(CANCELING)) {
+            } else if (oldState.equals(Task.PAUSING) || oldState.equals(Task.PAUSED)) {
+                if (!newState.equals(Task.RESUMING) && !newState.equals(Task.CANCELING)) {
                     illegal = true;
                 }
             } else {

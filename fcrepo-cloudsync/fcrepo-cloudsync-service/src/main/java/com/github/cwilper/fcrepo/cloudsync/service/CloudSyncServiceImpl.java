@@ -13,6 +13,7 @@ import com.github.cwilper.fcrepo.cloudsync.api.SystemLog;
 import com.github.cwilper.fcrepo.cloudsync.api.Task;
 import com.github.cwilper.fcrepo.cloudsync.api.TaskLog;
 import com.github.cwilper.fcrepo.cloudsync.api.User;
+import com.github.cwilper.fcrepo.cloudsync.service.backend.TaskManager;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.ConfigurationDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.DuraCloudDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectSetDao;
@@ -29,6 +30,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 import java.io.InputStream;
 import java.util.List;
@@ -49,6 +51,8 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     private final TaskLogDao taskLogDao;
     private final DuraCloudDao duraCloudDao;
 
+    private final TaskManager taskManager;
+
     public CloudSyncServiceImpl(DataSource dataSource,
                                 PlatformTransactionManager txMan) {
         db = new JdbcTemplate(dataSource);
@@ -56,9 +60,9 @@ public class CloudSyncServiceImpl implements CloudSyncService {
 
         configurationDao = new ConfigurationDao(db);
         userDao = new UserDao(db);
-        taskDao = new TaskDao(db, tt);
         objectSetDao = new ObjectSetDao(db);
         objectStoreDao = new ObjectStoreDao(db);
+        taskDao = new TaskDao(db, tt, objectSetDao, objectStoreDao);
         systemLogDao = new SystemLogDao(db);
         taskLogDao = new TaskLogDao(db);
         duraCloudDao = new DuraCloudDao();
@@ -67,6 +71,14 @@ public class CloudSyncServiceImpl implements CloudSyncService {
             initDb();
         }
         logger.info("Service initialization complete. Ready to handle requests.");
+
+        taskManager = new TaskManager(taskDao, objectSetDao, objectStoreDao);
+        taskManager.start();
+    }
+
+    @PreDestroy
+    public void close() {
+        taskManager.shutdown();
     }
 
     private void initDb() {

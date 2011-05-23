@@ -5,6 +5,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="task")
 public class Task {
 
+    // IDLE tasks can transition to STARTING
+    public static final String IDLE = "idle";
+
+    // STARTING tasks can transition to RUNNING, PAUSING, or CANCELING
+    public static final String STARTING = "starting";
+
+    // RUNNING tasks can transition to PAUSING, CANCELING, or IDLE
+    public static final String RUNNING = "running";
+
+    // PAUSING tasks can transition to CANCELING, PAUSED, or RESUMING
+    public static final String PAUSING = "pausing";
+
+    // PAUSED tasks can transition to RESUMING or CANCELING
+    public static final String PAUSED = "paused";
+
+    // RESUMING tasks can transition to PAUSING, CANCELING, or RUNNING
+    public static final String RESUMING = "resuming";
+
+    // CANCELING tasks can transition to IDLE
+    public static final String CANCELING = "canceling";
+
     private String id;
     private String name;
     private String type;

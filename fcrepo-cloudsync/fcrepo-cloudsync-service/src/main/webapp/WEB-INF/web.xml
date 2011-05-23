@@ -20,7 +20,7 @@
 
   <listener>
     <listener-class>
-      com.github.cwilper.fcrepo.cloudsync.service.util.CloudSyncInitializer
+      com.github.cwilper.fcrepo.cloudsync.service.CloudSyncContextListener
     </listener-class>
   </listener>
 
