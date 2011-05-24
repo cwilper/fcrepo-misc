@@ -211,9 +211,8 @@
     <tr>
       <td>Query Type</td>
       <td><select id="NewQuery-queryType">
-        <option>SPARQL</option>
         <option>iTQL</option>
-        <option>SPO</option>
+        <option selected="selected">SPARQL</option>
       </select></td>
     </tr>
     <tr>

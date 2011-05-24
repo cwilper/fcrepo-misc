@@ -85,6 +85,8 @@ public abstract class TaskRunner extends Thread {
             logger.info("Task " + task.getId() + " failed (" + task.getName() + ")");
             completionDate = completionListener.taskFailed(task, th);
             resultType = "failed";
+            logWriter.print("ERROR: ");
+            th.printStackTrace(logWriter);
         } finally {
             logWriter.println("# Finished (" + resultType + ") at " + DateUtil.toString(completionDate));
             logWriter.close();

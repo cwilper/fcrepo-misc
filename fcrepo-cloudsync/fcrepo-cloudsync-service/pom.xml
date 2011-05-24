@@ -39,17 +39,22 @@
 
     <dependency>
       <groupId>com.github.cwilper.fcrepo-misc</groupId>
-      <artifactId>fcrepo-httpclient</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.cwilper.fcrepo-misc</groupId>
       <artifactId>fcrepo-dto-core</artifactId>
     </dependency>
 
     <dependency>
       <groupId>com.github.cwilper.fcrepo-misc</groupId>
       <artifactId>fcrepo-dto-foxml</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-httpclient</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-riclient</artifactId>
     </dependency>
 
     <dependency>
