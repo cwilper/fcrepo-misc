@@ -4,10 +4,12 @@ import com.github.cwilper.fcrepo.cloudsync.api.Task;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectSetDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectStoreDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskDao;
+import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Set;
 
 public abstract class TaskRunner extends Thread {
@@ -65,20 +67,26 @@ public abstract class TaskRunner extends Thread {
 
     @Override
     public final void run() {
+        Date completionDate = null;
+        String resultType = null;
         try {
             logger.info("Task " + task.getId() + " started (" + task.getName() + ")");
             pauseOrCancelIfRequested();
             runTask();
             pauseOrCancelIfRequested();
             logger.info("Task " + task.getId() + " succeeded (" + task.getName() + ")");
-            completionListener.taskSucceeded(task);
+            completionDate = completionListener.taskSucceeded(task);
+            resultType = "succeeded";
         } catch (TaskCanceledException e) {
             logger.info("Task " + task.getId() + " canceled (" + task.getName() + ")");
-            completionListener.taskCanceled(task);
+            completionDate = completionListener.taskCanceled(task);
+            resultType = "canceled";
         } catch (Throwable th) {
             logger.info("Task " + task.getId() + " failed (" + task.getName() + ")");
-            completionListener.taskFailed(task, th);
+            completionDate = completionListener.taskFailed(task, th);
+            resultType = "failed";
         } finally {
+            logWriter.println("# Finished (" + resultType + ") at " + DateUtil.toString(completionDate));
             logWriter.close();
         }
     }
@@ -91,6 +99,7 @@ public abstract class TaskRunner extends Thread {
         } else if (pauseRequested) {
             taskDao.setTaskState(task.getId(), Task.PAUSED);
             logger.info("Task " + task.getId() + " paused (" + task.getName() + ")");
+            logWriter.println("# Paused at " + DateUtil.toString(new Date()));
             while (!resumeRequested) {
                 if (cancelRequested) {
                     throw new TaskCanceledException();
@@ -102,6 +111,7 @@ public abstract class TaskRunner extends Thread {
             }
             taskDao.setTaskState(task.getId(), Task.RUNNING);
             logger.info("Task " + task.getId() + " resumed (" + task.getName() + ")");
+            logWriter.println("# Resumed at " + DateUtil.toString(new Date()));
             pauseRequested = false;
             resumeRequested = false;
         }

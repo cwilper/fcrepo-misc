@@ -108,6 +108,9 @@ function getActiveTaskHtml(item) {
       if (item.state != 'Paused' && item.state != 'Pausing' && item.state != 'Canceling') {
         html += "  <button onclick='doSetTaskState(" + item.id + ", \"Pausing\");'>Pause</button>";
       }
+      if (item.state == 'Paused') {
+        html += "  <button onclick='doSetTaskState(" + item.id + ", \"Resuming\");'>Resume</button>";
+      }
       if (item.state != 'Canceling') {
         html += "  <button onclick='doSetTaskState(" + item.id + ", \"Canceling\");'>Cancel</button>";
       }

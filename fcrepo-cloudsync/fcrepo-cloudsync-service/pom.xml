@@ -44,6 +44,11 @@
 
     <dependency>
       <groupId>com.github.cwilper.fcrepo-misc</groupId>
+      <artifactId>fcrepo-dto-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.cwilper.fcrepo-misc</groupId>
       <artifactId>fcrepo-dto-foxml</artifactId>
     </dependency>
 

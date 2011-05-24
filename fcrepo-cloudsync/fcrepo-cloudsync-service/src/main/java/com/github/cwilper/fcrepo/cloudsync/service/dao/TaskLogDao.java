@@ -59,10 +59,11 @@ public class TaskLogDao extends AbstractDao {
     }
 
     // TaskManager use only
-    public void finish(String id, String resultType) {
+    public Date finish(String id, String resultType) {
         long now = System.currentTimeMillis();
         db.update("UPDATE TaskLogs SET resultType = ?, finishDate = ? WHERE id = ?",
                 resultType, now, Integer.parseInt(id));
+        return new Date(now);
     }
 
     public List<TaskLog> listTaskLogs() {

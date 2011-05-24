@@ -6,10 +6,12 @@ import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectSetDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectStoreDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskLogDao;
+import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -140,7 +142,12 @@ public class TaskManager extends Thread implements TaskCompletionListener {
 
     private void startTask(Task task) {
         String taskLogId = taskLogDao.start(task.getId());
+
         PrintWriter logWriter = taskLogDao.getContentWriter(taskLogId);
+
+        Date startDate = taskLogDao.getTaskLog(taskLogId).getStartDate();
+        logWriter.println("# Started at " + DateUtil.toString(startDate));
+
         TaskRunner runner = TaskRunner.getInstance(task, taskDao, objectSetDao, objectStoreDao, logWriter, this);
         synchronized (runners) {
             runners.put(task.getId(), runner);
@@ -202,20 +209,20 @@ public class TaskManager extends Thread implements TaskCompletionListener {
     }
 
     @Override
-    public void taskSucceeded(Task task) {
-        taskLogDao.finish(task.getActiveLogId(), TaskLog.SUCCEEDED);
+    public Date taskSucceeded(Task task) {
         taskDao.goIdle(task.getId());
+        return taskLogDao.finish(task.getActiveLogId(), TaskLog.SUCCEEDED);
     }
 
     @Override
-    public void taskFailed(Task task, Throwable cause) {
-        taskLogDao.finish(task.getActiveLogId(), TaskLog.FAILED);
+    public Date taskFailed(Task task, Throwable cause) {
         taskDao.goIdle(task.getId());
+        return taskLogDao.finish(task.getActiveLogId(), TaskLog.FAILED);
     }
 
     @Override
-    public void taskCanceled(Task task) {
-        taskLogDao.finish(task.getActiveLogId(), TaskLog.CANCELED);
+    public Date taskCanceled(Task task) {
         taskDao.goIdle(task.getId());
+        return taskLogDao.finish(task.getActiveLogId(), TaskLog.CANCELED);
     }
 }
