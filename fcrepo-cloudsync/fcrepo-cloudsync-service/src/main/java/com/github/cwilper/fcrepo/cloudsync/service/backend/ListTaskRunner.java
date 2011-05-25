@@ -72,8 +72,4 @@ public class ListTaskRunner extends TaskRunner implements ObjectListHandler {
         }
     }
 
-    @Override
-    public void noMoreObjects() {
-        // no-op
-    }
 }

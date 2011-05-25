@@ -6,5 +6,4 @@ public interface ObjectListHandler {
 
     boolean handleObject(ObjectInfo info);
 
-    void noMoreObjects();
 }

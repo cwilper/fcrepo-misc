@@ -31,7 +31,7 @@ public class ObjectQuery {
             // TODO: validate?
             pidPattern = null;
             pidList = new ArrayList<String>();
-            String[] pids = set.getData().split("\\S");
+            String[] pids = set.getData().split("\\s+");
             pidList.addAll(Arrays.asList(pids));
             queryType = null;
             queryText = null;

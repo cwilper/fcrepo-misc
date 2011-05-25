@@ -19,18 +19,15 @@ public abstract class StoreConnector {
         }
     }
 
-    public abstract void countObjects(ObjectQuery query,
-                                      ObjectCountHandler handler);
-
     public abstract void listObjects(ObjectQuery query,
                                      ObjectListHandler handler);
+
+    public abstract boolean hasObject(String pid);
 
     public abstract FedoraObject getObject(String pid);
 
     public abstract InputStream getContent(FedoraObject o,
                                            Datastream ds,
                                            DatastreamVersion dsv);
-
-
 
 }

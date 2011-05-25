@@ -11,11 +11,14 @@ import com.github.cwilper.fcrepo.httpclient.FedoraHttpClient;
 import com.github.cwilper.fcrepo.httpclient.HttpClientConfig;
 import com.github.cwilper.fcrepo.riclient.RIClient;
 import com.github.cwilper.fcrepo.riclient.RIQueryResult;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpHead;
 import org.openrdf.model.Value;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -35,18 +38,22 @@ public class FedoraConnector extends StoreConnector {
     }
 
     @Override
-    public void countObjects(ObjectQuery query, ObjectCountHandler handler) {
-    }
-
-    @Override
     public void listObjects(ObjectQuery query, ObjectListHandler handler) {
         String type = query.getType();
         if (type.equals("pidPattern")) {
             RIQueryResult result = riClient.itql("select $o from <#ri> where $o <fedora-model:hasModel> <info:fedora/fedora-system:FedoraObject-3.0>", false);
             listObjects(result, new PIDPatternFilter(query.getPidPattern()), handler);
         } else if (type.equals("pidList")) {
-            // TODO: Check if each objects exists
-            throw new UnsupportedOperationException("pidList not supported yet.");
+            Iterator<String> iter = query.getPidList().iterator();
+            boolean keepGoing = true;
+            while (iter.hasNext() && keepGoing) {
+                String pid = iter.next();
+                if (hasObject(pid)) {
+                    ObjectInfo o = new ObjectInfo();
+                    o.setPid(pid);
+                    keepGoing = handler.handleObject(o);
+                }
+            }
         } else if (type.equals("query")) {
             RIQueryResult result;
             if (query.getQueryType().equals("iTQL")) {
@@ -57,6 +64,18 @@ public class FedoraConnector extends StoreConnector {
                 throw new IllegalArgumentException("Query type '" + query.getQueryType() + "' unrecognized.");
             }
             listObjects(result, null, handler);
+        }
+    }
+
+    @Override
+    public boolean hasObject(String pid) {
+        HttpHead head = new HttpHead(httpClient.getBaseURI() + "/objects/" + pid);
+        try {
+            HttpResponse response = httpClient.execute(head);
+            int responseCode = response.getStatusLine().getStatusCode();
+            return responseCode == 200;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

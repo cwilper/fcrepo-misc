@@ -34,12 +34,14 @@ public class DuraCloudConnector extends StoreConnector {
     }
 
     @Override
-    public void countObjects(ObjectQuery query, ObjectCountHandler handler) {
+    public void listObjects(ObjectQuery query, ObjectListHandler handler) {
+        // https://demo.duracloud.org/durastore/cwilper-test?storeID=0
     }
 
     @Override
-    public void listObjects(ObjectQuery query, ObjectListHandler handler) {
-        // https://demo.duracloud.org/durastore/cwilper-test?storeID=0
+    public boolean hasObject(String pid) {
+        // TODO: HEAD request on foxml url?
+        return false;
     }
 
     @Override
