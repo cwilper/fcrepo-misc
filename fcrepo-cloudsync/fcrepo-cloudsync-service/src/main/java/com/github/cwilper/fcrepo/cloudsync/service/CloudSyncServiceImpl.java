@@ -42,7 +42,6 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     private static final Logger logger = LoggerFactory.getLogger(CloudSyncServiceImpl.class);
 
     private final JdbcTemplate db;
-    private final TransactionTemplate tt;
 
     private final ConfigurationDao configurationDao;
     private final UserDao userDao;
@@ -58,7 +57,7 @@ public class CloudSyncServiceImpl implements CloudSyncService {
     public CloudSyncServiceImpl(DataSource dataSource,
                                 PlatformTransactionManager txMan) {
         db = new JdbcTemplate(dataSource);
-        tt = new TransactionTemplate(txMan);
+        TransactionTemplate tt = new TransactionTemplate(txMan);
 
         configurationDao = new ConfigurationDao(db);
         userDao = new UserDao(db);

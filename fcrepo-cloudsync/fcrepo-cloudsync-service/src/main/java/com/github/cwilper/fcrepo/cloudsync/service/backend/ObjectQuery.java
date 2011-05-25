@@ -4,7 +4,7 @@ import com.github.cwilper.fcrepo.cloudsync.api.ObjectSet;
 import com.github.cwilper.fcrepo.cloudsync.service.util.JSON;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;import java.util.List;
 import java.util.Map;
 
 public class ObjectQuery {
@@ -32,9 +32,7 @@ public class ObjectQuery {
             pidPattern = null;
             pidList = new ArrayList<String>();
             String[] pids = set.getData().split("\\S");
-            for (String pid: pids) {
-                pidList.add(pid);
-            }
+            pidList.addAll(Arrays.asList(pids));
             queryType = null;
             queryText = null;
         } else if (type.equals("query")) {

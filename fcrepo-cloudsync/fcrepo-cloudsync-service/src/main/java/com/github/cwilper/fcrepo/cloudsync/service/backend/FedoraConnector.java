@@ -21,12 +21,10 @@ import java.util.Map;
 
 public class FedoraConnector extends StoreConnector {
 
-    private final ObjectStore store;
     private final FedoraHttpClient httpClient;
     private final RIClient riClient;
 
     public FedoraConnector(ObjectStore store) {
-        this.store = store;
         Map<String, String> map = JSON.getMap(JSON.parse(store.getData()));
         String url = StringUtil.validate("url", map.get("url"));
         String username = StringUtil.validate("username", map.get("username"));

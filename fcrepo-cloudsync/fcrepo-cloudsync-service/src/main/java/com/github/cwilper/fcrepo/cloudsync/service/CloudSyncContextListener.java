@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Handler;
 
 public class CloudSyncContextListener implements ServletContextListener {
 
@@ -75,8 +76,8 @@ public class CloudSyncContextListener implements ServletContextListener {
             java.util.logging.Logger rootLogger =
                     java.util.logging.LogManager.getLogManager().getLogger("");
             java.util.logging.Handler[] handlers = rootLogger.getHandlers();
-            for (int i = 0; i < handlers.length; i++) {
-                rootLogger.removeHandler(handlers[i]);
+            for (Handler handler: handlers) {
+                rootLogger.removeHandler(handler);
             }
             SLF4JBridgeHandler.install();
 
