@@ -1,47 +1,102 @@
 package com.github.cwilper.fcrepo.cloudsync.service.backend;
 
+import com.github.cwilper.fcrepo.cloudsync.api.ObjectInfo;
 import com.github.cwilper.fcrepo.cloudsync.api.ObjectStore;
 import com.github.cwilper.fcrepo.cloudsync.service.util.JSON;
 import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
+import com.github.cwilper.fcrepo.httpclient.HttpClientConfig;
+import com.github.cwilper.fcrepo.httpclient.MultiThreadedHttpClient;
+import com.github.cwilper.ttff.Filter;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class DuraCloudConnector extends StoreConnector {
 
-    private final ObjectStore store;
-    private final String url;
-    private final String username;
-    private final String password;
+    private static final int CHUNKSIZE = 999;
+
+    private final URI spaceURI;
     private final String providerId;
-    private final String providerName;
-    private final String space;
     private final String prefix;
 
+    private final MultiThreadedHttpClient httpClient;
+
     public DuraCloudConnector(ObjectStore store) {
-        this.store = store;
         Map<String, String> map = JSON.getMap(JSON.parse(store.getData()));
-        url = StringUtil.validate("url", map.get("url"));
-        username = StringUtil.validate("username", map.get("username"));
-        password = StringUtil.validate("password", map.get("password"));
         providerId = StringUtil.validate("providerId", map.get("providerId"));
-        providerName = StringUtil.validate("providerName", map.get("providerName"));
-        space = StringUtil.validate("space", map.get("space"));
         prefix = StringUtil.normalize(map.get("prefix"));
+
+        // Determine base URI of space and init httpClient
+        String duraStoreUrl = StringUtil.validate("url", map.get("url"));
+        while (duraStoreUrl.endsWith("/")) {
+            duraStoreUrl = duraStoreUrl.substring(0, duraStoreUrl.length() - 1);
+        }
+
+        String space = StringUtil.validate("space", map.get("space"));
+
+        spaceURI = URI.create(duraStoreUrl + "/" + space);
+        int port = spaceURI.getPort();
+        if (port <= 0) {
+            if (spaceURI.getScheme().equals("http")) {
+                port = 80;
+            } else {
+                port = 443;
+            }
+        }
+        httpClient = new MultiThreadedHttpClient(new HttpClientConfig());
+        String username = StringUtil.validate("username", map.get("username"));
+        String password = StringUtil.validate("password", map.get("password"));
+        httpClient.getCredentialsProvider().setCredentials(
+                new AuthScope(spaceURI.getHost(), port),
+                new UsernamePasswordCredentials(username, password));
     }
 
     @Override
     public void listObjects(ObjectQuery query, ObjectListHandler handler) {
-        // https://demo.duracloud.org/durastore/cwilper-test?storeID=0
+        String type = query.getType();
+        if (type.equals("pidPattern")) {
+            listObjects(new PIDPatternFilter(query.getPidPattern()), handler);
+        } else if (type.equals("pidList")) {
+            listObjects(query.getPidList().iterator(), handler);
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override
-    public boolean hasObject(String pid) {
-        // TODO: HEAD request on foxml url?
-        return false;
+    protected boolean hasObject(String pid) {
+        return headCheck(httpClient, getURL(pid));
+    }
+
+    private String getURL(String pid) {
+        StringBuilder s = new StringBuilder();
+        s.append(spaceURI.toString());
+        s.append('/');
+        if (prefix != null) {
+            s.append(prefix);
+        }
+        s.append(pid);
+        s.append("?storeID=");
+        s.append(providerId);
+        return s.toString();
     }
 
     @Override
@@ -54,6 +109,80 @@ public class DuraCloudConnector extends StoreConnector {
         // https://demo.duracloud.org/durastore/cwilper-test/content-id?storeID=0
         // note: if content-id has slashes, they should not be URL-encoded
         return null;
+    }
+
+    @Override
+    public void close() {
+        httpClient.close();
+    }
+
+    private void listObjects(Filter<String> filter, ObjectListHandler handler) {
+        boolean keepGoing = true;
+        boolean moreChunks = true;
+        String marker = null;
+        while (moreChunks && keepGoing) {
+            String lastItemId = null;
+            int chunkSize = 0;
+            for (String itemId: getNextChunk(marker, CHUNKSIZE)) {
+                String pid;
+                if (prefix == null) {
+                    pid = itemId;
+                } else {
+                    pid = itemId.substring(prefix.length());
+                }
+                try {
+                    if (filter.accept(pid) != null) {
+                        ObjectInfo o = new ObjectInfo();
+                        o.setPid(pid);
+                        keepGoing = handler.handleObject(o);
+                    }
+                } catch (IOException wontHappen) {
+                    throw new RuntimeException(wontHappen);
+                }
+                lastItemId = itemId;
+                chunkSize++;
+            }
+            if (chunkSize == CHUNKSIZE) {
+                marker = lastItemId;
+            } else {
+                moreChunks = false;
+            }
+        }
+    }
+
+    private List<String> getNextChunk(String marker, int maxResults) {
+        String url = spaceURI.toString() + "?storeID=" + providerId
+                + "&maxResults=" + maxResults;
+        if (marker != null) {
+            url += "&marker=" + marker;
+        }
+        if (prefix != null) {
+            url += "&prefix=" + prefix;
+        }
+        List<String> list = new ArrayList<String>();
+        try {
+            Document doc = parseXML(get(httpClient, url));
+            Node root = doc.getDocumentElement();
+            NodeList itemNodes = root.getChildNodes();
+            for (int i = 0; i < itemNodes.getLength(); i++) {
+                Node itemNode = itemNodes.item(i);
+                if (itemNode.getNodeType() == Node.ELEMENT_NODE) {
+                    list.add(itemNode.getTextContent().trim());
+                }
+            }
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Document parseXML(String xmlString)
+            throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = factory.newDocumentBuilder();
+        InputSource inStream = new InputSource();
+        inStream.setCharacterStream(new StringReader(xmlString));
+        return db.parse(inStream);
     }
 
 }

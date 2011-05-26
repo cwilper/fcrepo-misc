@@ -38,13 +38,15 @@ public class ListTaskRunner extends TaskRunner implements ObjectListHandler {
 
     @Override
     public void runTask() throws Exception {
-        // Fake running a task that takes 10 seconds or so, with an
-        // opportunity to pause or cancel halfway through.
         StoreConnector connector = StoreConnector.getInstance(objectStoreDao.getObjectStore("" + storeId));
-        ObjectQuery query = new ObjectQuery(objectSetDao.getObjectSet("" + setId));
-        connector.listObjects(query, this);
-        if (canceledException != null) {
-            throw canceledException;
+        try {
+            ObjectQuery query = new ObjectQuery(objectSetDao.getObjectSet("" + setId));
+            connector.listObjects(query, this);
+            if (canceledException != null) {
+                throw canceledException;
+            }
+        } finally {
+            connector.close();
         }
     }
 

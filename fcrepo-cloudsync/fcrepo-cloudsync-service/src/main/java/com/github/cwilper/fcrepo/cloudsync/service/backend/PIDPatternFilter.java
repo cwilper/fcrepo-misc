@@ -13,12 +13,22 @@ public class PIDPatternFilter extends AbstractFilter<String> {
     }
 
     public String accept(String value) {
-        if (pattern == null
+        if (isPid(value) && (pattern == null
                 || pattern.equals("*")
-                || Pattern.matches(pattern, value) ) {
+                || Pattern.matches(pattern, value)) ) {
             return value;
         } else {
             return null;
         }
+    }
+
+    private boolean isPid(String value) {
+        if ( (value == null)
+                || (value.indexOf("/") != -1)
+                || (value.indexOf(" ") != -1) ) {
+            return false;
+        }
+        int i = value.indexOf(":");
+        return i > 0 && i < (value.length() - 1) && value.lastIndexOf(":") == i;
     }
 }
