@@ -57,6 +57,8 @@ public abstract class TaskRunner extends Thread {
         if (task.getType() != null && task.getType().length() > 0) {
             if (task.getType().equals("list")) {
                 return new ListTaskRunner(task, taskDao, objectSetDao, objectStoreDao, logWriter, completionListener);
+            } else if (task.getType().equals("copy")) {
+                return new CopyTaskRunner(task, taskDao, objectSetDao, objectStoreDao, logWriter, completionListener);
             } else {
                 throw new IllegalArgumentException("Unrecognized Task type: " + task.getType());
             }

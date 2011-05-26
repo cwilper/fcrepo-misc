@@ -160,7 +160,49 @@
 </div>
 
 <div class="ui-helper-hidden" id="dialog-NewCopyTask" title="New Copy Task">
-  <p>Not Implemented</p>
+  <table>
+    <tr>
+      <td>Copy</td>
+      <td><select id="NewCopyTask-setId">
+        ...
+      </select></td>
+    </tr>
+    <tr>
+      <td>in</td>
+      <td><select id="NewCopyTask-queryStoreId">
+        ...
+      </select></td>
+    </tr>
+    <tr>
+      <td>from</td>
+      <td><select id="NewCopyTask-sourceStoreId">
+        ...
+      </select></td>
+    <tr>
+      <td>to</td>
+      <td><select id="NewCopyTask-destStoreId">
+        ...
+      </select></td>
+    </tr>
+    <tr>
+      <td>Task Name</td>
+      <td>
+        <input id="NewCopyTask-name" type="text"/>
+      </td>
+    </tr>
+    <tr>
+      <td>Overwrite</td>
+      <td>
+        <input type="checkbox" id="NewCopyTask-overwrite" checked="checked"/>
+      </td>
+    </tr>
+    <tr>
+      <td>Run Now</td>
+      <td>
+        <input type="checkbox" id="NewCopyTask-runNow" checked="checked"/>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <!-- Sets -->

@@ -722,9 +722,9 @@ $(function() {
               storeOptions += store.name;
               storeOptions += "</option>";
             });
-            $("#NewListTask-name").attr("size", 60);
             $("#NewListTask-storeId").html(storeOptions);
             $("#NewListTask-storeId").change(showNewListTaskName);
+            $("#NewListTask-name").attr("size", 60);
             showNewListTaskName();
 
             $("#dialog-NewListTask").dialog("open");
@@ -736,7 +736,37 @@ $(function() {
   $("#button-NewCopyTask").click(
       function() {
         $("#dialog-NewTask").dialog("close");
-        $("#dialog-NewCopyTask").dialog("open");
+        // populate selects for new copy task
+        service.listObjectSets(function(sets) {
+          // populate sets in dialog, then get stores
+          var setOptions = "";
+          $.each(sets.objectsets, function(index, set) {
+            setOptions += "<option value=\"" + set.id + "\">"
+            setOptions += set.name;
+            setOptions += "</option>";
+          });
+          $("#NewCopyTask-setId").html(setOptions);
+          $("#NewCopyTask-setId").change(showNewCopyTaskName);
+          service.listObjectStores(function(stores) {
+            // populate stores in dialog, then show dialog
+            var storeOptions = "";
+            $.each(stores.objectstores, function(index, store) {
+              storeOptions += "<option value=\"" + store.id + "\">"
+              storeOptions += store.name;
+              storeOptions += "</option>";
+            });
+            $("#NewCopyTask-name").attr("size", 60);
+            $("#NewCopyTask-queryStoreId").html(storeOptions);
+            $("#NewCopyTask-queryStoreId").change(showNewCopyTaskName);
+            $("#NewCopyTask-sourceStoreId").html(storeOptions);
+            $("#NewCopyTask-sourceStoreId").change(showNewCopyTaskName);
+            $("#NewCopyTask-destStoreId").html(storeOptions);
+            $("#NewCopyTask-destStoreId").change(showNewCopyTaskName);
+            showNewCopyTaskName();
+
+            $("#dialog-NewCopyTask").dialog("open");
+          });
+        });
       }
   );
 
@@ -779,8 +809,34 @@ $(function() {
     show: 'fade',
     hide: 'fade',
     buttons: {
-      OK: function() {
-        $(this).dialog("close");
+      Save: function() {
+        // attempt to save it
+        var overwrite = "false";
+        if ($("#NewCopyTask-overwrite").is(":checked")) {
+          overwrite = "true";
+        }
+        var typeSpecificData = {
+          "setId"        : $("#NewCopyTask-setId").val(),
+          "queryStoreId" : $("#NewCopyTask-queryStoreId").val(),
+          "sourceStoreId": $("#NewCopyTask-sourceStoreId").val(),
+          "destStoreId"  : $("#NewCopyTask-destStoreId").val(),
+          "overwrite"    : overwrite
+        };
+        var state = "Idle";
+        if ($("#NewCopyTask-runNow").is(":checked")) {
+          state = "Starting";
+        }
+        var data = { task: {
+          "name" : $("#NewCopyTask-name").val(),
+          "type" : "copy",
+          "state": state,
+          "data" : JSON.stringify(typeSpecificData)
+        }};
+        service.createTask(data,
+          function() {
+            $("#dialog-NewCopyTask").dialog("close");
+            refreshTasks();
+          }, handleNameCollision);
       }
     }
   });
@@ -822,6 +878,13 @@ function showNewListTaskName() {
   var name = "List " + $("#NewListTask-setId option:selected").text()
       + " in " + $("#NewListTask-storeId option:selected").text();
   $("#NewListTask-name").val(name);
+}
+
+function showNewCopyTaskName() {
+  var name = "Copy " + $("#NewCopyTask-setId option:selected").text()
+      + " from " + $("#NewCopyTask-sourceStoreId option:selected").text()
+      + " to " + $("#NewCopyTask-destStoreId option:selected").text();
+  $("#NewCopyTask-name").val(name);
 }
 
 function showSpacesForProvider(id) {
