@@ -150,6 +150,12 @@
         <input id="NewListTask-name" type="text"/>
       </td>
     </tr>
+    <tr>
+      <td>Run Now</td>
+      <td>
+        <input type="checkbox" id="NewListTask-runNow" checked="checked"/>
+      </td>
+    </tr>
   </table>
 </div>
 

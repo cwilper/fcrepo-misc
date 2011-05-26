@@ -77,7 +77,7 @@ public class DuraCloudConnector extends StoreConnector {
         } else if (type.equals("pidList")) {
             listObjects(query.getPidList().iterator(), handler);
         } else {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException("DuraCloud does not support " + query.getQueryType() + " queries.");
         }
     }
 

@@ -753,10 +753,14 @@ $(function() {
           "setId"  : $("#NewListTask-setId").val(),
           "storeId": $("#NewListTask-storeId").val()
         };
+        var state = "Idle";
+        if ($("#NewListTask-runNow").is(":checked")) {
+          state = "Starting";
+        }
         var data = { task: {
           "name" : $("#NewListTask-name").val(),
           "type" : "list",
-          "state": "Idle",
+          "state": state,
           "data" : JSON.stringify(typeSpecificData)
         }};
         service.createTask(data,
