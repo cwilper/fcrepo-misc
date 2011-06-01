@@ -7,9 +7,12 @@ import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
+import com.github.cwilper.fcrepo.dto.foxml.FOXMLReader;
+import com.github.cwilper.fcrepo.dto.foxml.FOXMLWriter;
 import com.github.cwilper.fcrepo.httpclient.HttpClientConfig;
 import com.github.cwilper.fcrepo.httpclient.MultiThreadedHttpClient;
 import com.github.cwilper.ttff.Filter;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.w3c.dom.Document;
@@ -21,8 +24,12 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URI;
 import java.util.ArrayList;
@@ -83,25 +90,62 @@ public class DuraCloudConnector extends StoreConnector {
 
     @Override
     protected boolean hasObject(String pid) {
-        return headCheck(httpClient, getURL(pid));
+        return headCheck(httpClient, getContentURI(pid));
     }
 
-    private String getURL(String pid) {
+    @Override
+    public FedoraObject getObject(String pid) {
+        InputStream in = getStream(httpClient, getContentURI(pid));
+        if (in == null) return null;
+        try {
+            return new FOXMLReader().readObject(in);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean putObject(FedoraObject o, boolean overwrite) {
+        boolean existed = hasObject(o.pid());
+        if (existed) {
+            if (!overwrite) {
+                return existed;
+            }
+        }
+        FOXMLWriter writer = new FOXMLWriter();
+        File tempFile = null;
+        OutputStream out = null;
+        try {
+            // write to temp file
+            tempFile = File.createTempFile("cloudsync", null);
+            out = new FileOutputStream(tempFile);
+            writer.writeObject(o, out);
+            out.close();
+            // put it
+            put(httpClient, getContentURI(o.pid()), tempFile, "application/xml");
+            return existed;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            IOUtils.closeQuietly(out);
+            if (tempFile != null) {
+                tempFile.delete();
+            }
+            writer.close();
+        }
+    }
+
+    private String getContentURI(String contentId) {
         StringBuilder s = new StringBuilder();
         s.append(spaceURI.toString());
         s.append('/');
         if (prefix != null) {
             s.append(prefix);
         }
-        s.append(pid);
+        s.append(contentId);
         s.append("?storeID=");
         s.append(providerId);
         return s.toString();
-    }
-
-    @Override
-    public FedoraObject getObject(String pid) {
-        return null;
     }
 
     @Override
@@ -161,7 +205,7 @@ public class DuraCloudConnector extends StoreConnector {
         }
         List<String> list = new ArrayList<String>();
         try {
-            Document doc = parseXML(get(httpClient, url));
+            Document doc = parseXML(getString(httpClient, url));
             Node root = doc.getDocumentElement();
             NodeList itemNodes = root.getChildNodes();
             for (int i = 0; i < itemNodes.getLength(); i++) {

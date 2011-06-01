@@ -7,6 +7,7 @@ import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectStoreDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskDao;
 import com.github.cwilper.fcrepo.cloudsync.service.util.JSON;
 import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
+import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 
 import java.io.PrintWriter;
 import java.util.HashSet;
@@ -23,6 +24,10 @@ public class CopyTaskRunner extends TaskRunner implements ObjectListHandler {
 
     private final Set<Integer> relatedSetIds = new HashSet<Integer>();
     private final Set<Integer> relatedStoreIds = new HashSet<Integer>();
+
+    private StoreConnector queryConnector;
+    private StoreConnector sourceConnector;
+    private StoreConnector destConnector;
 
     private TaskCanceledException canceledException;
 
@@ -47,9 +52,9 @@ public class CopyTaskRunner extends TaskRunner implements ObjectListHandler {
 
     @Override
     public void runTask() throws Exception {
-        StoreConnector queryConnector = StoreConnector.getInstance(objectStoreDao.getObjectStore("" + queryStoreId));
-        StoreConnector sourceConnector = StoreConnector.getInstance(objectStoreDao.getObjectStore("" + sourceStoreId));
-        StoreConnector destConnector = StoreConnector.getInstance(objectStoreDao.getObjectStore("" + destStoreId));
+        queryConnector = StoreConnector.getInstance(objectStoreDao.getObjectStore("" + queryStoreId));
+        sourceConnector = StoreConnector.getInstance(objectStoreDao.getObjectStore("" + sourceStoreId));
+        destConnector = StoreConnector.getInstance(objectStoreDao.getObjectStore("" + destStoreId));
         try {
             ObjectQuery query = new ObjectQuery(objectSetDao.getObjectSet("" + setId));
             queryConnector.listObjects(query, this);
@@ -90,7 +95,20 @@ public class CopyTaskRunner extends TaskRunner implements ObjectListHandler {
     }
 
     private void doCopy(String pid) {
-        logWriter.println("NOT IMPLEMENTED");
+        FedoraObject o = sourceConnector.getObject(pid);
+        if (o != null) {
+            if (destConnector.putObject(o, overwrite)) {
+                if (overwrite) {
+                    logWriter.println("REPLACED (object existed in destination)");
+                } else {
+                    logWriter.println("SKIPPED (object existed in destination)");
+                }
+            } else {
+                logWriter.println("OK (object is new in destination)");
+            }
+        } else {
+            logWriter.println("SKIPPED (object does not exist in source)");
+        }
     }
 
 }

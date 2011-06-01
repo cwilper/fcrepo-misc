@@ -7,15 +7,21 @@ import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.DatastreamVersion;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
+import com.github.cwilper.fcrepo.dto.foxml.FOXMLReader;
+import com.github.cwilper.fcrepo.dto.foxml.FOXMLWriter;
 import com.github.cwilper.fcrepo.httpclient.FedoraHttpClient;
 import com.github.cwilper.fcrepo.httpclient.HttpClientConfig;
 import com.github.cwilper.fcrepo.riclient.RIClient;
 import com.github.cwilper.fcrepo.riclient.RIQueryResult;
 import com.github.cwilper.ttff.Filter;
+import org.apache.commons.io.IOUtils;
 import org.openrdf.model.Value;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -58,14 +64,55 @@ public class FedoraConnector extends StoreConnector {
 
     @Override
     protected boolean hasObject(String pid) {
-        return headCheck(httpClient, httpClient.getBaseURI() + "/objects/" + pid);
+        return headCheck(httpClient, getObjectURI(pid));
     }
-
-
 
     @Override
     public FedoraObject getObject(String pid) {
-        return null;
+        InputStream in = getStream(httpClient, getObjectURI(pid) + "/export?context=migrate");
+        if (in == null) return null;
+        try {
+            return new FOXMLReader().readObject(in);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean putObject(FedoraObject o, boolean overwrite) {
+        boolean existed = hasObject(o.pid());
+        if (existed) {
+            if (overwrite) {
+                delete(httpClient, getObjectURI(o.pid()));
+            } else {
+                return existed;
+            }
+        }
+        FOXMLWriter writer = new FOXMLWriter();
+        File tempFile = null;
+        OutputStream out = null;
+        try {
+            // write to temp file
+            tempFile = File.createTempFile("cloudsync", null);
+            out = new FileOutputStream(tempFile);
+            writer.writeObject(o, out);
+            out.close();
+            // post it
+            post(httpClient, getObjectURI(o.pid()), tempFile, "text/xml");
+            return existed;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            IOUtils.closeQuietly(out);
+            if (tempFile != null) {
+                tempFile.delete();
+            }
+            writer.close();
+        }
+    }
+
+    private String getObjectURI(String pid) {
+        return httpClient.getBaseURI() + "/objects/" + pid;
     }
 
     @Override
