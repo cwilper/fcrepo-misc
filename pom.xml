@@ -18,7 +18,6 @@
   <url>http://cwilper.github.com/fcrepo-misc/</url>
 
   <modules>
-    <module>fcrepo-cloudsync</module>
     <module>fcrepo-dto</module>
     <module>fcrepo-httpclient</module>
     <module>fcrepo-riclient</module>
@@ -96,18 +95,6 @@
         <groupId>com.github.cwilper</groupId>
         <artifactId>ttff</artifactId>
         <version>1.0.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.github.cwilper.fcrepo-misc</groupId>
-        <artifactId>fcrepo-cloudsync-api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.github.cwilper.fcrepo-misc</groupId>
-        <artifactId>fcrepo-cloudsync-service</artifactId>
-        <version>${project.version}</version>
       </dependency>
 
       <dependency>

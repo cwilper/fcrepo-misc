@@ -1,9 +1,0 @@
-  ---
-  About
-  ---
-
-About ${artifactId}
-
-  This project encompasses the Fedora CloudSync service and supporting libraries.
-
-  For more information, see the Modules at the left and the {{{https://wiki.duraspace.org/display/FEDORACREATE/Fedora+CloudSync}Fedora CloudSync Wiki Page}}.
