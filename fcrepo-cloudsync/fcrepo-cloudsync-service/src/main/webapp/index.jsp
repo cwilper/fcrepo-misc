@@ -21,9 +21,7 @@
 
 <body>
 <div id="title">
-  <a href="test.jsp">
-    <img src="static/logo.png" alt="Fedora CloudSync"/>
-  </a>
+  <img src="static/logo.png" alt="Fedora CloudSync"/>
 </div>
 
 <div id="logout">
