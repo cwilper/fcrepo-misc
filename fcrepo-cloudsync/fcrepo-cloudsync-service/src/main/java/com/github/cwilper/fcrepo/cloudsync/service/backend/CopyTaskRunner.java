@@ -7,6 +7,8 @@ import com.github.cwilper.fcrepo.cloudsync.service.dao.ObjectStoreDao;
 import com.github.cwilper.fcrepo.cloudsync.service.dao.TaskDao;
 import com.github.cwilper.fcrepo.cloudsync.service.util.JSON;
 import com.github.cwilper.fcrepo.cloudsync.service.util.StringUtil;
+import com.github.cwilper.fcrepo.dto.core.ControlGroup;
+import com.github.cwilper.fcrepo.dto.core.Datastream;
 import com.github.cwilper.fcrepo.dto.core.FedoraObject;
 
 import java.io.PrintWriter;
@@ -97,7 +99,9 @@ public class CopyTaskRunner extends TaskRunner implements ObjectListHandler {
     private void doCopy(String pid) {
         FedoraObject o = sourceConnector.getObject(pid);
         if (o != null) {
-            if (destConnector.putObject(o, overwrite)) {
+            if (countManagedDatastreams(o) > 0) {
+                logWriter.println("SKIPPED (managed datastream copying NOT IMPLEMENTED)");
+            } else if (destConnector.putObject(o, overwrite)) {
                 if (overwrite) {
                     logWriter.println("REPLACED (object existed in destination)");
                 } else {
@@ -109,6 +113,16 @@ public class CopyTaskRunner extends TaskRunner implements ObjectListHandler {
         } else {
             logWriter.println("SKIPPED (object does not exist in source)");
         }
+    }
+
+    private static int countManagedDatastreams(FedoraObject o) {
+        int count = 0;
+        for (Datastream ds: o.datastreams().values()) {
+            if (ds.controlGroup().equals(ControlGroup.MANAGED)) {
+                count++;
+            }
+        }
+        return count;
     }
 
 }
