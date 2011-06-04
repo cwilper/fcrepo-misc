@@ -10,32 +10,32 @@
 
 <a class="jxr_linenumber" name="1" href="#1">1</a>   <strong class="jxr_keyword">package</strong> com.github.cwilper.fcrepo.riclient;
 <a class="jxr_linenumber" name="2" href="#2">2</a>   
-<a class="jxr_linenumber" name="3" href="#3">3</a>   <strong class="jxr_keyword">import</strong> com.google.common.collect.AbstractIterator;
+<a class="jxr_linenumber" name="3" href="#3">3</a>   <strong class="jxr_keyword">import</strong> com.github.cwilper.ttff.AbstractSource;
 <a class="jxr_linenumber" name="4" href="#4">4</a>   <strong class="jxr_keyword">import</strong> org.apache.http.protocol.HTTP;
 <a class="jxr_linenumber" name="5" href="#5">5</a>   <strong class="jxr_keyword">import</strong> org.openrdf.model.Value;
 <a class="jxr_linenumber" name="6" href="#6">6</a>   <strong class="jxr_keyword">import</strong> org.openrdf.model.ValueFactory;
 <a class="jxr_linenumber" name="7" href="#7">7</a>   <strong class="jxr_keyword">import</strong> org.openrdf.model.impl.ValueFactoryImpl;
 <a class="jxr_linenumber" name="8" href="#8">8</a>   <strong class="jxr_keyword">import</strong> org.openrdf.rio.ntriples.NTriplesUtil;
-<a class="jxr_linenumber" name="9" href="#9">9</a>   
-<a class="jxr_linenumber" name="10" href="#10">10</a>  <strong class="jxr_keyword">import</strong> javax.annotation.PreDestroy;
-<a class="jxr_linenumber" name="11" href="#11">11</a>  <strong class="jxr_keyword">import</strong> java.io.BufferedReader;
-<a class="jxr_linenumber" name="12" href="#12">12</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
-<a class="jxr_linenumber" name="13" href="#13">13</a>  <strong class="jxr_keyword">import</strong> java.io.InputStream;
-<a class="jxr_linenumber" name="14" href="#14">14</a>  <strong class="jxr_keyword">import</strong> java.io.InputStreamReader;
-<a class="jxr_linenumber" name="15" href="#15">15</a>  <strong class="jxr_keyword">import</strong> java.io.UnsupportedEncodingException;
-<a class="jxr_linenumber" name="16" href="#16">16</a>  <strong class="jxr_keyword">import</strong> java.util.ArrayList;
-<a class="jxr_linenumber" name="17" href="#17">17</a>  <strong class="jxr_keyword">import</strong> java.util.List;
-<a class="jxr_linenumber" name="18" href="#18">18</a>  
-<a class="jxr_linenumber" name="19" href="#19">19</a>  <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="20" href="#20">20</a>  <em class="jxr_javadoccomment"> * The result of a Resource Index query.</em>
-<a class="jxr_linenumber" name="21" href="#21">21</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;</em>
-<a class="jxr_linenumber" name="22" href="#22">22</a>  <em class="jxr_javadoccomment"> * &lt;b&gt;NOTE:&lt;/b&gt; If an underlying error occurs while the result is being</em>
-<a class="jxr_linenumber" name="23" href="#23">23</a>  <em class="jxr_javadoccomment"> * iterated, it will be wrapped and thrown as a &lt;code&gt;RuntimeException&lt;/code&gt;.</em>
-<a class="jxr_linenumber" name="24" href="#24">24</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;</em>
-<a class="jxr_linenumber" name="25" href="#25">25</a>  <em class="jxr_javadoccomment"> * &lt;b&gt;IMPORTANT:&lt;/b&gt; Results must always be &lt;code&gt;close()&lt;/code&gt;d when</em>
-<a class="jxr_linenumber" name="26" href="#26">26</a>  <em class="jxr_javadoccomment"> * finished, regardless of success or failure.</em>
-<a class="jxr_linenumber" name="27" href="#27">27</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="28" href="#28">28</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../com/github/cwilper/fcrepo/riclient/RIQueryResult.html">RIQueryResult</a> <strong class="jxr_keyword">extends</strong> AbstractIterator&lt;List&lt;Value&gt;&gt; {
+<a class="jxr_linenumber" name="9" href="#9">9</a>   <strong class="jxr_keyword">import</strong> org.slf4j.Logger;
+<a class="jxr_linenumber" name="10" href="#10">10</a>  <strong class="jxr_keyword">import</strong> org.slf4j.LoggerFactory;
+<a class="jxr_linenumber" name="11" href="#11">11</a>  
+<a class="jxr_linenumber" name="12" href="#12">12</a>  <strong class="jxr_keyword">import</strong> javax.annotation.PreDestroy;
+<a class="jxr_linenumber" name="13" href="#13">13</a>  <strong class="jxr_keyword">import</strong> java.io.BufferedReader;
+<a class="jxr_linenumber" name="14" href="#14">14</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
+<a class="jxr_linenumber" name="15" href="#15">15</a>  <strong class="jxr_keyword">import</strong> java.io.InputStream;
+<a class="jxr_linenumber" name="16" href="#16">16</a>  <strong class="jxr_keyword">import</strong> java.io.InputStreamReader;
+<a class="jxr_linenumber" name="17" href="#17">17</a>  <strong class="jxr_keyword">import</strong> java.io.UnsupportedEncodingException;
+<a class="jxr_linenumber" name="18" href="#18">18</a>  <strong class="jxr_keyword">import</strong> java.util.ArrayList;
+<a class="jxr_linenumber" name="19" href="#19">19</a>  <strong class="jxr_keyword">import</strong> java.util.List;
+<a class="jxr_linenumber" name="20" href="#20">20</a>  
+<a class="jxr_linenumber" name="21" href="#21">21</a>  <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="22" href="#22">22</a>  <em class="jxr_javadoccomment"> * The result of a Resource Index query.</em>
+<a class="jxr_linenumber" name="23" href="#23">23</a>  <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="24" href="#24">24</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../com/github/cwilper/fcrepo/riclient/RIQueryResult.html">RIQueryResult</a>
+<a class="jxr_linenumber" name="25" href="#25">25</a>          <strong class="jxr_keyword">extends</strong> AbstractSource&lt;List&lt;Value&gt;&gt; {
+<a class="jxr_linenumber" name="26" href="#26">26</a>  
+<a class="jxr_linenumber" name="27" href="#27">27</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger logger =
+<a class="jxr_linenumber" name="28" href="#28">28</a>              LoggerFactory.getLogger(RIQueryResult.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="29" href="#29">29</a>  
 <a class="jxr_linenumber" name="30" href="#30">30</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> BufferedReader reader;
 <a class="jxr_linenumber" name="31" href="#31">31</a>  
@@ -54,54 +54,47 @@
 <a class="jxr_linenumber" name="44" href="#44">44</a>      }
 <a class="jxr_linenumber" name="45" href="#45">45</a>  
 <a class="jxr_linenumber" name="46" href="#46">46</a>      @Override
-<a class="jxr_linenumber" name="47" href="#47">47</a>      <strong class="jxr_keyword">protected</strong> List&lt;Value&gt; computeNext() {
+<a class="jxr_linenumber" name="47" href="#47">47</a>      <strong class="jxr_keyword">protected</strong> List&lt;Value&gt; computeNext() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="48" href="#48">48</a>          <strong class="jxr_keyword">if</strong> (exhausted) {
 <a class="jxr_linenumber" name="49" href="#49">49</a>              <strong class="jxr_keyword">return</strong> endOfData();
 <a class="jxr_linenumber" name="50" href="#50">50</a>          } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="51" href="#51">51</a>              List&lt;Value&gt; values = <strong class="jxr_keyword">new</strong> ArrayList&lt;Value&gt;();
-<a class="jxr_linenumber" name="52" href="#52">52</a>              <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="53" href="#53">53</a>                  String line = reader.readLine();
-<a class="jxr_linenumber" name="54" href="#54">54</a>                  <strong class="jxr_keyword">while</strong> (line != <strong class="jxr_keyword">null</strong> &amp;&amp; line.length() &gt; 0) {
-<a class="jxr_linenumber" name="55" href="#55">55</a>                      values.add(parse(line));
-<a class="jxr_linenumber" name="56" href="#56">56</a>                      line = reader.readLine();
-<a class="jxr_linenumber" name="57" href="#57">57</a>                  }
-<a class="jxr_linenumber" name="58" href="#58">58</a>                  <strong class="jxr_keyword">if</strong> (values.size() == 0) {
-<a class="jxr_linenumber" name="59" href="#59">59</a>                      <strong class="jxr_keyword">return</strong> endOfData();
-<a class="jxr_linenumber" name="60" href="#60">60</a>                  } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (line == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="61" href="#61">61</a>                      exhausted = <strong class="jxr_keyword">true</strong>;
-<a class="jxr_linenumber" name="62" href="#62">62</a>                      close();
-<a class="jxr_linenumber" name="63" href="#63">63</a>                  }
-<a class="jxr_linenumber" name="64" href="#64">64</a>                  <strong class="jxr_keyword">return</strong> values;
-<a class="jxr_linenumber" name="65" href="#65">65</a>              } <strong class="jxr_keyword">catch</strong> (IOException e) {
-<a class="jxr_linenumber" name="66" href="#66">66</a>                  <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> RuntimeException(e);
-<a class="jxr_linenumber" name="67" href="#67">67</a>              }
-<a class="jxr_linenumber" name="68" href="#68">68</a>          }
-<a class="jxr_linenumber" name="69" href="#69">69</a>      }
-<a class="jxr_linenumber" name="70" href="#70">70</a>  
-<a class="jxr_linenumber" name="71" href="#71">71</a>      <em class="jxr_comment">// Parse a query result value of the form "name : NTriplesValue"</em>
-<a class="jxr_linenumber" name="72" href="#72">72</a>      <strong class="jxr_keyword">private</strong> Value parse(String line) {
-<a class="jxr_linenumber" name="73" href="#73">73</a>          <strong class="jxr_keyword">int</strong> i = line.indexOf(<span class="jxr_string">" : "</span>);
-<a class="jxr_linenumber" name="74" href="#74">74</a>          <strong class="jxr_keyword">if</strong> (i == -1) {
-<a class="jxr_linenumber" name="75" href="#75">75</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"Malformed line in RI Query "</span>
-<a class="jxr_linenumber" name="76" href="#76">76</a>                      + <span class="jxr_string">"result (expected ' : ' delimiter): '"</span> + line + <span class="jxr_string">"'"</span>);
-<a class="jxr_linenumber" name="77" href="#77">77</a>          } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="78" href="#78">78</a>              <strong class="jxr_keyword">return</strong> NTriplesUtil.parseValue(line.substring(i + 3), factory);
-<a class="jxr_linenumber" name="79" href="#79">79</a>          }
-<a class="jxr_linenumber" name="80" href="#80">80</a>      }
-<a class="jxr_linenumber" name="81" href="#81">81</a>  
-<a class="jxr_linenumber" name="82" href="#82">82</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="83" href="#83">83</a>  <em class="jxr_javadoccomment">     * Releases any resources associated with the result.</em>
-<a class="jxr_linenumber" name="84" href="#84">84</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="85" href="#85">85</a>      @PreDestroy
-<a class="jxr_linenumber" name="86" href="#86">86</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> close() {
-<a class="jxr_linenumber" name="87" href="#87">87</a>          <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="88" href="#88">88</a>              reader.close();
-<a class="jxr_linenumber" name="89" href="#89">89</a>          } <strong class="jxr_keyword">catch</strong> (IOException e) {
-<a class="jxr_linenumber" name="90" href="#90">90</a>              <em class="jxr_comment">// FIXME: This really should not die...log a warning instead</em>
-<a class="jxr_linenumber" name="91" href="#91">91</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> RuntimeException(e);
-<a class="jxr_linenumber" name="92" href="#92">92</a>          }
-<a class="jxr_linenumber" name="93" href="#93">93</a>      }
-<a class="jxr_linenumber" name="94" href="#94">94</a>  }
+<a class="jxr_linenumber" name="52" href="#52">52</a>              String line = reader.readLine();
+<a class="jxr_linenumber" name="53" href="#53">53</a>              <strong class="jxr_keyword">while</strong> (line != <strong class="jxr_keyword">null</strong> &amp;&amp; line.length() &gt; 0) {
+<a class="jxr_linenumber" name="54" href="#54">54</a>                  values.add(parse(line));
+<a class="jxr_linenumber" name="55" href="#55">55</a>                  line = reader.readLine();
+<a class="jxr_linenumber" name="56" href="#56">56</a>              }
+<a class="jxr_linenumber" name="57" href="#57">57</a>              <strong class="jxr_keyword">if</strong> (values.size() == 0) {
+<a class="jxr_linenumber" name="58" href="#58">58</a>                  <strong class="jxr_keyword">return</strong> endOfData();
+<a class="jxr_linenumber" name="59" href="#59">59</a>              } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (line == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="60" href="#60">60</a>                  exhausted = <strong class="jxr_keyword">true</strong>;
+<a class="jxr_linenumber" name="61" href="#61">61</a>                  close();
+<a class="jxr_linenumber" name="62" href="#62">62</a>              }
+<a class="jxr_linenumber" name="63" href="#63">63</a>              <strong class="jxr_keyword">return</strong> values;
+<a class="jxr_linenumber" name="64" href="#64">64</a>          }
+<a class="jxr_linenumber" name="65" href="#65">65</a>      }
+<a class="jxr_linenumber" name="66" href="#66">66</a>  
+<a class="jxr_linenumber" name="67" href="#67">67</a>      @PreDestroy
+<a class="jxr_linenumber" name="68" href="#68">68</a>      @Override
+<a class="jxr_linenumber" name="69" href="#69">69</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> close() {
+<a class="jxr_linenumber" name="70" href="#70">70</a>          <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="71" href="#71">71</a>              reader.close();
+<a class="jxr_linenumber" name="72" href="#72">72</a>          } <strong class="jxr_keyword">catch</strong> (IOException e) {
+<a class="jxr_linenumber" name="73" href="#73">73</a>              logger.warn(<span class="jxr_string">"Error closing reader"</span>, e);
+<a class="jxr_linenumber" name="74" href="#74">74</a>          }
+<a class="jxr_linenumber" name="75" href="#75">75</a>      }
+<a class="jxr_linenumber" name="76" href="#76">76</a>  
+<a class="jxr_linenumber" name="77" href="#77">77</a>      <em class="jxr_comment">// Parse a query result value of the form "name : NTriplesValue"</em>
+<a class="jxr_linenumber" name="78" href="#78">78</a>      <strong class="jxr_keyword">private</strong> Value parse(String line) {
+<a class="jxr_linenumber" name="79" href="#79">79</a>          <strong class="jxr_keyword">int</strong> i = line.indexOf(<span class="jxr_string">" : "</span>);
+<a class="jxr_linenumber" name="80" href="#80">80</a>          <strong class="jxr_keyword">if</strong> (i == -1) {
+<a class="jxr_linenumber" name="81" href="#81">81</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"Malformed line in RI Query "</span>
+<a class="jxr_linenumber" name="82" href="#82">82</a>                      + <span class="jxr_string">"result (expected ' : ' delimiter): '"</span> + line + <span class="jxr_string">"'"</span>);
+<a class="jxr_linenumber" name="83" href="#83">83</a>          } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="84" href="#84">84</a>              <strong class="jxr_keyword">return</strong> NTriplesUtil.parseValue(line.substring(i + 3), factory);
+<a class="jxr_linenumber" name="85" href="#85">85</a>          }
+<a class="jxr_linenumber" name="86" href="#86">86</a>      }
+<a class="jxr_linenumber" name="87" href="#87">87</a>  }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>
