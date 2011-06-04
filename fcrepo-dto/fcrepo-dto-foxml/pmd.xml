@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2011-01-13T11:04:01.953">
+<pmd version="4.2.5" timestamp="2011-06-03T21:55:41.803">
 <file name="/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/src/main/java/com/github/cwilper/fcrepo/dto/foxml/FOXMLWriter.java">
-<violation beginline="36" endline="36" begincolumn="33" endcolumn="38" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="com.github.cwilper.fcrepo.dto.foxml" class="FOXMLWriter" variable="logger" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
+<violation beginline="37" endline="37" begincolumn="33" endcolumn="38" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="com.github.cwilper.fcrepo.dto.foxml" class="FOXMLWriter" variable="logger" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
 Avoid unused private fields such as 'logger'.
-</violation>
-</file>
-<file name="/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/src/main/java/com/github/cwilper/fcrepo/dto/foxml/Util.java">
-<violation beginline="32" endline="33" begincolumn="15" endcolumn="13" rule="EmptyCatchBlock" ruleset="Basic Rules" package="com.github.cwilper.fcrepo.dto.foxml" class="Util" method="toDate" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
 </violation>
 </file>
 </pmd>

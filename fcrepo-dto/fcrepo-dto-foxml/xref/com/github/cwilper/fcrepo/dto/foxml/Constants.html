@@ -11,63 +11,66 @@
 <a class="jxr_linenumber" name="1" href="#1">1</a>   <strong class="jxr_keyword">package</strong> com.github.cwilper.fcrepo.dto.foxml;
 <a class="jxr_linenumber" name="2" href="#2">2</a>   
 <a class="jxr_linenumber" name="3" href="#3">3</a>   <em class="jxr_javadoccomment">/**</em><em class="jxr_javadoccomment"> Package-private constants. */</em>
-<a class="jxr_linenumber" name="4" href="#4">4</a>   <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../com/github/cwilper/fcrepo/dto/foxml/Constants.html">Constants</a> {
+<a class="jxr_linenumber" name="4" href="#4">4</a>   <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../com/github/cwilper/fcrepo/dto/foxml/Constants.html">Constants</a> {
 <a class="jxr_linenumber" name="5" href="#5">5</a>   
-<a class="jxr_linenumber" name="6" href="#6">6</a>       <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String XML_VERSION = <span class="jxr_string">"1.0"</span>;
-<a class="jxr_linenumber" name="7" href="#7">7</a>       <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CHAR_ENCODING = <span class="jxr_string">"UTF-8"</span>;
-<a class="jxr_linenumber" name="8" href="#8">8</a>   
-<a class="jxr_linenumber" name="9" href="#9">9</a>       <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> BASE64_LINE_LENGTH = 74;
-<a class="jxr_linenumber" name="10" href="#10">10</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String LINE_FEED = <span class="jxr_string">"\n"</span>;
-<a class="jxr_linenumber" name="11" href="#11">11</a>  
-<a class="jxr_linenumber" name="12" href="#12">12</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String FOXML_VERSION = <span class="jxr_string">"1.1"</span>;
+<a class="jxr_linenumber" name="6" href="#6">6</a>       <strong class="jxr_keyword">private</strong> <a href="../../../../../../com/github/cwilper/fcrepo/dto/foxml/Constants.html">Constants</a>() { }
+<a class="jxr_linenumber" name="7" href="#7">7</a>   
+<a class="jxr_linenumber" name="8" href="#8">8</a>       <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String XML_VERSION = <span class="jxr_string">"1.0"</span>;
+<a class="jxr_linenumber" name="9" href="#9">9</a>       <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CHAR_ENCODING = <span class="jxr_string">"UTF-8"</span>;
+<a class="jxr_linenumber" name="10" href="#10">10</a>  
+<a class="jxr_linenumber" name="11" href="#11">11</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> BASE64_LINE_LENGTH = 74;
+<a class="jxr_linenumber" name="12" href="#12">12</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String LINE_FEED = <span class="jxr_string">"\n"</span>;
 <a class="jxr_linenumber" name="13" href="#13">13</a>  
-<a class="jxr_linenumber" name="14" href="#14">14</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String xmlns = <span class="jxr_string">"info:fedora/fedora-system:def/foxml#"</span>;
+<a class="jxr_linenumber" name="14" href="#14">14</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String FOXML_VERSION = <span class="jxr_string">"1.1"</span>;
 <a class="jxr_linenumber" name="15" href="#15">15</a>  
-<a class="jxr_linenumber" name="16" href="#16">16</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String digitalObject = <span class="jxr_string">"digitalObject"</span>;
-<a class="jxr_linenumber" name="17" href="#17">17</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String VERSION = <span class="jxr_string">"VERSION"</span>;
-<a class="jxr_linenumber" name="18" href="#18">18</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String PID = <span class="jxr_string">"PID"</span>;
-<a class="jxr_linenumber" name="19" href="#19">19</a>  
-<a class="jxr_linenumber" name="20" href="#20">20</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String objectProperties = <span class="jxr_string">"objectProperties"</span>;
-<a class="jxr_linenumber" name="21" href="#21">21</a>      
-<a class="jxr_linenumber" name="22" href="#22">22</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String property = <span class="jxr_string">"property"</span>;
-<a class="jxr_linenumber" name="23" href="#23">23</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String NAME = <span class="jxr_string">"NAME"</span>;
-<a class="jxr_linenumber" name="24" href="#24">24</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String MODEL = <span class="jxr_string">"info:fedora/fedora-system:def/model#"</span>;
-<a class="jxr_linenumber" name="25" href="#25">25</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String VIEW = <span class="jxr_string">"info:fedora/fedora-system:def/view#"</span>;
-<a class="jxr_linenumber" name="26" href="#26">26</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String STATE_URI = MODEL + <span class="jxr_string">"state"</span>;
-<a class="jxr_linenumber" name="27" href="#27">27</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String LABEL_URI = MODEL + <span class="jxr_string">"label"</span>;
-<a class="jxr_linenumber" name="28" href="#28">28</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String OWNERID_URI = MODEL + <span class="jxr_string">"ownerId"</span>;
-<a class="jxr_linenumber" name="29" href="#29">29</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CREATEDDATE_URI = MODEL + <span class="jxr_string">"createdDate"</span>;
-<a class="jxr_linenumber" name="30" href="#30">30</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String LASTMODIFIEDDATE_URI = VIEW + <span class="jxr_string">"lastModifiedDate"</span>;
-<a class="jxr_linenumber" name="31" href="#31">31</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String VALUE = <span class="jxr_string">"VALUE"</span>;
-<a class="jxr_linenumber" name="32" href="#32">32</a>  
-<a class="jxr_linenumber" name="33" href="#33">33</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String datastream = <span class="jxr_string">"datastream"</span>;
-<a class="jxr_linenumber" name="34" href="#34">34</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String ID = <span class="jxr_string">"ID"</span>;
-<a class="jxr_linenumber" name="35" href="#35">35</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String STATE = <span class="jxr_string">"STATE"</span>;
-<a class="jxr_linenumber" name="36" href="#36">36</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CONTROL_GROUP = <span class="jxr_string">"CONTROL_GROUP"</span>;
-<a class="jxr_linenumber" name="37" href="#37">37</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String VERSIONABLE = <span class="jxr_string">"VERSIONABLE"</span>;
-<a class="jxr_linenumber" name="38" href="#38">38</a>  
-<a class="jxr_linenumber" name="39" href="#39">39</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String datastreamVersion = <span class="jxr_string">"datastreamVersion"</span>;
-<a class="jxr_linenumber" name="40" href="#40">40</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String ALT_IDS = <span class="jxr_string">"ALT_IDS"</span>;
-<a class="jxr_linenumber" name="41" href="#41">41</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String LABEL = <span class="jxr_string">"LABEL"</span>;
-<a class="jxr_linenumber" name="42" href="#42">42</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CREATED = <span class="jxr_string">"CREATED"</span>;
-<a class="jxr_linenumber" name="43" href="#43">43</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String MIMETYPE = <span class="jxr_string">"MIMETYPE"</span>;
-<a class="jxr_linenumber" name="44" href="#44">44</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String FORMAT_URI = <span class="jxr_string">"FORMAT_URI"</span>;
-<a class="jxr_linenumber" name="45" href="#45">45</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String SIZE = <span class="jxr_string">"SIZE"</span>;
-<a class="jxr_linenumber" name="46" href="#46">46</a>  
-<a class="jxr_linenumber" name="47" href="#47">47</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String contentDigest = <span class="jxr_string">"contentDigest"</span>;
-<a class="jxr_linenumber" name="48" href="#48">48</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String TYPE = <span class="jxr_string">"TYPE"</span>;
-<a class="jxr_linenumber" name="49" href="#49">49</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String DIGEST = <span class="jxr_string">"DIGEST"</span>;
-<a class="jxr_linenumber" name="50" href="#50">50</a>      
-<a class="jxr_linenumber" name="51" href="#51">51</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String contentLocation = <span class="jxr_string">"contentLocation"</span>;
-<a class="jxr_linenumber" name="52" href="#52">52</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String INTERNALREF_SCHEME = <span class="jxr_string">"internal"</span>;
-<a class="jxr_linenumber" name="53" href="#53">53</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String INTERNALREF_TYPE = <span class="jxr_string">"INTERNAL_REF"</span>;
-<a class="jxr_linenumber" name="54" href="#54">54</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String URL_TYPE = <span class="jxr_string">"URL"</span>;
-<a class="jxr_linenumber" name="55" href="#55">55</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String REF = <span class="jxr_string">"REF"</span>;
-<a class="jxr_linenumber" name="56" href="#56">56</a>  
-<a class="jxr_linenumber" name="57" href="#57">57</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String xmlContent = <span class="jxr_string">"xmlContent"</span>;
+<a class="jxr_linenumber" name="16" href="#16">16</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String xmlns = <span class="jxr_string">"info:fedora/fedora-system:def/foxml#"</span>;
+<a class="jxr_linenumber" name="17" href="#17">17</a>  
+<a class="jxr_linenumber" name="18" href="#18">18</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String digitalObject = <span class="jxr_string">"digitalObject"</span>;
+<a class="jxr_linenumber" name="19" href="#19">19</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String VERSION = <span class="jxr_string">"VERSION"</span>;
+<a class="jxr_linenumber" name="20" href="#20">20</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String PID = <span class="jxr_string">"PID"</span>;
+<a class="jxr_linenumber" name="21" href="#21">21</a>  
+<a class="jxr_linenumber" name="22" href="#22">22</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String objectProperties = <span class="jxr_string">"objectProperties"</span>;
+<a class="jxr_linenumber" name="23" href="#23">23</a>      
+<a class="jxr_linenumber" name="24" href="#24">24</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String property = <span class="jxr_string">"property"</span>;
+<a class="jxr_linenumber" name="25" href="#25">25</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String NAME = <span class="jxr_string">"NAME"</span>;
+<a class="jxr_linenumber" name="26" href="#26">26</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String MODEL = <span class="jxr_string">"info:fedora/fedora-system:def/model#"</span>;
+<a class="jxr_linenumber" name="27" href="#27">27</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String VIEW = <span class="jxr_string">"info:fedora/fedora-system:def/view#"</span>;
+<a class="jxr_linenumber" name="28" href="#28">28</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String STATE_URI = MODEL + <span class="jxr_string">"state"</span>;
+<a class="jxr_linenumber" name="29" href="#29">29</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String LABEL_URI = MODEL + <span class="jxr_string">"label"</span>;
+<a class="jxr_linenumber" name="30" href="#30">30</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String OWNERID_URI = MODEL + <span class="jxr_string">"ownerId"</span>;
+<a class="jxr_linenumber" name="31" href="#31">31</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CREATEDDATE_URI = MODEL + <span class="jxr_string">"createdDate"</span>;
+<a class="jxr_linenumber" name="32" href="#32">32</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String LASTMODIFIEDDATE_URI = VIEW + <span class="jxr_string">"lastModifiedDate"</span>;
+<a class="jxr_linenumber" name="33" href="#33">33</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String VALUE = <span class="jxr_string">"VALUE"</span>;
+<a class="jxr_linenumber" name="34" href="#34">34</a>  
+<a class="jxr_linenumber" name="35" href="#35">35</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String datastream = <span class="jxr_string">"datastream"</span>;
+<a class="jxr_linenumber" name="36" href="#36">36</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String ID = <span class="jxr_string">"ID"</span>;
+<a class="jxr_linenumber" name="37" href="#37">37</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String STATE = <span class="jxr_string">"STATE"</span>;
+<a class="jxr_linenumber" name="38" href="#38">38</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CONTROL_GROUP = <span class="jxr_string">"CONTROL_GROUP"</span>;
+<a class="jxr_linenumber" name="39" href="#39">39</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String VERSIONABLE = <span class="jxr_string">"VERSIONABLE"</span>;
+<a class="jxr_linenumber" name="40" href="#40">40</a>  
+<a class="jxr_linenumber" name="41" href="#41">41</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String datastreamVersion = <span class="jxr_string">"datastreamVersion"</span>;
+<a class="jxr_linenumber" name="42" href="#42">42</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String ALT_IDS = <span class="jxr_string">"ALT_IDS"</span>;
+<a class="jxr_linenumber" name="43" href="#43">43</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String LABEL = <span class="jxr_string">"LABEL"</span>;
+<a class="jxr_linenumber" name="44" href="#44">44</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CREATED = <span class="jxr_string">"CREATED"</span>;
+<a class="jxr_linenumber" name="45" href="#45">45</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String MIMETYPE = <span class="jxr_string">"MIMETYPE"</span>;
+<a class="jxr_linenumber" name="46" href="#46">46</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String FORMAT_URI = <span class="jxr_string">"FORMAT_URI"</span>;
+<a class="jxr_linenumber" name="47" href="#47">47</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String SIZE = <span class="jxr_string">"SIZE"</span>;
+<a class="jxr_linenumber" name="48" href="#48">48</a>  
+<a class="jxr_linenumber" name="49" href="#49">49</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String contentDigest = <span class="jxr_string">"contentDigest"</span>;
+<a class="jxr_linenumber" name="50" href="#50">50</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String TYPE = <span class="jxr_string">"TYPE"</span>;
+<a class="jxr_linenumber" name="51" href="#51">51</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String DIGEST = <span class="jxr_string">"DIGEST"</span>;
+<a class="jxr_linenumber" name="52" href="#52">52</a>      
+<a class="jxr_linenumber" name="53" href="#53">53</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String contentLocation = <span class="jxr_string">"contentLocation"</span>;
+<a class="jxr_linenumber" name="54" href="#54">54</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String INTERNALREF_SCHEME = <span class="jxr_string">"internal"</span>;
+<a class="jxr_linenumber" name="55" href="#55">55</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String INTERNALREF_TYPE = <span class="jxr_string">"INTERNAL_REF"</span>;
+<a class="jxr_linenumber" name="56" href="#56">56</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String URL_TYPE = <span class="jxr_string">"URL"</span>;
+<a class="jxr_linenumber" name="57" href="#57">57</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String REF = <span class="jxr_string">"REF"</span>;
 <a class="jxr_linenumber" name="58" href="#58">58</a>  
-<a class="jxr_linenumber" name="59" href="#59">59</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String binaryContent = <span class="jxr_string">"binaryContent"</span>;
-<a class="jxr_linenumber" name="60" href="#60">60</a>  }
+<a class="jxr_linenumber" name="59" href="#59">59</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String xmlContent = <span class="jxr_string">"xmlContent"</span>;
+<a class="jxr_linenumber" name="60" href="#60">60</a>  
+<a class="jxr_linenumber" name="61" href="#61">61</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String binaryContent = <span class="jxr_string">"binaryContent"</span>;
+<a class="jxr_linenumber" name="62" href="#62">62</a>  
+<a class="jxr_linenumber" name="63" href="#63">63</a>  }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>
