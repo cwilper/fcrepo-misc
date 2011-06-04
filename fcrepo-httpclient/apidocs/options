@@ -1,5 +1,5 @@
 -classpath
-'/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-httpclient/target/classes:/Users/cwilper/.m2/repository/com/google/guava/guava-primitives/r03/guava-primitives-r03.jar:/Users/cwilper/.m2/repository/com/google/guava/guava-base/r03/guava-base-r03.jar:/Users/cwilper/.m2/repository/com/google/guava/guava-collections/r03/guava-collections-r03.jar:/Users/cwilper/.m2/repository/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar:/Users/cwilper/.m2/repository/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar:/Users/cwilper/.m2/repository/org/slf4j/jcl-over-slf4j/1.6.1/jcl-over-slf4j-1.6.1.jar:/Users/cwilper/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:/Users/cwilper/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar:/Users/cwilper/.m2/repository/com/google/guava/guava-annotations/r03/guava-annotations-r03.jar'
+'/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-httpclient/target/classes:/Users/cwilper/.m2/repository/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar:/Users/cwilper/.m2/repository/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar:/Users/cwilper/.m2/repository/org/slf4j/jcl-over-slf4j/1.6.1/jcl-over-slf4j-1.6.1.jar:/Users/cwilper/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:/Users/cwilper/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar'
 -encoding
 'UTF-8'
 -protected
@@ -15,7 +15,7 @@
 -docencoding
 'UTF-8'
 -doctitle
-'Fedora HTTP Client Library 0.1.0 API'
+'Fedora HTTP Client Library 0.1.1 API'
 -link
 'http://java.sun.com/javase/6/docs/api'
 -linkoffline
@@ -24,9 +24,7 @@
 'http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/apidocs' '/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/target/site/apidocs'
 -linkoffline
 'http://cwilper.github.com/fcrepo-misc/fcrepo-riclient/apidocs' '/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-riclient/target/site/apidocs'
--linkoffline
-'http://cwilper.github.com/fcrepo-misc/fcrepo-flexport/apidocs' '/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-flexport/target/site/apidocs'
 -use
 -version
 -windowtitle
-'Fedora HTTP Client Library 0.1.0 API'
+'Fedora HTTP Client Library 0.1.1 API'
