@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.xml.stream.XMLOutputFactory;
@@ -34,7 +35,7 @@ import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
  */
 public class FOXMLWriter extends ContentResolvingDTOWriter {
 
-    private Set<String> managedDatastreamsToEmbed;
+    private Set<String> managedDatastreamsToEmbed = new HashSet<String>();
 
     private FedoraObject obj;
     private OutputStream sink;

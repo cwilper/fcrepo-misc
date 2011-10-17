@@ -62,21 +62,6 @@ public class RIClient {
         return new RIQueryResult(executeQuery(query, "sparql", flush));
     }
 
-    /**
-     * Performs an SPO query.
-     *
-     * @param query the query text.
-     * @param flush whether the Fedora server should flush its triple buffer
-     *        first. If false, the result could be out of date with what was
-     *        actually stored in the repository at the time of the request.
-     *        If true, it may take considerably longer to get a response.
-     * @return the resulting tuples.
-     */
-    public RIQueryResult spo(String query, boolean flush) {
-        // TODO: Implement this, using NTriplesParser with a custom RDFHandler
-        throw new UnsupportedOperationException();
-    }
-
     private InputStream executeQuery(String query,
                                      String lang,
                                      boolean flush) {
