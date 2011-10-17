@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2011-06-03T21:54:11.332">
-<file name="/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-core/src/main/java/com/github/cwilper/fcrepo/dto/core/DatastreamVersion.java">
-<violation beginline="19" endline="19" begincolumn="33" endcolumn="38" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="com.github.cwilper.fcrepo.dto.core" class="DatastreamVersion" variable="logger" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
-Avoid unused private fields such as 'logger'.
-</violation>
-</file>
-<file name="/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-core/src/main/java/com/github/cwilper/fcrepo/dto/core/io/DateUtil.java">
+<pmd version="4.2.5" timestamp="2011-10-16T22:35:14.626">
+<file name="/Users/cwilper/work/gh/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-core/src/main/java/com/github/cwilper/fcrepo/dto/core/io/DateUtil.java">
 <violation beginline="56" endline="57" begincolumn="15" endcolumn="13" rule="EmptyCatchBlock" ruleset="Basic Rules" package="com.github.cwilper.fcrepo.dto.core.io" class="DateUtil" method="toDate" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
 Avoid empty catch blocks
 </violation>
