@@ -1,26 +1,28 @@
 -classpath
-'/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/target/classes:/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/target/test-classes:/Users/cwilper/.m2/repository/ch/qos/logback/logback-core/0.9.26/logback-core-0.9.26.jar:/Users/cwilper/.m2/repository/com/github/cwilper/fcrepo-misc/fcrepo-dto-core/0.1.1/fcrepo-dto-core-0.1.1.jar:/Users/cwilper/.m2/repository/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar:/Users/cwilper/.m2/repository/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar:/Users/cwilper/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:/Users/cwilper/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar:/Users/cwilper/.m2/repository/commons-io/commons-io/2.0.1/commons-io-2.0.1.jar:/Users/cwilper/.m2/repository/org/apache/santuario/xmlsec/1.4.3/xmlsec-1.4.3.jar:/Users/cwilper/.m2/repository/ch/qos/logback/logback-classic/0.9.26/logback-classic-0.9.26.jar:/Users/cwilper/.m2/repository/com/github/cwilper/fcrepo-misc/fcrepo-httpclient/0.1.1/fcrepo-httpclient-0.1.1.jar:/Users/cwilper/.m2/repository/net/java/dev/stax-utils/stax-utils/20060502/stax-utils-20060502.jar:/Users/cwilper/.m2/repository/org/slf4j/jcl-over-slf4j/1.6.1/jcl-over-slf4j-1.6.1.jar:/Users/cwilper/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar'
+'/Users/cwilper/work/gh/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/target/classes:/Users/cwilper/work/gh/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/target/test-classes:/Users/cwilper/.m2/repository/ch/qos/logback/logback-core/0.9.26/logback-core-0.9.26.jar:/Users/cwilper/.m2/repository/com/github/cwilper/fcrepo-misc/fcrepo-dto-core/1.0.0/fcrepo-dto-core-1.0.0.jar:/Users/cwilper/.m2/repository/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar:/Users/cwilper/.m2/repository/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar:/Users/cwilper/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:/Users/cwilper/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar:/Users/cwilper/.m2/repository/commons-io/commons-io/2.0.1/commons-io-2.0.1.jar:/Users/cwilper/.m2/repository/org/apache/santuario/xmlsec/1.4.3/xmlsec-1.4.3.jar:/Users/cwilper/.m2/repository/ch/qos/logback/logback-classic/0.9.26/logback-classic-0.9.26.jar:/Users/cwilper/.m2/repository/com/github/cwilper/fcrepo-misc/fcrepo-httpclient/1.0.0/fcrepo-httpclient-1.0.0.jar:/Users/cwilper/.m2/repository/net/java/dev/stax-utils/stax-utils/20060502/stax-utils-20060502.jar:/Users/cwilper/.m2/repository/org/slf4j/jcl-over-slf4j/1.6.1/jcl-over-slf4j-1.6.1.jar:/Users/cwilper/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar'
 -encoding
 'UTF-8'
 -protected
 -sourcepath
-'/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/src/test/java'
+'/Users/cwilper/work/gh/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/src/test/java'
 -author
 -bottom
 'Copyright &#169; 2011 <a href="http://duraspace.org/">DuraSpace</a>. All Rights Reserved.'
 -charset
 'UTF-8'
 -d
-'/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/target/site/testapidocs'
+'/Users/cwilper/work/gh/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-foxml/target/site/testapidocs'
 -docencoding
 'UTF-8'
 -doctitle
-'Fedora DTO FOXML Library 0.1.1 Test API'
+'Fedora DTO FOXML Library 1.0.0 Test API'
+-link
+'../apidocs'
 -link
 'http://java.sun.com/javase/6/docs/api'
 -linkoffline
-'http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core/apidocs' '/Users/cwilper/work/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-core/target/site/testapidocs'
+'http://cwilper.github.com/fcrepo-misc/fcrepo-dto/fcrepo-dto-core/apidocs' '/Users/cwilper/work/gh/cwilper/fcrepo-misc/fcrepo-dto/fcrepo-dto-core/target/site/testapidocs'
 -use
 -version
 -windowtitle
-'Fedora DTO FOXML Library 0.1.1 Test API'
+'Fedora DTO FOXML Library 1.0.0 Test API'
