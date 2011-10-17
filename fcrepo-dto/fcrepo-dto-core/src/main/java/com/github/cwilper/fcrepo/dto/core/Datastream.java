@@ -195,7 +195,9 @@ public class Datastream extends FedoraDTO {
     private static class DSVComparator
             implements Comparator<DatastreamVersion>, Serializable {
 
-        @Override
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public int compare(DatastreamVersion a, DatastreamVersion b) {
             Date aDate = a.createdDate();
             Date bDate = b.createdDate();

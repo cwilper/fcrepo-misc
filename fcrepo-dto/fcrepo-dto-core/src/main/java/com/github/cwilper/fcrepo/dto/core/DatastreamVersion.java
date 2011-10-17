@@ -1,13 +1,11 @@
 package com.github.cwilper.fcrepo.dto.core;
 
-import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.net.URI;
 import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
 
 /**
  * A particular revision of a {@link Datastream}.
@@ -15,9 +13,6 @@ import java.util.TreeSet;
  * @see <a href="package-summary.html#working">Working With DTO Classes</a>
  */
 public class DatastreamVersion extends FedoraDTO {
-
-    private final static Logger logger =
-            LoggerFactory.getLogger(DatastreamVersion.class);
 
     private final SortedSet<URI> altIds = new TreeSet<URI>();
 

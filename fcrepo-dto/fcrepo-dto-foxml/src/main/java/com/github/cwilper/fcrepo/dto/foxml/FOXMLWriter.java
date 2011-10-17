@@ -1,5 +1,17 @@
 package com.github.cwilper.fcrepo.dto.foxml;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URI;
+import java.util.Date;
+import java.util.Set;
+
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
+
+import org.apache.commons.codec.binary.Base64OutputStream;
+
 import com.github.cwilper.fcrepo.dto.core.ContentDigest;
 import com.github.cwilper.fcrepo.dto.core.ControlGroup;
 import com.github.cwilper.fcrepo.dto.core.Datastream;
@@ -10,18 +22,6 @@ import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.ContentResolvingDTOWriter;
 import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
-import org.apache.commons.codec.binary.Base64OutputStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URI;
-import java.util.Date;
-import java.util.Set;
 
 /**
  * A {@link com.github.cwilper.fcrepo.dto.core.io.DTOWriter} that writes
@@ -33,9 +33,6 @@ import java.util.Set;
  * @see <a href="http://fedora-commons.org/definitions/1/0/foxml1-1.xsd">FOXML 1.1 XML Schema</a>
  */
 public class FOXMLWriter extends ContentResolvingDTOWriter {
-
-    private static final Logger logger =
-            LoggerFactory.getLogger(FOXMLWriter.class);
 
     private Set<String> managedDatastreamsToEmbed;
 

@@ -218,7 +218,9 @@ public class FedoraObject extends FedoraDTO {
     // ensures datastreams can't be added with a key differing from their id
     private static class DSMap extends TreeMap<String, Datastream> {
 
-        @Override
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public Datastream put(String id, Datastream datastream) {
             if (id == null) throw new NullPointerException();
             if (!datastream.id().equals(id)) {
