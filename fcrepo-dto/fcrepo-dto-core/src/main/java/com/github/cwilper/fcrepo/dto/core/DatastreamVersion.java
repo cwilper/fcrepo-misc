@@ -14,7 +14,7 @@ import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
  */
 public class DatastreamVersion extends FedoraDTO {
 
-    private final SortedSet<URI> altIds = new TreeSet<URI>();
+    private final SortedSet<URI> altIds;
 
     private final String id;
     private final Date createdDate;
@@ -36,6 +36,7 @@ public class DatastreamVersion extends FedoraDTO {
      * @throws NullPointerException if id is given as <code>null</code>.
      */
     public DatastreamVersion(String id, Date createdDate) {
+    	this.altIds=new TreeSet<URI>();
         this.id = Util.normalize(id);
         if (this.id == null) {
             throw new NullPointerException();
@@ -44,6 +45,23 @@ public class DatastreamVersion extends FedoraDTO {
     }
 
     /**
+     * creates an instance from a DatastreamVersion.Builder
+     * @param builder the builder holding the data
+     */
+    public DatastreamVersion(Builder builder) {
+    	this.altIds=builder.altIds;
+    	this.id=builder.id;
+    	this.createdDate=builder.createdDate;
+    	this.label=builder.label;
+    	this.mimeType=builder.mimeType;
+    	this.formatURI=builder.formatURI;
+    	this.size=builder.size;
+    	this.contentDigest=builder.contentDigest;
+    	this.inlineXML=builder.inlineXML;
+    	this.contentLocation=builder.contentLocation;
+    }
+
+	/**
      * Creates an instance based on the current state of this one.
      *
      * @return a deep copy.
@@ -268,5 +286,64 @@ public class DatastreamVersion extends FedoraDTO {
                 contentLocation,
                 altIds };
     }
+    
+    public static class Builder{
 
+    	private final SortedSet<URI> altIds = new TreeSet<URI>();
+        private final String id;
+        private final Date createdDate;
+
+        private String label;
+        private String mimeType;
+        private URI formatURI;
+        private Long size;
+        private ContentDigest contentDigest;
+        private InlineXML inlineXML;
+        private URI contentLocation;
+        
+		public Builder(String id, Date createdDate) {
+			super();
+        	if (id == null){
+        		throw new NullPointerException("id can not be null");
+        	}
+			this.id = Util.normalize(id);
+			this.createdDate = Util.copy(createdDate);
+		}
+        
+        public Builder withLabel(String label){
+        	this.label=label;
+        	return this;
+        }
+        public Builder withMimeType(String mimeType){
+        	this.mimeType=mimeType;
+        	return this;
+        }
+        public Builder withFormatURI(URI formatURI){
+        	this.formatURI=formatURI;
+        	return this;
+        }
+        public Builder withSize(long size){
+        	this.size=size;
+        	return this;
+        }
+        public Builder withContentDigest(ContentDigest digest){
+        	this.contentDigest=digest;
+        	return this;
+        }
+        public Builder withInlineXML(InlineXML xml){
+        	this.inlineXML=xml;
+        	return this;
+        }
+        public Builder withContentLocation(URI location){
+        	this.contentLocation=location;
+        	return this;
+        }
+        public Builder withAlternateId(URI id){
+        	this.altIds.add(id);
+        	return this;
+        }
+        public DatastreamVersion build(){
+        	return new DatastreamVersion(this);
+        }
+    }
 }
