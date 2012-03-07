@@ -2,6 +2,7 @@ target
 .idea
 *.log
 *.iml
+*.swp
 .DS_Store
 .settings
 .project

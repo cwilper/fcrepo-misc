@@ -9,6 +9,12 @@ import java.io.InputStream;
  * Interface for reading a {@link FedoraObject} from a stream.
  */
 public interface DTOReader {
+    /**
+     * Gets a new instance configured like this one.
+     *
+     * @return a new instance.
+     */
+    DTOReader getInstance();
 
     /**
      * Deserializes the given stream into a <code>FedoraObject</code>.

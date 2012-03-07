@@ -9,7 +9,7 @@ import java.net.URI;
  */
 public abstract class ContentResolvingDTOWriter implements DTOWriter {
 
-    private final ContentResolver defaultContentResolver =
+    protected final ContentResolver defaultContentResolver =
             new DefaultContentResolver();
 
     protected ContentResolver contentResolver;

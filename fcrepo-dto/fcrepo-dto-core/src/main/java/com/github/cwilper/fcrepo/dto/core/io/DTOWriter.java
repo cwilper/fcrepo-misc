@@ -9,6 +9,12 @@ import java.io.OutputStream;
  * Interface for writing a {@link FedoraObject} to a stream.
  */
 public interface DTOWriter {
+    /**
+     * Gets a new instance configured like this one.
+     *
+     * @return the instance.
+     */
+    DTOWriter getInstance();
 
     /**
      * Serializes a <code>FedoraObject</code> to the given stream.

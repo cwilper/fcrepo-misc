@@ -9,6 +9,7 @@ import com.github.cwilper.fcrepo.dto.core.InlineXML;
 import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.ContentHandlingDTOReader;
 import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
+import com.github.cwilper.fcrepo.dto.core.io.DTOReader;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.apache.commons.io.IOUtils;
@@ -30,8 +31,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A {@link com.github.cwilper.fcrepo.dto.core.io.DTOReader} that reads
- * Fedora Object XML.
+ * A {@link DTOReader} that reads Fedora Object XML.
  * <p>
  * <b>NOTE:</b> Only FOXML version 1.1 is supported.
  *
@@ -50,6 +50,15 @@ public class FOXMLReader extends ContentHandlingDTOReader {
      * Creates an instance.
      */
     public FOXMLReader() {
+    }
+
+    @Override
+    public DTOReader getInstance() {
+        FOXMLReader reader = new FOXMLReader();
+        if (contentHandler != defaultContentHandler) {
+            reader.setContentHandler(contentHandler);
+        }
+        return reader;
     }
 
     @Override

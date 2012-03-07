@@ -8,7 +8,7 @@ import javax.annotation.PreDestroy;
  */
 public abstract class ContentHandlingDTOReader implements DTOReader {
 
-    private final ContentHandler defaultContentHandler =
+    protected final ContentHandler defaultContentHandler =
             new DefaultContentHandler();
     
     protected ContentHandler contentHandler;

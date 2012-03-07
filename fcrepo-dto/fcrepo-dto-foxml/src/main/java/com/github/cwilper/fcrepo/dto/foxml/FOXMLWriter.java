@@ -22,11 +22,11 @@ import com.github.cwilper.fcrepo.dto.core.InlineXML;
 import com.github.cwilper.fcrepo.dto.core.State;
 import com.github.cwilper.fcrepo.dto.core.io.ContentResolvingDTOWriter;
 import com.github.cwilper.fcrepo.dto.core.io.DateUtil;
+import com.github.cwilper.fcrepo.dto.core.io.DTOWriter;
 import com.github.cwilper.fcrepo.dto.core.io.XMLUtil;
 
 /**
- * A {@link com.github.cwilper.fcrepo.dto.core.io.DTOWriter} that writes
- * Fedora Object XML.
+ * A {@link DTOWriter} that writes Fedora Object XML.
  * <p>
  * <b>NOTE:</b> Only FOXML version 1.1 is supported.
  *
@@ -49,6 +49,18 @@ public class FOXMLWriter extends ContentResolvingDTOWriter {
         this.managedDatastreamsToEmbed = managedDatastreamsToEmbed;
     }
 
+    @Override
+    public DTOWriter getInstance() {
+        FOXMLWriter writer = new FOXMLWriter();
+        if (contentResolver != defaultContentResolver) {
+            writer.setContentResolver(contentResolver);
+        }
+        writer.setManagedDatastreamsToEmbed(
+                new HashSet<String>(managedDatastreamsToEmbed));
+        return writer;
+    }
+
+    @Override
     public void writeObject(FedoraObject obj, OutputStream sink)
             throws IOException {
         this.obj = obj;
