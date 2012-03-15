@@ -69,7 +69,7 @@ public class InlineXML extends FedoraDTO {
             this.bytes = XMLUtil.canonicalize(bytes);
             this.canonical = true;
         } catch (IOException e) {
-            logger.warn("Unable to canonicalize (c14n11); using non-standard "
+            logger.debug("Unable to canonicalize (c14n11); using non-standard "
                     + "normalization instead", e);
             this.bytes = normalized;
         }
