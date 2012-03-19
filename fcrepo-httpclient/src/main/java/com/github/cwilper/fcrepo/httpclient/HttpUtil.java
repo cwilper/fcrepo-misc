@@ -63,6 +63,7 @@ public final class HttpUtil {
         HttpGet httpGet = new HttpGet(requestURI);
         HttpResponse response = httpClient.execute(httpGet);
         if (response.getStatusLine().getStatusCode() != 200) {
+            response.getEntity().getContent().close();
             throw new IOException("Error GETting " 
                     + requestURI + " -- " + response.getStatusLine());
         }
